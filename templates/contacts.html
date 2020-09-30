@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>title</title>
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!--<meta property="og:image" content="path/to/image.jpg">
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">-->
+	<link rel="stylesheet" href="css/main.min.css">
+	<meta name="theme-color" content="#000">
+	<meta name="msapplication-navbutton-color" content="#000">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+</head>
+<body>
+	<!-- start header -->
+	<header class="header">
+		<div class="wrapper">
+			<div class="header-bar">
+				<div class="header-bar__1">
+					<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.375 7.875C3.375 7.25368 3.87868 6.75 4.5 6.75H22.5C23.1213 6.75 23.625 7.25368 23.625 7.875C23.625 8.49632 23.1213 9 22.5 9H4.5C3.87868 9 3.375 8.49632 3.375 7.875ZM3.375 13.5C3.375 12.8787 3.87868 12.375 4.5 12.375H22.5C23.1213 12.375 23.625 12.8787 23.625 13.5C23.625 14.1213 23.1213 14.625 22.5 14.625H4.5C3.87868 14.625 3.375 14.1213 3.375 13.5ZM3.375 19.125C3.375 18.5037 3.87868 18 4.5 18H22.5C23.1213 18 23.625 18.5037 23.625 19.125C23.625 19.7463 23.1213 20.25 22.5 20.25H4.5C3.87868 20.25 3.375 19.7463 3.375 19.125Z" fill="#2F2F2F"/></svg>
+				</div>
+				<div class="header-bar__2">
+					<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.3322 7.33211C15.7022 6.70214 14.625 7.14831 14.625 8.03921L14.625 22.625C14.625 23.1773 14.1773 23.625 13.625 23.625L13.375 23.625C12.8228 23.625 12.375 23.1773 12.375 22.625L12.375 8.03921C12.375 7.14831 11.2979 6.70214 10.6679 7.33211L8.58215 9.41789C8.19163 9.80842 7.55847 9.80842 7.16794 9.41789L7.00716 9.25711C6.61663 8.86658 6.61663 8.23342 7.00716 7.84289L12.7929 2.05711C13.1835 1.66658 13.8166 1.66658 14.2072 2.05711L19.9929 7.84289C20.3835 8.23342 20.3835 8.86658 19.9929 9.25711L19.8322 9.41789C19.4416 9.80842 18.8085 9.80842 18.4179 9.41789L16.3322 7.33211ZM7.75005 23.625C7.19776 23.625 6.75005 23.1773 6.75005 22.625L6.75005 13.375C6.75005 12.8227 7.19776 12.375 7.75005 12.375L8.00005 12.375C8.55233 12.375 9.00005 12.8227 9.00005 13.375L9.00005 22.625C9.00005 23.1773 8.55233 23.625 8.00005 23.625L7.75005 23.625ZM18 13.375C18 12.8227 18.4478 12.375 19 12.375L19.25 12.375C19.8023 12.375 20.25 12.8227 20.25 13.375L20.25 22.625C20.25 23.1773 19.8023 23.625 19.25 23.625L19 23.625C18.4478 23.625 18 23.1773 18 22.625L18 13.375Z" fill="#2F2F2F"/></svg>
+				</div>
+			</div>
+			<div class="header-logo">
+				<a href="#">
+					<img src="img/logo.svg" alt="">
+				</a>
+			</div>
+			<div class="header-row">
+				<div class="header-info">
+					<ul class="header-list">
+						<li><a href="#">
+							<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.715 5.8425C3.795 7.965 5.535 9.705 7.6575 10.785L9.3075 9.135C9.5175 8.925 9.81 8.865 10.0725 8.9475C10.9125 9.225 11.8125 9.375 12.75 9.375C12.9489 9.375 13.1397 9.45402 13.2803 9.59467C13.421 9.73532 13.5 9.92609 13.5 10.125V12.75C13.5 12.9489 13.421 13.1397 13.2803 13.2803C13.1397 13.421 12.9489 13.5 12.75 13.5C9.36849 13.5 6.12548 12.1567 3.73439 9.76561C1.3433 7.37452 0 4.13151 0 0.75C0 0.551088 0.0790176 0.360322 0.21967 0.21967C0.360322 0.0790176 0.551088 0 0.75 0H3.375C3.57391 0 3.76468 0.0790176 3.90533 0.21967C4.04598 0.360322 4.125 0.551088 4.125 0.75C4.125 1.6875 4.275 2.5875 4.5525 3.4275C4.635 3.69 4.575 3.9825 4.365 4.1925L2.715 5.8425Z" fill="#FFB42D"/></svg>
+							+7 964 174-xx-xx
+						</a></li>
+						<li><a href="#">
+							<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.4 3L8 6.75L1.6 3V1.5L8 5.25L14.4 1.5V3ZM14.4 0H1.6C0.712 0 0 0.6675 0 1.5V10.5C0 10.8978 0.168571 11.2794 0.468629 11.5607C0.768687 11.842 1.17565 12 1.6 12H14.4C14.8243 12 15.2313 11.842 15.5314 11.5607C15.8314 11.2794 16 10.8978 16 10.5V1.5C16 0.6675 15.28 0 14.4 0Z" fill="#FFB42D"/></svg>
+							support@hellopanda.com
+						</a></li>
+					</ul>
+					<ul class="header-menu">
+						<li class="drop">
+							<a href="#" class="drop-text">
+								Обучение
+								<svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.67969 0.00390625L7.5 0.824219L4 4.32422L0.5 0.824219L1.32031 0.00390625L4 2.68359L6.67969 0.00390625Z" fill="#6B6B6B"/></svg>
+							</a>
+							<ul class="drop-list">
+								<li><a href="#">Процесс обучения</a></li>
+								<li><a href="#">Частые вопросы</a></li>
+								<li><a href="#">Стоимость</a></li>
+							</ul>
+						</li>
+						<li><a href="#">О школе</a></li>
+						<li><a href="#">Преподаватели</a></li>
+						<li><a href="#">Отзывы</a></li>
+						<li><a href="#">Контакты</a></li>
+					</ul>
+				</div>
+				<div class="header-btns">
+					<a href="modal-checkIn" class="button-modal main-btn">Регистрация</a>
+					<a href="modal-logging" class="button-modal second-btn">Вход</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- end header -->
+	<!-- start contatcs -->
+	<section class="contatcs">
+		<div class="contatcs-bg contatcs-bg__1">
+			<img src="img/contatcs-bg-1.svg" alt="">
+		</div>
+		<div class="contatcs-bg contatcs-bg__2">
+			<img src="img/contatcs-bg-2.svg" alt="">
+		</div>
+		<div class="wrapper">
+			<div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+				<span class="section-subtitle">Contacts</span>
+				<h2 class="section-title">Контакты</h2>
+			</div>
+			<div class="contatcs-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+				<p>Если ты принял решение учиться в нашей школе или у тебя возникли другие вопросы, касающиеся процесса обучения у нас – связывайся с нами любым удобным способом. Наши консультанты помогут по любому вопросу, а наши кураторы готовы проконсультировать и проверить уровень твоего английского или китайского и подобрать нужную программу.</p>
+			</div>
+			<div class="contatcs-row">
+				<div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="contatcs-wrap">
+						<div class="contatcs-ico">
+							<img src="img/contatcs-ico-1.svg" alt="">
+						</div>
+						<ul>
+							<li><a href="#">+7 000 000-00-00</a></li>
+							<li><a href="#">+7 000 000-00-00</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="contatcs-wrap">
+						<div class="contatcs-ico">
+							<img src="img/contatcs-ico-2.svg" alt="">
+						</div>
+						<ul>
+							<li><a href="#">office@hellopanda.com</a></li>
+							<li><a href="#">support@hellopanda.com</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="contatcs-wrap">
+						<div class="contatcs-ico">
+							<img src="img/contatcs-ico-3.svg" alt="">
+						</div>
+						<p>75b Nəsibbəy Yusifbəyli, Bakı 1007</p>
+					</div>
+				</div>
+			</div>
+			<div class="contatcs-map">
+				<div id="map" class="map"></div>
+			</div>
+			<div class="contatcs-social" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+				<span class="contatcs-social__subtitle">Мы так же и в социальных сетях:</span>
+				<ul>
+					<li><a href="#"><img src="img/ico-vk.svg" alt=""></a></li>
+					<li><a href="#"><img src="img/ico-tg.svg" alt=""></a></li>
+					<li><a href="#"><img src="img/ico-what.svg" alt=""></a></li>
+					<li><a href="#"><img src="img/ico-fb.svg" alt=""></a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<!-- end contatcs -->
+	<!-- start faq -->
+	<section class="faq">
+		<div class="wrapper">
+			<div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+				<span class="section-subtitle">FAQ</span>
+				<h2 class="section-title">частые вопросы</h2>
+			</div>
+			<div class="faq-row grid">
+				<div class="grid-item" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="faq-wrap">
+						<h3 class="faq-title">Для каких уровней подходит изучение китайского и английского на платформе Hello Panda?</h3>
+						<p>В Hello Panda могут обучаться только начинающие изучение языка энтузиасты, так и желающие улучшить уровень владения языком. Наша школа подходит как детям с 4-х лет, так и взрослым.</p>
+					</div>
+				</div>
+				<div class="grid-item" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="faq-wrap">
+						<h3 class="faq-title">Насколько сложный интерфейс платформы?</h3>
+						<p>Пользоваться нашим сервисом очень просто, но самым юным ученикам нашей школы может понадобится помощь родителей.</p>
+					</div>
+				</div>
+				<div class="grid-item" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="faq-wrap">
+						<h3 class="faq-title">Как часто нужно заниматься?</h3>
+						<p>Мы рекомендуем интенсив - 2-4 урока в неделю, чтобы сохранять и улучшать качество обучения. При желании можно увеличить или уменьшить количество занятий.</p>
+					</div>
+				</div>
+				<div class="grid-item" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="faq-wrap">
+						<h3 class="faq-title">Как проводятся занятия?</h3>
+						<p>Занятия проводятся индивидуально с преподавателем, родители также могут участвовать на занятиях, чтобы проверять качество обучения их деток.</p>
+					</div>
+				</div>
+				<div class="grid-item" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="faq-wrap">
+						<h3 class="faq-title">Сколько стоит обучение ?</h3>
+						<p>Hello Panda всячески поддерживает и стимулирует желающих изучать язык. Если ученик усердно старается - стоимость начнет падать, а если он приведет друга, то оба получат бесплатные уроки.</p>
+					</div>
+				</div>
+				<div class="grid-item" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="faq-wrap">
+						<h3 class="faq-title">Чем Hello Panda лучше других школ?</h3>
+						<p>Наша опытная команда специалистов прочувствовала все этапы обуздания иностранных языков. Мы обучались за рубежом, работаем с людьми из разных стран и постоянно развиваемся. Получив ценный опыт, мы смогли внести свои коррективы в классические методы обучения и смогли создать эффективную методику преподавания. А еще – мы очень любим детей и знаем, как нужно выстроить обучение с каждым из деток.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end faq -->
+	<!-- start allQuestions -->
+	<section class="allQuestions">
+		<div class="wrapper">
+			<div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+				<span class="section-subtitle">FAQ</span>
+				<h2 class="section-title">Все вопросы</h2>
+			</div>
+			<div class="allQuestions-wrap">
+				<div class="accordeon" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="accordeon-top">
+						<h3 class="accordeon-title">Идейные соображения высшего порядка, а также укрепление и развитие</h3>
+						<div class="accordeon-arrow"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#F8FFFC"/></svg></div>
+					</div>
+					<div class="accordeon-block">
+						<div class="accordeon-block__wrap">
+							<p>Идейные соображения высшего порядка, а также укрепление и развитие структуры позволяет выполнять важные задания по разработке существенных финансовых и административных условий.</p>
+						</div>
+					</div>
+				</div>
+				<div class="accordeon" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="accordeon-top">
+						<h3 class="accordeon-title">Идейные соображения высшего порядка, а также укрепление и развитие</h3>
+						<div class="accordeon-arrow"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#F8FFFC"/></svg></div>
+					</div>
+					<div class="accordeon-block">
+						<div class="accordeon-block__wrap">
+							<p>Идейные соображения высшего порядка, а также укрепление и развитие структуры позволяет выполнять важные задания по разработке существенных финансовых и административных условий.</p>
+						</div>
+					</div>
+				</div>
+				<div class="accordeon" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="accordeon-top">
+						<h3 class="accordeon-title">Идейные соображения высшего порядка, а также укрепление и развитие</h3>
+						<div class="accordeon-arrow"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#F8FFFC"/></svg></div>
+					</div>
+					<div class="accordeon-block">
+						<div class="accordeon-block__wrap">
+							<p>Идейные соображения высшего порядка, а также укрепление и развитие структуры позволяет выполнять важные задания по разработке существенных финансовых и административных условий.</p>
+						</div>
+					</div>
+				</div>
+				<div class="accordeon" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="accordeon-top">
+						<h3 class="accordeon-title">Идейные соображения высшего порядка, а также укрепление и развитие</h3>
+						<div class="accordeon-arrow"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#F8FFFC"/></svg></div>
+					</div>
+					<div class="accordeon-block">
+						<div class="accordeon-block__wrap">
+							<p>Идейные соображения высшего порядка, а также укрепление и развитие структуры позволяет выполнять важные задания по разработке существенных финансовых и административных условий.</p>
+						</div>
+					</div>
+				</div>
+				<div class="accordeon" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+					<div class="accordeon-top">
+						<h3 class="accordeon-title">Идейные соображения высшего порядка, а также укрепление и развитие</h3>
+						<div class="accordeon-arrow"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#F8FFFC"/></svg></div>
+					</div>
+					<div class="accordeon-block">
+						<div class="accordeon-block__wrap">
+							<p>Идейные соображения высшего порядка, а также укрепление и развитие структуры позволяет выполнять важные задания по разработке существенных финансовых и административных условий.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end allQuestions -->
+	<!-- start contactUs -->
+	<section class="contactUs">
+		<div class="wrapper">
+			<div class="contactUs-wrap">
+				<div class="contactUs-bg">
+					<img src="img/contactUs-bg.svg" alt="">
+				</div>
+				<div class="contactUs-mob">
+					<img src="img/contactUs-mob.svg" alt="">
+				</div>
+				<div class="form-wrap">
+					<div class="form-block">
+						<h2 class="form-title">Свяжитесь с нами по любому<br>вопросу:</h2>
+						<form action="">
+							<div class="input-block">
+								<label for="v-1">Ваше имя:</label>
+								<input id="v-1" type="text" name="name" placeholder="Имя">
+							</div>
+							<div class="input-block">
+								<label for="v-2">Если хотите, чтобы мы вам ответили:</label>
+								<input id="v-2" type="email" name="email" placeholder="Эмеил">
+							</div>
+							<div class="input-block">
+								<label for="v-3">Если хотите, чтобы мы вам позвонили:</label>
+								<input id="v-3" type="tel" name="tel" placeholder="Телефон:">
+							</div>
+							<div class="input-block input-select">
+								<label for="v-4">Тема сообщения:</label>
+								<div class="select">
+									<div class="select-main">
+										<div class="select-text">Я нашел баг</div>
+										<div class="input-icon">
+											<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
+										</div>
+									</div>
+									<div class="select-info">
+										<ul>
+											<li>Я нашел баг</li>
+											<li>Я нашел баг2</li>
+											<li>Я нашел баг3</li>
+										</ul>
+									</div>
+									<input type="text" name="text" class="select-value">
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-textarea">
+									<textarea name="text" id="v-5" placeholder="Сообщение"></textarea>
+									<span class="input-textarea__info">Доступно <b>1000</b> из 1000 знаков</span>
+								</div>
+							</div>
+							<button class="second-btn">Отправить вопрос</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end contactUs -->
+	<!-- start footer -->
+	<footer class="footer">
+		<div class="footer-bg footer-bg__1">
+			<img src="img/footer-bg-1.svg" alt="">
+		</div>
+		<div class="footer-bg footer-bg__2">
+			<img src="img/footer-bg-2.svg" alt="">
+		</div>
+		<div class="wrapper">
+			<div class="footer-top">
+				<ul class="footer-list">
+					<li><a href="#">Обучение</a></li>
+					<li><a href="#">О школе</a></li>
+					<li><a href="#">Преподавателям</a></li>
+					<li><a href="#">Карьера</a></li>
+					<li><a href="#">Отзывы</a></li>
+					<li><a href="#">Контакты</a></li>
+				</ul>
+				<ul class="footer-social">
+					<li><a href="#"><svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.37638 0.00377079L7.03941 0C4.4139 0 2.71719 1.75059 2.71719 4.46009V6.5165H0.367466C0.164422 6.5165 0 6.68203 0 6.88622V9.86572C0 10.0699 0.16461 10.2353 0.367466 10.2353H2.71719V17.7535C2.71719 17.9577 2.88161 18.123 3.08465 18.123H6.15037C6.35341 18.123 6.51783 17.9575 6.51783 17.7535V10.2353H9.2652C9.46825 10.2353 9.63267 10.0699 9.63267 9.86572L9.63379 6.88622C9.63379 6.78818 9.59498 6.69429 9.52618 6.62491C9.45737 6.55552 9.36363 6.5165 9.26614 6.5165H6.51783V4.77326C6.51783 3.93539 6.71638 3.51004 7.80171 3.51004L9.376 3.50948C9.57886 3.50948 9.74328 3.34394 9.74328 3.13994V0.373309C9.74328 0.169497 9.57905 0.00414787 9.37638 0.00377079Z" fill="#F8FFFC"/></svg></a></li>
+					<li><a href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.4806 0C17.5241 0 20.0001 2.47601 20 5.51928V14.4807C20 17.524 17.5241 20 14.4806 20H5.51916C2.4759 20 0 17.5241 0 14.4807V5.51928C0 2.47601 2.4759 0 5.51916 0H14.4806ZM18.2256 14.4807H18.2255V5.51928C18.2255 3.45447 16.5455 1.7745 14.4806 1.7745H5.51916C3.45435 1.7745 1.7745 3.45447 1.7745 5.51928V14.4807C1.7745 16.5456 3.45435 18.2256 5.51916 18.2255H14.4807C16.5456 18.2255 18.2256 16.5456 18.2256 14.4807ZM10 5C12.757 5 15 7.24301 15 10.0001C15 12.7571 12.757 15 10 15C7.24296 15 5 12.7571 5 10.0001C5 7.24301 7.24296 5 10 5ZM10 13.2782C11.8076 13.2782 13.2784 11.8077 13.2784 10C13.2784 8.19223 11.8077 6.72157 10 6.72157C8.19227 6.72157 6.72164 8.19223 6.72164 10C6.72164 11.8077 8.19239 13.2782 10 13.2782ZM15.4167 3.33333C15.7462 3.33333 16.0689 3.46629 16.3008 3.69924C16.5337 3.93106 16.6667 4.25379 16.6667 4.58333C16.6667 4.91174 16.5337 5.23447 16.3008 5.46742C16.0678 5.69924 15.7462 5.83333 15.4167 5.83333C15.0883 5.83333 14.7655 5.69924 14.5337 5.46742C14.3008 5.23447 14.1667 4.91186 14.1667 4.58333C14.1667 4.25379 14.3006 3.93106 14.5337 3.69924C14.7656 3.46629 15.0883 3.33333 15.4167 3.33333Z" fill="#F8FFFC"/></svg></a></li>
+					<li><a href="#"><svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.7609 1.90713C19.0336 2.23076 18.2532 2.45025 17.4332 2.54824C18.2705 2.04477 18.9113 1.24622 19.2151 0.297595C18.4297 0.763832 17.5629 1.10238 16.6392 1.2859C15.8996 0.493538 14.8475 0 13.6806 0C11.4418 0 9.62664 1.82283 9.62664 4.06974C9.62664 4.38841 9.66245 4.69965 9.73161 4.99728C6.36302 4.82738 3.37599 3.20669 1.37681 0.743988C1.02734 1.34417 0.828538 2.04351 0.828538 2.79003C0.828538 4.20242 1.54474 5.44864 2.6314 6.17774C1.96705 6.15543 1.34223 5.97191 0.795216 5.66686V5.7177C0.795216 7.68932 2.19304 9.33482 4.0465 9.70932C3.70692 9.80109 3.34883 9.85193 2.97838 9.85193C2.71661 9.85193 2.46346 9.82589 2.21526 9.77628C2.7314 11.3945 4.22803 12.5713 6.00125 12.6035C4.61453 13.6948 2.86601 14.3433 0.966865 14.3433C0.639647 14.3433 0.317337 14.3234 0 14.2875C1.79421 15.4444 3.92429 16.119 6.21365 16.119C13.6708 16.119 17.7469 9.91642 17.7469 4.53724L17.7333 4.01024C18.5298 3.43979 19.2188 2.72307 19.7609 1.90713Z" fill="#F8FFFC"/></svg></a></li>
+					<li><a href="#"><svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.4481 0C16.9637 0 18.2809 0.348194 18.9943 1.2018C19.7111 2.05919 19.7647 3.37246 19.7647 5.27803V8.72204C19.7647 10.9057 19.4225 12.1669 18.6205 12.9394C17.8385 13.6927 16.6296 14 14.4481 14H5.31645C0.822212 14 0 12.2226 0 8.72204V5.27803C0 3.47109 0 2.16553 0.692976 1.27945C1.40374 0.370654 2.74328 0 5.31645 0H14.4481ZM8.54237 9.65676L12.689 7.47551C12.8997 7.36475 13.0316 7.14522 13.0313 6.90586C13.031 6.66669 12.8985 6.44748 12.6875 6.33724L8.5409 4.17004C8.34332 4.06673 8.10646 4.07469 7.91602 4.19109C7.72564 4.3075 7.60948 4.51541 7.60948 4.7395V9.08801C7.60948 9.31248 7.72596 9.52059 7.91672 9.63693C8.01803 9.69866 8.13241 9.72972 8.24705 9.72972C8.34829 9.72972 8.44967 9.70553 8.54237 9.65676Z" fill="#F8FFFC"/></svg></a></li>
+				</ul>
+			</div>
+			<div class="footer-bottom">
+				<div class="footer-row">
+					<div class="footer-logo">
+						<a href="#">
+							<img src="img/footer-logo.svg" alt="">
+						</a>
+					</div>
+					<p>Все права защищены. 2020.</p>
+				</div>
+				<ul>
+					<li><a href="#">Privacy Policy</a></li>
+					<li><a href="#">Terms and Conditions</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+	<!-- end footer -->
+	<!-- modal-form -->
+	<div class="modal-overlay"></div>
+	<div class="modal">
+		<div class="modal-over scrollbar-outer">
+			<div class="modal-wrap">
+				<div class="modal-bg modal-bg__mob">
+					<img src="img/modal-mob.svg" alt="">
+				</div>
+				<div class="modal-bg modal-bg__1">
+					<img src="img/modal-1.svg" alt="">
+				</div>
+				<div class="modal-bg modal-bg__2">
+					<img src="img/modal-2.svg" alt="">
+				</div>
+				<div class="modal-img">
+					<img src="img/modal-img.svg" alt="">
+				</div>
+				<div class="modal-content">
+					<div id="modal-logging" class="modal-tab">
+						<div class="section-top">
+							<span class="section-subtitle">enter</span>
+							<h2 class="section-title">Вход</h2>
+						</div>
+						<form method="POST">
+							<div class="input-block">
+								<p class="text-error">Логин или пароль введен не верно !</p>
+								<div class="input-wrap">
+									<input type="text" name="text" placeholder="Логин">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-wrap">
+									<input type="password" name="password" placeholder="Пароль">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<a href="modal-restore" class="button-modal modal-link">Я забыл пароль</a>
+							<div class="modal-btns">
+								<button class="second-btn">Войти</button>
+								<a href="#" class="primary-btn">Войти как преподаватель</a>
+							</div>
+							<div class="modal-bottom">
+								<p>Нет аккаунта? <a class="button-modal" href="modal-checkIn">Регистрация</a></p>
+							</div>
+						</form>
+					</div>
+					<div id="modal-restore" class="modal-tab">
+						<div class="section-top section-center">
+							<span class="section-subtitle">Password recovery</span>
+							<h2 class="section-title">восстановление пароля</h2>
+						</div>
+						<form method="POST">
+							<div class="input-block">
+								<p class="text-error">Логин или пароль введен не верно !</p>
+								<div class="input-wrap">
+									<input type="email" name="email" placeholder="Эл. почта">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="modal-btns__big">
+								<button class="second-btn">Продолжить</button>
+							</div>
+						</form>
+					</div>
+					<div id="modal-checkIn" class="modal-tab">
+						<div class="section-top">
+							<span class="section-subtitle">registration</span>
+							<h2 class="section-title">Регистрация</h2>
+						</div>
+						<form method="POST">
+							<div class="input-block">
+								<p class="text-error">Логин или пароль введен не верно !</p>
+							</div>
+							<div class="modal-row">
+								<div class="input-block input-block__small">
+									<div class="input-wrap">
+										<input type="text" name="name" placeholder="Имя">
+										<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+									</div>
+								</div>
+								<div class="input-block input-block__big">
+									<div class="input-wrap">
+										<input type="name" name="secondname" placeholder="Фамилия">
+										<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+									</div>
+								</div>
+							</div>
+							<div class="input-block">
+								<p class="text-error">Логин или пароль введен не верно !</p>
+								<div class="input-wrap">
+									<input type="text" name="text" placeholder="Логин">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-wrap">
+									<input type="tel" name="tel" placeholder="Телефон">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-wrap">
+									<input type="email" name="email" placeholder="Эл. адрес">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-wrap">
+									<input type="password" name="password" placeholder="Пароль">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="modal-text">
+								<p>Эта страница защищена функцией reCAPTCHA и подпадает под <a href="#">Политику конфиденциальности</a> и <a href="#">Условия использования Hello Panda.</a></p>
+							</div>
+							<div class="modal-checkbox">
+								<div class="checkbox">
+									<input type="checkbox">
+									<span class="checkbox-ico"><svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 1.1566L4.71429 11L0 6.48844L1.20857 5.33184L4.71429 8.6786L13.7914 0L15 1.1566Z" fill="#5F9F84"/></svg></span>
+									<p>Я принимаю <a href="#">Условия обслуживания Hello Panda.</a></p>
+								</div>
+							</div>
+							<div class="modal-btns modal-btns__big">
+								<button class="second-btn">Регистрировать как ученика</button>
+								<a href="#" class="primary-btn">Регистрировать как учителя</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="js/scripts.min.js"></script>
+	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+	<script>
+	ymaps.ready(init);
+	var myMap;
+
+	function init(){    
+	   myMap = new ymaps.Map ("map", {
+	       center: [55.7084, 37.6527],
+	       zoom: 16,
+	       controls: []
+	   });
+	   myMap.behaviors.disable([
+	   'scrollZoom'
+	 ]);
+
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+  <meta charset="utf-8">
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!--<meta property="og:image" content="path/to/image.jpg">
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">-->
+
+	<meta name="theme-color" content="#000">
+	<meta name="msapplication-navbutton-color" content="#000">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+
+  <title>{% block title %}{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+
+  {% block style %}{% endblock %}
+
+</head>
+<body>
+
+  <header class="header">
+    {% include './components/header.html' %}
+  </header>
+
+  {% block content %}{% endblock %}
+
+	<footer class="footer">
+    {% include './components/footer.html' %}
+	</footer>
+
+  <!-- modal-form -->
+	<div class="modal-overlay"></div>
+	<div class="modal">
+		<div class="modal-over scrollbar-outer">
+			<div class="modal-wrap">
+				<div class="modal-bg modal-bg__mob">
+					<img src="{% static 'img/modal-mob.svg' %}" alt="">
+				</div>
+				<div class="modal-bg modal-bg__1">
+					<img src="{% static 'img/modal-1.svg' %}" alt="">
+				</div>
+				<div class="modal-bg modal-bg__2">
+					<img src="{% static 'img/modal-2.svg' %}" alt="">
+				</div>
+				<div class="modal-img">
+					<img src="{% static 'img/modal-img.svg' %}" alt="">
+				</div>
+				<div class="modal-content">
+					<div id="modal-logging" class="modal-tab">
+						<div class="section-top">
+							<span class="section-subtitle">enter</span>
+							<h2 class="section-title">Вход</h2>
+						</div>
+						<form method="POST">
+							<div class="input-block">
+								<p class="text-error">Логин или пароль введен не верно !</p>
+								<div class="input-wrap">
+									<input type="text" name="text" placeholder="Логин">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-wrap">
+									<input type="password" name="password" placeholder="Пароль">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<a href="modal-restore" class="button-modal modal-link">Я забыл пароль</a>
+							<div class="modal-btns">
+								<button class="second-btn">Войти</button>
+								<a href="#" class="primary-btn">Войти как преподаватель</a>
+							</div>
+							<div class="modal-bottom">
+								<p>Нет аккаунта? <a class="button-modal" href="modal-checkIn">Регистрация</a></p>
+							</div>
+						</form>
+					</div>
+					<div id="modal-restore" class="modal-tab">
+						<div class="section-top section-center">
+							<span class="section-subtitle">Password recovery</span>
+							<h2 class="section-title">восстановление пароля</h2>
+						</div>
+						<form method="POST">
+							<div class="input-block">
+								<p class="text-error">Логин или пароль введен не верно !</p>
+								<div class="input-wrap">
+									<input type="email" name="email" placeholder="Эл. почта">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="modal-btns__big">
+								<button class="second-btn">Продолжить</button>
+							</div>
+						</form>
+					</div>
+					<div id="modal-checkIn" class="modal-tab">
+						<div class="section-top">
+							<span class="section-subtitle">registration</span>
+							<h2 class="section-title">Регистрация</h2>
+						</div>
+						<form method="POST">
+							<div class="input-block">
+								<p class="text-error">Логин или пароль введен не верно !</p>
+							</div>
+							<div class="modal-row">
+								<div class="input-block input-block__small">
+									<div class="input-wrap">
+										<input type="text" name="name" placeholder="Имя">
+										<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+									</div>
+								</div>
+								<div class="input-block input-block__big">
+									<div class="input-wrap">
+										<input type="name" name="secondname" placeholder="Фамилия">
+										<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+									</div>
+								</div>
+							</div>
+							<div class="input-block">
+								<p class="text-error">Логин или пароль введен не верно !</p>
+								<div class="input-wrap">
+									<input type="text" name="text" placeholder="Логин">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-wrap">
+									<input type="tel" name="tel" placeholder="Телефон">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-wrap">
+									<input type="email" name="email" placeholder="Эл. адрес">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="input-block">
+								<div class="input-wrap">
+									<input type="password" name="password" placeholder="Пароль">
+									<div class="ico-error"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 11H9V5H11V11ZM11 15H9V13H11V15ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0Z" fill="#FF4B4B"/></svg></div>
+								</div>
+							</div>
+							<div class="modal-text">
+								<p>Эта страница защищена функцией reCAPTCHA и подпадает под <a href="#">Политику конфиденциальности</a> и <a href="#">Условия использования Hello Panda.</a></p>
+							</div>
+							<div class="modal-checkbox">
+								<div class="checkbox">
+									<input type="checkbox">
+									<span class="checkbox-ico"><svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 1.1566L4.71429 11L0 6.48844L1.20857 5.33184L4.71429 8.6786L13.7914 0L15 1.1566Z" fill="#5F9F84"/></svg></span>
+									<p>Я принимаю <a href="#">Условия обслуживания Hello Panda.</a></p>
+								</div>
+							</div>
+							<div class="modal-btns modal-btns__big">
+								<button class="second-btn">Регистрировать как ученика</button>
+								<a href="#" class="primary-btn">Регистрировать как учителя</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="{% static 'js/scripts.min.js' %}"></script>
+
+  {% block script %}{% endblock %}
+
+</body>
+</html>

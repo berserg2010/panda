@@ -1,0 +1,283 @@
+{% extends './_base.html' %}
+
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<!-- start main -->
+<section class="main">
+  <div class="main-bg" style="background-image: url({% static 'img/main-bg.jpg' %});"></div>
+  <div class="main-bg main-bg__mob" style="background-image: url({% static 'img/main-bg-mob.svg' %});"></div>
+  <div class="wrapper">
+    <div class="main-info">
+      <h1 class="main-title" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Изучение языка с нами увлекательно. Присоединяйся! </h1>
+      <div class="main-img">
+        <img src="{% static 'img/main-img.svg' %}" alt="">
+      </div>
+      <div class="main-btns">
+        <a href="#" class="second-btn" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">Начать</a>
+        <a href="#" class="primary-btn" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">У меня уже есть аккаунт</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end main -->
+<!-- start about -->
+<section class="about">
+  <div class="about-bg about-bg__1">
+    <img src="{% static 'img/about-bg-1.svg' %}" alt="">
+  </div>
+  <div class="about-bg about-bg__2">
+    <img src="{% static 'img/about-bg-2.svg' %}" alt="">
+  </div>
+  <div class="wrapper">
+    <div class="section-top section-center" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <span class="section-subtitle">ABOUT SCHOOL</span>
+      <h2 class="section-title">О школе</h2>
+    </div>
+    <div class="about-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <p>Онлайн школа Hello Panda дает возможность выучить или улучшить знания по самым востребованным языкам в мире – английскому и китайскому – эффективным и увлекательным способом.</p>
+    </div>
+    <div class="about-row">
+      <div class="about-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+        <div class="about-ico__bg">
+          <svg width="223" height="225" viewBox="0 0 223 225" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M199.551 107.781C196.487 144.088 113.717 205.919 63.893 184.011C6.05767 158.578 74.8649 40.4697 99.1091 20.0343C123.353 -0.401738 131.163 3.18837 142.757 41.6578C154.351 80.1277 202.616 71.4726 199.551 107.781Z" fill="#F0F0F0"/></svg>
+        </div>
+        <div class="about-ico">
+          <img src="{% static 'img/about-ico-1.svg' %}" alt="">
+        </div>
+        <span class="about-subtitle">Интерактивное обучение</span>
+      </div>
+      <div class="about-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+        <div class="about-ico__bg">
+          <svg width="174" height="201" viewBox="0 0 174 201" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M139.378 26.7321C166.632 52.2803 163.74 158.163 114.443 184.309C57.2165 214.657 5.96612 84.2246 4.94355 51.7323C3.92032 19.2397 11.7732 15.2406 50.0859 30.3732C88.3987 45.5064 112.123 1.18339 139.378 26.7321Z" fill="#F0F0F0"/></svg>
+        </div>
+        <div class="about-ico">
+          <img src="{% static 'img/about-ico-2.svg' %}" alt="">
+        </div>
+        <span class="about-subtitle">Фокус на ученике</span>
+      </div>
+      <div class="about-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+        <div class="about-ico__bg">
+          <svg width="188" height="211" viewBox="0 0 188 211" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.2791 151.153C1.08787 116.596 47.6682 21.466 103.371 18.1414C168.032 14.2843 160.519 154.223 147.962 184.208C135.406 214.194 126.602 214.573 98.0267 184.903C69.4517 155.232 29.4702 185.709 15.2791 151.153Z" fill="#F0F0F0"/></svg>
+        </div>
+        <div class="about-ico">
+          <img src="{% static 'img/about-ico-3.svg' %}" alt="">
+        </div>
+        <span class="about-subtitle">Гибкость и удобство</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end about -->
+<!-- start training -->
+<section class="training">
+  <div class="wrapper">
+    <div class="section-top section-center" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <span class="section-subtitle">How is the training going</span>
+      <h2 class="section-title">Как проходит обучение</h2>
+    </div>
+    <div class="training-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <p>Получи бесплатный пробный урок, чтобы узнать больше о наших методах преподавания</p>
+    </div>
+    <div class="training-row">
+      <div class="training-bg">
+        <img src="{% static 'img/training-bg.svg' %}" alt="">
+      </div>
+      <div class="training-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+        <div class="training-ico">
+          <img src="{% static 'img/training-ico-1.svg' %}" alt="">
+        </div>
+        <span class="training-subtitle">Бесплатный урок</span>
+      </div>
+      <div class="training-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+        <div class="training-ico">
+          <img src="{% static 'img/training-ico-2.svg' %}" alt="">
+        </div>
+        <span class="training-subtitle">Выбор графика и оплата</span>
+      </div>
+      <div class="training-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+        <div class="training-ico">
+          <img src="{% static 'img/training-ico-3.svg' %}" alt="">
+        </div>
+        <span class="training-subtitle">Доступ к урокам</span>
+      </div>
+      <div class="training-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
+        <div class="training-ico">
+          <img src="{% static 'img/training-ico-4.svg' %}" alt="">
+        </div>
+        <span class="training-subtitle">Регулярные отчеты</span>
+      </div>
+    </div>
+    <div class="training-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <p>Занятия в Hello Panda проходят индивидуально с преподавателем с использованием современных мультимедийных технологий, а также с помощью цифровых учебников, разработанных лучшими специалистами университета Oxford и Пекинского университета языка и культуры. </p>
+    </div>
+  </div>
+</section>
+<!-- end training -->
+<!-- start action -->
+<section class="action">
+  <div class="action-mob" style="background-image: url({% static 'img/action-bg.svg' %});"></div>
+  <div class="action-bg action-bg__1">
+    <img src="{% static 'img/action-bg-1.svg' %}" alt="">
+  </div>
+  <div class="action-bg action-bg__2">
+    <img src="{% static 'img/action-bg-2.svg' %}" alt="">
+  </div>
+  <div class="wrapper">
+    <div class="action-info">
+      <h2 class="action-title">Начни учиться интересно!</h2>
+      <p>Готов освоить новый язык, другую культуру и раскрыть свой потенциал? Изучать язык с Hello Panda – это просто и одновременно увлекательно.</p>
+      <div class="action-img">
+        <img src="{% static 'img/action-img.svg' %}" alt="">
+      </div>
+      <a href="#" class="second-btn">Посмотреть цены</a>
+    </div>
+  </div>
+</section>
+<!-- end action -->
+<!-- start teacher -->
+<section class="teacher">
+  <div class="teacher-bg teacher-bg__1">
+    <img src="{% static 'img/teacher-bg-1.svg' %}" alt="">
+  </div>
+  <div class="teacher-bg teacher-bg__2">
+    <img src="{% static 'img/teacher-bg-2.svg' %}" alt="">
+  </div>
+  <div class="wrapper">
+    <div class="section-top section-center" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <span class="section-subtitle">Teachers</span>
+      <h2 class="section-title">Преподаватели</h2>
+    </div>
+    <div class="teacher-info" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <p>Только опытные и квалифицированные специалисты, с которыми учиться будет просто и интересно</p>
+    </div>
+    <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Преподаватели Hello Panda используют только передовые современные методики, формируют интерес у учеников посредством интерактивных игр и обсуждений на самые актуальные темы. Все наши преподаватели имеют опыт преподавания от 3-х лет и многие имеют международные дипломы и сертификаты. Русскоязычные преподаватели имели большой опыт с носителями языка в США и Великобритании, а непосредственно преподаватели-носители языка также владеют русским языком.</p>
+  </div>
+</section>
+<!-- end teacher -->
+<!-- start testimonials -->
+<section class="testimonials">
+  <div class="testimonials-bg testimonials-bg__1">
+    <img src="{% static 'img/testimonials-bg-1.svg' %}" alt="">
+  </div>
+  <div class="testimonials-bg testimonials-bg__2">
+    <img src="{% static 'img/testimonials-bg-2.svg' %}" alt="">
+  </div>
+  <div class="wrapper">
+    <div class="testimonials-info">
+      <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+        <span class="section-subtitle">Testimonials</span>
+        <h2 class="section-title">оТЗЫВЫ</h2>
+      </div>
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Чтобы удостовериться в качестве обучения в нашей школе, предлагаем вам прочитать отзывы наших дорогих учеников, которые выбрали обучение в нашей школе. Также вы можете напрямую связаться с учениками или их родителями, чтобы получить более подробную информацию об их опыте обучения с нашей школой.</p>
+    </div>
+  </div>
+  <div class="testimonials-slider">
+    <div class="testimonials-slide">
+      <div class="testimonials-wrap">
+        <div class="testimonials-ico"><svg width="34" height="27" viewBox="0 0 34 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 17.0548C0 23.2357 4.00428 26.7785 8.4454 26.7785C12.5225 26.7785 16.0171 23.2357 16.0171 18.8638C16.0171 14.6427 13.1777 11.8537 9.68308 11.8537C8.88223 11.8537 8.15417 12.0045 7.79015 12.1552C8.73662 9.29086 12.0857 5.97425 14.4154 4.91896L9.10064 0.47168C3.42184 4.61745 0 10.4215 0 17.0548ZM17.9829 17.0548C17.9829 23.2357 21.9872 26.7785 26.4283 26.7785C30.5054 26.7785 34 23.2357 34 18.8638C34 14.6427 31.1606 11.8537 27.6659 11.8537C26.8651 11.8537 26.137 12.0045 25.773 12.1552C26.7195 9.29086 30.0685 5.97425 32.3983 4.91896L27.0835 0.47168C21.4047 4.61745 17.9829 10.4215 17.9829 17.0548Z" fill="#5C5C5C"/></svg></div>
+        <div class="testimonials-text">
+          <p>Начала изучение китайского языка с 0, спустя 6 месяцев успешно сдала тест HSK второго уровня, который соответствует уровню A2 по международным стандартам. Камила набрала 196 из 200 баллов.</p>
+        </div>
+        <div class="testimonials-row">
+          <div class="testimonials-img">
+            <img src="{% static 'img/testimonials-img.jpg' %}" alt="">
+          </div>
+          <div class="testimonials-descr">
+            <span class="testimonials-name">Камила, 11 лет</span>
+            <p>Город: Тернополь</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-slide">
+      <div class="testimonials-wrap">
+        <div class="testimonials-ico"><svg width="34" height="27" viewBox="0 0 34 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 17.0548C0 23.2357 4.00428 26.7785 8.4454 26.7785C12.5225 26.7785 16.0171 23.2357 16.0171 18.8638C16.0171 14.6427 13.1777 11.8537 9.68308 11.8537C8.88223 11.8537 8.15417 12.0045 7.79015 12.1552C8.73662 9.29086 12.0857 5.97425 14.4154 4.91896L9.10064 0.47168C3.42184 4.61745 0 10.4215 0 17.0548ZM17.9829 17.0548C17.9829 23.2357 21.9872 26.7785 26.4283 26.7785C30.5054 26.7785 34 23.2357 34 18.8638C34 14.6427 31.1606 11.8537 27.6659 11.8537C26.8651 11.8537 26.137 12.0045 25.773 12.1552C26.7195 9.29086 30.0685 5.97425 32.3983 4.91896L27.0835 0.47168C21.4047 4.61745 17.9829 10.4215 17.9829 17.0548Z" fill="#5C5C5C"/></svg></div>
+        <div class="testimonials-text">
+          <p>Начала изучение китайскогоHSK второго уровня, который соответствует уровню A2 по международным стандартам. Камила набрала 196 из 200 баллов.</p>
+        </div>
+        <div class="testimonials-row">
+          <div class="testimonials-img">
+            <img src="{% static 'img/testimonials-img.jpg' %}" alt="">
+          </div>
+          <div class="testimonials-descr">
+            <span class="testimonials-name">Камила, 11 лет</span>
+            <p>Город: Тернополь</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-slide">
+      <div class="testimonials-wrap">
+        <div class="testimonials-ico"><svg width="34" height="27" viewBox="0 0 34 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 17.0548C0 23.2357 4.00428 26.7785 8.4454 26.7785C12.5225 26.7785 16.0171 23.2357 16.0171 18.8638C16.0171 14.6427 13.1777 11.8537 9.68308 11.8537C8.88223 11.8537 8.15417 12.0045 7.79015 12.1552C8.73662 9.29086 12.0857 5.97425 14.4154 4.91896L9.10064 0.47168C3.42184 4.61745 0 10.4215 0 17.0548ZM17.9829 17.0548C17.9829 23.2357 21.9872 26.7785 26.4283 26.7785C30.5054 26.7785 34 23.2357 34 18.8638C34 14.6427 31.1606 11.8537 27.6659 11.8537C26.8651 11.8537 26.137 12.0045 25.773 12.1552C26.7195 9.29086 30.0685 5.97425 32.3983 4.91896L27.0835 0.47168C21.4047 4.61745 17.9829 10.4215 17.9829 17.0548Z" fill="#5C5C5C"/></svg></div>
+        <div class="testimonials-text">
+          <p>Начала изучение китайского языка с 0, спустя 6 месяцев успешно сдала тест HSK второго уровня, который соответствует уровню A2 по международным стандартам. Камила набрала 196 из 200 баллов.</p>
+        </div>
+        <div class="testimonials-row">
+          <div class="testimonials-img">
+            <img src="{% static 'img/testimonials-img.jpg' %}" alt="">
+          </div>
+          <div class="testimonials-descr">
+            <span class="testimonials-name">Камила, 11 лет</span>
+            <p>Город: Тернополь</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-slide">
+      <div class="testimonials-wrap">
+        <div class="testimonials-ico"><svg width="34" height="27" viewBox="0 0 34 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 17.0548C0 23.2357 4.00428 26.7785 8.4454 26.7785C12.5225 26.7785 16.0171 23.2357 16.0171 18.8638C16.0171 14.6427 13.1777 11.8537 9.68308 11.8537C8.88223 11.8537 8.15417 12.0045 7.79015 12.1552C8.73662 9.29086 12.0857 5.97425 14.4154 4.91896L9.10064 0.47168C3.42184 4.61745 0 10.4215 0 17.0548ZM17.9829 17.0548C17.9829 23.2357 21.9872 26.7785 26.4283 26.7785C30.5054 26.7785 34 23.2357 34 18.8638C34 14.6427 31.1606 11.8537 27.6659 11.8537C26.8651 11.8537 26.137 12.0045 25.773 12.1552C26.7195 9.29086 30.0685 5.97425 32.3983 4.91896L27.0835 0.47168C21.4047 4.61745 17.9829 10.4215 17.9829 17.0548Z" fill="#5C5C5C"/></svg></div>
+        <div class="testimonials-text">
+          <p>Начала изучение китайскогоHSK второго уровня, который соответствует уровню A2 по международным стандартам. Камила набрала 196 из 200 баллов.</p>
+        </div>
+        <div class="testimonials-row">
+          <div class="testimonials-img">
+            <img src="{% static 'img/testimonials-img.jpg' %}" alt="">
+          </div>
+          <div class="testimonials-descr">
+            <span class="testimonials-name">Камила, 11 лет</span>
+            <p>Город: Тернополь</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-slide">
+      <div class="testimonials-wrap">
+        <div class="testimonials-ico"><svg width="34" height="27" viewBox="0 0 34 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 17.0548C0 23.2357 4.00428 26.7785 8.4454 26.7785C12.5225 26.7785 16.0171 23.2357 16.0171 18.8638C16.0171 14.6427 13.1777 11.8537 9.68308 11.8537C8.88223 11.8537 8.15417 12.0045 7.79015 12.1552C8.73662 9.29086 12.0857 5.97425 14.4154 4.91896L9.10064 0.47168C3.42184 4.61745 0 10.4215 0 17.0548ZM17.9829 17.0548C17.9829 23.2357 21.9872 26.7785 26.4283 26.7785C30.5054 26.7785 34 23.2357 34 18.8638C34 14.6427 31.1606 11.8537 27.6659 11.8537C26.8651 11.8537 26.137 12.0045 25.773 12.1552C26.7195 9.29086 30.0685 5.97425 32.3983 4.91896L27.0835 0.47168C21.4047 4.61745 17.9829 10.4215 17.9829 17.0548Z" fill="#5C5C5C"/></svg></div>
+        <div class="testimonials-text">
+          <p>Начала изучение китайского языка с 0, спустя 6 месяцев успешно сдала тест HSK второго уровня, который соответствует уровню A2 по международным стандартам. Камила набрала 196 из 200 баллов.</p>
+        </div>
+        <div class="testimonials-row">
+          <div class="testimonials-img">
+            <img src="{% static 'img/testimonials-img.jpg' %}" alt="">
+          </div>
+          <div class="testimonials-descr">
+            <span class="testimonials-name">Камила, 11 лет</span>
+            <p>Город: Тернополь</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-slide">
+      <div class="testimonials-wrap">
+        <div class="testimonials-ico"><svg width="34" height="27" viewBox="0 0 34 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 17.0548C0 23.2357 4.00428 26.7785 8.4454 26.7785C12.5225 26.7785 16.0171 23.2357 16.0171 18.8638C16.0171 14.6427 13.1777 11.8537 9.68308 11.8537C8.88223 11.8537 8.15417 12.0045 7.79015 12.1552C8.73662 9.29086 12.0857 5.97425 14.4154 4.91896L9.10064 0.47168C3.42184 4.61745 0 10.4215 0 17.0548ZM17.9829 17.0548C17.9829 23.2357 21.9872 26.7785 26.4283 26.7785C30.5054 26.7785 34 23.2357 34 18.8638C34 14.6427 31.1606 11.8537 27.6659 11.8537C26.8651 11.8537 26.137 12.0045 25.773 12.1552C26.7195 9.29086 30.0685 5.97425 32.3983 4.91896L27.0835 0.47168C21.4047 4.61745 17.9829 10.4215 17.9829 17.0548Z" fill="#5C5C5C"/></svg></div>
+        <div class="testimonials-text">
+          <p>Начала изучение китайскогоHSK второго уровня, который соответствует уровню A2 по международным стандартам. Камила набрала 196 из 200 баллов.</p>
+        </div>
+        <div class="testimonials-row">
+          <div class="testimonials-img">
+            <img src="{% static 'img/testimonials-img.jpg' %}" alt="">
+          </div>
+          <div class="testimonials-descr">
+            <span class="testimonials-name">Камила, 11 лет</span>
+            <p>Город: Тернополь</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end testimonials -->
+{% endblock %}
