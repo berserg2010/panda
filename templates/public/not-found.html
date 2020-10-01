@@ -1,0 +1,29 @@
+{% extends './_base.html' %}
+
+{% load static %}
+
+{% block title %}Страница не найдена{% endblock %}
+
+
+{% block content %}
+<!-- start notFound -->
+<section class="notFound">
+  <div class="notFound-bg notFound-bg__1">
+    <img src="{% static 'img/notFound-bg-1.svg' %}" alt="">
+  </div>
+  <div class="notFound-bg notFound-bg__2">
+    <img src="{% static 'img/notFound-bg-2.svg' %}" alt="">
+  </div>
+  <div class="wrapper">
+    <div class="notFound-info">
+      <span class="notFound-subtitle">404</span>
+      <div class="notFound-img">
+        <img src="{% static 'img/notFound-img.svg' %}" alt="">
+      </div>
+      <h1 class="notFound-title">Такой страницы<br>не существет</h1>
+      <a href="{% url 'public_side:index' %}" class="main-btn">Перейти на главную</a>
+    </div>
+  </div>
+</section>
+<!-- end notFound -->
+{% endblock %}

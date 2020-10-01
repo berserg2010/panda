@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="header-logo">
-    <a href="#">
+    <a href="{% url 'public_side:index' %}">
       <img src="{% static 'img/logo.svg' %}" alt="">
     </a>
   </div>
@@ -27,20 +27,20 @@
       </ul>
       <ul class="header-menu">
         <li class="drop">
-          <a href="#" class="drop-text">
+          <a href="" class="drop-text">
             Обучение
             <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.67969 0.00390625L7.5 0.824219L4 4.32422L0.5 0.824219L1.32031 0.00390625L4 2.68359L6.67969 0.00390625Z" fill="#6B6B6B"></path></svg>
           </a>
           <ul class="drop-list">
-            <li><a href="#">Процесс обучения</a></li>
-            <li><a href="#">Частые вопросы</a></li>
-            <li><a href="#">Стоимость</a></li>
+            <li><a href="{% url 'public_side:process' %}">Процесс обучения</a></li>
+            <li><a href="{% url 'public_side:faq' %}">Частые вопросы</a></li>
+            <li><a href="{% url 'public_side:price' %}">Стоимость</a></li>
           </ul>
         </li>
-        <li><a href="#">О школе</a></li>
-        <li><a href="#">Преподаватели</a></li>
-        <li><a href="#">Отзывы</a></li>
-        <li><a href="#">Контакты</a></li>
+        <li><a href="{% url 'public_side:about' %}">О школе</a></li>
+        <li><a href="{% url 'public_side:teachers' %}">Преподаватели</a></li>
+        <li><a href="{% url 'public_side:testimonials' %}">Отзывы</a></li>
+        <li><a href="{% url 'public_side:contacts' %}">Контакты</a></li>
       </ul>
     </div>
     <div class="header-btns">

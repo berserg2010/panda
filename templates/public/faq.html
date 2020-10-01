@@ -1,0 +1,54 @@
+{% extends './_base.html' %}
+
+{% load static %}
+
+{% block title %}Частые вопросы{% endblock %}
+
+
+{% block content %}
+<!-- start faq -->
+<section class="faq">
+  <div class="faq-bg faq-bg__1">
+    <img src="{% static 'img/faq-bg-1.svg' %}" alt="">
+  </div>
+  <div class="faq-bg faq-bg__2">
+    <img src="{% static 'img/faq-bg-2.svg' %}" alt="">
+  </div>
+
+  {% include './components/faq-section.html' %}
+
+</section>
+<!-- end faq -->
+
+{% include './components/all-questions-section.html' %}
+
+<!-- start form -->
+<section class="form">
+  <div class="teacher-bg teacher-bg__1">
+    <img src="{% static 'img/teacher-bg-1.svg' %}" alt="">
+  </div>
+  <div class="teacher-bg teacher-bg__2">
+    <img src="{% static 'img/teacher-bg-2.svg' %}" alt="">
+  </div>
+  <div class="wrapper">
+    <div class="form-wrap">
+      <div class="form-block">
+        <h2 class="form-title">не нашли то что искали ?<br>спросите:</h2>
+        <form action="">
+          <div class="input-block">
+            <input type="email" name="email" placeholder="Эмеил">
+          </div>
+          <div class="input-block">
+            <input type="text" name="text" placeholder="Вопрос">
+          </div>
+          <div class="form-img">
+            <img src="{% static 'img/form-img.svg' %}" alt="">
+          </div>
+          <button class="second-btn">Отправить вопрос</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end form -->
+{% endblock %}
