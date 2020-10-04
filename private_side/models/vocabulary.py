@@ -11,7 +11,7 @@ class Word(models.Model):
     # audio
 
 
-class WordExamples(models.Model):
+class WordExample(models.Model):
 
     example = models.TextField(max_length=500, verbose_name='Пример')
     word = models.ForeignKey(Word, on_delete=models.CASCADE)
