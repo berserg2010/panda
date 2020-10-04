@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from corsheaders.defaults import default_headers
 
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -24,22 +23,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'corsheaders',
+    'rest_framework',
 
     'auth_backend',
     'public_side',
     'private_side',
 ]
-
-# # Corsheaders
-# CORS_ALLOW_HEADERS = default_headers + (
-#     'contenttype',
-# )
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost',
-#     'http://127.0.0.1',
-#     'http://192.168.1.52',
-# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,9 +36,6 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
-
-    # 'corsheaders.middleware.CorsMiddleware',
-
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
