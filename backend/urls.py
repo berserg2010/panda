@@ -7,8 +7,10 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('auth_backend.urls')),
 
     path('', include('public_side.urls')),
+    path('lk/', include('private_side.urls')),
 ]
 
 handler404 = TemplateView.as_view(template_name='public/not-found.html')

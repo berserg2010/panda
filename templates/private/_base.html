@@ -25,51 +25,27 @@
   {% block style %}{% endblock %}
 
 </head>
-<body>
+<body class="bodyLk">
 
-  <header class="header">
+  <header class="header header-second">
     {% include './components/header.html' %}
   </header>
 
-  {% block content %}{% endblock %}
+  <!-- start personalArea -->
+  <section class="personalArea">
 
-  <footer class="footer">
-    {% include './components/footer.html' %}
-  </footer>
+    {% include './components/menu.html' %}
 
-  {% include './components/modal-form.html' %}
+    {% block content %}{% endblock %}
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </section>
+  <!-- end personalArea -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
   {% block script %}{% endblock %}
 
-  <script src="{% static 'js/scripts.min.js' %}"></script>
-  <script>
-
-    function formSubmitHandler(form) {
-
-      const urls_actions = {
-        'login-form': 'login/',
-        'register-form': 'register/',
-      };
-
-      const instance = axios.create({
-        baseURL: 'http://127.0.0.1:8000/',
-        withCredentials: true,
-        xsrfCookieName: 'csrftoken',
-        xsrfHeaderName: 'X-CSRFToken',
-      });
-
-      instance.post(`${urls_actions[form.id]}`, new FormData(form))
-        .then(() => {
-          window.location.href = 'lk/';
-        })
-        .catch((e) => {
-          console.log(e)
-        });
-    }
-  </script>
+	<script src="{% static 'js/scripts.min.js' %}"></script>
 
 </body>
 </html>
