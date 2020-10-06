@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'auth_backend',
     'public_side',
     'private_side',
+    'account',
+    'course',
+    'lesson',
 ]
 
 MIDDLEWARE = [
