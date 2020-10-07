@@ -2,22 +2,26 @@
 
 {% load static %}
 
-{% block title %}Бесплатные уроки - ЛК{% endblock %}
+{% block title %}Все курсы{% endblock %}
 
 {% block content %}
 <div class="personalArea-content">
 	<div class="courses">
 
-		<div class="courses-col">
-			<a href="#" class="courses-wrap">
-				<div class="courses-img">
-					<img src="{% static 'img/courses-1.jpg' %}" alt="">
-				</div>
-				<div class="courses-info">
-					<span class="courses-name">Английский язык для детей от 4-х лет</span>
-				</div>
-			</a>
-		</div>
+    {% for course in object_list %}
+      <div class="courses-col">
+        <a href="{% url 'private_side:course-detail' course.pk %}" class="courses-wrap">
+          <div class="courses-img">
+            <img src="{% static 'img/courses-1.jpg' %}" alt="">
+          </div>
+          <div class="courses-info">
+            <span class="courses-name">{{ course.title }}</span>
+          </div>
+        </a>
+      </div>
+    {% empty %}
+      <div class="courses-col">Нет курсов</div>
+    {% endfor %}
 
 	</div>
 </div>

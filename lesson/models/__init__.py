@@ -7,16 +7,21 @@ from .word import Word
 
 class Lesson(CommonFields):
 
-    homework = models.ForeignKey('Homework', on_delete=models.PROTECT)
+    homework = models.ForeignKey('Homework', null=True, blank=True, on_delete=models.PROTECT)
 
     # video_practice
     # book
     # article
 
+
+    def __str__(self):
+        return self.title
+
+
     class Meta:
 
         verbose_name = 'урок'
-        verbose_name_plural = 'уроки'
+        verbose_name_plural = '01 | Уроки'
 
 
 class Homework(models.Model):
@@ -29,4 +34,4 @@ class Homework(models.Model):
     class Meta:
 
         verbose_name = 'домашнее задание'
-        verbose_name_plural = 'домашние задания'
+        verbose_name_plural = '02 | Домашние задания'

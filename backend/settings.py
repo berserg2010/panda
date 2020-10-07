@@ -1,3 +1,4 @@
+from django.contrib import admin
 import os
 from pathlib import Path
 
@@ -108,3 +109,6 @@ LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/lk/'
 # LOGOUT_URL = 'auth_backend:logout'
 LOGOUT_REDIRECT_URL = '/'
+
+admin.AdminSite.site_header = 'Panda'.upper()
+admin.AdminSite.empty_value_display = '--'

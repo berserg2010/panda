@@ -24,12 +24,15 @@ class Account(models.Model):
 
 class Teacher(Account):
 
-    native_speaker = models.CharField(max_length=100, verbose_name='родной язык')
+    native_speaker = models.CharField(max_length=100, default='', blank=True, verbose_name='родной язык')
+
+    def __str__(self):
+        return self.user.get_full_name()
 
     class Meta:
 
         verbose_name = 'учитель'
-        verbose_name_plural = 'учителя'
+        verbose_name_plural = '01 | Учителя'
 
 
 class Student(Account):
@@ -52,14 +55,19 @@ class Student(Account):
 
     wallet = models.OneToOneField('Wallet', on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.user.get_full_name()
+
     class Meta:
         verbose_name = 'ученик'
-        verbose_name_plural = 'ученики'
+        verbose_name_plural = '01 | Ученики'
 
 
 class Wallet(models.Model):
 
-    pass
+    def __str__(self):
+        return f'кошелек | id {self.pk}'
 
     class Meta:
         verbose_name = 'кошелек'
+        verbose_name_plural = '03 | Кошелеки'
