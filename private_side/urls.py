@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
 
 from .views import IndexLkView, SettingsLkView, FreeLessonLkView
@@ -12,4 +12,5 @@ urlpatterns = [
     path('settings/', SettingsLkView.as_view(), name='settings'),
     path('free-lesson/', FreeLessonLkView.as_view(), name='free-lesson'),
 
+    path('', include('course.urls')),
 ]
