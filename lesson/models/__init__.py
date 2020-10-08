@@ -2,16 +2,21 @@ from django.db import models
 
 from common.models import CommonFields
 from .test import Test
-from .word import Word
+from .word import Word, Example
+from .article import Article
+from .book import Book
 
 
 class Lesson(CommonFields):
 
-    homework = models.ForeignKey('Homework', null=True, blank=True, on_delete=models.PROTECT)
+    tests = models.ManyToManyField(Test, blank=True, verbose_name='тесты')
+    words = models.ManyToManyField(Word, blank=True, verbose_name='слова')
+    articles = models.ManyToManyField(Article, blank=True, verbose_name='статьи')
+    books = models.ManyToManyField(Book, blank=True, verbose_name='книги')
 
+    # game
     # video_practice
     # book
-    # article
 
 
     def __str__(self):
@@ -22,16 +27,3 @@ class Lesson(CommonFields):
 
         verbose_name = 'урок'
         verbose_name_plural = '01 | Уроки'
-
-
-class Homework(models.Model):
-
-    test = models.ManyToManyField(Test)
-    word = models.ManyToManyField(Word)
-
-    # game
-
-    class Meta:
-
-        verbose_name = 'домашнее задание'
-        verbose_name_plural = '02 | Домашние задания'

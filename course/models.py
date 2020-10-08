@@ -54,9 +54,9 @@ class Course(models.Model):
     end = models.DateTimeField(default='', null=True, blank=True, verbose_name='окончание курса')
     prolong = models.DateTimeField(default='', null=True, blank=True, verbose_name='продление курса')
 
-    banner_of_course = models.ForeignKey(BannerOfCourse, on_delete=models.PROTECT)
-    teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT)
-    student = models.ForeignKey(Student, on_delete=models.PROTECT)
+    banner_of_course = models.ForeignKey(BannerOfCourse, on_delete=models.PROTECT, verbose_name='презентация курса')
+    teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, verbose_name='учитель')
+    student = models.ForeignKey(Student, on_delete=models.PROTECT, verbose_name='ученик')
 
     lessons = models.ManyToManyField(Lesson, through='CourseLesson')
 
@@ -69,6 +69,22 @@ class Course(models.Model):
 
         verbose_name = 'курс'
         verbose_name_plural = '02 | Курсы'
+
+
+class Schedule(models.Model):
+
+    datetime = models.DateTimeField(verbose_name='дата и время урока')
+
+    course = models.ForeignKey('Course', on_delete=models.PROTECT)
+
+
+    def __str__(self):
+        return f'{self.datetime.astimezone()}'
+
+
+    class Meta:
+        verbose_name = 'расписание уроков'
+        verbose_name_plural = 'расписания уроков'
 
 
 class CourseLesson(models.Model):
@@ -98,12 +114,4 @@ class CourseLesson(models.Model):
         ordering = ('number',)
 
 
-class Schedule(models.Model):
 
-    datetime = models.DateTimeField(verbose_name='дата и время урока')
-
-    course = models.ForeignKey('Course', on_delete=models.PROTECT)
-
-
-    class Meta:
-        verbose_name = 'расписание уроков'

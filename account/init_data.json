@@ -1,0 +1,38 @@
+[
+{
+  "model": "account.teacher",
+  "pk": 1,
+  "fields": {
+    "gender": "M",
+    "user": 3,
+    "native_speaker": ""
+  }
+},
+{
+  "model": "account.student",
+  "pk": "e7e9b25b-44a4-46a0-8304-77681cd57d75",
+  "fields": {
+    "gender": "M",
+    "user": 2,
+    "phone": "+76543210000",
+    "native_language": null,
+    "pronunciation": null,
+    "timezone": "Europe/Moscow",
+    "voice_acting": "M",
+    "accent_of_voice_acting": null,
+    "system_notification": true,
+    "support_message": true,
+    "payment_info": true,
+    "reminders_about_lessons": true,
+    "discounts": true,
+    "sounds": false,
+    "age": 14,
+    "wallet": 1
+  }
+},
+{
+  "model": "account.wallet",
+  "pk": 1,
+  "fields": {}
+}
+]

@@ -1,0 +1,66 @@
+[
+{
+  "model": "course.bannerofcourse",
+  "pk": 1,
+  "fields": {
+    "title": "Английский язык для детей от 4-х лет",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet donec erat ut duis. Cras pellentesque fames natoque magna est eget orci ipsum aliquam. Mi sem magna mattis dignissim fringilla urna pellentesque sit orci. Ultrices viverra hac vivamus fringilla pulvinar fringilla. Diam ut consequat duis sem.",
+    "cost": 640,
+    "percentage_discount": 47,
+    "is_active": true,
+    "number_of_lessons": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "course.bannerofcourse",
+  "pk": 2,
+  "fields": {
+    "title": "Английский язык для взрослых",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet donec erat ut duis. Cras pellentesque fames natoque magna est eget orci ipsum aliquam. Mi sem magna mattis dignissim fringilla urna pellentesque sit orci. Ultrices viverra hac vivamus fringilla pulvinar fringilla. Diam ut consequat duis sem.",
+    "cost": 640,
+    "percentage_discount": 47,
+    "is_active": true,
+    "number_of_lessons": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "course.numberoflessons",
+  "pk": 1,
+  "fields": {
+    "count": 4
+  }
+},
+{
+  "model": "course.numberoflessons",
+  "pk": 2,
+  "fields": {
+    "count": 8
+  }
+},
+{
+  "model": "course.numberoflessons",
+  "pk": 3,
+  "fields": {
+    "count": 16
+  }
+},
+{
+  "model": "course.course",
+  "pk": 1,
+  "fields": {
+    "start": null,
+    "end": null,
+    "prolong": null,
+    "banner_of_course": 1,
+    "teacher": 1,
+    "student": "e7e9b25b-44a4-46a0-8304-77681cd57d75"
+  }
+}
+]

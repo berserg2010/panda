@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth import get_user_model
 import pytz
@@ -36,6 +38,8 @@ class Teacher(Account):
 
 
 class Student(Account):
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
 
     phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
     native_language = models.CharField(max_length=20, null=True, blank=True, verbose_name='родной язык')

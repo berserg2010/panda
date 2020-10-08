@@ -7,6 +7,11 @@ class Test(models.Model):
     options = models.CharField(max_length=200, verbose_name='варианты ответа')
     answer = models.CharField(max_length=200, verbose_name='ответ')
 
+
+    def __str__(self):
+        return f'{self.question}'
+
+
     class Meta:
 
         verbose_name = 'тест'

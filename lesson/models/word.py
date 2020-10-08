@@ -8,18 +8,28 @@ class Word(models.Model):
     translation = models.CharField(max_length=200, verbose_name='перевод')
     description = models.CharField(max_length=200, verbose_name='описание')
 
+    example = models.ManyToManyField('Example', blank=True, verbose_name='пример со словом')
+
+
+    def __str__(self):
+        return f'{self.spelling.capitalize()} | {self.translation.capitalize()}'
+
+
     class Meta:
 
         verbose_name = 'слово'
         verbose_name_plural = 'слова'
 
 
-class WordExample(models.Model):
+class Example(models.Model):
 
     example = models.CharField(max_length=200, verbose_name='пример')
-    description = models.CharField(max_length=200, verbose_name='описание')
+    description = models.CharField(max_length=200, blank=True, verbose_name='описание')
 
-    word = models.ForeignKey(Word, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f'{self.example}'
+
 
     class Meta:
 

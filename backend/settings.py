@@ -1,13 +1,15 @@
 from django.contrib import admin
+from django.core.management import utils
 import os
 from pathlib import Path
+from decouple import config
 
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'of&sa*bks8g3lkxk99%dfeo3du#1jvj-+b!#3as5&d7dusqs#o')
+SECRET_KEY = config('SECRET_KEY', default=utils.get_random_secret_key())
 
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     'http://localhost',

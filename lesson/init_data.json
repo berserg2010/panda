@@ -1,0 +1,77 @@
+[
+{
+  "model": "lesson.test",
+  "pk": 1,
+  "fields": {
+    "question": "I don’t like this table. It … very small.",
+    "options": "am, are, be",
+    "answer": "is"
+  }
+},
+{
+  "model": "lesson.test",
+  "pk": 2,
+  "fields": {
+    "question": "… you live in a house or in a flat?",
+    "options": "Does Did Will",
+    "answer": "Do"
+  }
+},
+{
+  "model": "lesson.test",
+  "pk": 3,
+  "fields": {
+    "question": "Our friends live abroad. But we often visit … .",
+    "options": "they, we, you",
+    "answer": "them"
+  }
+},
+{
+  "model": "lesson.word",
+  "pk": 1,
+  "fields": {
+    "spelling": "desperately",
+    "transcription": "dispæritli",
+    "translation": "отчаянно",
+    "description": "In a very frightened, worried or angry way.",
+    "example": [
+      1
+    ]
+  }
+},
+{
+  "model": "lesson.example",
+  "pk": 1,
+  "fields": {
+    "example": "He looked desparately around for a weapon.",
+    "description": ""
+  }
+},
+{
+  "model": "lesson.article",
+  "pk": 1,
+  "fields": {
+    "title": "Английский язык для начинающих: отправляемся в пут",
+    "description": "",
+    "url": "https://www.native-english.ru/articles/english-for-beginners"
+  }
+},
+{
+  "model": "lesson.lesson",
+  "pk": 1,
+  "fields": {
+    "title": "Притяжательный падеж существительного",
+    "description": "",
+    "tests": [
+      1,
+      2,
+      3
+    ],
+    "words": [
+      1
+    ],
+    "articles": [],
+    "books": []
+  }
+}
+]
