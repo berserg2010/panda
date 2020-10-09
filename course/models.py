@@ -14,18 +14,14 @@ class BannerOfCourse(CommonFields):
 
     number_of_lessons = models.ManyToManyField('NumberOfLessons', verbose_name='количество уроков')
 
-
     def get_discount(self):
         return self.cost / 100 * self.percentage_discount
-
 
     def get_cost_with_discount(self):
         return self.cost - self.get_discount()
 
-
     def __str__(self):
         return f'{self.title} | {self.cost} руб./урок'
-
 
     class Meta:
 
@@ -37,10 +33,8 @@ class NumberOfLessons(models.Model):
 
     count = models.PositiveSmallIntegerField()
 
-
     def __str__(self) -> str:
         return f'{self.count}'
-
 
     class Meta:
 
@@ -60,10 +54,8 @@ class Course(models.Model):
 
     lessons = models.ManyToManyField(Lesson, through='CourseLesson')
 
-
     def __str__(self):
         return f'{self.banner_of_course.title} | {self.teacher} | {self.student} | {self.start or "--"}/{self.end or "--"}/{self.prolong or "--"}'
-
 
     class Meta:
 
@@ -77,10 +69,8 @@ class Schedule(models.Model):
 
     course = models.ForeignKey('Course', on_delete=models.PROTECT)
 
-
     def __str__(self):
         return f'{self.datetime.astimezone()}'
-
 
     class Meta:
         verbose_name = 'расписание уроков'
@@ -102,16 +92,11 @@ class CourseLesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.PROTECT)
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
 
-
     def __str__(self):
         return f'{self.course} <-> {self.number} | {self.lesson}'
-
 
     class Meta:
 
         verbose_name = 'Курс <-> урок'
         verbose_name_plural = '03 | Курсы <-> уроки'
         ordering = ('number',)
-
-
-

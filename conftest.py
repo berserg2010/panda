@@ -9,7 +9,7 @@ pytestmark = pytest.mark.django_db
 
 
 @pytest.fixture
-def create_user():
+def create_user_handler():
     def _create_user(user_data):
         return mixer.blend(
             get_user_model(),
@@ -23,10 +23,17 @@ def create_user():
 
 
 @pytest.fixture(autouse=True)
-def create_superuser(create_user):
+def create_superuser(create_user_handler):
     def _create_superuser():
-        return create_user(ParameterStorage.root_auth)
+        return create_user_handler(ParameterStorage.root_auth)
     return _create_superuser
+
+
+@pytest.fixture(autouse=True)
+def create_user(create_user_handler):
+    def _create_user():
+        return create_user_handler(ParameterStorage.user_auth)
+    return _create_user
 
 
 @pytest.fixture
@@ -50,7 +57,15 @@ class ParameterStorage:
     root_auth = {
         'username': 'root',
         'email': 'root@asdfasdf.com',
-        'first_name': 'first_name',
-        'last_name': 'last_name',
+        'first_name': 'first_root',
+        'last_name': 'last_root',
+        'password': 'lkasdjlkasdflaksdjf',
+    }
+
+    user_auth = {
+        'username': 'user',
+        'email': 'user@asdfasdf.com',
+        'first_name': 'first_user',
+        'last_name': 'last_user',
         'password': 'lkasdjlkasdflaksdjf',
     }
