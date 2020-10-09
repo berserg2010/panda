@@ -64,7 +64,7 @@ class Student(Account):
 
     class Meta:
         verbose_name = 'ученик'
-        verbose_name_plural = '01 | Ученики'
+        verbose_name_plural = '02 | Ученики'
 
 
 class Wallet(models.Model):
