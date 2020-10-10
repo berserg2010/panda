@@ -69,17 +69,20 @@ class Schedule(models.Model):
 
     course = models.ForeignKey('Course', on_delete=models.PROTECT)
 
+    # Если урок перенесен, нужно удалить запись в Schedule
+
     def __str__(self):
         return f'{self.datetime.astimezone()}'
 
     class Meta:
         verbose_name = 'расписание уроков'
         verbose_name_plural = 'расписания уроков'
+        ordering = ('datetime', )
 
 
 class CourseLesson(models.Model):
 
-    finished = models.BooleanField(default=False, verbose_name='завершон')
+    finished = models.BooleanField(default=False, verbose_name='завершен')
 
     test_result = models.FloatField(default=0, verbose_name='результат по тесту')
     word_result = models.FloatField(default=0, verbose_name='результат по словам')
@@ -91,6 +94,8 @@ class CourseLesson(models.Model):
 
     course = models.ForeignKey(Course, on_delete=models.PROTECT)
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+
+    # Если урок перенесен, нужно удалить запись в Schedule
 
     def __str__(self):
         return f'{self.course} <-> {self.number} | {self.lesson}'

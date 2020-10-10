@@ -20,7 +20,7 @@
           <b class="menu-ico"><img src="{% static 'img/menu-ico-1.svg' %}" alt=""></b>
           <span>Личный кабинет</span>
         </a></li>
-        <li class="menu-li"><a href="{% url 'private_side:lessons' %}">
+        <li class="menu-li"><a href="">
           <b class="menu-ico"><img src="{% static 'img/menu-ico-2.svg' %}" alt=""></b>
           <span>Расписания</span>
         </a></li>
@@ -48,7 +48,7 @@
           <b class="menu-ico"><img src="{% static 'img/menu-ico-8.svg' %}" alt=""></b>
           <span>Словарные игры</span>
         </a></li>
-        <li><a href="#">
+        <li><a href="{% url 'private_side:lessons' %}">
           <b class="menu-ico"><img src="{% static 'img/menu-ico-9.svg' %}" alt=""></b>
           <span>Занятия</span>
         </a></li>
