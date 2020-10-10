@@ -1,9 +1,9 @@
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Q
 
-from .models import BannerOfCourse, Course
+from .models import BannerOfCourse, Course, CourseLesson
 
 
 class BannerOfCourseListView(ListView):
@@ -24,6 +24,15 @@ class CourseLessonListView(ListView):
     template_name = 'private/lessons.html'
 
     def get_queryset(self):
-        return super().get_queryset().filter(student__user=self.request.user).prefetch_related(
+
+        user = self.request.user
+        user_filter = Q(teacher__user=self.request.user) if user.is_staff else Q(student__user=self.request.user)
+
+        return super().get_queryset().filter(user_filter).prefetch_related(
             Prefetch('lessons')
         )
+
+class LessonView(DetailView):
+
+    model = CourseLesson
+    template_name = 'private/lesson.html'

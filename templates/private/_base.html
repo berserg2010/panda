@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -27,29 +28,23 @@
 </head>
 <body class="bodyLk">
 
-  <header class="header header-second">
-    {% include './components/header.html' %}
-  </header>
+<header class="header header-second">
+  {% include './components/header.html' %}
+</header>
 
-  <!-- start personalArea -->
-  <section class="personalArea">
+<section class="personalArea">
 
-    {% if not user.is_staff %}
-      {% include './components/student_menu.html' %}
-    {% else %}
-      {% include './components/teacher_menu.html' %}
-    {% endif %}
+  {% include './components/left_menu.html' %}
 
-    {% block content %}{% endblock %}
+  {% block content %}{% endblock %}
 
-  </section>
-  <!-- end personalArea -->
+</section>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-  {% block script %}{% endblock %}
+{% block script %}{% endblock %}
 
-	<script src="{% static 'js/scripts.min.js' %}"></script>
+<script src="{% static 'js/scripts.min.js' %}"></script>
 
 </body>
 </html>

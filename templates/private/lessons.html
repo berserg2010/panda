@@ -38,13 +38,15 @@
                       <p>{{ courselesson.lesson.title }}</p>
                     </div>
                     <div class="master-block">
+
                       {% if user.is_stuff %}
-                        <span class="master-subtitle">Ученик:</span>
-                        <p>{{ courselesson.course.student }}</p>
-                      {% else %}
                         <span class="master-subtitle">Учитель:</span>
                         <p>{{ courselesson.course.teacher }}</p>
+                      {% else %}
+                        <span class="master-subtitle">Ученик:</span>
+                        <p>{{ courselesson.course.student }}</p>
                       {% endif %}
+
                     </div>
                     <div class="master-block">
                       <span class="master-subtitle">Запланировано:</span>
@@ -53,7 +55,9 @@
                       {% endwith %}
                     </div>
                     <div class="master-bottom">
-                      <a href="#" class="second-btn">Начать урок</a>
+
+                      <a href="{% url 'private_side:lesson' courselesson.pk %}" class="second-btn">Начать урок</a>
+
                       <a href="#" class="main-btn master-btn">Перенести урок</a>
                       <p>Занятие можно переносить не позже чем за 8 часов до начала урока</p>
                     </div>
@@ -105,11 +109,11 @@
                     <div class="master-block">
 
                       {% if user.is_stuff %}
-                        <span class="master-subtitle">Ученик:</span>
-                        <p>{{ courselesson.course.student }}</p>
-                      {% else %}
                         <span class="master-subtitle">Учитель:</span>
                         <p>{{ courselesson.course.teacher }}</p>
+                      {% else %}
+                        <span class="master-subtitle">Ученик:</span>
+                        <p>{{ courselesson.course.student }}</p>
                       {% endif %}
 
                     </div>
@@ -148,11 +152,11 @@
               <div class="today-col">
 
                 {% if user.is_stuff %}
-                  <span>Ученик:</span>
-                  {{ courselesson.course.student }}
-                {% else %}
                   <span>Учитель:</span>
                   {{ courselesson.course.teacher }}
+                {% else %}
+                  <span>Ученик:</span>
+                  {{ courselesson.course.student }}
                 {% endif %}
 
               </div>
@@ -162,9 +166,9 @@
               </div>
               <div class="today-col">
                 <span>Урок проведен:</span>
-                  {% with schedule=courselesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
-                    {{ schedule }}
-                  {% endwith %}
+                {% with schedule=courselesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
+                  {{ schedule }}
+                {% endwith %}
               </div>
               <div class="today-right">
                 <div class="today-btn"><svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M39.5 0C17.6868 0 0 17.6868 0 39.5C0 61.3132 17.6868 79 39.5 79C61.3132 79 79 61.3132 79 39.5C79 17.6868 61.3132 0 39.5 0ZM52.2052 40.1084L32.949 54.1185C32.8434 54.1944 32.719 54.2397 32.5894 54.2494C32.4597 54.2592 32.3299 54.233 32.2142 54.1737C32.0985 54.1145 32.0013 54.0245 31.9334 53.9137C31.8655 53.8028 31.8294 53.6754 31.8292 53.5454V25.5427C31.8288 25.4125 31.8645 25.2847 31.9322 25.1734C32 25.0622 32.0973 24.9719 32.2132 24.9125C32.3292 24.8532 32.4593 24.8271 32.5892 24.8372C32.719 24.8473 32.8436 24.8931 32.949 24.9696L52.2052 38.971C52.2962 39.0353 52.3704 39.1205 52.4216 39.2195C52.4729 39.3185 52.4996 39.4283 52.4996 39.5397C52.4996 39.6511 52.4729 39.7609 52.4216 39.8599C52.3704 39.9588 52.2962 40.044 52.2052 40.1084Z" fill="#FFB42D"/></svg></div>

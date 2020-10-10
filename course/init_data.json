@@ -62,5 +62,155 @@
     "teacher": 1,
     "student": "e7e9b25b-44a4-46a0-8304-77681cd57d75"
   }
+},
+{
+  "model": "course.course",
+  "pk": 2,
+  "fields": {
+    "start": null,
+    "end": null,
+    "prolong": null,
+    "banner_of_course": 2,
+    "teacher": 1,
+    "student": "e7e9b25b-44a4-46a0-8304-77681cd57d75"
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 1,
+  "fields": {
+    "datetime": "2020-10-09T09:00:00Z",
+    "course": 1
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 2,
+  "fields": {
+    "datetime": "2020-10-13T09:00:00Z",
+    "course": 1
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 3,
+  "fields": {
+    "datetime": "2020-10-01T09:00:00Z",
+    "course": 2
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 4,
+  "fields": {
+    "datetime": "2020-10-07T14:07:01Z",
+    "course": 2
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 5,
+  "fields": {
+    "datetime": "2020-10-17T09:00:00Z",
+    "course": 2
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 1,
+  "fields": {
+    "finished": true,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 1,
+    "note": "",
+    "course": 1,
+    "lesson": 1
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 2,
+  "fields": {
+    "finished": false,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 2,
+    "note": "",
+    "course": 1,
+    "lesson": 2
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 3,
+  "fields": {
+    "finished": false,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 3,
+    "note": "",
+    "course": 1,
+    "lesson": 3
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 4,
+  "fields": {
+    "finished": false,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 4,
+    "note": "",
+    "course": 1,
+    "lesson": 4
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 5,
+  "fields": {
+    "finished": true,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 1,
+    "note": "",
+    "course": 2,
+    "lesson": 4
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 6,
+  "fields": {
+    "finished": false,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 2,
+    "note": "",
+    "course": 2,
+    "lesson": 3
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 7,
+  "fields": {
+    "finished": false,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 3,
+    "note": "",
+    "course": 2,
+    "lesson": 2
+  }
 }
 ]

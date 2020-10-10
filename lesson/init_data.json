@@ -57,6 +57,16 @@
   }
 },
 {
+  "model": "lesson.book",
+  "pk": 1,
+  "fields": {
+    "title": "The Adventures of Tom Sawyer",
+    "description": "Tom Sawyer loves adventures. He has a lot of adventures at home, at school, and with his friends. He has one adventure in a cave. But why is he there? What does he see in the cave? And why is he afraid?",
+    "author": "Mark Twein",
+    "isbn": ""
+  }
+},
+{
   "model": "lesson.lesson",
   "pk": 1,
   "fields": {
@@ -67,11 +77,103 @@
       2,
       3
     ],
+    "homework_tests": [
+      2,
+      3
+    ],
     "words": [
       1
     ],
-    "articles": [],
-    "books": []
+    "homework_words": [
+      1
+    ],
+    "articles": [
+      1
+    ],
+    "books": [
+      1
+    ]
+  }
+},
+{
+  "model": "lesson.lesson",
+  "pk": 2,
+  "fields": {
+    "title": "Будущее время",
+    "description": "",
+    "tests": [
+      1,
+      2
+    ],
+    "homework_tests": [
+      1,
+      2
+    ],
+    "words": [
+      1
+    ],
+    "homework_words": [
+      1
+    ],
+    "articles": [
+      1
+    ],
+    "books": [
+      1
+    ]
+  }
+},
+{
+  "model": "lesson.lesson",
+  "pk": 3,
+  "fields": {
+    "title": "Прошедшее время",
+    "description": "",
+    "tests": [
+      2
+    ],
+    "homework_tests": [
+      2,
+      3
+    ],
+    "words": [
+      1
+    ],
+    "homework_words": [
+      1
+    ],
+    "articles": [
+      1
+    ],
+    "books": [
+      1
+    ]
+  }
+},
+{
+  "model": "lesson.lesson",
+  "pk": 4,
+  "fields": {
+    "title": "Настоящее время",
+    "description": "",
+    "tests": [
+      2
+    ],
+    "homework_tests": [
+      1
+    ],
+    "words": [
+      1
+    ],
+    "homework_words": [
+      1
+    ],
+    "articles": [
+      1
+    ],
+    "books": [
+      1
+    ]
   }
 }
 ]

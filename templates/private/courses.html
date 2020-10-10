@@ -5,24 +5,24 @@
 {% block title %}Все курсы{% endblock %}
 
 {% block content %}
-<div class="personalArea-content">
-	<div class="courses">
+  <div class="personalArea-content">
+    <div class="courses">
 
-    {% for course in object_list %}
-      <div class="courses-col">
-        <a href="{% url 'private_side:course-detail' course.pk %}" class="courses-wrap">
-          <div class="courses-img">
-            <img src="{% static 'img/courses-1.jpg' %}" alt="">
-          </div>
-          <div class="courses-info">
-            <span class="courses-name">{{ course.title }}</span>
-          </div>
-        </a>
-      </div>
-    {% empty %}
-      <div class="courses-col">Нет курсов</div>
-    {% endfor %}
+      {% for course in object_list %}
+        <div class="courses-col">
+          <a href="{% url 'private_side:course-detail' course.pk %}" class="courses-wrap">
+            <div class="courses-img">
+              <img src="{% static 'img/courses-1.jpg' %}" alt="">
+            </div>
+            <div class="courses-info">
+              <span class="courses-name">{{ course.title }}</span>
+            </div>
+          </a>
+        </div>
+      {% empty %}
+        <div class="courses-col">Нет курсов</div>
+      {% endfor %}
 
-	</div>
-</div>
+    </div>
+  </div>
 {% endblock %}
