@@ -16,47 +16,57 @@
         </ul>
       </div>
       <ul class="menu-list">
-        <li><a href="#" class="active">
+        <li><a href="{% url 'private_side:index' %}" class="active">
           <b class="menu-ico"><img src="{% static 'img/menu-ico-1.svg' %}" alt=""></b>
           <span>Личный кабинет</span>
         </a></li>
-        <li class="menu-li"><a href="#">
+        <li class="menu-li"><a href="{% url 'private_side:lessons' %}">
           <b class="menu-ico"><img src="{% static 'img/menu-ico-2.svg' %}" alt=""></b>
           <span>Расписания</span>
         </a></li>
-        <li class="menu-li"><a href="#">
-          <b class="menu-ico"><img src="{% static 'img/menu-ico-13.svg' %}" alt=""></b>
-          <span>Материалы</span>
-        </a></li>
-        <li class="menu-li"><a href="#">
-          <b class="menu-ico"><img src="{% static 'img/menu-ico-3.svg"' %} alt=""></b>
+        <li class="menu-li"><a href="{% url 'private_side:courses' %}">
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-3.svg' %}" alt=""></b>
           <span>Курсы</span>
         </a></li>
         <li><a href="#">
-          <b class="menu-ico"><img src="{% static 'img/menu-ico-14.svg' %}" alt=""></b>
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-4.svg' %}" alt=""></b>
+          <span>Мои заметки</span>
+        </a></li>
+        <li><a href="#">
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-5.svg' %}" alt=""></b>
+          <span>Мой словарь</span>
+        </a></li>
+        <li><a href="#">
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-6.svg' %}" alt=""></b>
+          <span>Видеопрактика</span>
+        </a></li>
+        <li><a href="#">
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-7.svg' %}" alt=""></b>
+          <span>Тесты</span>
+        </a></li>
+        <li><a href="#">
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-8.svg' %}" alt=""></b>
+          <span>Словарные игры</span>
+        </a></li>
+        <li><a href="#">
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-9.svg' %}" alt=""></b>
           <span>Занятия</span>
         </a></li>
         <li><a href="#">
-          <b class="menu-ico"><img src="{% static 'img/menu-ico-15.svg' %}" alt=""></b>
-          <span>Задания</span>
-        </a></li>
-        <li><a href="#">
-          <b class="menu-ico"><img src="{% static 'img/menu-ico-16.svg' %}" alt=""></b>
-          <span>Ссылки</span>
-        </a></li>
-        <li><a href="#">
-          <b class="menu-ico"><img src="{% static 'img/menu-ico-17.svg' %}" alt=""></b>
-          <span>Файлы</span>
-        </a></li>
-        <li><a href="#">
-          <b class="menu-ico"><img src="{% static 'img/menu-ico-18.svg' %}" alt=""></b>
-          <span>Темы</span>
-        </a></li>
-        <li><a href="#">
-          <b class="menu-ico"><img src="{% static 'img/menu-ico-19.svg' %}" alt=""></b>
-          <span>Ученики</span>
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-10.svg' %}" alt=""></b>
+          <span>Бесплатные уроки<i>Пригласить друзей</i></span>
         </a></li>
       </ul>
+      <div class="menu-row">
+        <a href="#" class="menu-col">
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-11.svg' %}" alt=""></b>
+          <span>домашние задания</span>
+        </a>
+        <a href="#" class="menu-col">
+          <b class="menu-ico"><img src="{% static 'img/menu-ico-12.svg' %}" alt=""></b>
+          <span>План Занятий</span>
+        </a>
+      </div>
       <div class="menu-bg">
         <img src="{% static 'img/menu-bg.svg' %}" alt="">
       </div>

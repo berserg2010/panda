@@ -34,7 +34,11 @@
   <!-- start personalArea -->
   <section class="personalArea">
 
-    {% include './components/menu.html' %}
+    {% if not user.is_staff %}
+      {% include './components/student_menu.html' %}
+    {% else %}
+      {% include './components/teacher_menu.html' %}
+    {% endif %}
 
     {% block content %}{% endblock %}
 
