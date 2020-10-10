@@ -10,3 +10,11 @@ def get_list_item(lst, index):
         return lst[index].datetime
     except IndexError:
         return '--'
+
+
+@register.filter
+def string_lines_to_list(string: str):
+    try:
+        return (line.strip() for line in string.splitlines() )
+    except IndexError:
+        return ''

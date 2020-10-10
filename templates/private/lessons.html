@@ -1,6 +1,6 @@
 {% extends './_base.html' %}
 
-{% load static l10n course_extras %}
+{% load static course_extras %}
 
 {% block title %}Расписание{% endblock %}
 
@@ -22,8 +22,8 @@
       {% for object in object_list %}
         <div class="master">
           <div class="master-row">
-            {% for courselesson in object.courselesson_set.all %}
-              {% if not courselesson.finished %}
+            {% for course_lesson in object.courselesson_set.all %}
+              {% if not course_lesson.finished %}
 
                 <div class="master-col">
 
@@ -34,29 +34,29 @@
                     </div>
 
                     <div class="master-block">
-                      <span class="master-subtitle">Урок {{ courselesson.number }} (интерактивный урок)</span>
-                      <p>{{ courselesson.lesson.title }}</p>
+                      <span class="master-subtitle">Урок {{ course_lesson.number }} (интерактивный урок)</span>
+                      <p>{{ course_lesson.lesson.title }}</p>
                     </div>
                     <div class="master-block">
 
                       {% if user.is_stuff %}
                         <span class="master-subtitle">Учитель:</span>
-                        <p>{{ courselesson.course.teacher }}</p>
+                        <p>{{ course_lesson.course.teacher }}</p>
                       {% else %}
                         <span class="master-subtitle">Ученик:</span>
-                        <p>{{ courselesson.course.student }}</p>
+                        <p>{{ course_lesson.course.student }}</p>
                       {% endif %}
 
                     </div>
                     <div class="master-block">
                       <span class="master-subtitle">Запланировано:</span>
-                      {% with schedule=courselesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
+                      {% with schedule=course_lesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
                         <p>{{ schedule }}</p>
                       {% endwith %}
                     </div>
                     <div class="master-bottom">
 
-                      <a href="{% url 'private_side:lesson' courselesson.pk %}" class="second-btn">Начать урок</a>
+                      <a href="{% url 'private_side:lesson' course_lesson.pk %}" class="second-btn">Начать урок</a>
 
                       <a href="#" class="main-btn master-btn">Перенести урок</a>
                       <p>Занятие можно переносить не позже чем за 8 часов до начала урока</p>
@@ -93,8 +93,8 @@
         <div class="master master-old">
           <div class="master-row">
 
-            {% for courselesson in object.courselesson_set.all %}
-              {% if courselesson.finished %}
+            {% for course_lesson in object.courselesson_set.all %}
+              {% if course_lesson.finished %}
 
                 <div class="master-col">
                   <div class="master-wrap">
@@ -103,23 +103,23 @@
                       <p>{{ object.banner_of_course.title }}</p>
                     </div>
                     <div class="master-block">
-                      <span class="master-subtitle">Урок {{ courselesson.number }} (Видео урок)</span>
-                      <p>{{ courselesson.lesson.title }}</p>
+                      <span class="master-subtitle">Урок {{ course_lesson.number }} (Видео урок)</span>
+                      <p>{{ course_lesson.lesson.title }}</p>
                     </div>
                     <div class="master-block">
 
                       {% if user.is_stuff %}
                         <span class="master-subtitle">Учитель:</span>
-                        <p>{{ courselesson.course.teacher }}</p>
+                        <p>{{ course_lesson.course.teacher }}</p>
                       {% else %}
                         <span class="master-subtitle">Ученик:</span>
-                        <p>{{ courselesson.course.student }}</p>
+                        <p>{{ course_lesson.course.student }}</p>
                       {% endif %}
 
                     </div>
                     <div class="master-block">
                       <span class="master-subtitle">Урок проведен:</span>
-                      {% with schedule=courselesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
+                      {% with schedule=course_lesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
                         <p>{{ schedule }}</p>
                       {% endwith %}
                     </div>
@@ -145,7 +145,7 @@
       <div class="today">
 
         {% for object in object_list %}
-          {% for courselesson in object.courselesson_set.all %}
+          {% for course_lesson in object.courselesson_set.all %}
 
             <div class="today-block">
               <div class="today-col"><span>Курс:</span>{{ object.banner_of_course.title }}</div>
@@ -153,20 +153,20 @@
 
                 {% if user.is_stuff %}
                   <span>Учитель:</span>
-                  {{ courselesson.course.teacher }}
+                  {{ course_lesson.course.teacher }}
                 {% else %}
                   <span>Ученик:</span>
-                  {{ courselesson.course.student }}
+                  {{ course_lesson.course.student }}
                 {% endif %}
 
               </div>
               <div class="today-col">
-                <span>Урок {{ courselesson.number }} (Видео урок):</span>
-                {{ courselesson.lesson.title }}
+                <span>Урок {{ course_lesson.number }} (Видео урок):</span>
+                {{ course_lesson.lesson.title }}
               </div>
               <div class="today-col">
                 <span>Урок проведен:</span>
-                {% with schedule=courselesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
+                {% with schedule=course_lesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
                   {{ schedule }}
                 {% endwith %}
               </div>

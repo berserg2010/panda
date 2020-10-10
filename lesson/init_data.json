@@ -40,10 +40,60 @@
   }
 },
 {
+  "model": "lesson.word",
+  "pk": 2,
+  "fields": {
+    "spelling": "age",
+    "transcription": "eidʒ",
+    "translation": "возраст",
+    "description": "",
+    "example": [
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "lesson.word",
+  "pk": 3,
+  "fields": {
+    "spelling": "ask",
+    "transcription": "ɑ:sk",
+    "translation": "спрашивать, просить",
+    "description": "",
+    "example": []
+  }
+},
+{
   "model": "lesson.example",
   "pk": 1,
   "fields": {
-    "example": "He looked desparately around for a weapon.",
+    "example": "He looked desperately around for a weapon.",
+    "description": ""
+  }
+},
+{
+  "model": "lesson.example",
+  "pk": 2,
+  "fields": {
+    "example": "You’re the cleverest witch of your age I’ve ever met, Hermione.",
+    "description": ""
+  }
+},
+{
+  "model": "lesson.example",
+  "pk": 3,
+  "fields": {
+    "example": "Age seemed to lend distinction to his still-handsome face.",
+    "description": ""
+  }
+},
+{
+  "model": "lesson.example",
+  "pk": 4,
+  "fields": {
+    "example": "Age suits you, Ralph.",
     "description": ""
   }
 },
@@ -82,10 +132,14 @@
       3
     ],
     "words": [
-      1
+      1,
+      2,
+      3
     ],
     "homework_words": [
-      1
+      1,
+      2,
+      3
     ],
     "articles": [
       1
@@ -110,10 +164,14 @@
       2
     ],
     "words": [
-      1
+      1,
+      2,
+      3
     ],
     "homework_words": [
-      1
+      1,
+      2,
+      3
     ],
     "articles": [
       1
@@ -137,10 +195,14 @@
       3
     ],
     "words": [
-      1
+      1,
+      2,
+      3
     ],
     "homework_words": [
-      1
+      1,
+      2,
+      3
     ],
     "articles": [
       1
@@ -163,10 +225,14 @@
       1
     ],
     "words": [
-      1
+      1,
+      2,
+      3
     ],
     "homework_words": [
-      1
+      1,
+      2,
+      3
     ],
     "articles": [
       1

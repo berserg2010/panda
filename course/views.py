@@ -26,7 +26,7 @@ class CourseLessonListView(ListView):
     def get_queryset(self):
 
         user = self.request.user
-        user_filter = Q(teacher__user=self.request.user) if user.is_staff else Q(student__user=self.request.user)
+        user_filter = Q(teacher__user=user) if user.is_staff else Q(student__user=user)
 
         return super().get_queryset().filter(user_filter).prefetch_related(
             Prefetch('lessons')
@@ -36,3 +36,31 @@ class LessonView(DetailView):
 
     model = CourseLesson
     template_name = 'private/lesson.html'
+
+
+class NotesListView(ListView):
+
+    model = CourseLesson
+    template_name = 'private/notes.html'
+
+    def get_queryset(self):
+
+        return super().get_queryset().filter(course__student__user=self.request.user)
+
+
+class VocabularyListView(ListView):
+
+    model = CourseLesson
+    template_name = 'private/vocabulary_list.html'
+
+    def get_queryset(self):
+
+        return super().get_queryset().filter(
+            course__student__user=self.request.user
+        )
+
+
+class VocabularyDetailView(DetailView):
+
+    model = CourseLesson
+    template_name = 'private/vocabulary_detail.html'

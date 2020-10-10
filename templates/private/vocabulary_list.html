@@ -1,0 +1,46 @@
+{% extends './_base.html' %}
+
+{% load static course_extras %}
+
+{% block title %}Словарь{% endblock %}
+
+{% block content %}
+
+  <div class="personalArea-content">
+    <div class="personalArea-block">
+      <div class="personalArea-block__top">
+        <span class="personalArea-block__title">Все уроки</span>
+        <div class="personalArea-block__top-b"></div>
+      </div>
+      <div class="notes vocabulary">
+
+        {% for course_lesson in object_list %}
+
+          <div class="notes-row">
+            <div class="notes-col">
+              <div class="notes-col__block">
+                <span class="notes-subtitle">Урок {{ course_lesson.number }} (Видео урок):</span>
+                <p><a href="#">{{ course_lesson.lesson.title }}</a></p>
+              </div>
+              <a href="{% url 'private_side:vocabulary_detail' course_lesson.pk %}" class="notes-button">Выучить слова</a>
+            </div>
+            <div class="notes-col">
+              <span class="notes-subtitle">Заметки:</span>
+              <ul>
+                {% for note in course_lesson.note|string_lines_to_list %}
+                  <li>{{ note }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+        {% endfor %}
+
+        <div class="notes-btn">
+          <a href="" class="second-btn">Показать еще</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

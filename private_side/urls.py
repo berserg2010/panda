@@ -13,4 +13,5 @@ urlpatterns = [
     path('free-lesson/', FreeLessonLkView.as_view(), name='free-lesson'),
 
     path('', include('course.urls')),
+    path('', include('lesson.urls')),
 ]

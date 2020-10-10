@@ -5,6 +5,10 @@ from .views import (
     BannerOfCourseDetailView,
     CourseLessonListView,
     LessonView,
+    NotesListView,
+    VocabularyListView,
+    VocabularyDetailView,
+
 )
 
 
@@ -14,4 +18,9 @@ urlpatterns = [
 
     path('lessons/', CourseLessonListView.as_view(), name='lessons'),
     path('lesson/<int:pk>', LessonView.as_view(), name='lesson'),
+
+    path('notes/', NotesListView.as_view(), name='notes'),
+
+    path('vocabulary/', VocabularyListView.as_view(), name='vocabulary_list'),
+    path('vocabulary/<int:pk>', VocabularyDetailView.as_view(), name='vocabulary_detail'),
 ]

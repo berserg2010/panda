@@ -52,7 +52,7 @@ class Course(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, verbose_name='учитель')
     student = models.ForeignKey(Student, on_delete=models.PROTECT, verbose_name='ученик')
 
-    lessons = models.ManyToManyField(Lesson, through='CourseLesson')
+    lessons = models.ManyToManyField(Lesson, through='CourseLesson', related_name='courses')
 
     def __str__(self):
         return f'{self.banner_of_course.title} | {self.teacher} | {self.student} | {self.start or "--"}/{self.end or "--"}/{self.prolong or "--"}'

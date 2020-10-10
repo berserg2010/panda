@@ -1,0 +1,86 @@
+{% extends './_base.html' %}
+
+{% load static lesson_extras %}
+
+{% block title %}Слова{% endblock %}
+
+{% block content %}
+  <div class="personalArea-content">
+    <div class="personalArea-block">
+      <div class="personalArea-block__top">
+        <span class="personalArea-block__title">Урок {{ object.number }} - Словарный запас</span>
+        <div class="personalArea-block__top-b"></div>
+      </div>
+
+      {% for word in object.lesson.words.all %}
+
+        <div class="vocabulary-main">
+          <div class="vocabulary-row">
+            <div class="vocabulary-col vocabulary-col__1">
+              <div class="vocabulary-col__wrap">
+                <div class="vocabulary-img">
+                  <img src="{% static 'img/vocabulary-img-1.jpg' %}" alt="">
+                </div>
+                <div class="vocabulary-info">
+                  <div class="vocabulary-info__text">
+                    <b>{{ word.spelling }}</b>
+                    <span>[{{ word.transcription }}]</span>
+                  </div>
+                </div>
+              </div>
+
+              <a href="#" class="second-btn">Следующее слово</a>
+
+            </div>
+
+            <div class="vocabulary-col vocabulary-col__2">
+              <div class="vocabulary-wrap">
+                <div class="vocabulary-wrap__top">
+                  <div class="vocabulary-word">
+                    <div class="vocabulary-ico">
+                      <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.5195 0.0429688C17.0586 0.589844 19.1484 1.89844 20.7891 3.96875C22.4297 6 23.25 8.34375 23.25 11C23.25 13.6562 22.4297 16.0195 20.7891 18.0898C19.1484 20.1211 17.0586 21.4102 14.5195 21.957V19.3789C16.3555 18.832 17.8398 17.7969 18.9727 16.2734C20.1445 14.75 20.7305 12.9922 20.7305 11C20.7305 9.00781 20.1445 7.25 18.9727 5.72656C17.8398 4.20312 16.3555 3.16797 14.5195 2.62109V0.0429688ZM17.625 11C17.625 13.3438 16.5898 15.0234 14.5195 16.0391V5.96094C15.3789 6.39062 16.1016 7.09375 16.6875 8.07031C17.3125 9.04688 17.625 10.0234 17.625 11ZM0.75 7.25H5.73047L12 0.980469V21.0195L5.73047 14.75H0.75V7.25Z" fill="#5F9F84"/></svg>
+                      <audio src="http://www.html5tutorial.info/media/vincent.mp3"></audio>
+                    </div>
+                    <span class="vocabulary-wrap__subtitle">{{ word.spelling }}</span>
+                    <p>[{{ word.transcription }}]</p>
+                  </div>
+
+                  <div class="vocabulary-warning">
+                    <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 18.4C23 18.92 22.8106 19.3167 22.4317 19.59C22.0529 19.8633 21.5879 20 21.0368 20H1.96316C1.4121 20 0.94714 19.86 0.568284 19.58C0.189428 19.3 0 18.9067 0 18.4C0 18 0.123989 17.5933 0.371968 17.18L9.89847 1.1C10.3531 0.366667 10.8904 0 11.5103 0C12.1303 0 12.6538 0.366667 13.0809 1.1L22.628 17.2C22.876 17.6267 23 18.0267 23 18.4ZM12.9362 8.18V5.26H10.0638V8.18C10.0638 8.36667 10.0776 8.54333 10.1051 8.71C10.1327 8.87667 10.1706 9.06333 10.2188 9.27C10.267 9.47667 10.3049 9.65333 10.3324 9.8L10.8697 13.04H12.0889L12.6469 9.8C12.6745 9.66667 12.7158 9.49333 12.7709 9.28C12.826 9.06667 12.8673 8.87667 12.8949 8.71C12.9224 8.54333 12.9362 8.36667 12.9362 8.18ZM12.9362 15.92C12.9362 15.5333 12.795 15.2067 12.5126 14.94C12.2302 14.6733 11.8892 14.54 11.4897 14.54C11.1039 14.54 10.7698 14.6733 10.4874 14.94C10.205 15.2067 10.0638 15.5333 10.0638 15.92C10.0638 16.3067 10.205 16.6367 10.4874 16.91C10.7698 17.1833 11.1039 17.32 11.4897 17.32C11.8892 17.32 12.2302 17.1833 12.5126 16.91C12.795 16.6367 12.9362 16.3067 12.9362 15.92Z" fill="#FF5E1A"/></svg>
+                    Сообщить о проблеме
+                  </div>
+                </div>
+
+                <div class="vocabulary-wrap__descr">
+                  <span class="vocabulary-wrap__subtitle">{{ word.description }}</span>
+                  <ul>
+                    {% for example in word.example.all %}
+                      <li>
+                        <div class="vocabulary-ico">
+                          <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.5195 0.0429688C17.0586 0.589844 19.1484 1.89844 20.7891 3.96875C22.4297 6 23.25 8.34375 23.25 11C23.25 13.6562 22.4297 16.0195 20.7891 18.0898C19.1484 20.1211 17.0586 21.4102 14.5195 21.957V19.3789C16.3555 18.832 17.8398 17.7969 18.9727 16.2734C20.1445 14.75 20.7305 12.9922 20.7305 11C20.7305 9.00781 20.1445 7.25 18.9727 5.72656C17.8398 4.20312 16.3555 3.16797 14.5195 2.62109V0.0429688ZM17.625 11C17.625 13.3438 16.5898 15.0234 14.5195 16.0391V5.96094C15.3789 6.39062 16.1016 7.09375 16.6875 8.07031C17.3125 9.04688 17.625 10.0234 17.625 11ZM0.75 7.25H5.73047L12 0.980469V21.0195L5.73047 14.75H0.75V7.25Z" fill="#5F9F84"/></svg>
+                          <audio src="http://www.html5tutorial.info/media/vincent.mp3"></audio>
+                        </div>
+
+                        {{ example.example|wrap_word_in_tag:word.spelling|safe }}
+
+                      </li>
+                    {% endfor %}
+                  </ul>
+
+                  <div class="vocabulary-warning vocabulary-warning__mob">
+                    <div class="vocabulary-ico">
+                      <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.5195 0.0429688C17.0586 0.589844 19.1484 1.89844 20.7891 3.96875C22.4297 6 23.25 8.34375 23.25 11C23.25 13.6562 22.4297 16.0195 20.7891 18.0898C19.1484 20.1211 17.0586 21.4102 14.5195 21.957V19.3789C16.3555 18.832 17.8398 17.7969 18.9727 16.2734C20.1445 14.75 20.7305 12.9922 20.7305 11C20.7305 9.00781 20.1445 7.25 18.9727 5.72656C17.8398 4.20312 16.3555 3.16797 14.5195 2.62109V0.0429688ZM17.625 11C17.625 13.3438 16.5898 15.0234 14.5195 16.0391V5.96094C15.3789 6.39062 16.1016 7.09375 16.6875 8.07031C17.3125 9.04688 17.625 10.0234 17.625 11ZM0.75 7.25H5.73047L12 0.980469V21.0195L5.73047 14.75H0.75V7.25Z" fill="#5F9F84"/></svg>
+                    </div>
+                    Сообщить о проблеме
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+{% endblock %}
