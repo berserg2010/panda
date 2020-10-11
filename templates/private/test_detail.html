@@ -1,0 +1,61 @@
+{% extends './_base.html' %}
+
+{% load static %}
+
+{% block title %}Тесты{% endblock %}
+
+{% block content %}
+  <div class="personalArea-content">
+    <div class="game-back">
+      <a href="{% url 'private_side:tests_courses_list' %}" class="game-back__row">
+        <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3077 20L3 11.5L11.3077 3" stroke="#FFB42D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.15384 11.5H21" stroke="#FFB42D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Тесты
+      </a>
+    </div>
+    <div class="personalArea-block">
+      <div class="personalArea-block__top">
+        <span class="personalArea-block__title" style="background-color: #ffff00">Притяжательный падеж существительного</span>
+        <div class="personalArea-block__top-b"></div>
+      </div>
+
+      <div class="test">
+
+        <form action="" method="post">
+          {% csrf_token %}
+
+          {% for test in object.lesson.homework_tests.all %}
+            <div class="test-wrap">
+              <span class="test-subtitle">
+                <b>{{ forloop.counter }}.</b>
+                {{ test.question }}
+              </span>
+
+              <div class="test-list">
+
+                <fieldset id="{{ test.pk }}" style="padding: 0;margin: 0;border: 0">
+
+                  {% for option in test.get_options %}
+
+                    <div class="test-item">
+                      <input type="radio" name="{{ test.pk }}" value="{{ option }}">
+                      <span class="radio-ico"></span>
+                      {{ option }}
+                    </div>
+
+                  {% endfor %}
+
+                </fieldset>
+
+              </div>
+            </div>
+          {% endfor %}
+
+          <div class="notes-btn">
+            <button type="submit" class="second-btn">Отправить ответы</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

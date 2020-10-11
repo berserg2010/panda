@@ -24,7 +24,7 @@
                 <div class="vocabulary-info">
                   <div class="vocabulary-info__text">
                     <b>{{ word.spelling }}</b>
-                    <span>[{{ word.transcription }}]</span>
+                    <span>{{ word.translation }}</span>
                   </div>
                 </div>
               </div>
@@ -54,6 +54,7 @@
                 <div class="vocabulary-wrap__descr">
                   <span class="vocabulary-wrap__subtitle">{{ word.description }}</span>
                   <ul>
+
                     {% for example in word.example.all %}
                       <li>
                         <div class="vocabulary-ico">
@@ -65,6 +66,7 @@
 
                       </li>
                     {% endfor %}
+
                   </ul>
 
                   <div class="vocabulary-warning vocabulary-warning__mob">

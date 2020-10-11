@@ -8,7 +8,8 @@ from .views import (
     NotesListView,
     VocabularyListView,
     VocabularyDetailView,
-
+    TestsCoursesListView,
+    TestsCourseLessonListView,
 )
 
 
@@ -23,4 +24,7 @@ urlpatterns = [
 
     path('vocabulary/', VocabularyListView.as_view(), name='vocabulary_list'),
     path('vocabulary/<int:pk>', VocabularyDetailView.as_view(), name='vocabulary_detail'),
+
+    path('tests/', TestsCoursesListView.as_view(), name='tests_courses_list'),
+    path('tests/<int:pk>', TestsCourseLessonListView.as_view(), name='tests_lesson_list'),
 ]

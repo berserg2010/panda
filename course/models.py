@@ -44,6 +44,8 @@ class NumberOfLessons(models.Model):
 
 class Course(models.Model):
 
+    finished = models.BooleanField(default=False, verbose_name='завершен')
+
     start = models.DateTimeField(default='', null=True, blank=True, verbose_name='начало курса')
     end = models.DateTimeField(default='', null=True, blank=True, verbose_name='окончание курса')
     prolong = models.DateTimeField(default='', null=True, blank=True, verbose_name='продление курса')

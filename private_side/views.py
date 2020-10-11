@@ -1,10 +1,21 @@
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from course.models import Course
 
-class IndexLkView(LoginRequiredMixin, TemplateView):
 
+class IndexLkView(LoginRequiredMixin, ListView):
+
+    model = Course
     template_name = 'private/index.html'
+
+    def get_queryset(self):
+
+        return super().get_queryset().filter(
+            student__user=self.request.user,
+            finished=False,
+        )
 
 
 class SettingsLkView(LoginRequiredMixin, TemplateView):
