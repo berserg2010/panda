@@ -18,11 +18,12 @@
       </div>
 
       <ul class="menu-list">
+
         <li><a href="{% url 'private_side:index' %}" class="active">
           <b class="menu-ico"><img src="{% static 'img/menu-ico-1.svg' %}" alt=""></b>
           <span>Личный кабинет</span>
         </a></li>
-        <li class="menu-li"><a href="">
+        <li class="menu-li"><a href="{% url 'private_side:timetables' %}">
           <b class="menu-ico"><img src="{% static 'img/menu-ico-2.svg' %}" alt=""></b>
           <span>Расписания</span>
         </a></li>
@@ -47,7 +48,7 @@
           </a>
           <a href="#" class="menu-col">
             <b class="menu-ico"><img src="{% static 'img/menu-ico-12.svg' %}" alt=""></b>
-            <span>План Занятий</span>
+            <span>План занятий</span>
           </a>
         </div>
       {% endif %}
@@ -64,7 +65,7 @@
           <li><a href="#"><svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.4481 0C16.9637 0 18.2809 0.348194 18.9943 1.2018C19.7111 2.05919 19.7647 3.37246 19.7647 5.27803V8.72204C19.7647 10.9057 19.4225 12.1669 18.6205 12.9394C17.8385 13.6927 16.6296 14 14.4481 14H5.31645C0.822212 14 0 12.2226 0 8.72204V5.27803C0 3.47109 0 2.16553 0.692976 1.27945C1.40374 0.370654 2.74328 0 5.31645 0H14.4481ZM8.54237 9.65676L12.689 7.47551C12.8997 7.36475 13.0316 7.14522 13.0313 6.90586C13.031 6.66669 12.8985 6.44748 12.6875 6.33724L8.5409 4.17004C8.34332 4.06673 8.10646 4.07469 7.91602 4.19109C7.72564 4.3075 7.60948 4.51541 7.60948 4.7395V9.08801C7.60948 9.31248 7.72596 9.52059 7.91672 9.63693C8.01803 9.69866 8.13241 9.72972 8.24705 9.72972C8.34829 9.72972 8.44967 9.70553 8.54237 9.65676Z" fill="#F8FFFC"/></svg></a></li>
         </ul>
         <div class="menu-footer__bottom">
-          <a href="#">
+          <a href="">
             <img src="{% static 'img/footer-logo.svg' %}" alt="">
             <p>Все права защищены. 2020.</p>
           </a>

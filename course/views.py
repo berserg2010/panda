@@ -1,14 +1,25 @@
-from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import UpdateView, ProcessFormView
+from django.views.generic.edit import ProcessFormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.db.models import Prefetch, Q
 
 from .models import BannerOfCourse, Course, CourseLesson
-from lesson.models import Lesson
+
+
+class TimetablesView(LoginRequiredMixin, ListView):
+
+    model = Course
+    template_name = 'private/timetables.html'
+
+    def get_queryset(self):
+
+        return super().get_queryset().filter(
+            student__user=self.request.user,
+            finished=False,
+        )
 
 
 class BannerOfCourseListView(LoginRequiredMixin, ListView):
@@ -45,10 +56,10 @@ class LessonView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
 
-        return super().get_queryset().filter(
-            course__student__user=self.request.user,
-            course__finished=False,
-        )
+        user = self.request.user
+        user_filter = Q(course__teacher__user=user) if user.is_staff else Q(course__student__user=user)
+
+        return super().get_queryset().filter(user_filter, course__finished=False)
 
 
 class NotesListView(ListView):

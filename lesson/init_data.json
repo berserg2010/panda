@@ -13,7 +13,7 @@
   "pk": 2,
   "fields": {
     "question": "… you live in a house or in a flat?",
-    "options": "Does Did Will",
+    "options": "Does, Did, Will",
     "answer": "Do"
   }
 },

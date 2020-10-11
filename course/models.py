@@ -51,6 +51,7 @@ class Course(models.Model):
     prolong = models.DateTimeField(default='', null=True, blank=True, verbose_name='продление курса')
 
     banner_of_course = models.ForeignKey(BannerOfCourse, on_delete=models.PROTECT, verbose_name='презентация курса')
+    number_of_lessons = models.ForeignKey(NumberOfLessons, on_delete=models.PROTECT, verbose_name='количество уроков')
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, verbose_name='учитель')
     student = models.ForeignKey(Student, on_delete=models.PROTECT, verbose_name='ученик')
 

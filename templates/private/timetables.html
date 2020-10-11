@@ -1,0 +1,105 @@
+{% extends './_base.html' %}
+
+{% load static %}
+
+{% block title %}Расписание{% endblock %}
+
+{% block content %}
+  {% with course=object_list.first %}
+  {{ course.number_of_lessons }}
+
+  <div class="personalArea-content">
+    <div class="personalArea-block">
+      <div class="personalArea-block__top">
+        <span class="personalArea-block__title">Расписание</span>
+        <div class="personalArea-block__top-b"></div>
+      </div>
+
+      <div class="timetables">
+
+        <div class="timetables-block range-slider__wrap">
+{#          <span class="timetables-title">Первая неделя 01.05.2020-05.05.2020</span>#}
+          <span class="timetables-title">Первая неделя</span>
+          <div class="timetables-slider range-slider">
+
+{#            {{ course.schedule_set.all.0.datetime.date }}#}
+
+            <div class="timetables-slide">
+              <div class="timetables-wrap">
+                <span class="timetables-subtitle">01 мая, Понедельник</span>
+                <div class="timetables-item active">
+                  <div class="timetables-item__top">
+                    <span>10:00 - 11.30</span>
+                    <span>Пройдено</span>
+                  </div>
+                  <ul>
+                    <li>Английский от 4-ех лет</li>
+                    <li><a href="#">Генадий Михайлов</a></li>
+                  </ul>
+                </div>
+                <div class="timetables-item active">
+                  <div class="timetables-item__top">
+                    <span>10:00 - 11.30</span>
+                    <span>Пройдено</span>
+                  </div>
+                  <ul>
+                    <li>Английский от 4-ех лет</li>
+                    <li><a href="#">Генадий Михайлов</a></li>
+                  </ul>
+                </div>
+                <div class="timetables-item active">
+                  <div class="timetables-item__top">
+                    <span>10:00 - 11.30</span>
+                    <span>Пройдено</span>
+                  </div>
+                  <ul>
+                    <li>Английский от 4-ех лет</li>
+                    <li><a href="#">Генадий Михайлов</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="timetables-slide">
+              <div class="timetables-wrap">
+                <span class="timetables-subtitle">04 мая, Четверг</span>
+                <div class="timetables-item">
+                  <div class="timetables-item__top">
+                    <span>10:00 - 11.30</span>
+                    <span>Пройдено</span>
+                  </div>
+                  <ul>
+                    <li>Английский от 4-ех лет</li>
+                    <li><a href="#">Генадий Михайлов</a></li>
+                  </ul>
+                </div>
+                <div class="timetables-item">
+                  <div class="timetables-item__top">
+                    <span>10:00 - 11.30</span>
+                    <span>Пройдено</span>
+                  </div>
+                  <ul>
+                    <li>Английский от 4-ех лет</li>
+                    <li><a href="#">Генадий Михайлов</a></li>
+                  </ul>
+                </div>
+                <div class="timetables-item">
+                  <div class="timetables-item__top">
+                    <span>10:00 - 11.30</span>
+                    <span>Пройдено</span>
+                  </div>
+                  <ul>
+                    <li>Английский от 4-ех лет</li>
+                    <li><a href="#">Генадий Михайлов</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="range" class="range" min="1" value="1" step="1" max="4">
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endwith %}
+{% endblock %}

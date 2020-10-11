@@ -30,7 +30,7 @@
                 <div class="master-wrap">
                   <div class="master-block master-block__top">
                     <span class="master-subtitle">Курс:</span>
-                    <p>{{ object.banner_of_course.title }}</p>
+                    <p>{{ course_lesson.course.banner_of_course.title }}</p>
                   </div>
 
                   <div class="master-block">
@@ -72,7 +72,9 @@
                 </div>
 
               </div>
+
             {% endif %}
+
           {% endfor %}
 
         </div>
@@ -92,13 +94,14 @@
         <div class="master-row">
 
           {% for course_lesson in object_list %}
+
             {% if course_lesson.finished %}
 
               <div class="master-col">
                 <div class="master-wrap">
                   <div class="master-block master-block__top">
                     <span class="master-subtitle">Курс:</span>
-                    <p>{{ object.banner_of_course.title }}</p>
+                    <p>{{ course_lesson.course.banner_of_course.title }}</p>
                   </div>
                   <div class="master-block">
                     <span class="master-subtitle">Урок {{ course_lesson.number }} (Видео урок)</span>
@@ -125,6 +128,7 @@
                 </div>
               </div>
             {% endif %}
+
           {% endfor %}
         </div>
       </div>
@@ -144,7 +148,7 @@
         {% for course_lesson in object_list %}
 
           <div class="today-block">
-            <div class="today-col"><span>Курс:</span>{{ object.banner_of_course.title }}</div>
+            <div class="today-col"><span>Курс:</span>{{ course_lesson.course.banner_of_course.title }}</div>
             <div class="today-col">
 
               {% if user.is_staff %}

@@ -55,10 +55,12 @@
   "model": "course.course",
   "pk": 1,
   "fields": {
+    "finished": true,
     "start": null,
     "end": null,
     "prolong": null,
     "banner_of_course": 1,
+    "number_of_lessons": 1,
     "teacher": 1,
     "student": "e7e9b25b-44a4-46a0-8304-77681cd57d75"
   }
@@ -67,12 +69,28 @@
   "model": "course.course",
   "pk": 2,
   "fields": {
+    "finished": false,
     "start": null,
     "end": null,
     "prolong": null,
     "banner_of_course": 2,
+    "number_of_lessons": 3,
     "teacher": 1,
     "student": "e7e9b25b-44a4-46a0-8304-77681cd57d75"
+  }
+},
+{
+  "model": "course.course",
+  "pk": 3,
+  "fields": {
+    "finished": false,
+    "start": null,
+    "end": null,
+    "prolong": null,
+    "banner_of_course": 2,
+    "number_of_lessons": 2,
+    "teacher": 1,
+    "student": "52b93a46-ccc4-48b4-ba6b-0c80a301c04b"
   }
 },
 {
@@ -116,11 +134,43 @@
   }
 },
 {
+  "model": "course.schedule",
+  "pk": 6,
+  "fields": {
+    "datetime": "2020-10-09T19:49:59Z",
+    "course": 3
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 7,
+  "fields": {
+    "datetime": "2020-10-01T09:00:00Z",
+    "course": 3
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 8,
+  "fields": {
+    "datetime": "2020-10-16T09:00:00Z",
+    "course": 3
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 9,
+  "fields": {
+    "datetime": "2020-10-22T09:00:00Z",
+    "course": 3
+  }
+},
+{
   "model": "course.courselesson",
   "pk": 1,
   "fields": {
     "finished": true,
-    "test_result": 0.0,
+    "test_result": 1.0,
     "word_result": 0.0,
     "game_result": 0.0,
     "number": 1,
@@ -176,7 +226,7 @@
   "pk": 5,
   "fields": {
     "finished": true,
-    "test_result": 0.0,
+    "test_result": 1.0,
     "word_result": 0.0,
     "game_result": 0.0,
     "number": 1,
@@ -189,8 +239,8 @@
   "model": "course.courselesson",
   "pk": 6,
   "fields": {
-    "finished": false,
-    "test_result": 0.0,
+    "finished": true,
+    "test_result": 0.5,
     "word_result": 0.0,
     "game_result": 0.0,
     "number": 2,
@@ -211,6 +261,62 @@
     "note": "Люди - People без множ. ч.\r\nУченики - Pupils\r\nУченики - Pupils",
     "course": 2,
     "lesson": 2
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 8,
+  "fields": {
+    "finished": true,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 1,
+    "note": "",
+    "course": 3,
+    "lesson": 4
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 9,
+  "fields": {
+    "finished": true,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 2,
+    "note": "",
+    "course": 3,
+    "lesson": 3
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 10,
+  "fields": {
+    "finished": true,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 3,
+    "note": "",
+    "course": 3,
+    "lesson": 2
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": 11,
+  "fields": {
+    "finished": false,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "number": 4,
+    "note": "",
+    "course": 3,
+    "lesson": 1
   }
 }
 ]

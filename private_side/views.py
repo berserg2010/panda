@@ -25,4 +25,4 @@ class SettingsLkView(LoginRequiredMixin, TemplateView):
 
 class FreeLessonLkView(LoginRequiredMixin, TemplateView):
 
-    template_name = 'private/free-lesson.html'
+    template_name = 'private/free_lesson.html'

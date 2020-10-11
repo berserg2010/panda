@@ -4,7 +4,6 @@
   <b class="menu-ico"><img src="{% static 'img/menu-ico-6.svg' %}" alt=""></b>
   <span>Видеопрактика</span>
 </a></li>
-
 <li><a href="{% url 'private_side:notes' %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-4.svg' %}" alt=""></b>
   <span>Мои заметки</span>
@@ -21,7 +20,7 @@
   <b class="menu-ico"><img src="{% static 'img/menu-ico-8.svg' %}" alt=""></b>
   <span>Словарные игры</span>
 </a></li>
-<li><a href="#">
+<li><a href="{% url 'private_side:free_lesson' %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-10.svg' %}" alt=""></b>
   <span>Бесплатные уроки<i>Пригласить друзей</i></span>
 </a></li>

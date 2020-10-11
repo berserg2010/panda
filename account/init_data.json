@@ -10,6 +10,28 @@
 },
 {
   "model": "account.student",
+  "pk": "52b93a46-ccc4-48b4-ba6b-0c80a301c04b",
+  "fields": {
+    "gender": "M",
+    "user": 4,
+    "phone": null,
+    "native_language": null,
+    "pronunciation": null,
+    "timezone": "Europe/Moscow",
+    "voice_acting": "M",
+    "accent_of_voice_acting": null,
+    "system_notification": true,
+    "support_message": true,
+    "payment_info": true,
+    "reminders_about_lessons": true,
+    "discounts": true,
+    "sounds": false,
+    "age": 22,
+    "wallet": 2
+  }
+},
+{
+  "model": "account.student",
   "pk": "e7e9b25b-44a4-46a0-8304-77681cd57d75",
   "fields": {
     "gender": "M",
@@ -33,6 +55,11 @@
 {
   "model": "account.wallet",
   "pk": 1,
+  "fields": {}
+},
+{
+  "model": "account.wallet",
+  "pk": 2,
   "fields": {}
 }
 ]

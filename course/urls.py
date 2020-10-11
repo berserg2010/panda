@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import (
+    TimetablesView,
     BannerOfCourseListView,
     BannerOfCourseDetailView,
     CourseLessonListView,
@@ -14,6 +15,8 @@ from .views import (
 
 
 urlpatterns = [
+    path('timetables/', TimetablesView.as_view(), name='timetables'),
+
     path('courses/', BannerOfCourseListView.as_view(), name='courses'),
     path('course/<int:pk>', BannerOfCourseDetailView.as_view(), name='course-detail'),
 

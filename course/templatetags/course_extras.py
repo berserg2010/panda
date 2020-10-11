@@ -1,5 +1,7 @@
 from django import template
 
+from ..models import CourseLesson
+
 
 register = template.Library()
 
@@ -18,3 +20,9 @@ def string_lines_to_list(string: str):
         return (line.strip() for line in string.splitlines() )
     except IndexError:
         return ''
+
+
+@register.filter
+def finished(course_lesson: [CourseLesson], check: bool) -> [CourseLesson]:
+
+    return course_lesson.filter(finished=check)
