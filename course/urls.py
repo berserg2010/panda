@@ -11,6 +11,7 @@ from .views import (
     VocabularyDetailView,
     TestsCoursesListView,
     TestsCourseLessonListView,
+    TasksView,
 )
 
 
@@ -30,4 +31,6 @@ urlpatterns = [
 
     path('tests/', TestsCoursesListView.as_view(), name='tests_courses_list'),
     path('tests/<int:pk>', TestsCourseLessonListView.as_view(), name='tests_lesson_list'),
+
+    path('tasks/', TasksView.as_view(), name='tasks'),
 ]

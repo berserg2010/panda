@@ -9,13 +9,13 @@
   <b class="menu-ico"><img src="{% static 'img/menu-ico-13.svg' %}" alt=""></b>
   <span>Материалы</span>
 </a></li>
-<li><a href="#">
+<li><a href="{% url 'private_side:tasks' %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-15.svg' %}" alt=""></b>
   <span>Задания</span>
 </a></li>
-<li><a href="#">
+<li><a href="{% url 'private_side:articles' %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-16.svg' %}" alt=""></b>
-  <span>Ссылки</span>
+  <span>Статьи</span>
 </a></li>
 <li><a href="#">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-17.svg' %}" alt=""></b>
@@ -25,7 +25,7 @@
   <b class="menu-ico"><img src="{% static 'img/menu-ico-18.svg' %}" alt=""></b>
   <span>Темы</span>
 </a></li>
-<li><a href="#">
+<li><a href="{% url 'private_side:students' %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-19.svg' %}" alt=""></b>
   <span>Ученики</span>
 </a></li>

@@ -1,6 +1,6 @@
 from django import template
 
-from course.models import CourseLesson
+from course.models import Course, CourseLesson
 
 
 register = template.Library()
@@ -23,3 +23,13 @@ def get_statistic_result(course_lessons: [CourseLesson], field: str) -> str:
         return '0.0'
 
     return str(sum_true_result / count_finished)
+
+
+@register.filter
+def get_last_date_lesson(course: Course):
+
+    schedules = course.schedule_set.all()
+
+    coutn_finished_lessons = course.courselesson_set.filter(finished=True).count()
+
+    return schedules[coutn_finished_lessons].datetime

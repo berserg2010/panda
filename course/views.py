@@ -1,3 +1,4 @@
+from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import ProcessFormView
@@ -36,15 +37,15 @@ class BannerOfCourseDetailView(LoginRequiredMixin, DetailView):
 
 class CourseLessonListView(LoginRequiredMixin, ListView):
 
-    model = CourseLesson
+    model = Course
     template_name = 'private/lessons.html'
 
     def get_queryset(self):
 
         user = self.request.user
-        user_filter = Q(course__teacher__user=user) if user.is_staff else Q(course__student__user=user)
+        user_filter = Q(teacher__user=user) if user.is_staff else Q(student__user=user)
 
-        return super().get_queryset().filter(user_filter, course__finished=False)
+        return super().get_queryset().filter(user_filter, finished=False)
         #     .prefetch_related(
         #     Prefetch('lessons')
         # )
@@ -138,3 +139,9 @@ class TestsCourseLessonListView(LoginRequiredMixin, DetailView, ProcessFormView)
         course_lesson.save()
 
         return redirect(reverse('private_side:tests_courses_list'))
+
+
+class TasksView(LoginRequiredMixin, TemplateView):
+
+    template_name = 'private/tasks.html'
+
