@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.db.models import Prefetch, Q
-from twilio.rest.video.v1.composition import
 
 from .models import BannerOfCourse, Course, CourseLesson
 
