@@ -115,3 +115,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 admin.AdminSite.site_header = 'Panda'.upper()
 admin.AdminSite.empty_value_display = '--'
+
+NUMB_WEBRTC_USERNAME = config('NUMB_WEBRTC_USERNAME')
+NUMB_WEBRTC_CREDENTIAL = config('NUMB_WEBRTC_CREDENTIAL')

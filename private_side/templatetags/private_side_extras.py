@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 
 from course.models import Course, CourseLesson
 
@@ -33,3 +34,8 @@ def get_last_date_lesson(course: Course):
     coutn_finished_lessons = course.courselesson_set.filter(finished=True).count()
 
     return schedules[coutn_finished_lessons].datetime
+
+
+@register.filter
+def get_settings_var(name: str):
+    return getattr(settings, name, '')
