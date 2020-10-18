@@ -31,3 +31,17 @@ front - django templates?
 
 Предварительно 50ч.
 
+
+### Запуск RTC-сервера
+
+В папке `rtc_server` запустить
+
+    npx run server
+
+
+### Запуск приложения https
+
+В корне проекта запустить
+    
+    python manage.py runsslserver 0.0.0.0:8000 --certificate ssl/dev.local.crt --key ssl/dev.local.key
+

@@ -16,6 +16,8 @@ TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
 
 class Account(models.Model):
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+
     gender = models.CharField(choices=GENDER, max_length=1, default='U', verbose_name='пол')
 
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
@@ -39,7 +41,6 @@ class Teacher(Account):
 
 class Student(Account):
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
 
     phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
     native_language = models.CharField(max_length=20, null=True, blank=True, verbose_name='родной язык')

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.core.management import utils
+from corsheaders.defaults import default_headers
 import os
 from pathlib import Path
 from decouple import config
@@ -12,11 +13,29 @@ SECRET_KEY = config('SECRET_KEY', default=utils.get_random_secret_key())
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    'http://localhost',
+    'localhost',
     '127.0.0.1',
     '0.0.0.0',
     '*',
 ]
+
+
+# Corsheaders
+CORS_ALLOW_HEADERS = default_headers + (
+    'contenttype',
+)
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost',
+    'https://localhost',
+    'http://127.0.0.1',
+    'https://127.0.0.1',
+    'http://192.168.1.52',
+    'https://192.168.1.52',
+    'http://192.168.1.52:9000',
+    'https://192.168.1.52:9000',
+    'https://dev.local:9000',
+]
+# CSRF_TRUSTED_ORIGINS = ['*']
 
 
 INSTALLED_APPS = [
@@ -27,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
+    'sslserver',
     'rest_framework',
 
     'auth_backend',
@@ -39,6 +60,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
