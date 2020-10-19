@@ -9,6 +9,11 @@
       <div class="personalArea-block">
         <div class="personalArea-block__top">
           <span class="personalArea-block__title">Урок {{ object.number }} – {{ object.lesson.title }}</span>
+          {% if user.is_staff %}
+            {{ user.teacher.pk }}
+          {% else %}
+            {{ user.student.pk }}
+          {% endif %}
           <div class="personalArea-block__top-b"></div>
         </div>
         <div class="videoCall">
@@ -100,107 +105,17 @@
       </div>
     </div>
 
-
-{##}
-{#  <div class="container">#}
-{#    <div class="row">#}
-{#      <div class="col-md-6 col-lg-6">#}
-{#        <!--#}
-{#            Display video of the current user#}
-{#            Note: mute your own video, otherwise you'll hear yourself ...#}
-{#         -->#}
-{#        <div class="text-center">#}
-{#          <video id="my-camera"  width="300" height="300" autoplay="autoplay" muted="true" class="center-block"></video>#}
-{#          <span class="label label-info">You</span>#}
-{#        </div>#}
-{#      </div>#}
-{##}
-{#      <div class="col-md-6 col-lg-6">#}
-{#        <!-- Display video of the connected peer -->#}
-{#        <div class="text-center">#}
-{#          <video id="peer-camera" width="300" height="300" autoplay="autoplay" class="center-block"></video>#}
-{#          <span class="label label-info" id="connected_peer"></span>#}
-{#        </div>#}
-{#      </div>#}
-{##}
-{#      <button id="connect-to-peer-btn" class="btn btn-primary">Connect to Peer</button>#}
-{#      <button id="end-call" class="btn btn-primary">end-call</button>#}
-{##}
-{#    </div>#}
-{##}
-{#    <div class="row">#}
-{#      <h1 class="text-center">#}
-{#        Videochat Example#}
-{#        <br>#}
-{#        <small> Share the following ID with the pal that wants to talk with you</small>#}
-{#      </h1>#}
-{#      <!-- The ID of your current session -->#}
-{#      <h4 class="text-center">#}
-{#        <span id="peer-id-label"></span>#}
-{#      </h4>#}
-{#      <div class="col-md-12 col-lg-12">#}
-{#        <div class="form-horizontal" id="connection-form">#}
-{#          <fieldset>#}
-{#            <legend>Connection Form</legend>#}
-{#            <div class="form-group">#}
-{#              <label for="name" class="col-lg-2 control-label">Username</label>#}
-{#              <div class="col-lg-10">#}
-{#                <input type="text" class="form-control" name="name" id="name" placeholder="Your random username">#}
-{#              </div>#}
-{#            </div>#}
-{#            <div class="form-group">#}
-{#              <label for="peer_id" class="col-lg-2 control-label">Peer ID (id of your pal)</label>#}
-{#              <div class="col-lg-10">#}
-{#                <input type="text" class="form-control" name="peer_id" id="peer_id" placeholder="Peer ID" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">#}
-{##}
-{#                <!-- Show message if someone connected to the client -->#}
-{#                <div id="connected_peer_container" class="hidden">#}
-{#                  An user is already connected to your session. Just provide a name to connect !#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#            <div class="form-group">#}
-{#              <div class="col-lg-10 col-lg-offset-2">#}
-{#                <button id="connect-to-peer-btn" class="btn btn-primary">Connect to Peer</button>#}
-{#              </div>#}
-{#            </div>#}
-{#          </fieldset>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="col-md-12 col-lg-12">#}
-{#        <div id="chat" class="hidden">#}
-{#          <div id="messages-container">#}
-{#            <div class="list-group" id="messages"></div>#}
-{#          </div>#}
-{#          <div id="message-container">#}
-{#            <div class="form-group">#}
-{#              <label class="control-label">Live chat</label>#}
-{#              <div class="input-group">#}
-{#                <span class="input-group-btn">#}
-{#                  <button id="call" class="btn btn-info">Call</button>#}
-{#                </span>#}
-{#                <input type="text" class="form-control" name="message" id="message" placeholder="Your messag here ...">#}
-{#                <span class="input-group-btn">#}
-{#                  <button id="send-message" class="btn btn-success">Send Message</button>#}
-{#                </span>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-
 {% endblock %}
 
 {% block script %}
 
-  <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+
   <script>
-    //dragANDdrop
+
+    //DragAndDrop
     if($('.videoCall-drag').length > 0){
       console.log('wd');
       // Enable drag and drop...
@@ -236,209 +151,8 @@
       dragAndDrop(".card", ".option");
     }
 
-    {#    document.addEventListener('DOMContentLoaded', function(event) {#}
-    {##}
-    {#      var peer_id;#}
-    {#      var username;#}
-    {#      var conn;#}
-    {##}
-    {#      navigator.getUserMedia = (#}
-    {#        navigator.getUserMedia ||#}
-    {#        navigator.webkitGetUserMedia ||#}
-    {#        navigator.mozGetUserMedia ||#}
-    {#        navigator.msGetUserMedia#}
-    {#      )#}
-    {##}
-    {#      // PeerJS#}
-    {#      const peer = new Peer(#}
-    {#        `{{ user.is_staff }}` ? `{{ user.teacher.pk }}` : `{{ user.student.pk }}`,#}
-    {#        {#}
-    {#          host: '192.168.1.52',#}
-    {#          port: 9000,#}
-    {#          path: '/myapp',#}
-    {#          debug: 3,#}
-    {#          config: {#}
-    {#            'iceServers': [#}
-    {#              { url: 'stun:stun.l.google.com:19302' },#}
-    {#              { url: 'stun:stun1.l.google.com:19302' },#}
-    {#              {#}
-    {#                url: 'turn:numb.viagenie.ca',#}
-    {#                username: '{{ 'NUMB_WEBRTC_USERNAME'|get_settings_var }}',#}
-    {#                credential: '{{ 'NUMB_WEBRTC_CREDENTIAL'|get_settings_var }}'#}
-    {#              }#}
-    {#            ]}#}
-    {#        }#}
-    {#      )#}
-    {##}
-    {##}
-    {#      peer.on('open', function (peerId) {#}
-    {##}
-    {#        console.log('open')#}
-    {##}
-    {#        document.getElementById('peer-id-label').innerHTML = peerId#}
-    {#      });#}
-    {##}
-    {##}
-    {#      peer.on('connection', (conn) => {#}
-    {##}
-    {#        console.log('connection')#}
-    {##}
-    {#        peer_id = conn.peer#}
-    {##}
-    {#        conn.on('data', handleMessage)#}
-    {##}
-    {#        // Hide peer_id field and set the incoming peer id as value#}
-    {#        document.getElementById('peer_id').className += ' hidden'#}
-    {#        document.getElementById('peer_id').value = peer_id#}
-    {#        document.getElementById('connected_peer').innerHTML = conn.metadata.username#}
-    {#      })#}
-    {##}
-    {##}
-    {#      peer.on('error', function(err) {#}
-    {##}
-    {#        alert('An error ocurred with peer: ' + err);#}
-    {#        console.error(err);#}
-    {#      });#}
-    {##}
-    {##}
-    {#      peer.on('call', function (call) {#}
-    {##}
-    {#        console.log('call')#}
-    {##}
-    {#        const acceptsCall = confirm('Videocall incoming, do you want to accept it?');#}
-    {##}
-    {#        if (acceptsCall) {#}
-    {#          // Answer the call with your own video/audio stream#}
-    {#          call.answer(window.localStream)#}
-    {##}
-    {#          // Receive data#}
-    {#          call.on('stream', function (stream) {#}
-    {#            // Store a global reference of the other user stream#}
-    {#            window.peer_stream = stream#}
-    {#            // Display the stream of the other user in the peer-camera video element !#}
-    {#            onReceiveStream(stream, 'peer-camera')#}
-    {#          });#}
-    {##}
-    {#          // Handle when the call finishes#}
-    {#          call.on('close', function() {#}
-    {#            alert('The videocall has finished')#}
-    {#          });#}
-    {##}
-    {#          // use call.close() to finish a call#}
-    {#        } else {#}
-    {#          console.log('Call denied!')#}
-    {#        }#}
-    {#      });#}
-    {##}
-    {#      const requestLocalVideo = (callbacks) => {#}
-    {#        // Monkeypatch for crossbrowser getusermedia#}
-    {##}
-    {##}
-    {#        // Request audio an video#}
-    {#        navigator.mediaDevices.getUserMedia(#}
-    {#          { audio: true, video: true },#}
-    {#          callbacks.success,#}
-    {#          callbacks.error#}
-    {#        )#}
-    {#      }#}
-    {##}
-    {#      const onReceiveStream = (stream, element_id) => {#}
-    {#        // Retrieve the video element according to the desired#}
-    {#        const video = document.getElementById(element_id)#}
-    {#        // Set the given stream as the video source#}
-    {#        video.src = window.URL.createObjectURL(stream)#}
-    {##}
-    {#        // Store a global reference of the stream#}
-    {#        window.peer_stream = stream#}
-    {#      }#}
-    {##}
-    {#      const handleMessage = (data) => {#}
-    {#        var orientation = 'text-left'#}
-    {##}
-    {#        // If the message is yours, set text to right !#}
-    {#        if (data.from == username) {#}
-    {#          orientation = 'text-right'#}
-    {#        }#}
-    {##}
-    {#        var messageHTML =  '<a href="javascript:void(0);" class="list-group-item' + orientation + '">'#}
-    {#        messageHTML += '<h4 class="list-group-item-heading">'+ data.from +'</h4>'#}
-    {#        messageHTML += '<p class="list-group-item-text">'+ data.text +'</p>'#}
-    {#        messageHTML += '</a>'#}
-    {##}
-    {#        document.getElementById('messages').innerHTML += messageHTML#}
-    {#      }#}
-    {##}
-    {##}
-    {#      document.getElementById('send-message').addEventListener('click', function() {#}
-    {#        // Get the text to send#}
-    {#        const text = document.getElementById('message').value#}
-    {##}
-    {#        // Prepare the data to send#}
-    {#        const data = {#}
-    {#          from: username,#}
-    {#          text: text#}
-    {#        };#}
-    {##}
-    {#        // Send the message with Peer#}
-    {#        conn.send(data);#}
-    {##}
-    {#        // Handle the message on the UI#}
-    {#        handleMessage(data);#}
-    {##}
-    {#        document.getElementById('message').value = '';#}
-    {#      }, false);#}
-    {##}
-    {##}
-    {#      document.getElementById('call').addEventListener('click', function() {#}
-    {##}
-    {#        console.log('Calling to ' + peer_id)#}
-    {#        console.log(peer)#}
-    {##}
-    {#        var call = peer.call(peer_id, window.localStream)#}
-    {##}
-    {#        call.on('stream', function (stream) {#}
-    {#          window.peer_stream = stream#}
-    {##}
-    {#          onReceiveStream(stream, 'peer-camera')#}
-    {#        })#}
-    {#      }, false);#}
-    {##}
-    {##}
-    {#      document.getElementById('connect-to-peer-btn').addEventListener('click', function() {#}
-    {##}
-    {#        username = document.getElementById('name').value#}
-    {#        peer_id = document.getElementById('peer_id').value#}
-    {##}
-    {#        if (peer_id) {#}
-    {#          conn = peer.connect(#}
-    {#            peer_id,#}
-    {#            { metadata: { 'username': username }}#}
-    {#          );#}
-    {##}
-    {#          conn.on('data', handleMessage)#}
-    {##}
-    {#        } else {#}
-    {#          alert('You need to provide a peer to connect with !')#}
-    {#          return false;#}
-    {#        }#}
-    {##}
-    {#        document.getElementById('chat').className = ''#}
-    {#        document.getElementById('connection-form').className += ' hidden'#}
-    {#      }, false)#}
-    {##}
-    {#      requestLocalVideo({#}
-    {#        success: function(stream) {#}
-    {#          window.localStream = stream#}
-    {#          onReceiveStream(stream, 'my-camera')#}
-    {#        },#}
-    {#        error: function(err) {#}
-    {#          alert('Cannot get access to your camera and video !')#}
-    {#          console.error(err)#}
-    {#        }#}
-    {#      })#}
-    {##}
-    {#    }, false)#}
 
+    // WebRTC
     navigator.getWebcam = (constraints) => {
       return navigator.mediaDevices.getUserMedia(constraints) ||
       navigator.webkitGetUserMedia(constraints) ||
@@ -446,8 +160,11 @@
       navigator.msGetUserMedia(constraints)
     }
 
+
+    const UserPk =`{% if user.is_staff %}{{ user.teacher.pk }}{% else %}{{ user.student.pk }}{% endif %}`
+
     const peer = new Peer(
-      `{{ user.is_staff }}` ? `{{ user.teacher.pk }}` : '',
+      UserPk,
       {
         host: 'dev.local',
         port: 9000,
@@ -468,47 +185,60 @@
       }
     )
 
-    let dataConnection = peer.connect()
+{#    let dataConnection = peer.connect()#}
 
     peer.on('open', (id) => {
+
+      console.info('peer open: ', id, peer.id)
+
       $('#peer-id-label').text(id)
     })
 
 
-    peer.on('connection', (dataConnection) => {
-      console.log('connection')
+{#    peer.on('connection', (dataConnection) => {#}
+{#      console.log('connection')#}
+{##}
+{#      dataConnection.on('data', handleCommand)#}
+{#    })#}
 
-      dataConnection.on('data', handleCommand)
-    })
 
-
-    const handleCommand = (data) => {
-      console.log('data', data)
-    }
+{#    const handleCommand = (data) => {#}
+{#      console.log('data', data)#}
+{#    }#}
 
 
     peer.on('call', (mediaConnection) => {
 
-      mediaConnection.answer(window.localStream)
+      console.info('peer call: ', mediaConnection)
 
-      getPeerStream(mediaConnection)
+      let getCall = confirm('Принять звонок?')
 
-      mediaConnection.on('close', () => {
-        console.log('mediaConnection close')
-      })
+      if (getCall) {
 
-      mediaConnection.on('error', () => {
-        console.error('mediaConnection error')
-      })
+        mediaConnection.answer(window.localStream)
+
+        getPeerStream(mediaConnection)
+
+        mediaConnection.on('close', () => {
+          console.log('mediaConnection close')
+        })
+
+        mediaConnection.on('error', () => {
+          console.error('mediaConnection error')
+        })
+
+      } else {
+        console.log('Escape call')
+      }
     })
 
 
     peer.on('disconnected', () => {
-      console.log('disconnected')
+      console.info('peer disconnected')
     })
 
     peer.on('close', () => {
-      console.log('close')
+      console.info('peer close')
     })
 
     peer.on('error', (error) => {
@@ -518,11 +248,18 @@
 
     $(() => {
 
-      handlerWebcam()
+      handleWebcam()
 
       $('#connect-to-peer').click(() => {
 
-        const mediaConnection = peer.call(`{{ object.course.teacher.pk }}`, window.localStream)
+        const callUser = `{% if user.is_staff %}{{ user.student.pk }}{% else %}{{ user.teacher.pk }}{% endif %}`
+
+        const mediaConnection = peer.call(
+          callUser,
+          window.localStream
+        )
+
+        console.info('peer.call: ', mediaConnection)
 
         getPeerStream(mediaConnection)
 
@@ -530,25 +267,26 @@
 
       $('#end-call').click(() => {
 
-        dataConnection.send('command')
+{#        dataConnection.send('command')#}
 
-{#        closeConnection()#}
+        closeConnection()
       })
 
     })
 
 
-    const handlerWebcam = (constraints = { video: true, audio: false }) => {
+    const handleWebcam = (constraints = { video: true, audio: false }) => {
 
       navigator.getWebcam(constraints)
         .then((stream) => {
 
+          window.localStream = stream
+
           const video = document.getElementById('my-camera')
           video.srcObject = stream
 
-          handlerStyleTrigger('videoCall-you', constraints.video)
+          handleStyleTrigger('videoCall-you', constraints.video)
 
-          window.localStream = stream
         })
         .catch((error) => {
           console.error(error)
@@ -565,10 +303,13 @@
       window.existingCall = mediaConnection
 
       mediaConnection.on('stream', (stream) => {
-        $('#peer-camera').prop('srcObject', stream)
+
+        const video = document.getElementById('peer-camera')
+        video.srcObject = stream
+
       })
 
-      handlerStyleTrigger('videoCall-user', true)
+      handleStyleTrigger('videoCall-user', true)
 
     }
 
@@ -591,7 +332,7 @@
     }
 
 
-    const handlerStyleTrigger = (className, condition) => {
+    const handleStyleTrigger = (className, condition) => {
 
       const videoNode = document.getElementsByClassName(className)[0].children
 
@@ -606,7 +347,7 @@
 
     const closeConnection = () => {
 
-      handlerStyleTrigger('videoCall-user', false)
+      handleStyleTrigger('videoCall-user', false)
 
       window.existingCall.close()
 

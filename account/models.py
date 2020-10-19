@@ -1,8 +1,7 @@
-import uuid
-
 from django.db import models
 from django.contrib.auth import get_user_model
 import pytz
+import uuid
 
 
 GENDER = [
@@ -40,7 +39,6 @@ class Teacher(Account):
 
 
 class Student(Account):
-
 
     phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
     native_language = models.CharField(max_length=20, null=True, blank=True, verbose_name='родной язык')

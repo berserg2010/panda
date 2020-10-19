@@ -1,6 +1,6 @@
 from django.db import models
 
-from common.models import CommonFields
+from common.models import CommonId, CommonFields
 from account.models import Teacher, Student
 from lesson.models import Lesson
 
@@ -42,7 +42,7 @@ class NumberOfLessons(models.Model):
         verbose_name_plural = 'количество уроков'
 
 
-class Course(models.Model):
+class Course(CommonId):
 
     finished = models.BooleanField(default=False, verbose_name='завершен')
 
@@ -83,7 +83,7 @@ class Schedule(models.Model):
         ordering = ('datetime', )
 
 
-class CourseLesson(models.Model):
+class CourseLesson(CommonId):
 
     finished = models.BooleanField(default=False, verbose_name='завершен')
 

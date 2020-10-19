@@ -1,13 +1,13 @@
 from django.db import models
 
-from common.models import CommonFields
+from common.models import CommonId, CommonFields
 from .test import Test
 from .word import Word, Example
 from .article import Article
 from .book import Book
 
 
-class Lesson(CommonFields):
+class Lesson(CommonId, CommonFields):
 
     tests = models.ManyToManyField(
         Test,
