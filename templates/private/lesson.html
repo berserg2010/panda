@@ -9,11 +9,7 @@
       <div class="personalArea-block">
         <div class="personalArea-block__top">
           <span class="personalArea-block__title">Урок {{ object.number }} – {{ object.lesson.title }}</span>
-          {% if user.is_staff %}
-            {{ user.teacher.pk }}
-          {% else %}
-            {{ user.student.pk }}
-          {% endif %}
+
           <div class="personalArea-block__top-b"></div>
         </div>
         <div class="videoCall">
@@ -113,6 +109,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 
+  {{ user.is_staff|json_script:'is_staff' }}
+  {{ object.course.teacher.pk.hex|json_script:'teacher' }}
+  {{ object.course.student.pk.hex|json_script:'student' }}
+  {{ object.pk.hex|json_script:'lesson' }}
+
   <script>
 
     //DragAndDrop
@@ -153,6 +154,14 @@
 
 
     // WebRTC
+
+    const is_staff = JSON.parse(document.getElementById('is_staff').textContent)
+    const teacher = JSON.parse(document.getElementById('teacher').textContent)
+    const student = JSON.parse(document.getElementById('student').textContent)
+    const lesson = JSON.parse(document.getElementById('lesson').textContent)
+
+    console.info(teacher)
+
     navigator.getWebcam = (constraints) => {
       return navigator.mediaDevices.getUserMedia(constraints) ||
       navigator.webkitGetUserMedia(constraints) ||
@@ -160,11 +169,8 @@
       navigator.msGetUserMedia(constraints)
     }
 
-
-    const UserPk =`{% if user.is_staff %}{{ user.teacher.pk }}{% else %}{{ user.student.pk }}{% endif %}`
-
     const peer = new Peer(
-      UserPk,
+      is_staff ? teacher : student,
       {
         host: 'dev.local',
         port: 9000,
@@ -185,31 +191,13 @@
       }
     )
 
-{#    let dataConnection = peer.connect()#}
-
     peer.on('open', (id) => {
-
-      console.info('peer open: ', id, peer.id)
-
-      $('#peer-id-label').text(id)
+      console.info(`Peer open: ${id}`)
     })
-
-
-{#    peer.on('connection', (dataConnection) => {#}
-{#      console.log('connection')#}
-{##}
-{#      dataConnection.on('data', handleCommand)#}
-{#    })#}
-
-
-{#    const handleCommand = (data) => {#}
-{#      console.log('data', data)#}
-{#    }#}
-
 
     peer.on('call', (mediaConnection) => {
 
-      console.info('peer call: ', mediaConnection)
+      console.info('Peer call: ', mediaConnection)
 
       let getCall = confirm('Принять звонок?')
 
@@ -234,11 +222,11 @@
 
 
     peer.on('disconnected', () => {
-      console.info('peer disconnected')
+      console.info('Peer disconnected')
     })
 
     peer.on('close', () => {
-      console.info('peer close')
+      console.info('Peer close')
     })
 
     peer.on('error', (error) => {
@@ -252,10 +240,8 @@
 
       $('#connect-to-peer').click(() => {
 
-        const callUser = `{% if user.is_staff %}{{ user.student.pk }}{% else %}{{ user.teacher.pk }}{% endif %}`
-
         const mediaConnection = peer.call(
-          callUser,
+          is_staff ? student : teacher,
           window.localStream
         )
 
@@ -289,7 +275,7 @@
 
         })
         .catch((error) => {
-          console.error(error)
+          console.error(`Navigator error: ${error}`)
         })
     }
 
@@ -300,9 +286,13 @@
         window.existingCall.close()
       }
 
+      console.info('getPeerStream')
+
       window.existingCall = mediaConnection
 
       mediaConnection.on('stream', (stream) => {
+
+        console.info(`MediaConnection stream: ${stream.id}`)
 
         const video = document.getElementById('peer-camera')
         video.srcObject = stream

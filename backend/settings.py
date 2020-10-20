@@ -38,6 +38,10 @@ CORS_ORIGIN_WHITELIST = [
 # CSRF_TRUSTED_ORIGINS = ['*']
 
 
+# Channels
+ASGI_APPLICATION = 'backend.routing.application'
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +53,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'sslserver',
     'rest_framework',
+    'channels',
 
     'auth_backend',
     'public_side',
