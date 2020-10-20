@@ -32,6 +32,15 @@ front - django templates?
 Предварительно 50ч.
 
 
+### Установка приложения
+
+    apt install libpq-dev postgresql postgresql-contrib
+
+    virtualenv -p /usr/bin/python3 ./venv/
+    source ./venv/bin/activate
+    pip3 install -U -r requirements.txt
+
+
 ### Запуск RTC-сервера
 
 В папке `rtc_server` запустить
