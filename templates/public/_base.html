@@ -54,8 +54,10 @@
         'register-form': 'register/',
       };
 
+      const protocol = location.protocol == 'http:' ? 'http:' : 'https:'
+
       const instance = axios.create({
-        baseURL: 'https://dev.local:8000/',
+        baseURL: `${protocol}//dev.local:8000/`,
         withCredentials: true,
         xsrfCookieName: 'csrftoken',
         xsrfHeaderName: 'X-CSRFToken',

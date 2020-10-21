@@ -110,8 +110,8 @@
   <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 
   {{ user.is_staff|json_script:'is_staff' }}
-  {{ object.course.teacher.pk.hex|json_script:'teacher' }}
-  {{ object.course.student.pk.hex|json_script:'student' }}
+  {{ object.course.teacher.pk|json_script:'teacher' }}
+  {{ object.course.student.pk|json_script:'student' }}
   {{ object.pk.hex|json_script:'lesson' }}
 
   <script>
@@ -172,10 +172,12 @@
     const peer = new Peer(
       is_staff ? teacher : student,
       {
+        key: '',
         host: 'dev.local',
-        port: 9000,
-        path: '/myapp',
-        secure: true,
+{#        port: 9000,#}
+        port: 8000,
+        path: '/lesson',
+        secure: false, // !
         config: {
           'iceServers': [
             { url: 'stun:stun.l.google.com:19302' },
