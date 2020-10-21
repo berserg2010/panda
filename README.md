@@ -135,7 +135,18 @@ Private - закрытые ресурсы, также делится на
     virtualenv -p /usr/bin/python3 ./venv/
     source ./venv/bin/activate
     pip3 install -U -r requirements.txt
+    
+    
+### SSL
 
+В `/etc/hosts` добавить `127.0.0.1 localhost dev.local`.
+
+В каталоге проекта `ssl` запустить
+
+    openssl req -config dev.local.conf -new -sha256 -newkey rsa:2048 -nodes -keyout dev.local.key -x509 -days 365 -out dev.local.crt
+    
+    
+    
 
 ### Запуск RTC-сервера
 
