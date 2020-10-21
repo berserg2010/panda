@@ -159,5 +159,4 @@ Private - закрытые ресурсы, также делится на
 
 В корне проекта запустить
     
-    python manage.py runsslserver 0.0.0.0:8000 --certificate ssl/dev.local.crt --key ssl/dev.local.key
-
+    daphne -e ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt backend.asgi:application
