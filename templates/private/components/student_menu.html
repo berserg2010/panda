@@ -1,26 +1,36 @@
 {% load static %}
 
-<li><a href="{% url 'private_side:lessons' %}">
+{% url 'private_side:lessons' as lessons_url %}
+<li><a href="{% url 'private_side:lessons' %}" class="{% if lessons_url == request.get_full_path %}active{% endif %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-6.svg' %}" alt=""></b>
   <span>Видеопрактика</span>
 </a></li>
-<li><a href="{% url 'private_side:notes' %}">
+
+{% url 'private_side:notes' as notes_url %}
+<li><a href="{% url 'private_side:notes' %}" class="{% if notes_url == request.get_full_path %}active{% endif %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-4.svg' %}" alt=""></b>
   <span>Мои заметки</span>
 </a></li>
-<li><a href="{% url 'private_side:vocabulary_list' %}">
+
+{% url 'private_side:vocabulary_list' as vocabulary_list_url %}
+<li><a href="{% url 'private_side:vocabulary_list' %}" class="{% if vocabulary_list_url == request.get_full_path %}active{% endif %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-5.svg' %}" alt=""></b>
   <span>Мой словарь</span>
 </a></li>
-<li><a href="{% url 'private_side:tests_courses_list' %}">
+
+{% url 'private_side:tests_courses_list' as tests_courses_list_url %}
+<li><a href="{% url 'private_side:tests_courses_list' %}" class="{% if tests_courses_list_url == request.get_full_path %}active{% endif %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-7.svg' %}" alt=""></b>
   <span>Тесты</span>
 </a></li>
+
 <li><a href="#">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-8.svg' %}" alt=""></b>
   <span>Словарные игры</span>
 </a></li>
-<li><a href="{% url 'private_side:free_lesson' %}">
+
+{% url 'private_side:free_lesson' as free_lesson_url %}
+<li><a href="{% url 'private_side:free_lesson' %}" class="{% if tests_courses_list_url == request.get_full_path %}active{% endif %}">
   <b class="menu-ico"><img src="{% static 'img/menu-ico-10.svg' %}" alt=""></b>
   <span>Бесплатные уроки<i>Пригласить друзей</i></span>
 </a></li>
