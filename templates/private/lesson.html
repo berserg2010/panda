@@ -33,9 +33,9 @@
                     style="display: none"
                     {#                      poster="{% static 'img/videoCall-user.svg' %}"#}
                 ></video>
-                <button id="connect-to-peer" >
-                  <img src="{% static 'img/videoCall-user.svg' %}" height="300px">
-                </button>
+{#                <button id="connect-to-peer" >#}
+{#                  <img src="{% static 'img/videoCall-user.svg' %}" height="300px">#}
+{#                </button>#}
               </div>
 
               <div class="videoCall-you" style="overflow: hidden">
@@ -120,7 +120,6 @@
   {{ object.pk|json_script:'lesson' }}
 
   <script>
-
     //DragAndDrop
     if($('.videoCall-drag').length > 0){
       // Enable drag and drop...
@@ -156,15 +155,15 @@
       dragAndDrop(".card", ".option");
     }
 
+  </script>
 
+  <script>
     // WebRTC
 
     const is_staff = JSON.parse(document.getElementById('is_staff').textContent)
     const teacher = JSON.parse(document.getElementById('teacher').textContent)
     const student = JSON.parse(document.getElementById('student').textContent)
     const lesson = JSON.parse(document.getElementById('lesson').textContent)
-
-    console.info(teacher)
 
     navigator.getWebcam = (constraints) => {
       return navigator.mediaDevices.getUserMedia(constraints) ||
@@ -173,99 +172,98 @@
         navigator.msGetUserMedia(constraints)
     }
 
-    const peer = new Peer(
-      is_staff ? teacher : student,
-      {
-        host: 'dev.local',
-        {#        port: 9000,#}
-        port: 8000,
-        path: 'ws/lk/lesson',
-        secure: true,
-        config: {
-          'iceServers': [
-            { url: 'stun:stun.l.google.com:19302' },
-            { url: 'stun:stun1.l.google.com:19302' },
-            {
-              url: 'turn:numb.viagenie.ca',
-              username: '{{ 'NUMB_WEBRTC_USERNAME'|get_settings_var }}',
-              credential: '{{ 'NUMB_WEBRTC_CREDENTIAL'|get_settings_var }}'
-            }
-          ]
-        },
-        debug: 3,
-      }
-    )
-
-    peer.on('open', (id) => {
-      console.info(`Peer open: ${id}`)
-    })
-
-    peer.on('call', (mediaConnection) => {
-
-      console.info('Peer call: ', mediaConnection)
-
-      let getCall = confirm('Принять звонок?')
-
-      if (getCall) {
-
-        mediaConnection.answer(window.localStream)
-
-        getPeerStream(mediaConnection)
-
-        mediaConnection.on('close', () => {
-          console.log('mediaConnection close')
-        })
-
-        mediaConnection.on('error', () => {
-          console.error('mediaConnection error')
-        })
-
-      } else {
-        console.log('Escape call')
-      }
-    })
-
-
-    peer.on('disconnected', () => {
-      console.info('Peer disconnected')
-    })
-
-    peer.on('close', () => {
-      console.info('Peer close')
-    })
-
-    peer.on('error', (error) => {
-      console.error(error)
-    })
-
-
-    $(() => {
-
-      handleWebcam()
-
-      $('#connect-to-peer').click(() => {
-
-        const mediaConnection = peer.call(
-          is_staff ? student : teacher,
-          window.localStream
-        )
-
-        console.info('peer.call: ', mediaConnection)
-
-        getPeerStream(mediaConnection)
-
-      })
-
-      $('#end-call').click(() => {
-
-        {#        dataConnection.send('command')#}
-
-        closeConnection()
-      })
-
-    })
-
-
+    {#    const peer = new Peer(#}
+    {#      is_staff ? teacher : student,#}
+    {#      {#}
+    {#        host: 'dev.local',#}
+    {#        port: 8000,#}
+    {#        path: 'ws/lesson/',#}
+    {#        secure: true,#}
+    {#        config: {#}
+    {#          'iceServers': [#}
+    {#            { url: 'stun:stun.l.google.com:19302' },#}
+    {#            { url: 'stun:stun1.l.google.com:19302' },#}
+    {#            {#}
+    {#              url: 'turn:numb.viagenie.ca',#}
+    {#              username: '{{ 'NUMB_WEBRTC_USERNAME'|get_settings_var }}',#}
+    {#              credential: '{{ 'NUMB_WEBRTC_CREDENTIAL'|get_settings_var }}'#}
+    {#            }#}
+    {#          ]#}
+    {#        },#}
+    {#        debug: 3,#}
+    {#      }#}
+    {#    )#}
+    {##}
+    {#    peer.on('open', (id) => {#}
+    {#      console.info(`Peer open: ${id}`)#}
+    {#    })#}
+    {##}
+    {#    peer.on('call', (mediaConnection) => {#}
+    {##}
+    {#      console.info('Peer call: ', mediaConnection)#}
+    {##}
+    {#      let getCall = confirm('Принять звонок?')#}
+    {##}
+    {#      if (getCall) {#}
+    {##}
+    {#        mediaConnection.answer(window.localStream)#}
+    {##}
+    {#        getPeerStream(mediaConnection)#}
+    {##}
+    {#        mediaConnection.on('close', () => {#}
+    {#          console.log('mediaConnection close')#}
+    {#        })#}
+    {##}
+    {#        mediaConnection.on('error', () => {#}
+    {#          console.error('mediaConnection error')#}
+    {#        })#}
+    {##}
+    {#      } else {#}
+    {#        console.log('Escape call')#}
+    {#      }#}
+    {#    })#}
+    {##}
+    {##}
+    {#    peer.on('disconnected', () => {#}
+    {#      console.info('Peer disconnected')#}
+    {#    })#}
+    {##}
+    {#    peer.on('close', () => {#}
+    {#      console.info('Peer close')#}
+    {#    })#}
+    {##}
+    {#    peer.on('error', (error) => {#}
+    {#      console.error(error)#}
+    {#    })#}
+    {##}
+    {##}
+    {#    $(() => {#}
+    {##}
+    {#      handleWebcam()#}
+    {##}
+    {#      $('#connect-to-peer').click(() => {#}
+    {##}
+    {#        const mediaConnection = peer.call(#}
+    {#          is_staff ? student : teacher,#}
+    {#          window.localStream#}
+    {#        )#}
+    {##}
+    {#        console.info('peer.call: ', mediaConnection)#}
+    {##}
+    {#        getPeerStream(mediaConnection)#}
+    {##}
+    {#      })#}
+    {##}
+    {#      $('#end-call').click(() => {#}
+    {##}
+    {#        dataConnection.send('command')#}
+    {##}
+    {#        closeConnection()#}
+    {#      })#}
+    {##}
+    {#    })#}
+    {##}
+    {##}
     const handleWebcam = (constraints = { video: true, audio: false }) => {
 
       navigator.getWebcam(constraints)
@@ -285,48 +283,48 @@
     }
 
 
-    const getPeerStream = (mediaConnection) => {
-
-      if (window.existingCall) {
-        window.existingCall.close()
-      }
-
-      console.info('getPeerStream')
-
-      window.existingCall = mediaConnection
-
-      mediaConnection.on('stream', (stream) => {
-
-        console.info(`MediaConnection stream: ${stream.id}`)
-
-        const video = document.getElementById('peer-camera')
-        video.srcObject = stream
-
-      })
-
-      handleStyleTrigger('videoCall-user', true)
-
-    }
-
-
-    const handlerScreen = (constraints = { cursor: 'always', displaySurface: 'monitor' }) => {
-
-      navigator.mediaDevices.getDisplayMedia({
-        video: constraints
-      })
-        .then((stream) => {
-
-          const video = document.getElementById('my-camera')
-          video.srcObject = stream
-
-          window.localStream = stream
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-    }
-
-
+    {#    const getPeerStream = (mediaConnection) => {#}
+    {##}
+    {#      if (window.existingCall) {#}
+    {#        window.existingCall.close()#}
+    {#      }#}
+    {##}
+    {#      console.info('getPeerStream')#}
+    {##}
+    {#      window.existingCall = mediaConnection#}
+    {##}
+    {#      mediaConnection.on('stream', (stream) => {#}
+    {##}
+    {#        console.info(`MediaConnection stream: ${stream.id}`)#}
+    {##}
+    {#        const video = document.getElementById('peer-camera')#}
+    {#        video.srcObject = stream#}
+    {##}
+    {#      })#}
+    {##}
+    {#      handleStyleTrigger('videoCall-user', true)#}
+    {##}
+    {#    }#}
+    {##}
+    {##}
+    {#    const handlerScreen = (constraints = { cursor: 'always', displaySurface: 'monitor' }) => {#}
+    {##}
+    {#      navigator.mediaDevices.getDisplayMedia({#}
+    {#        video: constraints#}
+    {#      })#}
+    {#        .then((stream) => {#}
+    {##}
+    {#          const video = document.getElementById('my-camera')#}
+    {#          video.srcObject = stream#}
+    {##}
+    {#          window.localStream = stream#}
+    {#        })#}
+    {#        .catch((error) => {#}
+    {#          console.error(error)#}
+    {#        })#}
+    {#    }#}
+    {##}
+    {##}
     const handleStyleTrigger = (className, condition) => {
 
       const videoNode = document.getElementsByClassName(className)[0].children
@@ -339,25 +337,95 @@
         videoNode[1].style.display = 'block'
       }
     }
+    {##}
+    {#    const closeConnection = () => {#}
+    {##}
+    {#      handleStyleTrigger('videoCall-user', false)#}
+    {##}
+    {#      window.existingCall.close()#}
+    {##}
+    {#      peer.destroy()#}
+    {#    }#}
+    {##}
 
-    const closeConnection = () => {
-
-      handleStyleTrigger('videoCall-user', false)
-
-      window.existingCall.close()
-
-      peer.destroy()
+    const iceConfiguration = {
+      iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' },
+{#        { urls: 'stun:stun1.l.google.com:19302' },#}
+        {
+          urls: 'turn:numb.viagenie.ca',
+          username: '{{ 'NUMB_WEBRTC_USERNAME'|get_settings_var }}',
+          credential: '{{ 'NUMB_WEBRTC_CREDENTIAL'|get_settings_var }}'
+        }
+      ]
     }
+
+    const yourVideo = document.getElementById('my-camera'),
+      theirVideo = document.getElementById('peer-camera')
+    let yourConnection, theirConnection
+
+    navigator.getWebcam({ video: true, audio: false })
+      .then((stream) => {
+
+        window.localStream = stream
+        yourVideo.srcObject = stream
+
+        startPeerConnection(stream)
+
+        handleStyleTrigger('videoCall-you', true)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+    const startPeerConnection = (stream) => {
+
+      yourConnection = new RTCPeerConnection(iceConfiguration);
+      theirConnection = new RTCPeerConnection(iceConfiguration);
+
+      // Setup stream listening
+      yourConnection.addStream(stream);
+      theirConnection.ontrack = (e) => {
+        theirVideo.srcObject = e.stream
+      }
+
+      // Setup ice handling
+      yourConnection.onicecandidate = function (event) {
+        if (event.candidate) {
+          theirConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+        }
+      };
+
+      theirConnection.onicecandidate = function (event) {
+        if (event.candidate) {
+          yourConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+        }
+      };
+
+      // Begin the offer
+      yourConnection.createOffer(function (offer) {
+        yourConnection.setLocalDescription(offer);
+        theirConnection.setRemoteDescription(offer);
+
+        theirConnection.createAnswer(function (offer) {
+          theirConnection.setLocalDescription(offer);
+          yourConnection.setRemoteDescription(offer);
+        });
+      });
+    };
+
 
   </script>
 
   <script>
+
     const chatSocket = new WebSocket(
       'wss://'
       + window.location.host
       + '/ws/chat/'
-{#      + lesson#}
-{#      + '/'#}
+      {#      + lesson#}
+      {#      + '/'#}
     );
 
     chatSocket.onmessage = function(e) {
