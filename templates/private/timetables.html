@@ -6,33 +6,29 @@
 
 {% block content %}
   {% with course=object_list.first %}
-  {{ course.number_of_lessons }}
+    <div class="personalArea-content">
+      <div class="personalArea-block">
+        <div class="personalArea-block__top">
+          <span class="personalArea-block__title">Расписание</span>
+          <div class="personalArea-block__top-b"></div>
+        </div>
 
-  <div class="personalArea-content">
-    <div class="personalArea-block">
-      <div class="personalArea-block__top">
-        <span class="personalArea-block__title">Расписание</span>
-        <div class="personalArea-block__top-b"></div>
-      </div>
-
-      <div class="timetables">
+        <div class="timetables">
           {% for week in weeks %}
-              <div class="timetables-block range-slider__wrap">
-{#          <span class="timetables-title">Первая неделя 01.05.2020-05.05.2020</span>#}
-          <span class="timetables-title">{{ week.title }}</span>
-          <div class="timetables-slider range-slider">
+            <div class="timetables-block range-slider__wrap">
 
-{#            {{ course.schedule_set.all.0.datetime.date }}#}
+              <span class="timetables-title">{{ week.title }}</span>
+              <div class="timetables-slider range-slider">
 
+                {% for week_day in week.week_days %}
 
-              {% for week_day in week.week_days %}
+                  <div class="timetables-slide">
+                    <div class="timetables-wrap">
+                      <span class="timetables-subtitle">{{ week_day.date|date:'d M' }}, {{week_day.title}}</span>
 
-            <div class="timetables-slide">
-              <div class="timetables-wrap">
-                <span class="timetables-subtitle">{{ week_day.date|date:'d M' }}, {{week_day.title}}</span>
+                      {% for shedule in week_day.shedules %}
 
-                  {% for shedule in week_day.shedules %}
-                      <div class="timetables-item {% if shedule.status %}active{% endif %}">
+                        <div class="timetables-item {% if shedule.status %}active{% endif %}">
                           <div class="timetables-item__top">
                             <span>{{ shedule.date_value }}- 11.30</span>
                             <span>Пройдено</span>
@@ -42,17 +38,20 @@
                             <li><a href="#">{{ shedule.student }}</a></li>
                           </ul>
                         </div>
-                  {% endfor %}
-              </div>
-            </div>
+
+                      {% endfor %}
+
+                    </div>
+                  </div>
 
                 {% endfor %}
-          </div>
-          <input type="range" class="range" min="1" value="1" step="1" max="4">
-        </div>
+
+              </div>
+              <input type="range" class="range" min="1" value="1" step="1" max="4">
+            </div>
           {% endfor %}
+        </div>
       </div>
     </div>
-  </div>
   {% endwith %}
 {% endblock %}

@@ -83,8 +83,13 @@ class TimetablesView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
 
+        user = self.request.user
+
+        check_user = user.teacher if user.is_staff else user.student
+
         shedules = Schedule.objects.filter(
-            course_id__in=[course.id for course in self.request.user.teacher.course_set.all()]).order_by('datetime')
+            course_id__in=[course.id for course in check_user.course_set.all()]).order_by('datetime')
+
         first_shedule = shedules.first()
         last_shedule = shedules.last()
 
