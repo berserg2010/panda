@@ -1,0 +1,30 @@
+{% load static %}
+<div class="modal-overlay"></div>
+<div class="modal">
+  <div class="modal-over scrollbar-outer">
+    <div class="modal-wrap">
+      <div class="modal-bg modal-bg__mob">
+        <img src="{% static 'img/modal-mob.svg' %}" alt="">
+      </div>
+      <div class="modal-bg modal-bg__1">
+        <img src="{% static 'img/modal-1.svg' %}" alt="">
+      </div>
+      <div class="modal-bg modal-bg__2">
+        <img src="{% static 'img/modal-2.svg' %}" alt="">
+      </div>
+      <div class="modal-img">
+        <img src="{% static 'img/modal-img.svg' %}" alt="">
+      </div>
+
+      <div class="modal-content">
+
+        {% include './form_login.html' %}
+
+        {#        {% include './form_password_recovery.html' %}#}
+
+        {% include './form_register.html' %}
+
+      </div>
+    </div>
+  </div>
+</div>

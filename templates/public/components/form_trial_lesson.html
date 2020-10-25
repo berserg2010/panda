@@ -1,5 +1,4 @@
 {% load static %}
-<!-- start join -->
 <section class="join">
   <div class="wrapper">
     <div class="join-wrap">
@@ -10,8 +9,11 @@
         <img src="{% static 'img/join-bg-2.svg' %}" alt="">
       </div>
       <h2 class="join-title">ЗАПИШИСЬ НА БЕСПЛАТНЫЙ ВВОДНЫЙ УРОК !</h2>
+
       <div class="join-form">
-        <form action="">
+        <form method="post">
+          {% csrf_token %}
+
           <div class="input-block">
             <div class="input-wrap">
               <input type="text" name="name" placeholder="Имя">
@@ -30,7 +32,11 @@
           <div class="join-checkbox">
             <div class="checkbox">
               <input type="checkbox" checked>
-              <span class="checkbox-ico"><svg enable-background="new 0 0 515.556 515.556" height="512" viewBox="0 0 515.556 515.556" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m0 274.226 176.549 176.886 339.007-338.672-48.67-47.997-290.337 290-128.553-128.552z"/></svg></span>
+              <span class="checkbox-ico">
+                <svg enable-background="new 0 0 515.556 515.556" height="512" viewBox="0 0 515.556 515.556" width="512" xmlns="http://www.w3.org/2000/svg">
+                  <path d="m0 274.226 176.549 176.886 339.007-338.672-48.67-47.997-290.337 290-128.553-128.552z"/>
+                </svg>
+              </span>
               <p>Я принимаю <a href="#">условия</a> соглашения</p>
             </div>
           </div>
@@ -38,9 +44,10 @@
             <img src="{% static 'img/join-img.svg' %}" alt="">
           </div>
           <button class="main-btn">Отправить заявку</button>
+
         </form>
       </div>
+
     </div>
   </div>
 </section>
-<!-- end join -->
