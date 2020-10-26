@@ -5,154 +5,161 @@
 {% block title %}Контакты{% endblock %}
 
 {% block content %}
-<!-- start contatcs -->
-<section class="contatcs">
-  <div class="contatcs-bg contatcs-bg__1">
-    <img src="{% static 'img/contatcs-bg-1.svg' %}" alt="">
-  </div>
-  <div class="contatcs-bg contatcs-bg__2">
-    <img src="{% static 'img/contatcs-bg-2.svg' %}" alt="">
-  </div>
-  <div class="wrapper">
-    <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-      <span class="section-subtitle">Contacts</span>
-      <h2 class="section-title">Контакты</h2>
+  <!-- start contatcs -->
+  <section class="contatcs">
+    <div class="contatcs-bg contatcs-bg__1">
+      <img src="{% static 'img/contatcs-bg-1.svg' %}" alt="">
     </div>
-    <div class="contatcs-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-      <p>Если ты принял решение учиться в нашей школе или у тебя возникли другие вопросы, касающиеся процесса обучения у нас – связывайся с нами любым удобным способом. Наши консультанты помогут по любому вопросу, а наши кураторы готовы проконсультировать и проверить уровень твоего английского или китайского и подобрать нужную программу.</p>
+    <div class="contatcs-bg contatcs-bg__2">
+      <img src="{% static 'img/contatcs-bg-2.svg' %}" alt="">
     </div>
-    <div class="contatcs-row">
-      <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="contatcs-wrap">
-          <div class="contatcs-ico">
-            <img src="{% static 'img/contatcs-ico-1.svg' %}" alt="">
+    <div class="wrapper">
+      <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+        <span class="section-subtitle">Contacts</span>
+        <h2 class="section-title">Контакты</h2>
+      </div>
+      <div class="contatcs-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+        <p>Если ты принял решение учиться в нашей школе или у тебя возникли другие вопросы, касающиеся процесса обучения у нас – связывайся с нами любым удобным способом. Наши консультанты помогут по любому вопросу, а наши кураторы готовы проконсультировать и проверить уровень твоего английского или китайского и подобрать нужную программу.</p>
+      </div>
+      <div class="contatcs-row">
+        <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="contatcs-wrap">
+            <div class="contatcs-ico">
+              <img src="{% static 'img/contatcs-ico-1.svg' %}" alt="">
+            </div>
+            <ul>
+              <li><a href="#">+7 000 000-00-00</a></li>
+              <li><a href="#">+7 000 000-00-00</a></li>
+            </ul>
           </div>
-          <ul>
-            <li><a href="#">+7 000 000-00-00</a></li>
-            <li><a href="#">+7 000 000-00-00</a></li>
-          </ul>
+        </div>
+        <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="contatcs-wrap">
+            <div class="contatcs-ico">
+              <img src="{% static 'img/contatcs-ico-2.svg' %}" alt="">
+            </div>
+            <ul>
+              <li><a href="#">office@hellopanda.com</a></li>
+              <li><a href="#">support@hellopanda.com</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="contatcs-wrap">
+            <div class="contatcs-ico">
+              <img src="{% static 'img/contatcs-ico-3.svg' %}" alt="">
+            </div>
+            <p>75b Nəsibbəy Yusifbəyli, Bakı 1007</p>
+          </div>
         </div>
       </div>
-      <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="contatcs-wrap">
-          <div class="contatcs-ico">
-            <img src="{% static 'img/contatcs-ico-2.svg' %}" alt="">
-          </div>
-          <ul>
-            <li><a href="#">office@hellopanda.com</a></li>
-            <li><a href="#">support@hellopanda.com</a></li>
-          </ul>
-        </div>
+      <div class="contatcs-map">
+        <div id="map" class="map"></div>
       </div>
-      <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="contatcs-wrap">
-          <div class="contatcs-ico">
-            <img src="{% static 'img/contatcs-ico-3.svg' %}" alt="">
-          </div>
-          <p>75b Nəsibbəy Yusifbəyli, Bakı 1007</p>
-        </div>
+      <div class="contatcs-social" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+        <span class="contatcs-social__subtitle">Мы так же и в социальных сетях:</span>
+        <ul>
+          <li><a href="#"><img src="{% static 'img/ico-vk.svg' %}" alt=""></a></li>
+          <li><a href="#"><img src="{% static 'img/ico-tg.svg' %}" alt=""></a></li>
+          <li><a href="#"><img src="{% static 'img/ico-what.svg' %}" alt=""></a></li>
+          <li><a href="#"><img src="{% static 'img/ico-fb.svg' %}" alt=""></a></li>
+        </ul>
       </div>
     </div>
-    <div class="contatcs-map">
-      <div id="map" class="map"></div>
-    </div>
-    <div class="contatcs-social" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-      <span class="contatcs-social__subtitle">Мы так же и в социальных сетях:</span>
-      <ul>
-        <li><a href="#"><img src="{% static 'img/ico-vk.svg' %}" alt=""></a></li>
-        <li><a href="#"><img src="{% static 'img/ico-tg.svg' %}" alt=""></a></li>
-        <li><a href="#"><img src="{% static 'img/ico-what.svg' %}" alt=""></a></li>
-        <li><a href="#"><img src="{% static 'img/ico-fb.svg' %}" alt=""></a></li>
-      </ul>
-    </div>
-  </div>
-</section>
-<!-- end contatcs -->
-<!-- start faq -->
-<section class="faq">
-  {% include './components/form_faq.html' %}
-</section>
-<!-- end faq -->
+  </section>
+  <!-- end contatcs -->
+  <!-- start faq -->
+  <section class="faq">
+    {% include './components/section_faq.html' %}
+  </section>
+  <!-- end faq -->
 
-{% include './components/all-questions-section.html' %}
+  {% include './components/section_all_questions.html' %}
 
-<!-- start contactUs -->
-<section class="contactUs">
-  <div class="wrapper">
-    <div class="contactUs-wrap">
-      <div class="contactUs-bg">
-        <img src="{% static 'img/contactUs-bg.svg' %}" alt="">
-      </div>
-      <div class="contactUs-mob">
-        <img src="{% static 'img/contactUs-mob.svg' %}" alt="">
-      </div>
-      <div class="form-wrap">
-        <div class="form-block">
-          <h2 class="form-title">Свяжитесь с нами по любому<br>вопросу:</h2>
-          <form action="">
-            <div class="input-block">
-              <label for="v-1">Ваше имя:</label>
-              <input id="v-1" type="text" name="name" placeholder="Имя">
-            </div>
-            <div class="input-block">
-              <label for="v-2">Если хотите, чтобы мы вам ответили:</label>
-              <input id="v-2" type="email" name="email" placeholder="Эмеил">
-            </div>
-            <div class="input-block">
-              <label for="v-3">Если хотите, чтобы мы вам позвонили:</label>
-              <input id="v-3" type="tel" name="tel" placeholder="Телефон:">
-            </div>
-            <div class="input-block input-select">
-              <label for="v-4">Тема сообщения:</label>
-              <div class="select">
-                <div class="select-main">
-                  <div class="select-text">Я нашел баг</div>
-                  <div class="input-icon">
-                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
+  <!-- start contactUs -->
+  <section class="contactUs">
+    <div class="wrapper">
+      <div class="contactUs-wrap">
+        <div class="contactUs-bg">
+          <img src="{% static 'img/contactUs-bg.svg' %}" alt="">
+        </div>
+        <div class="contactUs-mob">
+          <img src="{% static 'img/contactUs-mob.svg' %}" alt="">
+        </div>
+        <div class="form-wrap">
+          <div class="form-block">
+            <h2 class="form-title">Свяжитесь с нами по любому<br>вопросу:</h2>
+
+            <form method="post">
+              {% csrf_token %}
+
+              <div class="input-block">
+                <label for="v-1">Ваше имя:</label>
+                <input id="v-1" type="text" name="name" placeholder="Имя">
+              </div>
+              <div class="input-block">
+                <label for="v-2">Если хотите, чтобы мы вам ответили:</label>
+                <input id="v-2" type="email" name="email" placeholder="Эмеил">
+              </div>
+              <div class="input-block">
+                <label for="v-3">Если хотите, чтобы мы вам позвонили:</label>
+                <input id="v-3" type="tel" name="tel" placeholder="Телефон:">
+              </div>
+              <div class="input-block input-select">
+                <label for="v-4">Тема сообщения:</label>
+                <div class="select">
+                  <div class="select-main">
+                    <div class="select-text">Я нашел баг</div>
+                    <div class="input-icon">
+                      <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
+                    </div>
                   </div>
+                  <div class="select-info">
+                    <ul>
+                      <li>Я нашел баг</li>
+                      <li>Я нашел баг2</li>
+                      <li>Я нашел баг3</li>
+                    </ul>
+                  </div>
+                  <input type="text" name="text" class="select-value">
                 </div>
-                <div class="select-info">
-                  <ul>
-                    <li>Я нашел баг</li>
-                    <li>Я нашел баг2</li>
-                    <li>Я нашел баг3</li>
-                  </ul>
+              </div>
+              <div class="input-block">
+                <div class="input-textarea">
+                  <textarea name="text" id="v-5" placeholder="Сообщение"></textarea>
+                  <span class="input-textarea__info">Доступно <b>1000</b> из 1000 знаков</span>
                 </div>
-                <input type="text" name="text" class="select-value">
               </div>
-            </div>
-            <div class="input-block">
-              <div class="input-textarea">
-                <textarea name="text" id="v-5" placeholder="Сообщение"></textarea>
-                <span class="input-textarea__info">Доступно <b>1000</b> из 1000 знаков</span>
-              </div>
-            </div>
-            <button class="second-btn">Отправить вопрос</button>
-          </form>
+              <button class="second-btn">Отправить вопрос</button>
+
+            </form>
+
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- end contactUs -->
+  </section>
+  <!-- end contactUs -->
 {% endblock %}
 
-
 {% block script %}
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-<script>
-  ymaps.ready(init);
-  var myMap;
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+  <script>
 
-  function init(){
-    myMap = new ymaps.Map ("map", {
-     center: [55.7084, 37.6527],
-     zoom: 16,
-     controls: []
-    });
-    myMap.behaviors.disable([
-     'scrollZoom'
-    ]);
-  }
-</script>
+    let myMap
+
+    const init = () => {
+      myMap = new ymaps.Map ('map', {
+        center: [ 55.7084, 37.6527 ],
+        zoom: 16,
+        controls: []
+      })
+      myMap.behaviors.disable([
+        'scrollZoom'
+      ])
+    }
+
+    ymaps.ready(init)
+
+  </script>
 {% endblock %}

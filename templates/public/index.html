@@ -16,8 +16,8 @@
           <img src="{% static 'img/main-img.svg' %}" alt="">
         </div>
         <div class="main-btns">
-          <a href="#" class="second-btn" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">Начать</a>
-          <a href="#" class="primary-btn" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">У меня уже есть аккаунт</a>
+          <a href="modal-checkIn" class="button-modal second-btn" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">Начать</a>
+          <a href="modal-logging" class="button-modal primary-btn" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">У меня уже есть аккаунт</a>
         </div>
       </div>
     </div>
@@ -132,7 +132,7 @@
         <div class="action-img">
           <img src="{% static 'img/action-img.svg' %}" alt="">
         </div>
-        <a href="#" class="second-btn">Посмотреть цены</a>
+        <a href="{% url 'public_side:price' %}" class="second-btn">Посмотреть цены</a>
       </div>
     </div>
   </section>

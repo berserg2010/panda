@@ -3,8 +3,9 @@ from django.db import models
 
 class SettingsSite(models.Model):
 
-    phone_first = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
-    phone_second = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
+    title = models.CharField(max_length=20, blank=True, verbose_name='название')
+    phone_first = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон 1')
+    phone_second = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон 2')
 
     office_email = models.EmailField(blank=True, verbose_name='почта учебной части')
     support_email = models.EmailField(blank=True, verbose_name='почта технической поддержки')
@@ -13,6 +14,8 @@ class SettingsSite(models.Model):
 
     is_active = models.BooleanField(default=True, verbose_name='активный')
 
+    def __str__(self):
+        return f'{self.title}'
 
     class Meta:
         verbose_name = 'настройки сайта'
@@ -24,7 +27,6 @@ class SocialNetwork(models.Model):
     name = models.CharField(max_length=20, verbose_name='название соц. сети')
 
     link = models.URLField(blank=True, verbose_name='ссылка')
-
 
     class Meta:
         verbose_name = 'социальная сеть'

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'sslserver',
     'rest_framework',
 
+    'settings_site',
     'auth_backend',
     'public_side',
     'private_side',
