@@ -24,7 +24,7 @@ class SettingsSite(models.Model):
 
 class SocialNetwork(models.Model):
 
-    name = models.CharField(max_length=20, verbose_name='название соц. сети')
+    name = models.CharField(primary_key=True, max_length=20, verbose_name='название соц. сети')
 
     link = models.URLField(blank=True, verbose_name='ссылка')
 
