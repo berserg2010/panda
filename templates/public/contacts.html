@@ -5,7 +5,6 @@
 {% block title %}Контакты{% endblock %}
 
 {% block content %}
-  <!-- start contatcs -->
   <section class="contatcs">
     <div class="contatcs-bg contatcs-bg__1">
       <img src="{% static 'img/contatcs-bg-1.svg' %}" alt="">
@@ -27,10 +26,16 @@
             <div class="contatcs-ico">
               <img src="{% static 'img/contatcs-ico-1.svg' %}" alt="">
             </div>
+
             <ul>
-              <li><a href="#">+7 000 000-00-00</a></li>
-              <li><a href="#">+7 000 000-00-00</a></li>
+              <li>
+                <a href="tel:{{ settings_site.phone_first }}">{{ settings_site.phone_first }}</a>
+              </li>
+              <li>
+                <a href="tel:{{ settings_site.phone_second }}">{{ settings_site.phone_second }}</a>
+              </li>
             </ul>
+
           </div>
         </div>
         <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
@@ -38,10 +43,16 @@
             <div class="contatcs-ico">
               <img src="{% static 'img/contatcs-ico-2.svg' %}" alt="">
             </div>
+
             <ul>
-              <li><a href="#">office@hellopanda.com</a></li>
-              <li><a href="#">support@hellopanda.com</a></li>
+              <li>
+                <a href="mailto:{{ settings_site.email_office }}">{{ settings_site.email_office }}</a>
+              </li>
+              <li>
+                <a href="mailto:{{ settings_site.email_support }}">{{ settings_site.email_support }}</a>
+              </li>
             </ul>
+
           </div>
         </div>
         <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
@@ -49,7 +60,7 @@
             <div class="contatcs-ico">
               <img src="{% static 'img/contatcs-ico-3.svg' %}" alt="">
             </div>
-            <p>75b Nəsibbəy Yusifbəyli, Bakı 1007</p>
+            <p>{{ settings_site.address }}</p>
           </div>
         </div>
       </div>
@@ -59,24 +70,50 @@
       <div class="contatcs-social" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
         <span class="contatcs-social__subtitle">Мы так же и в социальных сетях:</span>
         <ul>
-          <li><a href="#"><img src="{% static 'img/ico-vk.svg' %}" alt=""></a></li>
-          <li><a href="#"><img src="{% static 'img/ico-tg.svg' %}" alt=""></a></li>
-          <li><a href="#"><img src="{% static 'img/ico-what.svg' %}" alt=""></a></li>
-          <li><a href="#"><img src="{% static 'img/ico-fb.svg' %}" alt=""></a></li>
+
+          {% if settings_site.vkontakte %}
+            <li>
+              <a href="{{ settings_site.vkontakte }}">
+                <img src="{% static 'img/ico-vk.svg' %}" alt="">
+              </a>
+            </li>
+          {% endif %}
+
+          {% if settings_site.telegram %}
+            <li>
+              <a href="{{ settings_site.telegram }}">
+                <img src="{% static 'img/ico-tg.svg' %}" alt="">
+              </a>
+            </li>
+          {% endif %}
+
+          {% if settings_site.whatsapp %}
+            <li>
+              <a href="{{ settings_site.whatsapp }}">
+                <img src="{% static 'img/ico-what.svg' %}" alt="">
+              </a>
+            </li>
+          {% endif %}
+
+          {% if settings_site.facebook %}
+            <li>
+              <a href="{{ settings_site.facebook }}">
+                <img src="{% static 'img/ico-fb.svg' %}" alt="">
+              </a>
+            </li>
+          {% endif %}
+
         </ul>
       </div>
     </div>
   </section>
-  <!-- end contatcs -->
-  <!-- start faq -->
+
   <section class="faq">
     {% include './components/section_faq.html' %}
   </section>
-  <!-- end faq -->
 
   {% include './components/section_all_questions.html' %}
 
-  <!-- start contactUs -->
   <section class="contactUs">
     <div class="wrapper">
       <div class="contactUs-wrap">
@@ -139,7 +176,7 @@
       </div>
     </div>
   </section>
-  <!-- end contactUs -->
+
 {% endblock %}
 
 {% block script %}
