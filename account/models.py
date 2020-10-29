@@ -30,7 +30,7 @@ class Teacher(Account):
     native_speaker = models.CharField(max_length=100, default='', blank=True, verbose_name='родной язык')
 
     def __str__(self):
-        return self.user.get_full_name()
+        return f'{self.user.username} | {self.user.get_full_name()}'
 
     class Meta:
 

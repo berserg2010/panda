@@ -5,7 +5,7 @@ from account.models import Teacher, Student
 from lesson.models import Lesson
 
 
-class BannerOfCourse(CommonFields):
+class BannerOfCourse(CommonFields, models.Model):
 
     cost = models.PositiveSmallIntegerField(verbose_name='стоимость')
     percentage_discount = models.PositiveSmallIntegerField(default=0, verbose_name='скидка в процентах')

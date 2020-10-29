@@ -1,9 +1,7 @@
 import pytest
 from mixer.backend.django import mixer
-from rest_framework import status
-from django.contrib.auth import get_user_model
 
-from ..models import Course, Schedule, CourseLesson
+from ..models import Course, Schedule, CourseLesson, BannerOfCourse
 
 
 pytestmark = pytest.mark.django_db
