@@ -5,7 +5,7 @@ from account.models import Teacher, Student
 from lesson.models import Lesson
 
 
-class BannerOfCourse(CommonFields, models.Model):
+class BannerOfCourse(CommonFields):
 
     cost = models.PositiveSmallIntegerField(verbose_name='стоимость')
     percentage_discount = models.PositiveSmallIntegerField(default=0, verbose_name='скидка в процентах')
@@ -98,7 +98,6 @@ class CourseLesson(CommonId):
     course = models.ForeignKey(Course, on_delete=models.PROTECT)
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
 
-    # Если урок перенесен, нужно удалить запись в Schedule
 
     def __str__(self):
         return f'{self.course} <-> {self.number} | {self.lesson}'

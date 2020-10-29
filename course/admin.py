@@ -45,9 +45,13 @@ class CourseAdmin(admin.ModelAdmin):
 
     inlines = [CourseInline, ]
 
+class ScheduleInline(admin.StackedInline):
+
+    model = Schedule
+    extra = 0
 
 @admin.register(Course)
-class MotherboardAdmin(CustomListCoursesModelAdmin):
+class CoursedAdmin(CustomListCoursesModelAdmin):
 
     list_display = (
         'banner_of_course',
@@ -61,13 +65,10 @@ class MotherboardAdmin(CustomListCoursesModelAdmin):
     #     *CustomListWorkstationsModelAdmin.list_display,
     # )
     # fields = (*Motherboard._list_fields(), )
-    # inlines = [MotherboardInline, ]
+    inlines = (ScheduleInline, )
 
 
-class ScheduleInline(admin.StackedInline):
 
-    model = Schedule
-    extra = 0
 
 
 # @admin.register(Course)

@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 import pytz
 import uuid
 
+from common.models import CommonId
+
 
 GENDER = [
     ('U', 'Undefined'),
@@ -13,9 +15,7 @@ GENDER = [
 TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
 
 
-class Account(models.Model):
-
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+class Account(CommonId):
 
     gender = models.CharField(choices=GENDER, max_length=1, default='U', verbose_name='пол')
 
