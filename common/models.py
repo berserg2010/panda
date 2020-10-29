@@ -10,7 +10,7 @@ class CommonId(models.Model):
         abstract = True
 
 
-class CommonFields(models.Model):
+class CommonFields(CommonId):
 
     title = models.CharField(max_length=50, verbose_name='заголовок')
     description = models.TextField(default='', blank=True, verbose_name='описание')

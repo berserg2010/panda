@@ -1,16 +1,7 @@
 from django.contrib import admin
 
-from .models import BannerOfCourse, NumberOfLessons, Course, CourseLesson, Schedule
-
-
-def hardware_inline(model):
-    def wrapped(cls):
-
-        cls.model = model
-        cls.extra = 0
-
-        return cls
-    return wrapped
+from common.utils import hardware_inline
+from .models import Course, CourseLesson, Schedule, PersonalCourse, PersonalCourseLesson
 
 
 @hardware_inline(Course)
@@ -18,10 +9,14 @@ class CourseInline(admin.TabularInline):
     pass
 
 
-class CustomListCoursesModelAdmin(admin.ModelAdmin):
+@hardware_inline(Schedule)
+class ScheduleInline(admin.StackedInline):
+    pass
+
+
+class CustomModelAdmin(admin.ModelAdmin):
 
     # list_display_links = ("description",)
-    # list_display = ["get_list_workstations"]
     # list_filter = ["manufacturer"]
     list_select_related = False
     preserve_filters = False
@@ -40,42 +35,42 @@ class CustomListCoursesModelAdmin(admin.ModelAdmin):
     # get_list_workstations.short_description = "Рабочая станция"
 
 
-@admin.register(BannerOfCourse, CourseLesson, NumberOfLessons)
-class CourseAdmin(admin.ModelAdmin):
-
-    inlines = [CourseInline, ]
-
-class ScheduleInline(admin.StackedInline):
-
-    model = Schedule
-    extra = 0
-
 @admin.register(Course)
-class CoursedAdmin(CustomListCoursesModelAdmin):
+class CourseAdmin(CustomModelAdmin):
 
     list_display = (
-        'banner_of_course',
-        'student',
-        'teacher',
-        'number_of_lessons',
-        'finished',
+        'title',
+        'cost',
+        'get_cost_with_discount',
+        'percentage_discount',
+        'get_discount',
     )
-    # list_display = (
-    #     *Motherboard._list_fields(),
-    #     *CustomListWorkstationsModelAdmin.list_display,
-    # )
+    search_fields = (
+        'title',
+    )
+    fields = (
+        'id', 'title', 'description', 'number_of_lessons',
+        'percentage_discount', 'cost',
+    )
+    # inlines = (ScheduleInline, )
+
+
+@admin.register(CourseLesson)
+class CourseLessonAdmin(CustomModelAdmin):
+    pass
+
+
+@admin.register(PersonalCourse)
+class PersonalCourseAdmin(CustomModelAdmin):
+
+    list_display = (
+        'course',
+    )
+    # date_hierarchy = 'schedule_set'
     # fields = (*Motherboard._list_fields(), )
-    inlines = (ScheduleInline, )
+    # inlines = (ScheduleInline, )
 
 
-
-
-
-# @admin.register(Course)
-# class CustomCourseAdmin(admin.ModelAdmin):
-#
-#     model = model
-#     extra = 0
-#
-#     inlines = (ScheduleInline, )
-
+@admin.register(PersonalCourseLesson)
+class PersonalCourseLessonAdmin(CustomModelAdmin):
+    pass

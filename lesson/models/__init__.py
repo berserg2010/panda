@@ -7,7 +7,7 @@ from .article import Article
 from .book import Book
 
 
-class Lesson(CommonId, CommonFields):
+class Lesson(CommonFields):
 
     tests = models.ManyToManyField(
         Test,
@@ -39,12 +39,9 @@ class Lesson(CommonId, CommonFields):
     # game
     # video_practice
 
-
     def __str__(self):
         return self.title
 
-
     class Meta:
-
         verbose_name = 'урок'
         verbose_name_plural = '01 | Уроки'

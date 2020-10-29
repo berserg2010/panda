@@ -15,7 +15,7 @@ from django.utils import timezone
 
 now = timezone.now()
 
-from .models import BannerOfCourse, Course, CourseLesson, Schedule
+from .models import Course, CourseLesson, Schedule
 
 
 class ScheduleEntity(BaseModel):
@@ -60,7 +60,7 @@ title_week_days = {
 def week_day_maker(dt, shedules):
     return WeekDay(title=title_week_days.get(dt.weekday()), date=dt, shedules=[
         ScheduleEntity(status=True if shedule.datetime >= now else False, date_value=shedule.datetime,
-                       course=shedule.course.banner_of_course.title,
+                       # course=shedule.course.banner_of_course.title,
                        student='{} {}'.format(shedule.course.student.user.first_name,
                                               shedule.course.student.user.last_name)) for
         shedule in shedules.filter(datetime__day=dt.day, datetime__month=dt.month, datetime__year=dt.year)])
@@ -108,13 +108,13 @@ class TimetablesView(LoginRequiredMixin, ListView):
         )
 
 
-class BannerOfCourseListView(LoginRequiredMixin, ListView):
-    model = BannerOfCourse
+class CourseListView(LoginRequiredMixin, ListView):
+    model = Course
     template_name = 'private/courses.html'
 
 
-class BannerOfCourseDetailView(LoginRequiredMixin, DetailView):
-    model = BannerOfCourse
+class CourseDetailView(LoginRequiredMixin, DetailView):
+    model = Course
     template_name = 'private/course_detail.html'
 
 

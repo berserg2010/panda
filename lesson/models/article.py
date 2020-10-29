@@ -7,12 +7,9 @@ class Article(CommonFields):
 
     url = models.URLField(blank=True, verbose_name='ссылка на статью')
 
-
     def __str__(self):
         return f'{self.title}'
 
-
     class Meta:
-
         verbose_name = 'статья'
-        verbose_name_plural = 'статьи'
+        verbose_name_plural = '06 | Статьи'

@@ -2,8 +2,8 @@ from django.urls import path
 
 from .views import (
     TimetablesView,
-    BannerOfCourseListView,
-    BannerOfCourseDetailView,
+    CourseListView,
+    CourseDetailView,
     CourseLessonListView,
     LessonView,
     NotesListView,
@@ -18,8 +18,8 @@ from .views import (
 urlpatterns = [
     path('timetables/', TimetablesView.as_view(), name='timetables'),
 
-    path('courses/', BannerOfCourseListView.as_view(), name='courses'),
-    path('course/<int:pk>', BannerOfCourseDetailView.as_view(), name='course-detail'),
+    path('courses/', CourseListView.as_view(), name='courses'),
+    path('course/<int:pk>', CourseDetailView.as_view(), name='course-detail'),
 
     path('lessons/', CourseLessonListView.as_view(), name='lessons'),
     path('lesson/<uuid:pk>', LessonView.as_view(), name='lesson'),

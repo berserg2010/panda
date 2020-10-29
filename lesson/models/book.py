@@ -16,4 +16,4 @@ class Book(CommonFields):
     class Meta:
 
         verbose_name = 'книга'
-        verbose_name_plural = 'книги'
+        verbose_name_plural = '05 | Книги'

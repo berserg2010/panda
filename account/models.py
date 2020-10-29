@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 import pytz
-import uuid
 
 from common.models import CommonId
 
@@ -66,11 +65,11 @@ class Student(Account):
         verbose_name_plural = '02 | Ученики'
 
 
-class Wallet(models.Model):
+class Wallet(CommonId):
 
     def __str__(self):
         return f'кошелек | id {self.pk}'
 
     class Meta:
         verbose_name = 'кошелек'
-        verbose_name_plural = '03 | Кошелеки'
+        verbose_name_plural = '03 | Кошельки'

@@ -3,7 +3,7 @@ from django.db import models
 
 class SettingsSite(models.Model):
 
-    title = models.CharField(max_length=20, blank=True, verbose_name='название')
+    title = models.CharField(max_length=20, blank=True, verbose_name='название настроек')
     phone_first = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон 1')
     phone_second = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон 2')
     address = models.CharField(max_length=500, null=True, blank=True, verbose_name='адрес организации')
