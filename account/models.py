@@ -18,7 +18,7 @@ class Account(CommonId):
 
     gender = models.CharField(choices=GENDER, max_length=1, default='U', verbose_name='пол')
 
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, verbose_name='учётная запись')
 
     class Meta:
         abstract = True
@@ -32,7 +32,6 @@ class Teacher(Account):
         return f'{self.user.username} | {self.user.get_full_name()}'
 
     class Meta:
-
         verbose_name = 'учитель'
         verbose_name_plural = '01 | Учителя'
 

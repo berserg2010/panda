@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from common.utils import hardware_inline
+from common.utils import hardware_inline, CustomModelAdmin
 from .models import Course, CourseLesson, Schedule, PersonalCourse, PersonalCourseLesson
 
 
@@ -12,27 +12,6 @@ class CourseInline(admin.TabularInline):
 @hardware_inline(Schedule)
 class ScheduleInline(admin.StackedInline):
     pass
-
-
-class CustomModelAdmin(admin.ModelAdmin):
-
-    # list_display_links = ("description",)
-    # list_filter = ["manufacturer"]
-    list_select_related = False
-    preserve_filters = False
-    save_on_top = True
-    # search_fields = ["inventory_number", "description"]
-    # exclude = ("workstation", )
-    readonly_fields = ('id', )
-
-
-    # def get_list_workstations(self, obj):
-    #     instance = obj.workstation_set.filter()
-    #     if instance.exists():
-    #         return [*instance]
-    #     else:
-    #         return []
-    # get_list_workstations.short_description = "Рабочая станция"
 
 
 @admin.register(Course)
