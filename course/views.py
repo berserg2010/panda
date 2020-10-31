@@ -84,7 +84,6 @@ class TimetablesView(LoginRequiredMixin, ListView):
         ctx = super().get_context_data(**kwargs)
 
         user = self.request.user
-
         check_user = user.teacher if user.is_staff else user.student
 
         shedules = Schedule.objects.filter(

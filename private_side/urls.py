@@ -10,6 +10,7 @@ from .views import (
 
 app_name = 'private_side'
 
+
 urlpatterns = [
     path('', IndexLkView.as_view(), name='index'),
 

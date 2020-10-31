@@ -1,33 +1,35 @@
 from django import template
 from django.conf import settings
 
-from course.models import Course, CourseLesson
+from course.models import PaidCourse, PaidCourseLesson
 
 
 register = template.Library()
 
 
 @register.filter
-def get_statistic_result(course_lessons: [CourseLesson], field: str) -> str:
+def get_statistic_result(paid_course_lessons: [PaidCourseLesson], field: str) -> str:
 
-    finished_course_lessons: [CourseLesson] = course_lessons.filter(finished=True)
-    count_finished: int = finished_course_lessons.count()
+    finished_paid_course_lessons: [PaidCourseLesson] = paid_course_lessons.filter(finished=True)
+    count_finished: int = finished_paid_course_lessons.count()
 
     sum_true_result: float = 0
+    default_result: str = '0.0'
 
     try:
-        for lesson in finished_course_lessons:
-
+        for lesson in finished_paid_course_lessons:
             sum_true_result += getattr(lesson, field)
-
     except AttributeError:
-        return '0.0'
+        return default_result
 
-    return str(sum_true_result / count_finished)
+    try:
+        return str(sum_true_result / count_finished)
+    except ZeroDivisionError:
+        return default_result
 
 
 @register.filter
-def get_last_date_lesson(course: Course):
+def get_last_date_lesson(course: PaidCourse):
 
     schedules = course.schedule_set.all()
 

@@ -55,20 +55,20 @@
       'register-form': 'register/',
     };
 
-      const instance = axios.create({
-        baseURL: `${window.location.origin}/`,
-        withCredentials: true,
-        xsrfCookieName: 'csrftoken',
-        xsrfHeaderName: 'X-CSRFToken',
-      });
+    const instance = axios.create({
+      baseURL: `${window.location.origin}/`,
+      withCredentials: true,
+      xsrfCookieName: 'csrftoken',
+      xsrfHeaderName: 'X-CSRFToken',
+    })
 
     instance.post(`${urls_actions[form.id]}`, new FormData(form))
       .then(() => {
-        window.location.pathname = 'lk/';
+        window.location.pathname = 'lk/'
       })
       .catch((e) => {
         console.log(e)
-      });
+      })
   }
 </script>
 
