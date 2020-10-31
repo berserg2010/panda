@@ -17,7 +17,7 @@ class Test(CommonId):
         return options
 
     def __str__(self):
-        return f'{self.question}'
+        return self.question
 
     class Meta:
         verbose_name = 'тест'

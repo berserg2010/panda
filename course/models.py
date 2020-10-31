@@ -35,7 +35,7 @@ class Course(CommonFields):
     get_cost_with_discount.short_description = 'стоимость со скидкой'
 
     def __str__(self):
-        return f'{self.title} | {self.cost} руб./урок'
+        return self.title
 
     class Meta:
         verbose_name = 'курс'
@@ -46,8 +46,8 @@ class CourseLesson(CommonId):
 
     number = models.PositiveSmallIntegerField(verbose_name='номер урока')
 
-    course = models.ForeignKey(Course, on_delete=models.PROTECT)
-    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    course = models.ForeignKey(Course, on_delete=models.PROTECT, verbose_name='курс')
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, verbose_name='урок')
 
     def __str__(self):
         return f'{self.course} <-> {self.number} | {self.lesson}'
@@ -55,10 +55,10 @@ class CourseLesson(CommonId):
     class Meta:
         verbose_name = 'Курс <-> урок'
         verbose_name_plural = '02 | Курсы <-> уроки'
-        ordering = ('number',)
+        ordering = ('number', )
 
 
-class PersonalCourse(CommonId):
+class PaidCourse(CommonId):
 
     finished = models.BooleanField(default=False, verbose_name='завершен')
 
@@ -66,21 +66,21 @@ class PersonalCourse(CommonId):
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, verbose_name='учитель')
     student = models.ForeignKey(Student, on_delete=models.PROTECT, verbose_name='ученик')
 
-    lessons = models.ManyToManyField(Lesson, through='PersonalCourseLesson', related_name='personal_course')
+    lessons = models.ManyToManyField(Lesson, through='PaidCourseLesson', related_name='paid_courses')
 
     def __str__(self):
-        return f'{self.student} | {self.teacher}'
+        return f'{self.course}'
 
     class Meta:
-        verbose_name = 'персональный курс'
-        verbose_name_plural = '03 | Персональные курсы'
+        verbose_name = 'оплаченный курс'
+        verbose_name_plural = '03 | Оплаченные курсы'
 
 
 class Schedule(models.Model):
 
     datetime = models.DateTimeField(verbose_name='дата и время урока')
 
-    course = models.ForeignKey('Course', on_delete=models.PROTECT)
+    course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT)
 
     # Если урок перенесен, нужно удалить запись в Schedule
 
@@ -93,7 +93,7 @@ class Schedule(models.Model):
         ordering = ('datetime', )
 
 
-class PersonalCourseLesson(CommonId):
+class PaidCourseLesson(CommonId):
 
     finished = models.BooleanField(default=False, verbose_name='завершен')
 
@@ -103,14 +103,14 @@ class PersonalCourseLesson(CommonId):
 
     note = models.TextField(default='', blank=True, verbose_name='заметки')
 
-    personal_course = models.ForeignKey(PersonalCourse, on_delete=models.PROTECT)
-    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT)
+    paid_course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT, verbose_name='оплаченный курс')
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, verbose_name='урок')
 
 
     def __str__(self):
-        return f'{self.personal_course} | {self.lesson}'
+        return f'{self.paid_course} | {self.lesson}'
 
     class Meta:
 
-        verbose_name = 'персональный курс <-> урок'
-        verbose_name_plural = '04 | Персональные курсы <-> уроки'
+        verbose_name = 'оплаченный курс <-> урок'
+        verbose_name_plural = '04 | Оплаченные курсы <-> уроки'

@@ -1,16 +1,109 @@
 from django.contrib import admin
 
+from common.utils import CommonIdModelAdmin, CommonFieldsModelAdmin, hardware_inline
 from .models import Lesson, Test, Word, Example, Article, Book
 
 
-class CommonAdmin(admin.ModelAdmin):
-
-    list_select_related = False
-    preserve_filters = False
-    # save_on_top = True
-
-
-@admin.register(Lesson, Test, Word, Example, Article, Book)
-class LessonAdmin(CommonAdmin):
-
+@hardware_inline(Test.lessons.through)
+class TestInline(admin.TabularInline):
     pass
+
+
+@hardware_inline(Test.homework_lessons.through)
+class TestHomeworkInline(admin.TabularInline):
+    pass
+
+
+@hardware_inline(Word.lessons.through)
+class WordInline(admin.TabularInline):
+    pass
+
+
+@hardware_inline(Example.words.through)
+class ExampleInline(admin.TabularInline):
+    pass
+
+
+@admin.register(Lesson)
+class LessonAdmin(CommonFieldsModelAdmin):
+
+    fields = (
+        *CommonFieldsModelAdmin.fields,
+        'tests',
+        'words',
+        'homework_tests',
+        'homework_words',
+        'articles',
+        'books',
+    )
+
+
+@admin.register(Word)
+class WordAdmin(CommonIdModelAdmin):
+
+    list_display = (
+        'spelling',
+        'translation',
+    )
+    fields = (
+        *CommonIdModelAdmin.fields,
+        'spelling',
+        'transcription',
+        'translation',
+    )
+    save_on_top = False
+    inlines = (ExampleInline, )
+
+
+@admin.register(Example)
+class ExampleAdmin(CommonIdModelAdmin):
+
+    list_display = (
+        'example',
+    )
+    fields = (
+        *CommonIdModelAdmin.fields,
+        'example',
+    )
+    save_on_top = False
+
+
+@admin.register(Test)
+class TestAdmin(CommonIdModelAdmin):
+
+    list_display = (
+        'question',
+        'answer',
+    )
+    fields = (
+        *CommonIdModelAdmin.fields,
+        'question',
+        'options',
+        'answer',
+    )
+    save_on_top = False
+
+
+@admin.register(Book)
+class BookAdmin(CommonFieldsModelAdmin):
+
+    fields = (
+        *CommonFieldsModelAdmin.fields,
+        'author',
+        'isbn',
+    )
+    save_on_top = False
+
+
+@admin.register(Article)
+class ArticleAdmin(CommonFieldsModelAdmin):
+
+    list_display = (
+        *CommonFieldsModelAdmin.list_display,
+        'url',
+    )
+    fields = (
+        *CommonFieldsModelAdmin.fields,
+        'url',
+    )
+    save_on_top = False

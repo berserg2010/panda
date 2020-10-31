@@ -29,7 +29,7 @@ class Teacher(Account):
     native_speaker = models.CharField(max_length=100, default='', blank=True, verbose_name='родной язык')
 
     def __str__(self):
-        return f'{self.user.username} | {self.user.get_full_name()}'
+        return self.user.get_full_name()
 
     class Meta:
         verbose_name = 'учитель'
@@ -67,7 +67,7 @@ class Student(Account):
 class Wallet(CommonId):
 
     def __str__(self):
-        return f'кошелек | id {self.pk}'
+        return f'{self.pk}'
 
     class Meta:
         verbose_name = 'кошелек'

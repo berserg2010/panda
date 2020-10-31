@@ -10,7 +10,7 @@ class Word(CommonId):
     translation = models.CharField(max_length=200, verbose_name='перевод')
     description = models.CharField(max_length=200, blank=True, verbose_name='описание')
 
-    example = models.ManyToManyField('Example', blank=True, verbose_name='пример со словом')
+    examples = models.ManyToManyField('Example', blank=True, related_name='words', verbose_name='пример со словом')
 
 
     def __str__(self):
@@ -26,12 +26,9 @@ class Example(CommonId):
     example = models.CharField(max_length=200, verbose_name='пример')
     description = models.CharField(max_length=200, blank=True, verbose_name='описание')
 
-
     def __str__(self):
-        return f'{self.example}'
-
+        return self.example
 
     class Meta:
-
         verbose_name = 'пример со словом'
         verbose_name_plural = '03 | Примеры со словом'

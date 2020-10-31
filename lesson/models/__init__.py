@@ -18,7 +18,7 @@ class Lesson(CommonFields):
     homework_tests = models.ManyToManyField(
         Test,
         blank=True,
-        related_name='homework',
+        related_name='homework_lessons',
         verbose_name='тесты (ДЗ)',
     )
     words = models.ManyToManyField(
@@ -30,7 +30,7 @@ class Lesson(CommonFields):
     homework_words = models.ManyToManyField(
         Word,
         blank=True,
-        related_name='homework',
+        related_name='homework_lessons',
         verbose_name='слова (ДЗ)',
     )
     articles = models.ManyToManyField(Article, blank=True, verbose_name='статьи')

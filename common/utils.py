@@ -11,7 +11,7 @@ def hardware_inline(model):
     return wrapped
 
 
-class CustomModelAdmin(admin.ModelAdmin):
+class CommonIdModelAdmin(admin.ModelAdmin):
 
     fields = ('id', )
     # list_display_links = ("description",)
@@ -26,10 +26,13 @@ class CustomModelAdmin(admin.ModelAdmin):
     readonly_fields = ('id', )
 
 
-    # def get_list_workstations(self, obj):
-    #     instance = obj.workstation_set.filter()
-    #     if instance.exists():
-    #         return [*instance]
-    #     else:
-    #         return []
-    # get_list_workstations.short_description = "Рабочая станция"
+class CommonFieldsModelAdmin(CommonIdModelAdmin):
+
+    list_display = (
+        'title',
+    )
+    fields = (
+        *CommonIdModelAdmin.fields,
+        'title',
+        'description',
+    )
