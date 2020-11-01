@@ -5,35 +5,47 @@ from django.views.generic.edit import ProcessFormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.db.models import Prefetch, Q
+from django.db.models import Q
 import math
-
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime, timedelta
 from django.utils import timezone
+import uuid
+
+from account.models import Teacher, Student
+from .models import Course, CourseLesson, PaidCourse, Schedule
+
+
+def get_user_context(obj, is_filter=True):
+    user = obj.request.user
+    if is_filter:
+        return Q(teacher__user=user) if user.is_staff else Q(student__user=user)
+    else:
+        return user.teacher if user.is_staff else user.student
+
 
 now = timezone.now()
-
-from .models import Course, CourseLesson, Schedule
 
 
 class ScheduleEntity(BaseModel):
     status: bool
     date_value: datetime
-    course: str
-    student: str
+    course: str = ''
+    lesson: str = ''
+    teacher: str = ''
+    student: str = ''
 
 
 class WeekDay(BaseModel):
     title: str
     date: datetime
-    shedules: List[ScheduleEntity] = []
+    schedules: List[ScheduleEntity] = []
 
 
 class Week(BaseModel):
     title: str
-    week_days: List[WeekDay]
+    weekday: List[WeekDay]
 
 
 title_weeks = {
@@ -45,8 +57,7 @@ title_weeks = {
     5: 'Шестая неделя',
     6: 'Седьмая неделя',
 }
-
-title_week_days = {
+title_weekday = {
     0: 'Понедельник',
     1: 'Вториник',
     2: 'Среда',
@@ -57,52 +68,76 @@ title_week_days = {
 }
 
 
-def week_day_maker(dt, shedules):
-    return WeekDay(title=title_week_days.get(dt.weekday()), date=dt, shedules=[
-        ScheduleEntity(status=True if shedule.datetime >= now else False, date_value=shedule.datetime,
-                       # course=shedule.course.banner_of_course.title,
-                       student='{} {}'.format(shedule.course.student.user.first_name,
-                                              shedule.course.student.user.last_name)) for
-        shedule in shedules.filter(datetime__day=dt.day, datetime__month=dt.month, datetime__year=dt.year)])
+def weekday_maker(dt, schedules):
+    return WeekDay(
+        title=title_weekday.get(dt.weekday()),
+        date=dt,
+        schedules=[
+            ScheduleEntity(
+                status=True if (schedule.datetime >= now) else False,
+                date_value=schedule.datetime,
+                course=schedule.course.course.title,
+                lesson=schedule.course.lessons.all()[key].title,
+                teacher=schedule.course.teacher.user.get_full_name(),
+                student=schedule.course.student.user.get_full_name(),
+            ) for key, schedule in enumerate(schedules.filter(datetime__day=dt.day, datetime__month=dt.month, datetime__year=dt.year))
+        ]
+    )
 
 
-def week_maker(week_number, first_day, shedules):
-    if week_number == 0:
-        week_days = [week_day_maker((first_day + timedelta(days=d)), shedules) for d in range(0, 7)]
-    else:
-        week_days = [week_day_maker((first_day + timedelta(days=d)), shedules) for d in
-                     range((week_number * 7), ((week_number * 7) + 7))]
+def week_maker(week_number, first_day, schedules):
 
-    return Week(title=title_weeks.get(week_number), week_days=week_days)
+    # if week_number:
+    #     weekday = [
+    #         weekday_maker((first_day + timedelta(days=d)), schedules)
+    #         for d in range(0, 7)
+    #     ]
+    # else:
+    weekday = [
+        weekday_maker((first_day + timedelta(days=d)), schedules)
+        for d in range((week_number * 7), ((week_number * 7) + 7))
+    ]
+
+    return Week(
+        title=title_weeks.get(week_number),
+        weekday=weekday
+    )
 
 
 class TimetablesView(LoginRequiredMixin, ListView):
-    model = Course
+
+    model = PaidCourse
     template_name = 'private/timetables.html'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
 
-        user = self.request.user
-        check_user = user.teacher if user.is_staff else user.student
+        schedules = Schedule.objects.filter(
+            course_id__in=[
+                paid_course.id
+                for paid_course in get_user_context(self, is_filter=False).paidcourse_set.filter(finished=False)
+            ]
+        ).order_by('datetime')
 
-        shedules = Schedule.objects.filter(
-            course_id__in=[course.id for course in check_user.course_set.all()]).order_by('datetime')
+        first_schedule = schedules.first()
+        last_schedule = schedules.last()
 
-        first_shedule = shedules.first()
-        last_shedule = shedules.last()
+        date_delta = last_schedule.datetime - first_schedule.datetime
 
-        result_date = last_shedule.datetime - first_shedule.datetime
+        print(first_schedule.datetime)
+        print(last_schedule.datetime)
+        print(date_delta)
 
-        weeks = [week_maker(i, first_shedule.datetime, shedules) for i in
-                 range(0, int(math.ceil(result_date.days / 7)))]
+        ctx['weeks'] = [
+            week_maker(i, first_schedule.datetime, schedules)
+            for i in range(0, int(math.ceil(date_delta.days / 7)))
+        ]
 
-        ctx['weeks'] = weeks
         return ctx
 
     def get_queryset(self):
         return super().get_queryset().filter(
-            student__user=self.request.user,
+            get_user_context(self),
             finished=False,
         )
 

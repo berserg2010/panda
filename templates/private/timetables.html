@@ -14,28 +14,37 @@
         </div>
 
         <div class="timetables">
+
           {% for week in weeks %}
+
             <div class="timetables-block range-slider__wrap">
 
               <span class="timetables-title">{{ week.title }}</span>
               <div class="timetables-slider range-slider">
 
-                {% for week_day in week.week_days %}
+                {% for weekday in week.weekday %}
 
                   <div class="timetables-slide">
                     <div class="timetables-wrap">
-                      <span class="timetables-subtitle">{{ week_day.date|date:'d M' }}, {{week_day.title}}</span>
+                      <span class="timetables-subtitle">{{ weekday.date|date:'d M' }}, {{weekday.title}}</span>
 
-                      {% for shedule in week_day.shedules %}
+                      {% for schedule in weekday.schedules %}
 
-                        <div class="timetables-item {% if shedule.status %}active{% endif %}">
+                        <div class="timetables-item {% if schedule.status %}active{% endif %}">
                           <div class="timetables-item__top">
-                            <span>{{ shedule.date_value }}- 11.30</span>
-                            <span>Пройдено</span>
+                            <span>{{ schedule.date_value }}</span>
+                            <span>{% if schedule.status %}Не пройдено{% else %}Пройдено{% endif %}</span>
                           </div>
                           <ul>
-                            <li>{{ shedule.course }}</li>
-                            <li><a href="#">{{ shedule.student }}</a></li>
+                            <li>{{ schedule.course }}</li>
+                            <li>{{ schedule.lesson }}</li>
+                            <li>
+                              {% if user.is_staff %}
+                                Ученик {{ schedule.student }}
+                              {% else %}
+                                Учитель {{ schedule.teacher }}
+                              {% endif %}
+                            </li>
                           </ul>
                         </div>
 
@@ -49,7 +58,9 @@
               </div>
               <input type="range" class="range" min="1" value="1" step="1" max="4">
             </div>
+
           {% endfor %}
+
         </div>
       </div>
     </div>
