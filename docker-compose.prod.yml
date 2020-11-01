@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  backend:
+#    environment:
+#      - DJANGO_DEBUG=0
+#      - HOST=0.0.0.0
+    ports:
+      - 8000
+    volumes:
+      - static_volume:/usr/src/panda/static
+      - media_volume:/usr/src/panda/media
+    user: root
+    networks:
+      - proxy_back
+    command:
+#      [ "gunicorn", "--bind", ":8000", "backend.wsgi:application" ]
+      ["daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application"]
+
+  proxy:
+    image: nginx:1.17
+    ports:
+      - 8000:80
+    volumes:
+      - ./proxy/backend.conf:/etc/nginx/conf.d/backend.conf
+      - static_volume:/usr/src/panda/static
+      - media_volume:/usr/src/panda/media
+    depends_on:
+      - backend
+    networks:
+      - proxy_back
+
+volumes:
+  static_volume:
+  media_volume:
+
+networks:
+  proxy_back:
+    driver: bridge
