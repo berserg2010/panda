@@ -147,6 +147,13 @@ ___
     virtualenv -p /usr/bin/python3 ./venv/
     source ./venv/bin/activate
     pip3 install -U -r requirements.txt
+
+
+### Dump db
+
+    python3 manage.py dumpdata --indent 2 --output dump.json
+>
+    python3 manage.py loaddata dump.json
     
     
 ### SSL
