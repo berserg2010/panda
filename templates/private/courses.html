@@ -10,7 +10,7 @@
 
       {% for course in object_list %}
         <div class="courses-col">
-          <a href="{% url 'private_side:course-detail' course.pk %}" class="courses-wrap">
+          <a href="{% url 'private_side:course_detail' course.pk %}" class="courses-wrap">
             <div class="courses-img">
               <img src="{% static 'img/courses-1.jpg' %}" alt="">
             </div>

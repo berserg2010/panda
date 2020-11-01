@@ -53,7 +53,7 @@ class CourseLesson(CommonId):
         return f'{self.course} <-> {self.number} | {self.lesson}'
 
     class Meta:
-        verbose_name = 'Курс <-> урок'
+        verbose_name = 'курс <-> урок'
         verbose_name_plural = '02 | Курсы <-> уроки'
         ordering = ('number', )
 
@@ -104,6 +104,7 @@ class PaidCourseLesson(CommonId):
     note = models.TextField(default='', blank=True, verbose_name='заметки')
 
     paid_course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT, related_name='paid_course_lessons', verbose_name='оплаченный курс')
+    course_lesson = models.ForeignKey(CourseLesson, null=True, blank=True, on_delete=models.PROTECT, related_name='paid_course_lessons', verbose_name='курс <-> урок')
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, verbose_name='урок')
 
 

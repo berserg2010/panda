@@ -79,6 +79,7 @@ class PaidCourseLessonAdmin(CommonIdModelAdmin):
 
     list_display = (
         'lesson',
+        'course_lesson',
         'paid_course',
         'test_result',
         'word_result',
@@ -88,6 +89,7 @@ class PaidCourseLessonAdmin(CommonIdModelAdmin):
     fields = (
         *CommonIdModelAdmin.fields,
         'lesson',
+        'course_lesson',
         'paid_course',
         'note',
         'test_result',

@@ -14,36 +14,39 @@
       </div>
       <div class="notes">
 
-        {% for course_lesson in object_list %}
+        {% for paid_course in object_list %}
+          {% for paid_course_lesson in paid_course.paid_course_lessons.all %}
 
-          <div class="notes-row">
-            <div class="notes-col">
-              <div class="notes-col__block">
-                <span class="notes-subtitle">Урок {{ course_lesson.number }} (Видео урок):</span>
-                <p><a href="#">{{ course_lesson.lesson.title }}</a></p>
+            <div class="notes-row">
+              <div class="notes-col">
+                <div class="notes-col__block">
+                  <span class="notes-subtitle">Урок {{ paid_course_lesson.course_lesson.number }}:</span>
+                  {#                  <p><a href="">{{ paid_course_lesson.lesson.title }}</a></p>#}
+                  <p>{{ paid_course_lesson.lesson.title }}</p>
+                </div>
+                <div class="notes-col__block">
+                  <span class="notes-subtitle">Урок проведен:</span>
+                  {% with schedule=paid_course_lesson.paid_course.schedule_set.all|get_list_item:forloop.counter0 %}
+                    <p>{{ schedule }}</p>
+                  {% endwith %}
+                </div>
               </div>
-              <div class="notes-col__block">
-                <span class="notes-subtitle">Урок проведен:</span>
-                {% with schedule=course_lesson.course.schedule_set.all|get_list_item:forloop.counter0 %}
-                  <p>{{ schedule }}</p>
-                {% endwith %}
+              <div class="notes-col">
+                <span class="notes-subtitle">Заметки:</span>
+                <ul>
+                  {% for note in paid_course_lesson.note|string_lines_to_list %}
+                    <li>{{ note }}</li>
+                  {% endfor %}
+                </ul>
               </div>
             </div>
-            <div class="notes-col">
-              <span class="notes-subtitle">Заметки:</span>
-              <ul>
-                {% for note in course_lesson.note|string_lines_to_list %}
-                  <li>{{ note }}</li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
 
+          {% endfor %}
         {% endfor %}
 
-        <div class="notes-btn">
-          <a href="#" class="second-btn">Показать еще</a>
-        </div>
+{#        <div class="notes-btn">#}
+{#          <a href="#" class="second-btn">Показать еще</a>#}
+{#        </div>#}
 
       </div>
     </div>

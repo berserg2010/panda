@@ -29,13 +29,13 @@ def get_statistic_result(paid_course_lessons: [PaidCourseLesson], field: str) ->
 
 
 @register.filter
-def get_last_date_lesson(course: PaidCourse):
+def get_last_date_lesson(paid_course: PaidCourse):
 
-    schedules = course.schedule_set.all()
+    schedules = paid_course.schedule_set.all()
 
-    coutn_finished_lessons = course.courselesson_set.filter(finished=True).count()
+    count_finished_lessons = paid_course.paid_course_lessons.filter(finished=True).count()
 
-    return schedules[coutn_finished_lessons].datetime
+    return schedules[count_finished_lessons - 1].datetime if count_finished_lessons else '--'
 
 
 @register.filter

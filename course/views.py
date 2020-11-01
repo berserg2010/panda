@@ -5,16 +5,14 @@ from django.views.generic.edit import ProcessFormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.db.models import Q
-import math
-from pydantic import BaseModel
-from typing import List, Optional
-from datetime import datetime, timedelta
 from django.utils import timezone
-import uuid
+from django.db.models import Q
+from pydantic import BaseModel
+from typing import List
+from datetime import datetime, timedelta
+import math
 
-from account.models import Teacher, Student
-from .models import Course, CourseLesson, PaidCourse, Schedule
+from .models import Course, CourseLesson, PaidCourse, Schedule, PaidCourseLesson
 
 
 def get_user_context(obj, is_filter=True):
@@ -87,12 +85,6 @@ def weekday_maker(dt, schedules):
 
 def week_maker(week_number, first_day, schedules):
 
-    # if week_number:
-    #     weekday = [
-    #         weekday_maker((first_day + timedelta(days=d)), schedules)
-    #         for d in range(0, 7)
-    #     ]
-    # else:
     weekday = [
         weekday_maker((first_day + timedelta(days=d)), schedules)
         for d in range((week_number * 7), ((week_number * 7) + 7))
@@ -124,10 +116,6 @@ class TimetablesView(LoginRequiredMixin, ListView):
 
         date_delta = last_schedule.datetime - first_schedule.datetime
 
-        print(first_schedule.datetime)
-        print(last_schedule.datetime)
-        print(date_delta)
-
         ctx['weeks'] = [
             week_maker(i, first_schedule.datetime, schedules)
             for i in range(0, int(math.ceil(date_delta.days / 7)))
@@ -142,65 +130,58 @@ class TimetablesView(LoginRequiredMixin, ListView):
         )
 
 
+class PaidCourseListView(LoginRequiredMixin, ListView):
+
+    model = PaidCourse
+    template_name = 'private/lessons.html'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(get_user_context(self), finished=False)
+
+
+class PaidCourseLessonView(LoginRequiredMixin, DetailView):
+
+    model = PaidCourseLesson
+    template_name = 'private/lesson.html'
+
+
+class NotesListView(ListView):
+
+    model = PaidCourse
+    template_name = 'private/notes.html'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            get_user_context(self),
+        ).exclude(
+            paid_course_lessons__note='',
+        )
+
+
 class CourseListView(LoginRequiredMixin, ListView):
+
     model = Course
     template_name = 'private/courses.html'
 
 
 class CourseDetailView(LoginRequiredMixin, DetailView):
+
     model = Course
     template_name = 'private/course_detail.html'
 
 
-class CourseLessonListView(LoginRequiredMixin, ListView):
-    model = Course
-    template_name = 'private/lessons.html'
-
-    def get_queryset(self):
-        user = self.request.user
-        user_filter = Q(teacher__user=user) if user.is_staff else Q(student__user=user)
-
-        return super().get_queryset().filter(user_filter, finished=False)
-        #     .prefetch_related(
-        #     Prefetch('lessons')
-        # )
-
-
-class LessonView(LoginRequiredMixin, DetailView):
-    model = CourseLesson
-    template_name = 'private/lesson.html'
-
-    def get_queryset(self):
-        user = self.request.user
-        user_filter = Q(course__teacher__user=user) if user.is_staff else Q(course__student__user=user)
-
-        return super().get_queryset().filter(user_filter, course__finished=False)
-
-
-class NotesListView(ListView):
-    model = CourseLesson
-    template_name = 'private/notes.html'
-
-    def get_queryset(self):
-        return super().get_queryset().filter(
-            course__student__user=self.request.user,
-            course__finished=False,
-        )
-
-
 class VocabularyListView(LoginRequiredMixin, ListView):
-    model = CourseLesson
+
+    model = PaidCourse
     template_name = 'private/vocabulary_list.html'
 
     def get_queryset(self):
-        return super().get_queryset().filter(
-            course__student__user=self.request.user,
-            course__finished=False,
-        )
+        return super().get_queryset().filter(get_user_context(self))
 
 
 class VocabularyDetailView(LoginRequiredMixin, DetailView):
-    model = CourseLesson
+
+    model = PaidCourseLesson
     template_name = 'private/vocabulary_detail.html'
 
 

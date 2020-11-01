@@ -8,12 +8,7 @@
     <div class="personalArea-content">
       <div class="personalArea-block">
         <div class="personalArea-block__top">
-          <span class="personalArea-block__title">Урок {{ object.number }} – {{ object.lesson.title }}</span>
-          {% if user.is_staff %}
-            {{ user.teacher.pk }}
-          {% else %}
-            {{ user.student.pk }}
-          {% endif %}
+          <span class="personalArea-block__title">Урок {{ object.course_lesson.number }} – {{ object.lesson.title }}</span>
           <div class="personalArea-block__top-b"></div>
         </div>
         <div class="videoCall">
@@ -114,8 +109,8 @@
   <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 
   {{ user.is_staff|json_script:'is_staff' }}
-  {{ object.course.teacher.pk|json_script:'teacher' }}
-  {{ object.course.student.pk|json_script:'student' }}
+  {{ object.paid_course.teacher.pk|json_script:'teacher' }}
+  {{ object.paid_course.student.pk|json_script:'student' }}
   {{ object.pk|json_script:'lesson' }}
 
   <script>
@@ -259,8 +254,6 @@
       handleWebcam()
 
       $('#connect-to-peer').click(() => {
-
-        const callUser = `{% if user.is_staff %}{{ user.student.pk }}{% else %}{{ user.teacher.pk }}{% endif %}`
 
         const mediaConnection = peer.call(
           is_staff ? student : teacher,
