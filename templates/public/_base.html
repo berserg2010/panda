@@ -53,7 +53,7 @@
     const urls_actions = {
       'login-form': 'login/',
       'register-form': 'register/',
-    };
+    }
 
     const instance = axios.create({
       baseURL: `${window.location.origin}/`,
@@ -62,7 +62,9 @@
       xsrfHeaderName: 'X-CSRFToken',
     })
 
-    instance.post(`${urls_actions[form.id]}`, new FormData(form))
+    const formData = new FormData(form)
+
+    instance.post(`${urls_actions[form.id]}`, formData)
       .then(() => {
         window.location.pathname = 'lk/'
       })
@@ -70,6 +72,7 @@
         console.log(e)
       })
   }
+
 </script>
 
 </body>

@@ -1,6 +1,6 @@
 from django import template
 
-from ..models import CourseLesson
+from ..models import PaidCourseLesson
 
 
 register = template.Library()
@@ -23,6 +23,12 @@ def string_lines_to_list(string: str):
 
 
 @register.filter
-def finished(course_lesson: [CourseLesson], check: bool) -> [CourseLesson]:
+def finished(paid_course_lessons: [PaidCourseLesson], check: bool) -> [PaidCourseLesson]:
+    return paid_course_lessons.filter(finished=check)
 
-    return course_lesson.filter(finished=check)
+
+@register.filter
+def filter_count(paid_course_lessons: [PaidCourseLesson]) -> [PaidCourseLesson]:
+    print(paid_course_lessons)
+    return paid_course_lessons.count()
+

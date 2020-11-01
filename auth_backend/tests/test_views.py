@@ -1,5 +1,4 @@
 import pytest
-from mixer.backend.django import mixer
 from rest_framework import status
 from django.contrib.auth import get_user_model
 
@@ -23,6 +22,7 @@ def test_get_private_side(url, client_fixture, errors, request):
 
 
 def test_register_user(client, create_superuser):
+
     create_superuser()
     data = {
         'first_name': 'Vasia',

@@ -133,13 +133,13 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-LOGIN_URL = 'login/'
-LOGIN_REDIRECT_URL = 'lk/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/lk/'
 # LOGOUT_URL = 'auth_backend:logout'
 LOGOUT_REDIRECT_URL = '/'
 
 admin.AdminSite.site_header = 'Panda'.upper()
 admin.AdminSite.empty_value_display = '--'
 
-NUMB_WEBRTC_USERNAME = config('NUMB_WEBRTC_USERNAME')
-NUMB_WEBRTC_CREDENTIAL = config('NUMB_WEBRTC_CREDENTIAL')
+NUMB_WEBRTC_USERNAME = config('NUMB_WEBRTC_USERNAME', default='')
+NUMB_WEBRTC_CREDENTIAL = config('NUMB_WEBRTC_CREDENTIAL', default='')

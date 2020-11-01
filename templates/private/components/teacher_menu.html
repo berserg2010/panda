@@ -1,40 +1,46 @@
 {% load static %}
-{% url 'private_side:lessons' as lessons_url %}
-<li><a href="{% url 'private_side:lessons' %}" class="{% if lessons_url == request.get_full_path %}active{% endif %}">
-  <b class="menu-ico"><img src="{% static 'img/menu-ico-14.svg' %}" alt=""></b>
-  <span>Занятия</span>
-</a></li>
 
 {% url 'private_side:materials' as materials_url %}
-<li class="menu-li"><a href="{% url 'private_side:materials' %}" class="{% if materials_url == request.get_full_path %}active{% endif %}">
-  <b class="menu-ico"><img src="{% static 'img/menu-ico-13.svg' %}" alt=""></b>
-  <span>Материалы</span>
-</a></li>
+<li class="menu-li">
+  <a href="{% url 'private_side:materials' %}" class="{% if materials_url == request.get_full_path %}active{% endif %}">
+    <b class="menu-ico"><img src="{% static 'img/menu-ico-13.svg' %}" alt=""></b>
+    <span>Материалы</span>
+  </a>
+</li>
 
 {% url 'private_side:tasks' as tasks_url %}
-<li><a href="{% url 'private_side:tasks' %}" class="{% if tasks_url == request.get_full_path %}active{% endif %}">
-  <b class="menu-ico"><img src="{% static 'img/menu-ico-15.svg' %}" alt=""></b>
-  <span>Задания</span>
-</a></li>
+<li>
+  <a href="{% url 'private_side:tasks' %}" class="{% if tasks_url == request.get_full_path %}active{% endif %}">
+    <b class="menu-ico"><img src="{% static 'img/menu-ico-15.svg' %}" alt=""></b>
+    <span>Задания</span>
+  </a>
+</li>
 
-{% url 'private_side:articles' as articles_url %}
-<li><a href="{% url 'private_side:articles' %}" class="{% if articles_url == request.get_full_path %}active{% endif %}">
-  <b class="menu-ico"><img src="{% static 'img/menu-ico-16.svg' %}" alt=""></b>
-  <span>Статьи</span>
-</a></li>
+{#{% url 'private_side:articles' as articles_url %}#}
+{#<li>#}
+{#  <a href="{% url 'private_side:articles' %}" class="{% if articles_url == request.get_full_path %}active{% endif %}">#}
+{#    <b class="menu-ico"><img src="{% static 'img/menu-ico-16.svg' %}" alt=""></b>#}
+{#    <span>Статьи</span>#}
+{#  </a>#}
+{#</li>#}
+{##}
+{#<li>#}
+{#  <a href="#">#}
+{#    <b class="menu-ico"><img src="{% static 'img/menu-ico-17.svg' %}" alt=""></b>#}
+{#    <span>Файлы</span>#}
+{#  </a>#}
+{#</li>#}
+{##}
+{#<li>#}
+{#  <a href="#">#}
+{#    <b class="menu-ico"><img src="{% static 'img/menu-ico-18.svg' %}" alt=""></b>#}
+{#    <span>Темы</span>#}
+{#  </a>#}
+{#</li>#}
 
-<li><a href="#">
-  <b class="menu-ico"><img src="{% static 'img/menu-ico-17.svg' %}" alt=""></b>
-  <span>Файлы</span>
-</a></li>
-
-<li><a href="#">
-  <b class="menu-ico"><img src="{% static 'img/menu-ico-18.svg' %}" alt=""></b>
-  <span>Темы</span>
-</a></li>
-
-<li><a href="{% url 'private_side:students' %}">
-  <b class="menu-ico"><img src="{% static 'img/menu-ico-19.svg' %}" alt=""></b>
-  <span>Ученики</span>
-</a></li>
-</ul>
+<li>
+  <a href="{% url 'private_side:students' %}">
+    <b class="menu-ico"><img src="{% static 'img/menu-ico-19.svg' %}" alt=""></b>
+    <span>Ученики</span>
+  </a>
+</li>

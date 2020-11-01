@@ -1,7 +1,7 @@
 import pytest
 from mixer.backend.django import mixer
 
-from ..models import Course, Schedule, CourseLesson, BannerOfCourse
+from ..models import Course, Schedule, CourseLesson
 
 
 pytestmark = pytest.mark.django_db
@@ -9,7 +9,9 @@ pytestmark = pytest.mark.django_db
 
 @pytest.fixture
 def courses_generate():
-    mixer.cycle().blend(Course, Schedule, CourseLesson)
+    mixer.cycle().blend(Course)
+    mixer.cycle().blend(Schedule)
+    mixer.cycle().blend(CourseLesson)
 
 
 @pytest.mark.usefixtures('courses_generate')

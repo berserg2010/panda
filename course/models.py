@@ -103,7 +103,7 @@ class PaidCourseLesson(CommonId):
 
     note = models.TextField(default='', blank=True, verbose_name='заметки')
 
-    paid_course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT, verbose_name='оплаченный курс')
+    paid_course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT, related_name='paid_course_lessons', verbose_name='оплаченный курс')
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, verbose_name='урок')
 
 

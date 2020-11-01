@@ -7,6 +7,7 @@
 
   <form id="login-form" method="POST" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
     {% csrf_token %}
+
     <div class="input-block">
       <p class="text-error">Логин или пароль введен не верно !</p>
       <div class="input-wrap">
