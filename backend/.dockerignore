@@ -176,11 +176,12 @@ dmypy.json
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
 pyvenv.cfg
 .env
+*.env
 .venv
-env/
+#env/
 venv/
 ENV/
-env_private/*.env
+env/*.env
 env.bak/
 venv.bak/
 pip-selfcheck.json

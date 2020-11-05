@@ -13,8 +13,8 @@ services:
     build: backend/.
     env_file:
       - env/back.env
-#    environment:
-#      - DJANGO_DEBUG=0
+    environment:
+      - DEBUG=false
     volumes:
       - ./backend:/usr/src/panda
     depends_on:
