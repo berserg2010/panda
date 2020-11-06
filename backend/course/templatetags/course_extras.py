@@ -29,6 +29,4 @@ def finished(paid_course_lessons: [PaidCourseLesson], check: bool) -> [PaidCours
 
 @register.filter
 def filter_count(paid_course_lessons: [PaidCourseLesson]) -> [PaidCourseLesson]:
-    print(paid_course_lessons)
     return paid_course_lessons.count()
-

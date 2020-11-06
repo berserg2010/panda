@@ -7,9 +7,9 @@ server {
 	listen 80;
     listen [::]:80;
 
-	server_name dev.local;
+	server_name ${PROXY_HOST};
 
-    return 301 https://dev.local;
+    return 301 https://${PROXY_HOST};
 
 }
 
@@ -18,8 +18,7 @@ server {
     listen 443 ssl;
     listen [::]:443 ssl;
 
-    # The host name to respond to
-    server_name dev.local;
+    server_name ${PROXY_HOST};
 
     ssl_certificate     /usr/src/panda/ssl/dev.local.crt;
     ssl_certificate_key /usr/src/panda/ssl/dev.local.key;

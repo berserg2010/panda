@@ -10,7 +10,7 @@ services:
     volumes:
       - static_volume:/usr/src/panda/static
       - media_volume:/usr/src/panda/media
-      - media_volume:/usr/src/panda/ssl
+      - ssl_volume:/usr/src/panda/ssl
     user: root
     networks:
       - proxy_back
@@ -18,15 +18,21 @@ services:
       ["daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application"]
 
   proxy:
-    image: nginx:1.17
+    image: nginx:1.19
+    env_file:
+      - env/proxy.env
+    environment:
+      - NGINX_ENVSUBST_TEMPLATE_DIR=/etc/nginx/templates
+      - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.template
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./proxy/backend.conf:/etc/nginx/conf.d/backend.conf
+      - ./proxy/templates:/etc/nginx/templates
       - static_volume:/usr/src/panda/static
       - media_volume:/usr/src/panda/media
-      - media_volume:/usr/src/panda/ssl
+      - ssl_volume:/usr/src/panda/ssl
     depends_on:
       - backend
     networks:
@@ -35,6 +41,7 @@ services:
 volumes:
   static_volume:
   media_volume:
+  ssl_volume:
 
 networks:
   proxy_back:

@@ -181,3 +181,19 @@ ___
     ~~python manage.py runsslserver 0.0.0.0:8000 --certificate ssl/dev.local.crt --key ssl/dev.local.key~~
 
     daphne -e ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt backend.asgi:application
+
+
+
+### Docker
+
+    docker-compose run backend python manage.py dumpdata --indent 2 --output dump.json
+    
+    docker-compose run backend python manage.py makemigrations
+    docker-compose run backend python manage.py migrate
+    docker-compose run backend python manage.py loaddata dump.json
+    
+    docker-compose run backend python manage.py collectstatic --no-input
+    
+    docker-compose up --build
+    
+    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
