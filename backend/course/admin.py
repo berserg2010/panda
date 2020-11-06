@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from common.utils import hardware_inline, CommonIdModelAdmin, CommonFieldsModelAdmin
-from .models import Course, CourseLesson, Schedule, PaidCourse, PaidCourseLesson
+from .models import Course, NumberOfLessons, CourseLesson, Schedule, PaidCourse, PaidCourseLesson
 
 
 @hardware_inline(Course)
@@ -34,6 +34,11 @@ class CourseAdmin(CommonFieldsModelAdmin):
         'title',
     )
     save_on_top = False
+
+
+@admin.register(NumberOfLessons)
+class NumberOfLessonsAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(CourseLesson)

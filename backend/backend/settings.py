@@ -34,6 +34,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://192.168.1.52:9000',
     'https://192.168.1.52:9000',
     'https://dev.local:9000',
+    'http://panda-dev.ddns.net',
+    'https://panda-dev.ddns.net',
 ]
 # CSRF_TRUSTED_ORIGINS = ['*']
 

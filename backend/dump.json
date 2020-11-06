@@ -1,0 +1,1534 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2020-11-06T22:29:58.729Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Основные настройки",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2020-11-06T22:30:47.561Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "petr",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2020-11-06T22:31:11.538Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "petr",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Staff status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2020-11-06T22:31:35.794Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "3",
+    "object_repr": "vasia",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2020-11-06T22:31:51.178Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "3",
+    "object_repr": "vasia",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2020-11-06T22:32:02.892Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "60b145f2-123d-4dc1-a913-20ae19ee8c12",
+    "object_repr": "Пётр Петров",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2020-11-06T22:32:52.679Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "0588c319-8e77-4ce1-869a-277401971bed",
+    "object_repr": "0588c319-8e77-4ce1-869a-277401971bed",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2020-11-06T22:32:54.899Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "7b95eb63-1aa9-455b-89f1-6ae89b1b2bb5",
+    "object_repr": "Василий Васильев",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2020-11-06T22:38:36.737Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "4",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2020-11-06T22:38:43.056Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "8",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2020-11-06T22:38:50.101Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "12",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2020-11-06T22:39:44.107Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "b17770bf-ad16-4f1d-9c4f-df1254914085",
+    "object_repr": "Английский язык для детей от 4-х лет",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2020-11-06T22:40:40.774Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "f53fe4c0-1dcd-4f5e-94c2-55bdc4e40f42",
+    "object_repr": "Английский язык для начинающих: отправляемся в пут",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2020-11-06T22:40:57.896Z",
+    "user": 1,
+    "content_type": 18,
+    "object_id": "0e6bd68f-79a7-4085-9832-cff37363d9a3",
+    "object_repr": "The Adventures of Tom Sawyer | Mark Twein",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2020-11-06T22:41:24.221Z",
+    "user": 1,
+    "content_type": 20,
+    "object_id": "649ebdb0-a61e-4b85-8c0c-0d57808a52a9",
+    "object_repr": "I don’t like this table. It … very small.",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2020-11-06T22:42:04.028Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "2fcbd4d8-e279-4084-b3ad-42e61ce620b7",
+    "object_repr": "He looked desperately around for a weapon.",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2020-11-06T22:42:06.156Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "d19e56ca-182e-4e75-921d-a798eb4713e4",
+    "object_repr": "Desperately | Отчаянно",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0421\\u0432\\u044f\\u0437\\u044c word-example\", \"object\": \"Word_examples object (1)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2020-11-06T22:42:31.904Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "87da72ea-bc95-45fb-b3c8-1cac36f8487a",
+    "object_repr": "Прошедшее время",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2020-11-06T22:42:46.897Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "fa3358f0-d9cb-4146-a2c7-d13e8c9ca6bf",
+    "object_repr": "Английский язык для детей от 4-х лет <-> 1 | Прошедшее время",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2020-11-06T22:43:18.067Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "41190063-03b3-432f-b993-831c9e645833",
+    "object_repr": "Английский язык для детей от 4-х лет",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0440\\u0430\\u0441\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435 \\u0443\\u0440\\u043e\\u043a\\u043e\\u0432\", \"object\": \"2020-11-07 01:43:02+03:00\"}}, {\"added\": {\"name\": \"\\u0440\\u0430\\u0441\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435 \\u0443\\u0440\\u043e\\u043a\\u043e\\u0432\", \"object\": \"2020-11-19 12:00:00+03:00\"}}, {\"added\": {\"name\": \"\\u0440\\u0430\\u0441\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435 \\u0443\\u0440\\u043e\\u043a\\u043e\\u0432\", \"object\": \"2020-11-27 12:00:00+03:00\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2020-11-06T22:43:32.567Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "574e8537-46e1-4c59-8e3e-3b84f9d2ca42",
+    "object_repr": "Английский язык для детей от 4-х лет | Прошедшее время",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add настройки сайта",
+    "content_type": 7,
+    "codename": "add_settingssite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change настройки сайта",
+    "content_type": 7,
+    "codename": "change_settingssite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete настройки сайта",
+    "content_type": 7,
+    "codename": "delete_settingssite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view настройки сайта",
+    "content_type": 7,
+    "codename": "view_settingssite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add кошелек",
+    "content_type": 8,
+    "codename": "add_wallet"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change кошелек",
+    "content_type": 8,
+    "codename": "change_wallet"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete кошелек",
+    "content_type": 8,
+    "codename": "delete_wallet"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view кошелек",
+    "content_type": 8,
+    "codename": "view_wallet"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add учитель",
+    "content_type": 9,
+    "codename": "add_teacher"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change учитель",
+    "content_type": 9,
+    "codename": "change_teacher"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete учитель",
+    "content_type": 9,
+    "codename": "delete_teacher"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view учитель",
+    "content_type": 9,
+    "codename": "view_teacher"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add ученик",
+    "content_type": 10,
+    "codename": "add_student"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change ученик",
+    "content_type": 10,
+    "codename": "change_student"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete ученик",
+    "content_type": 10,
+    "codename": "delete_student"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view ученик",
+    "content_type": 10,
+    "codename": "view_student"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add курс",
+    "content_type": 11,
+    "codename": "add_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change курс",
+    "content_type": 11,
+    "codename": "change_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete курс",
+    "content_type": 11,
+    "codename": "delete_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view курс",
+    "content_type": 11,
+    "codename": "view_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add курс <-> урок",
+    "content_type": 12,
+    "codename": "add_courselesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change курс <-> урок",
+    "content_type": 12,
+    "codename": "change_courselesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete курс <-> урок",
+    "content_type": 12,
+    "codename": "delete_courselesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view курс <-> урок",
+    "content_type": 12,
+    "codename": "view_courselesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add количество уроков",
+    "content_type": 13,
+    "codename": "add_numberoflessons"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change количество уроков",
+    "content_type": 13,
+    "codename": "change_numberoflessons"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete количество уроков",
+    "content_type": 13,
+    "codename": "delete_numberoflessons"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view количество уроков",
+    "content_type": 13,
+    "codename": "view_numberoflessons"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add оплаченный курс",
+    "content_type": 14,
+    "codename": "add_paidcourse"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change оплаченный курс",
+    "content_type": 14,
+    "codename": "change_paidcourse"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete оплаченный курс",
+    "content_type": 14,
+    "codename": "delete_paidcourse"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view оплаченный курс",
+    "content_type": 14,
+    "codename": "view_paidcourse"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add расписание уроков",
+    "content_type": 15,
+    "codename": "add_schedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change расписание уроков",
+    "content_type": 15,
+    "codename": "change_schedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete расписание уроков",
+    "content_type": 15,
+    "codename": "delete_schedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view расписание уроков",
+    "content_type": 15,
+    "codename": "view_schedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add оплаченный курс <-> урок",
+    "content_type": 16,
+    "codename": "add_paidcourselesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change оплаченный курс <-> урок",
+    "content_type": 16,
+    "codename": "change_paidcourselesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete оплаченный курс <-> урок",
+    "content_type": 16,
+    "codename": "delete_paidcourselesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view оплаченный курс <-> урок",
+    "content_type": 16,
+    "codename": "view_paidcourselesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add статья",
+    "content_type": 17,
+    "codename": "add_article"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change статья",
+    "content_type": 17,
+    "codename": "change_article"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete статья",
+    "content_type": 17,
+    "codename": "delete_article"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view статья",
+    "content_type": 17,
+    "codename": "view_article"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add книга",
+    "content_type": 18,
+    "codename": "add_book"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change книга",
+    "content_type": 18,
+    "codename": "change_book"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete книга",
+    "content_type": 18,
+    "codename": "delete_book"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view книга",
+    "content_type": 18,
+    "codename": "view_book"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add пример со словом",
+    "content_type": 19,
+    "codename": "add_example"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change пример со словом",
+    "content_type": 19,
+    "codename": "change_example"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete пример со словом",
+    "content_type": 19,
+    "codename": "delete_example"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view пример со словом",
+    "content_type": 19,
+    "codename": "view_example"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add тест",
+    "content_type": 20,
+    "codename": "add_test"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change тест",
+    "content_type": 20,
+    "codename": "change_test"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete тест",
+    "content_type": 20,
+    "codename": "delete_test"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view тест",
+    "content_type": 20,
+    "codename": "view_test"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add слово",
+    "content_type": 21,
+    "codename": "add_word"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change слово",
+    "content_type": 21,
+    "codename": "change_word"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete слово",
+    "content_type": 21,
+    "codename": "delete_word"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view слово",
+    "content_type": 21,
+    "codename": "view_word"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 85,
+  "fields": {
+    "name": "Can add урок",
+    "content_type": 22,
+    "codename": "add_lesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 86,
+  "fields": {
+    "name": "Can change урок",
+    "content_type": 22,
+    "codename": "change_lesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 87,
+  "fields": {
+    "name": "Can delete урок",
+    "content_type": 22,
+    "codename": "delete_lesson"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 88,
+  "fields": {
+    "name": "Can view урок",
+    "content_type": 22,
+    "codename": "view_lesson"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$AXYhSkJ3HBDH$3aRfbnTREzq3AAtQoQyuoM+Gly3AvA3x5NiwZ/gJyaM=",
+    "last_login": "2020-11-06T22:28:44.329Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@panda.edu",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-11-06T22:27:26.780Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$wmRRfCW3w6YK$qcECOvNyBgGpJxdk8zGxdNUOKpq3jlONCTAOrXZhLz0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "petr",
+    "first_name": "Пётр",
+    "last_name": "Петров",
+    "email": "petrov@ya.ru",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-11-06T22:30:47Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$e61vXpwbw7BI$K7Hp6SEFz12w8n56ojv2d+J61ViTtjWatbFXmGssiTY=",
+    "last_login": "2020-11-06T22:44:20.604Z",
+    "is_superuser": false,
+    "username": "vasia",
+    "first_name": "Василий",
+    "last_name": "Васильев",
+    "email": "vasiliev@yandex.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-11-06T22:31:35Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "settings_site",
+    "model": "settingssite"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "account",
+    "model": "wallet"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "account",
+    "model": "teacher"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "account",
+    "model": "student"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "course",
+    "model": "course"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "course",
+    "model": "courselesson"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "course",
+    "model": "numberoflessons"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "course",
+    "model": "paidcourse"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "course",
+    "model": "schedule"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "course",
+    "model": "paidcourselesson"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "lesson",
+    "model": "article"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "lesson",
+    "model": "book"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "lesson",
+    "model": "example"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "lesson",
+    "model": "test"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 21,
+  "fields": {
+    "app_label": "lesson",
+    "model": "word"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 22,
+  "fields": {
+    "app_label": "lesson",
+    "model": "lesson"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "4px0qlkcjkcozc1fudymcymdov0aid8o",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSFcKCgu3fsN5D6oVA0kpV0Z_12bdKHbMzPnpRKuS0lrz3OaRJ0VqMPvRsiPXDcgd6y3prnVZZ5Ib4readfXJvl52d2_g4K9fGsc7GidDczkmCKjBwQejAsC7CQbKzZ642GMIPaElAOE7GA4mhgoGPX-AOfCN3o:1kbADs:26hBOxj6UmdXKldB6pclB0UlAJZF0pymmMWErluai5k",
+    "expire_date": "2020-11-20T22:28:44.344Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "bnh8c1sa8mwsbshbjg2bdvz6huam39qa",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAUBe_iGlneMZT0OYP1FxsHkCPFSYW4O4mUAtqZee8tEqxLTWvPcxpZXIUVp1-GQM_cdsEPaPdJ0tSWeUS5J_KwXQ4T59ftaP8OKvS6rZWy7II3HqMrismXckGGgmeLJsYNckCTNUdFzhkVrPbkDOSiMyF78fkC6Vo4VQ:1kbASy:qK7_m-Socxonavp60Nv-2ng290pQIan4RDWnqLT9xIM",
+    "expire_date": "2020-11-20T22:44:20.618Z"
+  }
+},
+{
+  "model": "settings_site.settingssite",
+  "pk": 1,
+  "fields": {
+    "title": "Основные настройки",
+    "phone_first": "88006543210",
+    "phone_second": "+76543219876",
+    "address": "г.Саратов ул.Ленина д.1",
+    "email_office": "office@panda.edu",
+    "email_support": "support@panda.edu",
+    "facebook": "https://ru-ru.facebook.com/",
+    "instagram": "https://www.instagram.com/",
+    "twitter": "https://twitter.com/",
+    "youtube": "https://www.youtube.com/",
+    "is_active": true
+  }
+},
+{
+  "model": "account.teacher",
+  "pk": "60b145f2-123d-4dc1-a913-20ae19ee8c12",
+  "fields": {
+    "gender": "M",
+    "user": 2,
+    "native_speaker": ""
+  }
+},
+{
+  "model": "account.student",
+  "pk": "7b95eb63-1aa9-455b-89f1-6ae89b1b2bb5",
+  "fields": {
+    "gender": "M",
+    "user": 3,
+    "phone": "+76543210000",
+    "native_language": null,
+    "pronunciation": null,
+    "timezone": "Europe/Moscow",
+    "voice_acting": "M",
+    "accent_of_voice_acting": null,
+    "system_notification": true,
+    "support_message": true,
+    "payment_info": true,
+    "reminders_about_lessons": true,
+    "discounts": true,
+    "sounds": false,
+    "age": 14,
+    "wallet": "0588c319-8e77-4ce1-869a-277401971bed"
+  }
+},
+{
+  "model": "account.wallet",
+  "pk": "0588c319-8e77-4ce1-869a-277401971bed",
+  "fields": {}
+},
+{
+  "model": "course.numberoflessons",
+  "pk": 1,
+  "fields": {
+    "count": 4
+  }
+},
+{
+  "model": "course.numberoflessons",
+  "pk": 2,
+  "fields": {
+    "count": 8
+  }
+},
+{
+  "model": "course.numberoflessons",
+  "pk": 3,
+  "fields": {
+    "count": 12
+  }
+},
+{
+  "model": "course.course",
+  "pk": "b17770bf-ad16-4f1d-9c4f-df1254914085",
+  "fields": {
+    "title": "Английский язык для детей от 4-х лет",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet donec erat ut duis. Cras pellentesque fames natoque magna est eget orci ipsum aliquam. Mi sem magna mattis dignissim fringilla urna pellentesque sit orci. Ultrices viverra hac vivamus fringilla pulvinar fringilla. Diam ut consequat duis sem.",
+    "percentage_discount": 36,
+    "cost": 650,
+    "number_of_lessons": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "course.courselesson",
+  "pk": "fa3358f0-d9cb-4146-a2c7-d13e8c9ca6bf",
+  "fields": {
+    "number": 1,
+    "course": "b17770bf-ad16-4f1d-9c4f-df1254914085",
+    "lesson": "87da72ea-bc95-45fb-b3c8-1cac36f8487a"
+  }
+},
+{
+  "model": "course.paidcourse",
+  "pk": "41190063-03b3-432f-b993-831c9e645833",
+  "fields": {
+    "finished": false,
+    "course": "b17770bf-ad16-4f1d-9c4f-df1254914085",
+    "teacher": "60b145f2-123d-4dc1-a913-20ae19ee8c12",
+    "student": "7b95eb63-1aa9-455b-89f1-6ae89b1b2bb5"
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 1,
+  "fields": {
+    "datetime": "2020-11-06T22:43:02Z",
+    "course": "41190063-03b3-432f-b993-831c9e645833"
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 2,
+  "fields": {
+    "datetime": "2020-11-19T09:00:00Z",
+    "course": "41190063-03b3-432f-b993-831c9e645833"
+  }
+},
+{
+  "model": "course.schedule",
+  "pk": 3,
+  "fields": {
+    "datetime": "2020-11-27T09:00:00Z",
+    "course": "41190063-03b3-432f-b993-831c9e645833"
+  }
+},
+{
+  "model": "course.paidcourselesson",
+  "pk": "574e8537-46e1-4c59-8e3e-3b84f9d2ca42",
+  "fields": {
+    "finished": false,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "note": "",
+    "paid_course": "41190063-03b3-432f-b993-831c9e645833",
+    "course_lesson": "fa3358f0-d9cb-4146-a2c7-d13e8c9ca6bf",
+    "lesson": "87da72ea-bc95-45fb-b3c8-1cac36f8487a"
+  }
+},
+{
+  "model": "lesson.test",
+  "pk": "649ebdb0-a61e-4b85-8c0c-0d57808a52a9",
+  "fields": {
+    "question": "I don’t like this table. It … very small.",
+    "options": "they, we, you",
+    "answer": "is"
+  }
+},
+{
+  "model": "lesson.word",
+  "pk": "d19e56ca-182e-4e75-921d-a798eb4713e4",
+  "fields": {
+    "spelling": "desperately",
+    "transcription": "dispæritli",
+    "translation": "отчаянно",
+    "description": "",
+    "examples": [
+      "2fcbd4d8-e279-4084-b3ad-42e61ce620b7"
+    ]
+  }
+},
+{
+  "model": "lesson.example",
+  "pk": "2fcbd4d8-e279-4084-b3ad-42e61ce620b7",
+  "fields": {
+    "example": "He looked desperately around for a weapon.",
+    "description": ""
+  }
+},
+{
+  "model": "lesson.article",
+  "pk": "f53fe4c0-1dcd-4f5e-94c2-55bdc4e40f42",
+  "fields": {
+    "title": "Английский язык для начинающих: отправляемся в пут",
+    "description": "",
+    "url": "https://www.native-english.ru/articles/english-for-beginners"
+  }
+},
+{
+  "model": "lesson.book",
+  "pk": "0e6bd68f-79a7-4085-9832-cff37363d9a3",
+  "fields": {
+    "title": "The Adventures of Tom Sawyer",
+    "description": "",
+    "author": "Mark Twein",
+    "isbn": ""
+  }
+},
+{
+  "model": "lesson.lesson",
+  "pk": "87da72ea-bc95-45fb-b3c8-1cac36f8487a",
+  "fields": {
+    "title": "Прошедшее время",
+    "description": "",
+    "tests": [
+      "649ebdb0-a61e-4b85-8c0c-0d57808a52a9"
+    ],
+    "homework_tests": [
+      "649ebdb0-a61e-4b85-8c0c-0d57808a52a9"
+    ],
+    "words": [
+      "d19e56ca-182e-4e75-921d-a798eb4713e4"
+    ],
+    "homework_words": [
+      "d19e56ca-182e-4e75-921d-a798eb4713e4"
+    ],
+    "articles": [
+      "f53fe4c0-1dcd-4f5e-94c2-55bdc4e40f42"
+    ],
+    "books": [
+      "0e6bd68f-79a7-4085-9832-cff37363d9a3"
+    ]
+  }
+}
+]
