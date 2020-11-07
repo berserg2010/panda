@@ -1,4 +1,5 @@
 {% load static %}
+
 <div id="modal-checkIn" class="modal-tab">
   <div class="section-top">
     <span class="section-subtitle">registration</span>
@@ -7,6 +8,7 @@
 
   <form id="register-form" method="POST" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
     {% csrf_token %}
+
     <div class="input-block">
       <p class="text-error">Логин или пароль введен не верно !</p>
     </div>
@@ -86,21 +88,21 @@
       </div>
     </div>
 
-{#    <div class="modal-text">#}
-{#      <p>Эта страница защищена функцией reCAPTCHA и подпадает под <a href="#">Политику конфиденциальности</a> и#}
-{#        <a href="#">Условия использования Hello Panda.</a></p>#}
-{#    </div>#}
+    {#    <div class="modal-text">#}
+    {#      <p>Эта страница защищена функцией reCAPTCHA и подпадает под <a href="#">Политику конфиденциальности</a> и#}
+    {#        <a href="#">Условия использования Hello Panda.</a></p>#}
+    {#    </div>#}
 
-{#    <div class="modal-checkbox">#}
-{#      <div class="checkbox">#}
-{#        <input type="checkbox">#}
-{#        <span class="checkbox-ico"><svg width="15" height="11" viewBox="0 0 15 11" fill="none"#}
-{#                                        xmlns="http://www.w3.org/2000/svg"><path#}
-{#            d="M15 1.1566L4.71429 11L0 6.48844L1.20857 5.33184L4.71429 8.6786L13.7914 0L15 1.1566Z"#}
-{#            fill="#5F9F84"></path></svg></span>#}
-{#        <p>Я принимаю <a href="#">Условия обслуживания Hello Panda.</a></p>#}
-{#      </div>#}
-{#    </div>#}
+    {#    <div class="modal-checkbox">#}
+    {#      <div class="checkbox">#}
+    {#        <input type="checkbox">#}
+    {#        <span class="checkbox-ico"><svg width="15" height="11" viewBox="0 0 15 11" fill="none"#}
+    {#                                        xmlns="http://www.w3.org/2000/svg"><path#}
+    {#            d="M15 1.1566L4.71429 11L0 6.48844L1.20857 5.33184L4.71429 8.6786L13.7914 0L15 1.1566Z"#}
+    {#            fill="#5F9F84"></path></svg></span>#}
+    {#        <p>Я принимаю <a href="#">Условия обслуживания Hello Panda.</a></p>#}
+    {#      </div>#}
+    {#    </div>#}
 
     <div class="modal-btns modal-btns__big">
       <button type="submit" class="second-btn">Зарегистрироваться</button>
