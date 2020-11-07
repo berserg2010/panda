@@ -1,7 +1,15 @@
 from django.contrib import admin
 
 from common.utils import hardware_inline, CommonIdModelAdmin, CommonFieldsModelAdmin
-from .models import Course, NumberOfLessons, CourseLesson, Schedule, PaidCourse, PaidCourseLesson
+from .models import (
+    Course,
+    NumberOfLessons,
+    Level,
+    CourseLesson,
+    Schedule,
+    PaidCourse,
+    PaidCourseLesson,
+)
 
 
 @hardware_inline(Course)
@@ -41,6 +49,11 @@ class NumberOfLessonsAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(Level)
+class CourseLessonAdmin(CommonFieldsModelAdmin):
+    save_on_top = False
+
+
 @admin.register(CourseLesson)
 class CourseLessonAdmin(CommonIdModelAdmin):
 
@@ -48,12 +61,14 @@ class CourseLessonAdmin(CommonIdModelAdmin):
         'number',
         'lesson',
         'course',
+        'level',
     )
     fields = (
         *CommonIdModelAdmin.fields,
         'number',
         'lesson',
         'course',
+        'level',
     )
     save_on_top = False
 

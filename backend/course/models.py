@@ -7,14 +7,14 @@ from lesson.models import Lesson
 
 class NumberOfLessons(models.Model):
 
-    count = models.PositiveSmallIntegerField(verbose_name='количество уроков')
+    count = models.PositiveSmallIntegerField(verbose_name='количество занятий')
 
     def __str__(self) -> str:
         return f'{self.count}'
 
     class Meta:
-        verbose_name = 'количество уроков'
-        verbose_name_plural = 'количество уроков'
+        verbose_name = 'количество занятий'
+        verbose_name_plural = 'количество занятий'
 
 
 class Course(CommonFields):
@@ -23,7 +23,7 @@ class Course(CommonFields):
 
     cost = models.PositiveSmallIntegerField(verbose_name='стоимость')
 
-    number_of_lessons = models.ManyToManyField(NumberOfLessons, related_name='courses', verbose_name='количество уроков')
+    number_of_lessons = models.ManyToManyField(NumberOfLessons, related_name='courses', verbose_name='количество занятий')
     lessons = models.ManyToManyField(Lesson, through='CourseLesson', related_name='courses')
 
     def get_discount(self):
@@ -42,12 +42,23 @@ class Course(CommonFields):
         verbose_name_plural = '01 | Курсы'
 
 
+class Level(CommonFields):
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'уровень'
+        verbose_name_plural = 'уровни'
+        ordering = ('title', )
+
+
 class CourseLesson(CommonId):
 
     number = models.PositiveSmallIntegerField(verbose_name='номер урока')
 
     course = models.ForeignKey(Course, on_delete=models.PROTECT, verbose_name='курс')
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, verbose_name='урок')
+    level = models.ForeignKey(Level, on_delete=models.PROTECT, verbose_name='уровень')
 
     def __str__(self):
         return f'{self.course} <-> {self.number} | {self.lesson}'
@@ -78,7 +89,7 @@ class PaidCourse(CommonId):
 
 class Schedule(models.Model):
 
-    datetime = models.DateTimeField(verbose_name='дата и время урока')
+    datetime = models.DateTimeField(verbose_name='дата и время занятия')
 
     course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT)
 
@@ -88,8 +99,8 @@ class Schedule(models.Model):
         return f'{self.datetime.astimezone()}'
 
     class Meta:
-        verbose_name = 'расписание уроков'
-        verbose_name_plural = 'расписания уроков'
+        verbose_name = 'расписание занятий'
+        verbose_name_plural = 'расписания занятий'
         ordering = ('datetime', )
 
 
