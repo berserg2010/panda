@@ -162,3 +162,10 @@ admin.AdminSite.empty_value_display = '--'
 
 NUMB_WEBRTC_USERNAME = config('NUMB_WEBRTC_USERNAME', default='')
 NUMB_WEBRTC_CREDENTIAL = config('NUMB_WEBRTC_CREDENTIAL', default='')
+
+# EMAIL
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = 465
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = True

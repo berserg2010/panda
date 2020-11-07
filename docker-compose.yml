@@ -5,7 +5,7 @@ services:
   db:
     image: postgres
     env_file:
-      - env/back.env
+      - env/db.env
     networks:
       - db_layer
 
@@ -13,6 +13,7 @@ services:
     build: backend/.
     env_file:
       - env/back.env
+      - env/db.env
     environment:
       - DEBUG=false
     volumes:
