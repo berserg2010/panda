@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from common.utils import CommonIdModelAdmin, CommonFieldsModelAdmin
-from .models import Teacher, Student, Wallet
+from .models import Teacher, Student, Payment
 
 
 class AccountAdmin(CommonIdModelAdmin):
@@ -48,19 +48,27 @@ class StudentAdmin(AccountAdmin):
         'voice_acting',
         'pronunciation',
         'sounds',
-        'wallet',
     )
 
 
-@admin.register(Wallet)
-class WalletAdmin(CommonIdModelAdmin):
+@admin.register(Payment)
+class PaymentAdmin(CommonIdModelAdmin):
 
     list_display = (
-        'id',
-        'get_student_name',
+        *CommonIdModelAdmin.list_display,
+        'student',
+        'paid_for_lessons',
+        'bonus',
+        'payment_was_made',
+        'valid_until',
     )
+    fields = (
+        *CommonIdModelAdmin.fields,
+        'student',
+        'paid_for_lessons',
+        'bonus',
+        'payment_was_made',
+        'valid_until',
+    )
+    readonly_fields = ('payment_was_made', )
     save_on_top = False
-
-    def get_student_name(self, obj):
-        return obj.student.user.get_full_name()
-    get_student_name.short_description = 'И.Ф.'

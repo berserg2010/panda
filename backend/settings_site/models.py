@@ -11,6 +11,9 @@ class SettingsSite(models.Model):
     email_office = models.EmailField(blank=True, verbose_name='почта учебной части')
     email_support = models.EmailField(blank=True, verbose_name='почта технической поддержки')
 
+    vkontakte = models.URLField(blank=True, verbose_name='vkontakte')
+    telegram = models.URLField(blank=True, verbose_name='telegram')
+    whatsapp = models.URLField(blank=True, verbose_name='whatsapp')
     facebook = models.URLField(blank=True, verbose_name='facebook')
     instagram = models.URLField(blank=True, verbose_name='instagram')
     twitter = models.URLField(blank=True, verbose_name='twitter')

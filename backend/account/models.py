@@ -1,9 +1,12 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 import pytz
 
 from common.models import CommonId
 
+
+date_now = timezone.now()
 
 GENDER = [
     ('U', 'Undefined'),
@@ -54,7 +57,9 @@ class Student(Account):
 
     age = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name='возраст')
 
-    wallet = models.OneToOneField('Wallet', on_delete=models.PROTECT)
+    @property
+    def get_paid_lessons(self):
+        return self.payment_set.filter(valid_until__gte=date_now)
 
     def __str__(self):
         return self.user.get_full_name()
@@ -64,11 +69,20 @@ class Student(Account):
         verbose_name_plural = '02 | Ученики'
 
 
-class Wallet(CommonId):
+class Payment(CommonId):
+
+    paid_for_lessons = models.PositiveSmallIntegerField(verbose_name='оплачено уроков')
+
+    payment_was_made = models.DateTimeField(auto_now_add=True, verbose_name='оплата была произведена')
+    valid_until = models.DateField(default=date_now + timezone.timedelta(days=28), verbose_name='действительно до')
+
+    bonus = models.BooleanField(default=False, verbose_name='бесплатные уроки')
+
+    student = models.ForeignKey(Student, on_delete=models.PROTECT, verbose_name='студент')
 
     def __str__(self):
         return f'{self.pk}'
 
     class Meta:
-        verbose_name = 'кошелек'
-        verbose_name_plural = '03 | Кошельки'
+        verbose_name = 'платеж'
+        verbose_name_plural = '03 | Платежи'

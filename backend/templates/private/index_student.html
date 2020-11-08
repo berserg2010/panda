@@ -94,16 +94,24 @@
 
     <div class="personalArea-block">
       <div class="personalArea-block__top">
-        <span class="personalArea-block__title">Баланс:&ensp;<span>250 грн.</span></span>
+        <span class="personalArea-block__title">Баланс</span>
         <div class="personalArea-block__top-b"></div>
       </div>
 
       <div class="personalArea-balance">
         <div class="personalArea-balance__info">
-          <p>4 занятия</p>
-          <p><a href="#">История оплат</a></p>
+
+          {% for paid_lesson in user.student.get_paid_lessons %}
+
+            <p>Количество занятий: {{ paid_lesson.paid_for_lessons }}</p>
+            <p>Действуют до: {{ paid_lesson.valid_until }}</p>
+
+          {% endfor %}
+
         </div>
-        <a href="#modal-topUpAccount" class="main-btn topUpAccount-btn">Пополнить счет</a>
+
+        <a href="{% url 'private_side:courses' %}" class="main-btn">Оплатить занятия</a>
+
         <div class="personalArea-balance__img">
           <img src="{% static 'img/balance0img.svg' %}" alt="">
         </div>

@@ -3,7 +3,7 @@ from django.contrib.auth import login, get_user_model
 from django.core.mail import send_mail
 
 from backend import settings
-from account.models import Student, Wallet
+from account.models import Student
 
 
 def register(request):
@@ -22,7 +22,6 @@ def register(request):
         student = Student.objects.create(
             user=user,
             phone=request.POST.get('phone'),
-            wallet=Wallet.objects.create(),
         )
 
         send_mail(
