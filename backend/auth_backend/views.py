@@ -17,6 +17,8 @@ def register(request):
             password=request.POST.get('password'),
         )
 
+        print(request.POST.get('phone'))
+
         student = Student.objects.create(
             user=user,
             phone=request.POST.get('phone'),
