@@ -7,15 +7,12 @@ services:
       - HOST=0.0.0.0
     ports:
       - 8000
-    volumes:
-      - type: bind
-        source: ./backend/templates
-        target: /usr/src/panda/temlates
-      - type: bind
-        source: ./backend/static
-        target: /usr/src/panda/static
-      - media_volume:/usr/src/panda/media
-      - ssl_volume:/usr/src/panda/ssl
+#    volumes:
+#      - type: bind
+#        source: ./backend/static
+#        target: /usr/src/panda/static
+#      - media_volume:/usr/src/panda/media
+#      - ssl_volume:/usr/src/panda/ssl
     user: root
     networks:
       - proxy_back
@@ -26,30 +23,32 @@ services:
     image: nginx:1.19
     env_file:
       - env/proxy.env
-#    environment:
-#      - NGINX_ENVSUBST_TEMPLATE_DIR=/etc/nginx/templates
-#      - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.template
-#      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
     ports:
       - 80:80
       - 443:443
     volumes:
       - ./proxy/templates:/etc/nginx/templates
 #      - static_volume:/usr/src/panda/static
+#      - media_volume:/usr/src/panda/media
+#      - ssl_volume:/usr/src/panda/ssl
       - type: bind
         source: ./backend/static
         target: /usr/src/panda/static
-      - media_volume:/usr/src/panda/media
-      - ssl_volume:/usr/src/panda/ssl
+      - type: bind
+        source: ./backend/media
+        target: /usr/src/panda/media
+      - type: bind
+        source: ./backend/ssl
+        target: /usr/src/panda/ssl
     depends_on:
       - backend
     networks:
       - proxy_back
 
-volumes:
+#volumes:
 #  static_volume:
-  media_volume:
-  ssl_volume:
+#  media_volume:
+#  ssl_volume:
 
 networks:
   proxy_back:

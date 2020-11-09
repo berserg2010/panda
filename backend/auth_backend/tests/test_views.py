@@ -30,11 +30,12 @@ def test_register_user(client, create_superuser):
         'email': 'vasia@yandex.ru',
         'tel': '7896543210',
         'username': 'vasia',
-        'password': 'asdf;lkjasdf;lkj',
+        'password1': 'asdf;lkjasdf;lkj',
     }
 
     response = client.post('/register/', data=data)
     assert response.status_code == status.HTTP_200_OK
+    assert response.content == b'{"message": "ok"}'
     assert get_user_model().objects.count() == 2
 
     user = get_user_model().objects.get(username=data.get('username'))
@@ -43,4 +44,9 @@ def test_register_user(client, create_superuser):
     assert user.last_name == data.get('last_name')
     assert user.email == data.get('email')
     assert user.username == data.get('username')
-    assert user.check_password(data.get('password'))
+    assert user.check_password(data.get('password1'))
+
+    response = client.post('/register/', data=data)
+    assert response.status_code == status.HTTP_200_OK
+    assert response.content == b'{"message": "error"}'
+    assert get_user_model().objects.count() == 2

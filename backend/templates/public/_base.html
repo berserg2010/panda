@@ -65,11 +65,16 @@
     const formData = new FormData(form)
 
     instance.post(`${urls_actions[form.id]}`, formData)
-      .then(() => {
-        window.location.pathname = 'lk/'
+      .then(({ data }) => {
+
+        if (data.message === 'ok') {
+          window.location.pathname = 'lk/'
+        } else {
+          console.error(data)
+        }
       })
       .catch((e) => {
-        console.log(e)
+        console.error(e)
       })
   }
 
