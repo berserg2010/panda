@@ -17,6 +17,23 @@ GENDER = [
 TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
 
 
+class RequestUser(CommonId):
+
+    name = models.CharField(max_length=50, verbose_name='имя')
+    email = models.CharField(max_length=50, verbose_name='эл. почта')
+    phone = models.CharField(max_length=20, verbose_name='телефон')
+
+    sending_date = models.DateTimeField(auto_now_add=True, verbose_name='дата отправки')
+    check_date = models.DateTimeField(verbose_name='дата проверки')
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = 'запрос пользователя'
+        verbose_name_plural = 'запросы пользователей'
+
+
 class Account(CommonId):
 
     gender = models.CharField(choices=GENDER, max_length=1, default='U', verbose_name='пол')
