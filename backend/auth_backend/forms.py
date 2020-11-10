@@ -3,6 +3,19 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
+from account.models import RequestUser
+
+
+class RequestUserForm(forms.ModelForm):
+
+	class Meta:
+		model = RequestUser
+		fields = (
+			'name',
+			'email',
+			'phone',
+		)
+
 
 class UserRegisterForm(UserCreationForm):
 

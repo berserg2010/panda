@@ -1,12 +1,47 @@
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login
 from django.core.mail import send_mail
-from django.db.utils import IntegrityError
 from django.contrib import messages
 
 from backend import settings
 from account.models import Student
-from .forms import UserRegisterForm
+from .forms import RequestUserForm, UserRegisterForm
+
+
+def request_user(request):
+
+    if request.method == 'POST':
+
+        form = RequestUserForm(request.POST)
+
+        if form.is_valid():
+            request_user_instance = form.save()
+
+            send_mail(
+                'Panda',
+                '''
+                Вы оставили заявку на сайте Panda!
+                С Вами скоро свяжутся.
+                ''',
+                settings.EMAIL_HOST_USER,
+                [request_user_instance.email],
+            )
+
+            send_mail(
+                'Panda',
+                f'{request_user_instance.name} оставил заявку.\n'
+                f'ID заявки: {request_user_instance.pk}\n'
+                f'Телефон: {request_user_instance.phone}\n'
+                f'Эл. почта: {request_user_instance.email}\n',
+                settings.EMAIL_HOST_USER,
+                [settings.EMAIL_HOST_USER],
+            )
+
+            messages.success(request, 'Вы оставили заявку!')
+            return JsonResponse({'message': 'ok'})
+
+        messages.error(request, 'Неудалось оставить заявку, проверьте данные.')
+        return JsonResponse({'message': 'error'})
 
 
 def register(request):

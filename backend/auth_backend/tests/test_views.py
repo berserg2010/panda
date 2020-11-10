@@ -3,6 +3,7 @@ from rest_framework import status
 from django.contrib.auth import get_user_model
 
 from private_side.urls import urlpatterns
+from account.models import RequestUser
 
 
 pytestmark = pytest.mark.django_db
@@ -21,6 +22,31 @@ def test_get_private_side(url, client_fixture, errors, request):
     assert response.status_code == errors
 
 
+def test_request_user(client):
+
+    data = {
+        'name': 'Vasia',
+        'email': 'vasia@yandex.ru',
+        'phone': '7896543210',
+    }
+
+    response = client.post('/request_user/', data=data)
+    assert response.status_code == status.HTTP_200_OK
+    assert response.content == b'{"message": "ok"}'
+    assert RequestUser.objects.count() == 1
+
+    req_user = RequestUser.objects.get(email=data.get('email'))
+    assert req_user.name == data.get('name')
+    assert req_user.email == data.get('email')
+    assert req_user.phone == data.get('phone')
+
+    response = client.post('/request_user/', data=data)
+    assert response.status_code == status.HTTP_200_OK
+    assert response.content == b'{"message": "ok"}'
+    assert RequestUser.objects.count() == 2
+
+
+@pytest.mark.skip
 def test_register_user(client, create_superuser):
 
     create_superuser()
@@ -28,7 +54,7 @@ def test_register_user(client, create_superuser):
         'first_name': 'Vasia',
         'last_name': 'Pupkin',
         'email': 'vasia@yandex.ru',
-        'tel': '7896543210',
+        'phone': '7896543210',
         'username': 'vasia',
         'password1': 'asdf;lkjasdf;lkj',
     }
@@ -39,7 +65,6 @@ def test_register_user(client, create_superuser):
     assert get_user_model().objects.count() == 2
 
     user = get_user_model().objects.get(username=data.get('username'))
-
     assert user.first_name == data.get('first_name')
     assert user.last_name == data.get('last_name')
     assert user.email == data.get('email')

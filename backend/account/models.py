@@ -24,7 +24,7 @@ class RequestUser(CommonId):
     phone = models.CharField(max_length=20, verbose_name='телефон')
 
     sending_date = models.DateTimeField(auto_now_add=True, verbose_name='дата отправки')
-    check_date = models.DateTimeField(verbose_name='дата проверки')
+    check_date = models.DateTimeField(null=True, blank=True, verbose_name='дата проверки')
 
     def __str__(self):
         return self.email

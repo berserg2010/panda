@@ -1,7 +1,30 @@
 from django.contrib import admin
 
 from common.utils import CommonIdModelAdmin, CommonFieldsModelAdmin
-from .models import Teacher, Student, Payment
+from .models import RequestUser, Teacher, Student, Payment
+
+
+@admin.register(RequestUser)
+class RequestUserAdmin(CommonIdModelAdmin):
+
+    list_display = (
+        *CommonIdModelAdmin.list_display,
+        'name',
+        'email',
+        'phone',
+        'sending_date',
+        'check_date',
+    )
+    fields = (
+        *CommonIdModelAdmin.fields,
+        'name',
+        'email',
+        'phone',
+        'sending_date',
+        'check_date',
+    )
+    readonly_fields = ('sending_date', )
+    save_on_top = False
 
 
 class AccountAdmin(CommonIdModelAdmin):

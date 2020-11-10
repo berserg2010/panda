@@ -1,19 +1,16 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import UserCreationForm
 
-from .views import register
+from .views import request_user, register
 
 
 app_name = 'auth_backend'
 
 
-class CustomUserCreationForm(UserCreationForm):
-    password2 = None
-
-
 urlpatterns = [
-    path('register/', register, name='register'),
+    path('request_user/', request_user, name='request_user'),
+
+    # path('register/', register, name='register'),
 
     path(
         'login/',
