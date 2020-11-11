@@ -1,0 +1,40 @@
+{% load static %}
+
+<div id="modal-checkIn" class="modal-tab">
+  <div class="section-top">
+    <span class="section-subtitle">send a request</span>
+    <h2 class="section-title">Отправить заявку</h2>
+  </div>
+
+  <form id="register-form" method="POST" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
+    {% csrf_token %}
+
+    <div class="input-block">
+      <p class="text-error">Логин или пароль введен не верно !</p>
+    </div>
+
+    <div class="input-block">
+      <div class="input-wrap">
+        <input type="text" name="name" placeholder="Имя">
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="input-wrap">
+        <input type="email" name="email" placeholder="Эл. почта">
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="input-wrap">
+        <input type="tel" name="tel" placeholder="Телефон">
+      </div>
+    </div>
+
+    <div class="modal-btns modal-btns__big">
+      <button type="submit" class="second-btn">Отправить заявку</button>
+    </div>
+
+  </form>
+
+</div>
