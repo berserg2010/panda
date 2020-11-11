@@ -6,33 +6,33 @@
     <h2 class="section-title">Отправить заявку</h2>
   </div>
 
-  <form id="register-form" method="POST" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
+  <form id="request-user-form" method="POST" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
     {% csrf_token %}
 
     <div class="input-block">
-      <p class="text-error">Логин или пароль введен не верно !</p>
+      <p class="text-error">Логин или пароль введен не верно!</p>
     </div>
 
     <div class="input-block">
       <div class="input-wrap">
-        <input type="text" name="name" placeholder="Имя">
+        <input type="text" name="name" placeholder="Имя" required>
       </div>
     </div>
 
     <div class="input-block">
       <div class="input-wrap">
-        <input type="email" name="email" placeholder="Эл. почта">
+        <input type="email" name="email" placeholder="Эл. почта" required>
       </div>
     </div>
 
     <div class="input-block">
       <div class="input-wrap">
-        <input type="tel" name="tel" placeholder="Телефон">
+        <input type="tel" name="phone" placeholder="Телефон" required>
       </div>
     </div>
 
     <div class="modal-btns modal-btns__big">
-      <button type="submit" class="second-btn">Отправить заявку</button>
+      <button class="second-btn">Отправить заявку</button>
     </div>
 
   </form>
