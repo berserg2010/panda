@@ -55,18 +55,22 @@
 
           </div>
         </div>
-        <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-          <div class="contatcs-wrap">
-            <div class="contatcs-ico">
-              <img src="{% static 'img/contatcs-ico-3.svg' %}" alt="">
-            </div>
-            <p>{{ settings_site.address }}</p>
-          </div>
-        </div>
+
+{#        <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">#}
+{#          <div class="contatcs-wrap">#}
+{#            <div class="contatcs-ico">#}
+{#              <img src="{% static 'img/contatcs-ico-3.svg' %}" alt="">#}
+{#            </div>#}
+{#            <p>{{ settings_site.address }}</p>#}
+{#          </div>#}
+{#        </div>#}
+
       </div>
-      <div class="contatcs-map">
-        <div id="map" class="map"></div>
-      </div>
+
+{#      <div class="contatcs-map">#}
+{#        <div id="map" class="map"></div>#}
+{#      </div>#}
+
       <div class="contatcs-social" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
         <span class="contatcs-social__subtitle">Мы так же и в социальных сетях:</span>
         <ul>
@@ -179,24 +183,27 @@
 
 {% endblock %}
 
-{% block script %}
-  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-  <script>
-
-    let myMap
-
-    const init = () => {
-      myMap = new ymaps.Map ('map', {
-        center: [ 55.7084, 37.6527 ],
-        zoom: 16,
-        controls: []
-      })
-      myMap.behaviors.disable([
-        'scrollZoom'
-      ])
-    }
-
-    ymaps.ready(init)
-
-  </script>
-{% endblock %}
+{#{% block script %}#}
+{#  #}
+{#  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>#}
+{#  #}
+{#  <script>#}
+{##}
+{#    let myMap#}
+{##}
+{#    const init = () => {#}
+{#      myMap = new ymaps.Map ('map', {#}
+{#        center: [ 55.7084, 37.6527 ],#}
+{#        zoom: 16,#}
+{#        controls: []#}
+{#      })#}
+{#      myMap.behaviors.disable([#}
+{#        'scrollZoom'#}
+{#      ])#}
+{#    }#}
+{##}
+{#    ymaps.ready(init)#}
+{##}
+{#  </script>#}
+{#  #}
+{#{% endblock %}#}

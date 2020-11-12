@@ -14,7 +14,8 @@ class NumberOfLessons(models.Model):
 
     class Meta:
         verbose_name = 'количество занятий'
-        verbose_name_plural = 'количество занятий'
+        verbose_name_plural = '02 | Количество занятий'
+        ordering = ('count', )
 
 
 class Course(CommonFields):
@@ -48,7 +49,7 @@ class Level(CommonFields):
 
     class Meta:
         verbose_name = 'уровень'
-        verbose_name_plural = 'уровни'
+        verbose_name_plural = '04 | Уровни'
         ordering = ('title', )
 
 
@@ -65,7 +66,7 @@ class CourseLesson(CommonId):
 
     class Meta:
         verbose_name = 'курс <-> урок'
-        verbose_name_plural = '02 | Курсы <-> уроки'
+        verbose_name_plural = '03 | Курсы <-> уроки'
         ordering = ('number', )
 
 
@@ -84,7 +85,7 @@ class PaidCourse(CommonId):
 
     class Meta:
         verbose_name = 'оплаченный курс'
-        verbose_name_plural = '03 | Оплаченные курсы'
+        verbose_name_plural = '05 | Оплаченные курсы'
 
 
 class Schedule(models.Model):
@@ -125,4 +126,4 @@ class PaidCourseLesson(CommonId):
     class Meta:
 
         verbose_name = 'оплаченный курс <-> урок'
-        verbose_name_plural = '04 | Оплаченные курсы <-> уроки'
+        verbose_name_plural = '06 | Оплаченные курсы <-> уроки'
