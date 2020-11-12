@@ -13,23 +13,7 @@
       <p class="text-error">Логин или пароль введен не верно!</p>
     </div>
 
-    <div class="input-block">
-      <div class="input-wrap">
-        <input type="text" name="name" placeholder="Имя" required>
-      </div>
-    </div>
-
-    <div class="input-block">
-      <div class="input-wrap">
-        <input type="email" name="email" placeholder="Эл. почта" required>
-      </div>
-    </div>
-
-    <div class="input-block">
-      <div class="input-wrap">
-        <input type="tel" name="phone" placeholder="Телефон" required>
-      </div>
-    </div>
+    {% include './input_form_request.html' %}
 
     <div class="modal-btns modal-btns__big">
       <button class="second-btn">Отправить заявку</button>

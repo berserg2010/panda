@@ -48,36 +48,38 @@
 
 <script>
 
-  function formSubmitHandler(form) {
+    function formSubmitHandler(form) {
 
-    const urls_actions = {
-      'login-form': 'login/',
-      {#'register-form': 'register/',#}
-      'request-user-form': 'request_user/',
-    }
-
-    const instance = axios.create({
-      baseURL: `${window.location.origin}/`,
-      withCredentials: true,
-      xsrfCookieName: 'csrftoken',
-      xsrfHeaderName: 'X-CSRFToken',
-    })
-
-    const formData = new FormData(form)
-
-    instance.post(`${urls_actions[form.id]}`, formData)
-      .then(({ data }) => {
-
-        if (data.message === 'ok') {
-          window.location.pathname = 'lk/'
-        } else {
-          console.error(data)
+        const urls_actions = {
+            'login-form': 'login/',
+            {#'register-form': 'register/',#}
+            'request-user-form': 'request_user/',
         }
-      })
-      .catch((e) => {
-        console.error(e)
-      })
-  }
+
+        const instance = axios.create({
+            baseURL: `${window.location.origin}/`,
+            withCredentials: true,
+            xsrfCookieName: 'csrftoken',
+            xsrfHeaderName: 'X-CSRFToken',
+        })
+
+        const formData = new FormData(form)
+
+        instance.post(`${urls_actions[form.id]}`, formData)
+            .then(({ data }) => {
+                if (form.id === 'request-user-form' && data.message === 'ok') {
+                    console.info('Заявка отправлена')
+                } else if (data.message === 'ok') {
+                    window.location.pathname = 'lk/'
+                } else {
+                    console.error(data)
+                }
+                form.reset()
+            })
+            .catch((e) => {
+                console.error(e)
+            })
+    }
 
 </script>
 

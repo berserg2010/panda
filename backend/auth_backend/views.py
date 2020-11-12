@@ -14,8 +14,6 @@ def request_user(request):
 
         form = RequestUserForm(request.POST)
 
-        print(form)
-
         if form.is_valid():
             request_user_instance = form.save()
 
