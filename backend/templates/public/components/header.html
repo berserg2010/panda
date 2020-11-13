@@ -42,8 +42,14 @@
       {% if request.user.is_authenticated %}
         <a href="{% url 'private_side:index' %}" class="second-btn">Личный кабинет</a>
       {% else %}
-        <a href="modal-checkIn" class="button-modal main-btn">Отправить заявку</a>
-        <a href="modal-logging" class="button-modal second-btn">Вход</a>
+        <a
+            href="modal-checkIn"
+            class="button-modal main-btn"
+        >Отправить заявку</a>
+        <a
+            href="modal-logging"
+            class="button-modal second-btn"
+        >Вход</a>
       {% endif %}
     </div>
   </div>
