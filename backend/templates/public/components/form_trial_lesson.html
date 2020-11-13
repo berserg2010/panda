@@ -12,7 +12,7 @@
       <h2 class="join-title">ЗАПИШИСЬ НА БЕСПЛАТНЫЙ ВВОДНЫЙ УРОК !</h2>
 
       <div class="join-form">
-        <form method="post">
+        <form id="request-user-form" method="post" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
           {% csrf_token %}
 
           {% include './input_form_request.html' %}

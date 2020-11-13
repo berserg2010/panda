@@ -6,7 +6,7 @@
     <h2 class="section-title">Отправить заявку</h2>
   </div>
 
-  <form id="request-user-form" method="POST" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
+  <form id="request-user-form" method="post" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
     {% csrf_token %}
 
     <div class="input-block">

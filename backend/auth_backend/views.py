@@ -37,7 +37,7 @@ def request_user(request):
                 [settings.EMAIL_HOST_USER],
             )
 
-            messages.success(request, 'Вы оставили заявку!')
+            # messages.success(request, 'Вы оставили заявку!')
             return JsonResponse({'message': 'ok'})
 
         messages.error(request, 'Неудалось оставить заявку, проверьте данные.')

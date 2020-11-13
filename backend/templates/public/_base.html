@@ -48,38 +48,43 @@
 
 <script>
 
-    function formSubmitHandler(form) {
+  function formSubmitHandler(form) {
 
-        const urls_actions = {
-            'login-form': 'login/',
-            {#'register-form': 'register/',#}
-            'request-user-form': 'request_user/',
-        }
-
-        const instance = axios.create({
-            baseURL: `${window.location.origin}/`,
-            withCredentials: true,
-            xsrfCookieName: 'csrftoken',
-            xsrfHeaderName: 'X-CSRFToken',
-        })
-
-        const formData = new FormData(form)
-
-        instance.post(`${urls_actions[form.id]}`, formData)
-            .then(({ data }) => {
-                if (form.id === 'request-user-form' && data.message === 'ok') {
-                    console.info('Заявка отправлена')
-                } else if (data.message === 'ok') {
-                    window.location.pathname = 'lk/'
-                } else {
-                    console.error(data)
-                }
-                form.reset()
-            })
-            .catch((e) => {
-                console.error(e)
-            })
+    const urls_actions = {
+      'login-form': 'login/',
+      {#'register-form': 'register/',#}
+      'request-user-form': 'request_user/',
     }
+
+    const instance = axios.create({
+      baseURL: `${window.location.origin}/`,
+      withCredentials: true,
+      xsrfCookieName: 'csrftoken',
+      xsrfHeaderName: 'X-CSRFToken',
+    })
+
+    const formData = new FormData(form)
+    const modalOverlay = document.getElementById('modal-overlay')
+    const modal = document.getElementById('modal')
+
+    instance.post(`${urls_actions[form.id]}`, formData)
+      .then(({ data }) => {
+        if (form.id === 'request-user-form' && data.message === 'ok') {
+          modal.classList.remove('open')
+          modalOverlay.classList.remove('open-overlay')
+
+          console.info('Заявка отправлена')
+        } else if (data.message === 'error') {
+          console.error(data)
+        } else {
+          window.location.pathname = 'lk/'
+        }
+        form.reset()
+      })
+      .catch((e) => {
+        console.error(e)
+      })
+  }
 
 </script>
 
