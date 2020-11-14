@@ -169,25 +169,8 @@
     </div>
   </section>
   <!-- end teacher -->
+
   <!-- start testimonials -->
-  <section class="testimonials">
-    <div class="testimonials-bg testimonials-bg__1">
-      <img src="{% static 'img/testimonials-bg-1.svg' %}" alt="">
-    </div>
-    <div class="testimonials-bg testimonials-bg__2">
-      <img src="{% static 'img/testimonials-bg-2.svg' %}" alt="">
-    </div>
-    <div class="wrapper">
-      <div class="testimonials-info">
-        <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-          <span class="section-subtitle">Testimonials</span>
-          <h2 class="section-title">оТЗЫВЫ</h2>
-        </div>
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Чтобы удостовериться в качестве обучения в нашей школе, предлагаем вам прочитать отзывы наших дорогих учеников, которые выбрали обучение в нашей школе. Также вы можете напрямую связаться с учениками или их родителями, чтобы получить более подробную информацию об их опыте обучения с нашей школой.</p>
-      </div>
-    </div>
+  {% include './components/slider_testimonials.html' %}
 
-    {% include './components/slider_testimonials.html' %}
-
-  </section>
 {% endblock %}
