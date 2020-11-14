@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     environment:
-      - DJANGO_DEBUG=true
+      - DEBUG=True
     command:
       ["daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application"]
     ports:

@@ -138,6 +138,10 @@ class PaidCourseListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return super().get_queryset().filter(get_user_context(self), finished=False)
 
+    # def post(self):
+    #     print('PaidCourseListView')
+    #     super().post(self)
+
 
 class PaidCourseLessonView(LoginRequiredMixin, DetailView):
 

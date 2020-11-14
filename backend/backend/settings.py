@@ -36,9 +36,9 @@ CORS_ORIGIN_WHITELIST = [
     'https://dev.local:9000',
     'http://panda-dev.ddns.net',
     'https://panda-dev.ddns.net',
-]
-# CSRF_TRUSTED_ORIGINS = ['*']
 
+    'https://api.fondy.eu',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -162,6 +162,10 @@ admin.AdminSite.empty_value_display = '--'
 
 NUMB_WEBRTC_USERNAME = config('NUMB_WEBRTC_USERNAME', default='')
 NUMB_WEBRTC_CREDENTIAL = config('NUMB_WEBRTC_CREDENTIAL', default='')
+
+
+# Fondy
+MERCHANT_ID = config('MERCHANT_ID', default='')
 
 # EMAIL
 EMAIL_HOST = config('EMAIL_HOST')

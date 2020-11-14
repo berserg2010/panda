@@ -1,4 +1,4 @@
-{% load static %}
+{% load static private_side_extras %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -41,10 +41,28 @@
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://api.fondy.eu/static_common/v1/checkout/ipsp.js"></script>
 
 {% block script %}{% endblock %}
 
 <script src="{% static 'js/scripts.min.js' %}"></script>
+
+<script>
+
+  function createOrder(amount) {
+
+    const button = $ipsp.get('button');
+    console.info(amount)
+    {#button.setMerchantId({{ 'MERCHANT_ID'|get_settings_var }});#}
+    button.setMerchantId(1396424);
+    button.setAmount(amount, 'RUB');
+    {#button.setResponseUrl(`${window.location.origin}/`);#}
+    button.setHost('api.fondy.eu');
+    {#button.addField({ label: 'Описание покупки', name: 'order_desc', value: order_desc });#}
+    return button.getUrl();
+  }
+
+</script>
 
 </body>
 </html>

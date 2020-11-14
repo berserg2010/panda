@@ -14,8 +14,6 @@ services:
     env_file:
       - env/back.env
       - env/db.env
-    environment:
-      - DEBUG=false
     volumes:
       - ./backend:/usr/src/panda
     depends_on:
