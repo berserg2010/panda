@@ -1,0 +1,45 @@
+{% extends './_base.html' %}
+
+{% load static %}
+
+{% block title %}Статус операции{% endblock %}
+
+{% block content %}
+  <section class="notFound">
+    <div class="notFound-bg notFound-bg__1">
+      <img src="{% static 'img/notFound-bg-1.svg' %}" alt="">
+    </div>
+    <div class="notFound-bg notFound-bg__2">
+      <img src="{% static 'img/notFound-bg-2.svg' %}" alt="">
+    </div>
+    <div class="wrapper">
+      <div class="notFound-info">
+        <div class="notFound-img">
+          <img src="{% static 'img/notFound-img.svg' %}" alt="">
+        </div>
+        <h1 class="notFound-title">{{ message }}</h1>
+        <a href="{% url 'public_side:index' %}" class="main-btn">Перейти на главную</a>
+        <p>Окно закроется через <span id="timer"></span></p>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  <script>
+
+    const timer_tag = document.getElementById('timer')
+    let count = 5
+    timer_tag.innerHTML = count
+
+    setInterval(() => {
+      --count
+      timer_tag.innerHTML = count
+    }, 1000)
+
+    setTimeout(() => {
+      self.close()
+    }, (count + 1) * 1000)
+
+  </script>
+{% endblock %}

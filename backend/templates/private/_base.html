@@ -47,28 +47,31 @@
 
 <script src="{% static 'js/scripts.min.js' %}"></script>
 
+{{ 'DEBUG'|get_settings_var|json_script:'DEBUG' }}
+{{ 'MERCHANT_ID'|get_settings_var|json_script:'MERCHANT_ID' }}
+
 <script>
+
+  const DEBUG = JSON.parse(document.getElementById('DEBUG').textContent)
+  const MERCHANT_ID = JSON.parse(document.getElementById('MERCHANT_ID').textContent)
 
   function createOrder(amount) {
 
-    const button = $ipsp.get('button');
-    console.info(button)
-    {#button.setMerchantId({{ 'MERCHANT_ID'|get_settings_var }});#}
-    {#button.setMerchantId(1396424);#}
-    button.setMerchantId(1461680);
-    {#button.setAmount(amount, 'RUB', true);#}
-    button.setAmount(amount, 'RUB');
-    {#button.setResponseUrl(`${window.location.origin}/`);#}
-    button.setHost('api.fondy.eu');
+    const button = $ipsp.get('button')
+    button.setMerchantId(MERCHANT_ID)
+    button.setAmount(amount, 'RUB', !DEBUG)
+    button.setResponseUrl(`${window.location.origin}/lk/payment-callback/`);
+    button.setHost('api.fondy.eu')
     button.addField({
       label: 'ID Ученика',
-      name: 'id_student',
+      name: 'student_id',
       value: '{{ user.student.pk }}',
       readonly: true,
+      hidden: true,
     })
     button.addField({
       label: 'Промо код',
-      name: 'id_bonus',
+      name: 'bonus_id',
     })
     window.open(button.getUrl())
     return false

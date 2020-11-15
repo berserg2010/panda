@@ -40,6 +40,17 @@ CORS_ORIGIN_WHITELIST = [
     'https://api.fondy.eu',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://54.76.178.89',
+    'https://54.76.178.89',
+    'http://54.154.216.60',
+    'https://54.154.216.60',
+    'http://23.105.225.142',
+    'https://23.105.225.142',
+    'http://23.108.217.143',
+    'https://23.108.217.143',
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -165,7 +176,7 @@ NUMB_WEBRTC_CREDENTIAL = config('NUMB_WEBRTC_CREDENTIAL', default='')
 
 
 # Fondy
-MERCHANT_ID = config('MERCHANT_ID', default='')
+MERCHANT_ID = config('MERCHANT_ID', default=1396424, cast=int)
 
 # EMAIL
 EMAIL_HOST = config('EMAIL_HOST')
