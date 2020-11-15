@@ -41,16 +41,15 @@
                 <span class="choice-price">{{ object.get_cost_with_discount|floatformat:"0" }} руб./занятие</span>
                 <span class="choice-old">{{ object.cost }} руб./занятие</span>
 
-                {#            <a href="#modal-topUpAccount" class="choice-allPrice topUpAccount-btn active">#}
-                <button
-{#                  href=""#}
-                  onclick="location.href=createOrder({{ price_with_a_discount }})"
+                <a
                   class="choice-allPrice topUpAccount-btn active"
+                  href=""
+                  target="_blank"
+                  onclick="createOrder({{price_with_a_discount }})"
                 >
                   <b>{{ price_with_a_discount }} руб.</b>
                   <span>{{ price }} руб.</span>
-                </button>
-                {#            </a>#}
+                </a>
 
                 {% widthratio object.get_discount|floatformat:"0" 1 number_of_lessons.count as profit %}
                 <span class="choice-benefit">Выгода {{ profit }} руб.</span>

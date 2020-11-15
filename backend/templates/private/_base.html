@@ -52,14 +52,26 @@
   function createOrder(amount) {
 
     const button = $ipsp.get('button');
-    console.info(amount)
+    console.info(button)
     {#button.setMerchantId({{ 'MERCHANT_ID'|get_settings_var }});#}
-    button.setMerchantId(1396424);
+    {#button.setMerchantId(1396424);#}
+    button.setMerchantId(1461680);
+    {#button.setAmount(amount, 'RUB', true);#}
     button.setAmount(amount, 'RUB');
     {#button.setResponseUrl(`${window.location.origin}/`);#}
     button.setHost('api.fondy.eu');
-    {#button.addField({ label: 'Описание покупки', name: 'order_desc', value: order_desc });#}
-    return button.getUrl();
+    button.addField({
+      label: 'ID Ученика',
+      name: 'id_student',
+      value: '{{ user.student.pk }}',
+      readonly: true,
+    })
+    button.addField({
+      label: 'Промо код',
+      name: 'id_bonus',
+    })
+    window.open(button.getUrl())
+    return false
   }
 
 </script>
