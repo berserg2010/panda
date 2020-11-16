@@ -1,6 +1,6 @@
 from django import template
 
-from ..models import PaidCourseLesson
+# from course.models import LessonResults
 
 
 register = template.Library()
@@ -21,12 +21,12 @@ def string_lines_to_list(string: str):
     except IndexError:
         return ''
 
-
-@register.filter
-def finished(paid_course_lessons: [PaidCourseLesson], check: bool) -> [PaidCourseLesson]:
-    return paid_course_lessons.filter(finished=check)
-
-
-@register.filter
-def filter_count(paid_course_lessons: [PaidCourseLesson]) -> [PaidCourseLesson]:
-    return paid_course_lessons.count()
+#
+# @register.filter
+# def finished(paid_course_lessons: [LessonResults], check: bool) -> [LessonResults]:
+#     return paid_course_lessons.filter(finished=check)
+#
+#
+# @register.filter
+# def filter_count(paid_course_lessons: [LessonResults]) -> [LessonResults]:
+#     return paid_course_lessons.count()

@@ -1,7 +1,7 @@
 import pytest
 from mixer.backend.django import mixer
 
-from ..models import Course, Schedule, CourseLesson
+from course.models import Course, Schedule, CourseLesson
 
 
 pytestmark = pytest.mark.django_db

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from common.utils import CommonIdModelAdmin, CommonFieldsModelAdmin
+from common.utils import CommonIdModelAdmin
 from .models import RequestUser, Teacher, Student, Payment
 
 
@@ -82,7 +82,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         'student',
         'paid_for_lessons',
         'bonus',
-        'payment_was_made',
+        'group_of_courses',
         'valid_until',
     )
     fields = (
@@ -90,8 +90,18 @@ class PaymentAdmin(CommonIdModelAdmin):
         'student',
         'paid_for_lessons',
         'bonus',
-        'payment_was_made',
+        'group_of_courses',
         'valid_until',
+
+        'payment',
+        'amount',
+        'order',
+        'order_time',
     )
-    readonly_fields = ('payment_was_made', )
+    readonly_fields = (
+        'payment',
+        'amount',
+        'order',
+        'order_time',
+    )
     save_on_top = False

@@ -1,14 +1,12 @@
 from django.contrib import admin
 
 from common.utils import hardware_inline, CommonIdModelAdmin, CommonFieldsModelAdmin
-from .models import (
+from course.models import (
+    GroupsOfCourses,
     Course,
-    NumberOfLessons,
+    PackageOfLessons,
     Level,
     CourseLesson,
-    Schedule,
-    PaidCourse,
-    PaidCourseLesson,
 )
 
 
@@ -17,8 +15,14 @@ class CourseInline(admin.TabularInline):
     pass
 
 
-@hardware_inline(Schedule)
-class ScheduleInline(admin.StackedInline):
+@admin.register(GroupsOfCourses)
+class GroupsOfCoursesAdmin(CommonFieldsModelAdmin):
+
+    save_on_top = False
+
+
+@admin.register(PackageOfLessons)
+class PackageOfLessonsAdmin(admin.ModelAdmin):
     pass
 
 
@@ -27,16 +31,12 @@ class CourseAdmin(CommonFieldsModelAdmin):
 
     list_display = (
         *CommonFieldsModelAdmin.list_display,
-        'cost',
-        'get_cost_with_discount',
-        'percentage_discount',
-        'get_discount',
     )
     fields = (
         *CommonFieldsModelAdmin.fields,
-        'number_of_lessons',
-        'percentage_discount',
-        'cost',
+        'package_of_lessons',
+        'group_of_course',
+        'is_published',
     )
     search_fields = (
         'title',
@@ -44,13 +44,8 @@ class CourseAdmin(CommonFieldsModelAdmin):
     save_on_top = False
 
 
-@admin.register(NumberOfLessons)
-class NumberOfLessonsAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Level)
-class CourseLessonAdmin(CommonFieldsModelAdmin):
+class LevelAdmin(CommonFieldsModelAdmin):
     save_on_top = False
 
 
@@ -71,49 +66,3 @@ class CourseLessonAdmin(CommonIdModelAdmin):
         'level',
     )
     save_on_top = False
-
-
-@admin.register(PaidCourse)
-class PaidCourseAdmin(CommonIdModelAdmin):
-
-    list_display = (
-        'course',
-        'student',
-        'teacher',
-        'finished',
-    )
-    fields = (
-        *CommonIdModelAdmin.fields,
-        'student', 'teacher',
-        'finished', 'course',
-    )
-    search_fields = (
-        'student',
-    )
-    inlines = (ScheduleInline, )
-    save_on_top = False
-
-
-@admin.register(PaidCourseLesson)
-class PaidCourseLessonAdmin(CommonIdModelAdmin):
-
-    list_display = (
-        'lesson',
-        'course_lesson',
-        'paid_course',
-        'test_result',
-        'word_result',
-        'game_result',
-        'finished',
-    )
-    fields = (
-        *CommonIdModelAdmin.fields,
-        'lesson',
-        'course_lesson',
-        'paid_course',
-        'note',
-        'test_result',
-        'word_result',
-        'game_result',
-        'finished',
-    )

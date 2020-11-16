@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'private_side',
     'account',
     'course',
+    'paid_course',
     'lesson',
 ]
 

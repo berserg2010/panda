@@ -1,16 +1,16 @@
 from django import template
 from django.conf import settings
 
-from course.models import PaidCourse, PaidCourseLesson
+from paid_course.models import PaidCourse, LessonResults
 
 
 register = template.Library()
 
 
 @register.filter
-def get_statistic_result(paid_course_lessons: [PaidCourseLesson], field: str) -> str:
+def get_statistic_result(paid_course_lessons: [LessonResults], field: str) -> str:
 
-    finished_paid_course_lessons: [PaidCourseLesson] = paid_course_lessons.filter(finished=True)
+    finished_paid_course_lessons: [LessonResults] = paid_course_lessons.filter(finished=True)
     count_finished: int = finished_paid_course_lessons.count()
 
     sum_true_result: float = 0
