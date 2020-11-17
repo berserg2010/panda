@@ -11,14 +11,14 @@ class GroupsOfCourses(CommonFields):
 
     class Meta:
         verbose_name = 'группа курсов'
-        verbose_name_plural = 'группы курсов'
+        verbose_name_plural = '01 | Группы курсов'
+        ordering = ('title', )
 
 
 class PackageOfLessons(models.Model):
 
     count = models.PositiveSmallIntegerField(verbose_name='количество занятий')
     cost = models.PositiveSmallIntegerField(verbose_name='стоимость')
-
 
     def __str__(self) -> str:
         return f'{self.count} | {self.cost}'
@@ -43,7 +43,7 @@ class Course(CommonFields):
 
     class Meta:
         verbose_name = 'курс'
-        verbose_name_plural = '01 | Курсы'
+        verbose_name_plural = '03 | Курсы'
 
 
 class Level(CommonFields):
@@ -66,9 +66,9 @@ class CourseLesson(CommonId):
     level = models.ForeignKey(Level, on_delete=models.PROTECT, verbose_name='уровень')
 
     def __str__(self):
-        return f'{self.course} <-> {self.number} | {self.lesson}'
+        return f'{self.course} | {self.number} {self.lesson}'
 
     class Meta:
-        verbose_name = 'курс <-> урок'
-        verbose_name_plural = '03 | Курсы <-> уроки'
+        verbose_name = 'уроки курсов'
+        verbose_name_plural = '05 | Уроки курсов'
         ordering = ('number', )

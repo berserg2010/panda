@@ -23,7 +23,12 @@ class GroupsOfCoursesAdmin(CommonFieldsModelAdmin):
 
 @admin.register(PackageOfLessons)
 class PackageOfLessonsAdmin(admin.ModelAdmin):
-    pass
+
+    list_display = (
+        'count',
+        'cost',
+    )
+    save_on_top = False
 
 
 @admin.register(Course)

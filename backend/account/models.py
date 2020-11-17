@@ -32,7 +32,7 @@ class RequestUser(CommonId):
 
     class Meta:
         verbose_name = 'запрос пользователя'
-        verbose_name_plural = 'запросы пользователей'
+        verbose_name_plural = '01 | Запросы пользователей'
 
 
 class Account(CommonId):
@@ -54,7 +54,7 @@ class Teacher(Account):
 
     class Meta:
         verbose_name = 'учитель'
-        verbose_name_plural = '01 | Учителя'
+        verbose_name_plural = '02 | Учителя'
 
 
 class Student(Account):
@@ -84,7 +84,7 @@ class Student(Account):
 
     class Meta:
         verbose_name = 'ученик'
-        verbose_name_plural = '02 | Ученики'
+        verbose_name_plural = '03 | Ученики'
 
 
 class Payment(CommonId):
@@ -102,10 +102,9 @@ class Payment(CommonId):
     bonus = models.ForeignKey(Student, on_delete=models.PROTECT, related_name='payment_bonus', verbose_name='бонус')
     group_of_courses = models.ForeignKey(GroupsOfCourses, on_delete=models.PROTECT, verbose_name='группа курса')
 
-
     def __str__(self):
         return f'{self.pk}'
 
     class Meta:
         verbose_name = 'платеж'
-        verbose_name_plural = '03 | Платежи'
+        verbose_name_plural = '04 | Платежи'

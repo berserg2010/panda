@@ -19,6 +19,7 @@ urlpatterns = [
     path('students/', StudentsListView.as_view(), name='students'),
 
     path('', include('course.urls')),
+    path('', include('paid_course.urls')),
     path('', include('lesson.urls')),
 
     path('', include('account.urls')),

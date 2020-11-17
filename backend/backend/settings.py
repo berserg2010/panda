@@ -62,14 +62,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
 
-    'settings_site',
-    'auth_backend',
-    'public_side',
-    'private_side',
-    'account',
-    'course',
-    'paid_course',
-    'lesson',
+    'settings_site.apps.SettingsSiteConfig',
+    'auth_backend.apps.AuthBackendConfig',
+    'account.apps.AccountConfig',
+    'public_side.apps.PublicSideConfig',
+    'private_side.apps.PrivateSideConfig',
+    'course.apps.CourseConfig',
+    'paid_course.apps.PaidCourseConfig',
+    'lesson.apps.LessonConfig',
 ]
 
 MIDDLEWARE = [

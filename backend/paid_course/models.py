@@ -26,7 +26,7 @@ class FreeLesson(BasicRelationshipTable):
 
     class Meta:
         verbose_name = 'бесплатное занятие'
-        verbose_name_plural = 'бесплатные занятия'
+        verbose_name_plural = '01 | Бесплатные занятия'
         ordering = ('datetime', )
 
 
@@ -41,7 +41,7 @@ class PaidCourse(BasicRelationshipTable):
 
     class Meta:
         verbose_name = 'оплаченный курс'
-        verbose_name_plural = '05 | Оплаченные курсы'
+        verbose_name_plural = '02 | Оплаченные курсы'
 
 
 class Schedule(models.Model):
@@ -73,11 +73,10 @@ class LessonResults(CommonId):
     course_lesson = models.ForeignKey(CourseLesson, null=True, blank=True, on_delete=models.PROTECT, related_name='paid_course_lessons', verbose_name='курс <-> урок')
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, verbose_name='урок')
 
-
     def __str__(self):
         return f'{self.paid_course} | {self.lesson}'
 
     class Meta:
 
-        verbose_name = 'оплаченный курс <-> урок'
-        verbose_name_plural = '06 | Оплаченные курсы <-> уроки'
+        verbose_name = 'результат занятия'
+        verbose_name_plural = '03 | Результаты занятий'
