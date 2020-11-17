@@ -56,7 +56,7 @@ def register(request):
 
             student = Student.objects.create(
                 user=user,
-                phone=request.POST.get('phone'),
+                phone=request.POST.get(),
             )
 
             send_mail(

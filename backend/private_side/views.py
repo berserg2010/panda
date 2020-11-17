@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 
 from paid_course.models import PaidCourse
 

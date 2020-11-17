@@ -18,7 +18,7 @@ def test_get_private_side(url, client_fixture, errors, request):
 
     client = request.getfixturevalue(client_fixture)
 
-    response = client.get(f'/lk/{url.pattern}')
+    response = client.get()
     assert response.status_code == errors
 
 
@@ -64,7 +64,7 @@ def test_register_user(client, create_superuser):
     assert response.content == b'{"message": "ok"}'
     assert get_user_model().objects.count() == 2
 
-    user = get_user_model().objects.get(username=data.get('username'))
+    user = get_user_model().objects.get()
     assert user.first_name == data.get('first_name')
     assert user.last_name == data.get('last_name')
     assert user.email == data.get('email')

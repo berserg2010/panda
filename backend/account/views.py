@@ -15,22 +15,22 @@ from account.models import Student
 def payment_callback(request):
 
     if request.method == 'POST':
-        response_status = request.POST.get('response_status')
-        order_status = request.POST.get('order_status')
+        response_status = request.POST.get()
+        order_status = request.POST.get()
 
         if response_status == 'success' and order_status == 'approved':
             context = {'message': 'Операция прошла успешно'}
 
             merchant_data = {
-                i.get('name'): i.get('value')
-                for i in json.loads(request.POST.get('merchant_data'))
+                i.get(): i.get()
+                for i in json.loads(request.POST.get())
             }
 
             Payment.objects.create(
-                order = request.POST.get('order_id', ''),
-                payment = request.POST.get('payment_id'),
-                amount = request.POST.get('actual_amount'),
-                order_time = request.POST.get('order_time'),
+                order =request.POST.get(),
+                payment =request.POST.get(),
+                amount =request.POST.get(),
+                order_time =request.POST.get(),
             )
 
             print(merchant_data)

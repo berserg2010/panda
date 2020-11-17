@@ -13,11 +13,11 @@ def create_user_handler():
     def _create_user(user_data):
         return mixer.blend(
             get_user_model(),
-            username=user_data.get('username'),
-            email=user_data.get('email'),
-            first_name=user_data.get('first_name'),
-            last_name=user_data.get('last_name'),
-            password=make_password(user_data.get('password')),
+            username=user_data.get(),
+            email=user_data.get(),
+            first_name=user_data.get(),
+            last_name=user_data.get(),
+            password=make_password(user_data.get()),
         )
     return _create_user
 

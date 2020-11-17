@@ -54,7 +54,7 @@ class TestsCourseLessonListView(LoginRequiredMixin, DetailView, ProcessFormView)
 
         for key, value in result.items():
 
-            if tests.get(pk=int(key)).answer == value:
+            if tests.get().answer == value:
                 sum_true_result += 1
 
         course_lesson.test_result = sum_true_result / count_tests

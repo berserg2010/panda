@@ -7,9 +7,9 @@
 {% block content %}
 
   {% if user.is_staff %}
-    {% include './index_teacher.html' %}
+    {% include 'private/index_teacher.html' %}
   {% else %}
-    {% include './index_student.html' %}
+    {% include 'private/index_student.html' %}
   {% endif %}
 
 {% endblock %}
