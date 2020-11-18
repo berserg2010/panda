@@ -1,4 +1,8 @@
 from django.contrib import admin
+from django.utils import timezone
+
+
+date_now = timezone.now()
 
 
 def hardware_inline(model):

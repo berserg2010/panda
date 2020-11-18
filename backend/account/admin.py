@@ -81,6 +81,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         *CommonIdModelAdmin.list_display,
         'student',
         'paid_for_lessons',
+        'amount',
         'bonus',
         'group_of_courses',
         'valid_until',
@@ -98,10 +99,10 @@ class PaymentAdmin(CommonIdModelAdmin):
         'order',
         'order_time',
     )
-    readonly_fields = (
-        'payment',
-        'amount',
-        'order',
-        'order_time',
-    )
+    # readonly_fields = (
+    #     'payment',
+    #     'amount',
+    #     'order',
+    #     'order_time',
+    # )
     save_on_top = False

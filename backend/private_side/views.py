@@ -4,13 +4,39 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 
+from common.utils import date_now
+from account.models import Payment
 from paid_course.models import PaidCourse
 
 
 class IndexLkView(LoginRequiredMixin, ListView):
-
     model = PaidCourse
     template_name = 'private/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        student_filter = Q(Q(student=user.student) | Q(bonus=user.student))
+
+        if not user.is_staff:
+            payment = Payment.objects.filter(
+                student_filter,
+                valid_until__gte=date_now,
+            )
+
+            context['payment'] = payment
+
+            context['payment_groups_of_courses'] = payment.distinct(
+                'group_of_courses'
+            )
+
+            # context['payment_bonus'] = payment.filter(
+            #     bonus__isnull=False,
+            # )
+
+        return context
+
 
     def get_queryset(self):
 

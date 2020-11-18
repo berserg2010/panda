@@ -3,11 +3,11 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 import pytz
 
+from common.utils import date_now
 from common.models import CommonId
 from course.models import GroupsOfCourses
 
 
-date_now = timezone.now()
 
 GENDER = [
     ('U', 'Undefined'),
@@ -91,7 +91,7 @@ class Payment(CommonId):
 
     paid_for_lessons = models.PositiveSmallIntegerField(verbose_name='оплачено занятий')
     payment = models.PositiveSmallIntegerField(verbose_name='ID платежа')
-    amount = models.PositiveSmallIntegerField(verbose_name='сумма заказа')
+    amount = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name='сумма заказа')
 
     order = models.CharField(max_length=1024, verbose_name='ID заказа')
 
@@ -99,7 +99,7 @@ class Payment(CommonId):
     valid_until = models.DateField(default=date_now + timezone.timedelta(days=28), verbose_name='действительно до')
 
     student = models.ForeignKey(Student, on_delete=models.PROTECT, related_name='payment_student', verbose_name='ученик')
-    bonus = models.ForeignKey(Student, on_delete=models.PROTECT, related_name='payment_bonus', verbose_name='бонус')
+    bonus = models.ForeignKey(Student, null=True, blank=True, on_delete=models.PROTECT, related_name='payment_bonus', verbose_name='бонус')
     group_of_courses = models.ForeignKey(GroupsOfCourses, on_delete=models.PROTECT, verbose_name='группа курса')
 
     def __str__(self):
