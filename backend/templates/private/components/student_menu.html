@@ -8,21 +8,21 @@
   </a>
 </li>
 
-{% url 'private_side:notes' as notes_url %}
-<li>
-  <a href="{% url 'private_side:notes' %}" class="{% if notes_url == request.get_full_path %}active{% endif %}">
-    <b class="menu-ico"><img src="{% static 'img/menu-ico-4.svg' %}" alt=""></b>
-    <span>Мои заметки</span>
-  </a>
-</li>
+{#{% url 'private_side:notes' as notes_url %}#}
+{#<li>#}
+{#  <a href="{% url 'private_side:notes' %}" class="{% if notes_url == request.get_full_path %}active{% endif %}">#}
+{#    <b class="menu-ico"><img src="{% static 'img/menu-ico-4.svg' %}" alt=""></b>#}
+{#    <span>Мои заметки</span>#}
+{#  </a>#}
+{#</li>#}
 
-{% url 'private_side:vocabulary_list' as vocabulary_list_url %}
-<li>
-  <a href="{% url 'private_side:vocabulary_list' %}" class="{% if vocabulary_list_url == request.get_full_path %}active{% endif %}">
-    <b class="menu-ico"><img src="{% static 'img/menu-ico-5.svg' %}" alt=""></b>
-    <span>Мой словарь</span>
-  </a>
-</li>
+{#{% url 'private_side:vocabulary_list' as vocabulary_list_url %}#}
+{#<li>#}
+{#  <a href="{% url 'private_side:vocabulary_list' %}" class="{% if vocabulary_list_url == request.get_full_path %}active{% endif %}">#}
+{#    <b class="menu-ico"><img src="{% static 'img/menu-ico-5.svg' %}" alt=""></b>#}
+{#    <span>Мой словарь</span>#}
+{#  </a>#}
+{#</li>#}
 
 {#{% url 'private_side:tests_courses_list' as tests_courses_list_url %}#}
 {#<li>#}
@@ -32,12 +32,12 @@
 {#  </a>#}
 {#</li>#}
 
-<li>
-  <a href="#">
-    <b class="menu-ico"><img src="{% static 'img/menu-ico-8.svg' %}" alt=""></b>
-    <span>Словарные игры</span>
-  </a>
-</li>
+{#<li>#}
+{#  <a href="#">#}
+{#    <b class="menu-ico"><img src="{% static 'img/menu-ico-8.svg' %}" alt=""></b>#}
+{#    <span>Словарные игры</span>#}
+{#  </a>#}
+{#</li>#}
 
 {% url 'private_side:free_lesson' as free_lesson_url %}
 <li>

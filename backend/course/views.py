@@ -10,13 +10,16 @@ from course.models import Course, CourseLesson
 
 
 class CourseListView(LoginRequiredMixin, ListView):
-
     model = Course
     template_name = 'private/courses.html'
 
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            is_published=True,
+        )
+
 
 class CourseDetailView(LoginRequiredMixin, DetailView):
-
     model = Course
     template_name = 'private/course_detail.html'
 

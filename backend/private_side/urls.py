@@ -20,7 +20,8 @@ urlpatterns = [
 
     path('', include('course.urls')),
     path('', include('paid_course.urls')),
-    path('', include('lesson.urls')),
+
+    # path('', include('lesson.urls')),
 
     path('', include('account.urls')),
 ]

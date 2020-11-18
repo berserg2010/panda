@@ -26,7 +26,7 @@ class PackageOfLessons(models.Model):
     class Meta:
         verbose_name = 'количество занятий'
         verbose_name_plural = '02 | Количество занятий'
-        ordering = ('count', )
+        ordering = ('count', 'cost')
 
 
 class Course(CommonFields):
