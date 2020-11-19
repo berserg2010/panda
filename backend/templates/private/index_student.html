@@ -14,10 +14,11 @@
         <div class="personalArea-balance__info">
 
           {% with group_of_courses=payment_group_of_courses.group_of_courses.pk %}
-            <p>У Вас {{ payment|filter_group_of_courses_sum_paid_for_lessons:group_of_courses }} занятий по направлению {{ payment_group_of_courses.group_of_courses.title }}.</p>
-            <p>Из них {{ payment|filter_group_of_courses_sum_bonus:group_of_courses }} бонусных.</p>
-            <p>Срок завершения {{ payment|filter_group_of_courses_latest_date:group_of_courses }}</p>
+            <p>У Вас <strong>{{ payment|filter_group_of_courses_sum_paid_for_lessons:group_of_courses }}</strong> занятий по направлению <strong>{{ payment_group_of_courses.group_of_courses.title }}</strong>.</p>
+            <p>Из них <strong>{{ payment|filter_group_of_courses_sum_bonus:group_of_courses }}</strong> бонусных.</p>
+            <p>Срок завершения <strong>{{ payment|filter_group_of_courses_latest_date:group_of_courses|date }}</strong></p>
           {% endwith %}
+
         </div>
 
         <a href="{% url 'private_side:courses' %}" class="main-btn">Оплатить занятия</a>
