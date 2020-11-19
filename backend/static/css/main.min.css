@@ -250,9 +250,9 @@
 }
 .vocabulary-warning img,.vocabulary-warning svg{display:block;max-width:23px;max-height:20px;min-width:23px;margin-right:8px}.vocabulary-warning__mob{display:none}.vocabulary-wrap{background:#f8fffc;-webkit-border-radius:10px;border-radius:10px;padding:40px 15px 16px}.vocabulary-wrap__top{position:relative;padding-bottom:30px;border-bottom:1px solid #ffb42d}.vocabulary-wrap__descr{padding-top:20px}.vocabulary-wrap__descr ul li{padding-left:41px;font-size:20px;line-height:1;color:#6b6b6b;position:relative;margin-bottom:30px}
 .vocabulary-wrap__descr ul li b,
-.personalArea-balance__info strong {
+.personalArea-balance__info span {
     font-weight:700;
-    color:#ffb42dЖ
+    color:#ffb42d;
 }
 .vocabulary-wrap__descr ul li img,.vocabulary-wrap__descr ul li svg{position:absolute;top:0;left:0;display:block;max-width:30px;max-height:30px}
 .vocabulary-wrap__subtitle{

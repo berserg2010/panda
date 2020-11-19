@@ -6,7 +6,7 @@
 
     <div class="personalArea-block">
       <div class="personalArea-block__top">
-        <span class="personalArea-block__title">Баланс</span>
+        <span class="personalArea-block__title">Баланс по направлению {{ payment_group_of_courses.group_of_courses.title }}</span>
         <div class="personalArea-block__top-b"></div>
       </div>
 
@@ -14,9 +14,9 @@
         <div class="personalArea-balance__info">
 
           {% with group_of_courses=payment_group_of_courses.group_of_courses.pk %}
-            <p>У Вас <strong>{{ payment|filter_group_of_courses_sum_paid_for_lessons:group_of_courses }}</strong> занятий по направлению <strong>{{ payment_group_of_courses.group_of_courses.title }}</strong>.</p>
-            <p>Из них <strong>{{ payment|filter_group_of_courses_sum_bonus:group_of_courses }}</strong> бонусных.</p>
-            <p>Срок завершения <strong>{{ payment|filter_group_of_courses_latest_date:group_of_courses|date }}</strong></p>
+            <p>У Вас <span>{{ payment|filter_group_of_courses_sum_paid_for_lessons:group_of_courses }}</span> занятий</p>
+            <p>Из них <span>{{ payment|filter_group_of_courses_sum_bonus:group_of_courses }}</span> бонусных</p>
+            <p>Срок завершения <span>{{ payment|filter_group_of_courses_latest_date:group_of_courses|date }}</span></p>
           {% endwith %}
 
         </div>
@@ -27,11 +27,9 @@
           <img src="{% static 'img/balance0img.svg' %}" alt="">
         </div>
       </div>
-
     </div>
 
   {% endfor %}
-
 
   {% if object_list %}
 
