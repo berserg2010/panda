@@ -12,13 +12,13 @@ pytestmark = pytest.mark.django_db
 @pytest.mark.parametrize('url', urlpatterns)
 @pytest.mark.parametrize('client_fixture, errors', [
     ('client', status.HTTP_302_FOUND),
-    ('client_register', status.HTTP_200_OK),
+    ('student_register', status.HTTP_200_OK),
 ])
 def test_get_private_side(url, client_fixture, errors, request):
 
     client = request.getfixturevalue(client_fixture)
 
-    response = client.get()
+    response = client.get(f'/lk/{url.pattern}')
     assert response.status_code == errors
 
 
