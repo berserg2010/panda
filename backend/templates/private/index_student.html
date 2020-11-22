@@ -2,22 +2,24 @@
 
 <div class="personalArea-content">
 
-  {% for payment_group_of_courses in payment_groups_of_courses %}
+  {% for group_courses_stat in groups_courses_stat %}
 
     <div class="personalArea-block">
       <div class="personalArea-block__top">
-        <span class="personalArea-block__title">Баланс по направлению {{ payment_group_of_courses.group_of_courses.title }}</span>
+        <span class="personalArea-block__title">Баланс по направлению {{ group_courses_stat.title }}</span>
         <div class="personalArea-block__top-b"></div>
       </div>
 
       <div class="personalArea-balance">
         <div class="personalArea-balance__info">
 
-          {% with group_of_courses=payment_group_of_courses.group_of_courses.pk %}
-            <p>У Вас <span>{{ payment|filter_group_of_courses_sum_paid_for_lessons:group_of_courses }}</span> занятий</p>
-            <p>Из них <span>{{ payment|filter_group_of_courses_sum_bonus:group_of_courses }}</span> бонусных</p>
-            <p>Срок завершения <span>{{ payment|filter_group_of_courses_latest_date:group_of_courses|date }}</span></p>
-          {% endwith %}
+          <p>У Вас <span>{{ group_courses_stat.lessons }}</span> занятий</p>
+
+          {% if group_courses_stat.bonus %}
+            <p>Из них <span>{{ group_courses_stat.bonus }}</span> бонусных</p>
+          {% endif %}
+
+          <p>Срок завершения <span>{{ group_courses_stat.valid_until|date }}</span></p>
 
         </div>
 

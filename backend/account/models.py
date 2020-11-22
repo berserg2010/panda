@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 import pytz
@@ -76,8 +77,8 @@ class Student(Account):
     age = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name='возраст')
 
     @property
-    def get_paid_lessons(self):
-        return self.payment_student.filter(valid_until__gte=date_now)
+    def get_payment_student(self):
+        return self.payment_student.all()
 
     def __str__(self):
         return self.user.get_full_name()
@@ -101,10 +102,48 @@ class Payment(CommonId):
     student = models.ForeignKey(Student, on_delete=models.PROTECT, related_name='payment_student', verbose_name='ученик')
     bonus = models.ForeignKey(Student, null=True, blank=True, on_delete=models.PROTECT, related_name='payment_bonus', verbose_name='бонус')
     group_of_courses = models.ForeignKey(GroupsOfCourses, on_delete=models.PROTECT, verbose_name='группа курса')
+    first_payment = models.ForeignKey(
+        'Payment',
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT,
+        related_name='last_payment',
+        verbose_name='первая оплата'
+    )
+
+    def get_first_data_payment(self):
+        if self.first_payment is None:
+            return '--'
+        return self.first_payment.order_time
+    get_first_data_payment.short_description = 'первая дата оплаты'
+
+
+    @property
+    def is_bonus(self):
+        return True if self.bonus is not None else False
+    get_first_data_payment.short_description = 'бесплатные занятия'
+
+
+    def save(self, **kwargs):
+
+        payment = Payment.objects.filter(
+            student=self.student,
+            group_of_courses=self.group_of_courses,
+            valid_until__gte=self.order_time,
+        ).first()
+
+        self.first_payment = payment.first_payment if (
+            payment and payment.first_payment is not None
+        ) else payment
+
+        super().save(self, **kwargs)
+
 
     def __str__(self):
         return f'{self.pk}'
 
+
     class Meta:
         verbose_name = 'платеж'
         verbose_name_plural = '04 | Платежи'
+        ordering = ('-valid_until', 'student__user__last_name')

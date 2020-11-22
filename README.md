@@ -186,7 +186,7 @@ ___
 
 ### Docker
 
-    docker-compose run backend python manage.py dumpdata --indent 2 --output dump-$HOST-$(date +"%Y.%m.%d_%H:%M").json
+    docker-compose run backend python manage.py dumpdata --indent 2 --exclude contenttypes --exclude admin.logentry --output dump.json
     
     docker-compose run backend python manage.py makemigrations
     docker-compose run backend python manage.py migrate

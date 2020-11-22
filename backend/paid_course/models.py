@@ -1,5 +1,7 @@
 from django.db import models
+from django.db.models import Q
 
+from common.utils import date_now
 from common.models import CommonId
 from account.models import Teacher, Student
 from course.models import Course, CourseLesson
@@ -49,6 +51,15 @@ class Schedule(models.Model):
     datetime = models.DateTimeField(verbose_name='дата и время занятия')
 
     course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT, verbose_name='курс')
+
+    @classmethod
+    def get_student_schedule(cls, student, groups_courses, first_date, second_date=date_now):
+        return cls.objects.filter(
+            Q(course__student=student),
+            Q(course__course__group_of_course=groups_courses),
+            Q(datetime__gte=first_date) | Q(datetime__lte=second_date),
+        )
+
 
     def __str__(self):
         return f'{self.datetime.astimezone()}'

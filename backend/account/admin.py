@@ -74,6 +74,24 @@ class StudentAdmin(AccountAdmin):
     )
 
 
+class BonusLesson(admin.SimpleListFilter):
+
+    title = 'бесплатные занятия'
+    parameter_name = 'is_bonus'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('true', 'Да'),
+            ('false', 'Нет'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'true':
+            return queryset.filter(bonus__isnull=False)
+        if self.value() == 'false':
+            return queryset.filter(bonus__isnull=True)
+
+
 @admin.register(Payment)
 class PaymentAdmin(CommonIdModelAdmin):
 
@@ -84,7 +102,9 @@ class PaymentAdmin(CommonIdModelAdmin):
         'amount',
         'bonus',
         'group_of_courses',
+        'order_time',
         'valid_until',
+        'get_first_data_payment',
     )
     fields = (
         *CommonIdModelAdmin.fields,
@@ -98,6 +118,15 @@ class PaymentAdmin(CommonIdModelAdmin):
         'amount',
         'order',
         'order_time',
+        'first_payment',
+    )
+    search_fields = (
+        'student__user__last_name',
+        'bonus__user__last_name',
+    )
+    list_filter = (
+        'group_of_courses',
+        BonusLesson,
     )
     # readonly_fields = (
     #     'payment',
