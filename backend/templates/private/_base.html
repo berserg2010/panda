@@ -29,12 +29,12 @@
 <body class="bodyLk">
 
 <header class="header header-second">
-  {% include './components/header.html' %}
+  {% include 'private/components/header.html' %}
 </header>
 
 <section class="personalArea personalArea-active"> <!-- Левое меню скрыто (personalArea-active)-->
 
-  {% include './components/left_menu.html' %}
+  {% include 'private/components/left_menu.html' %}
 
   {% block content %}{% endblock %}
 
@@ -55,23 +55,36 @@
   const DEBUG = JSON.parse(document.getElementById('DEBUG').textContent)
   const MERCHANT_ID = JSON.parse(document.getElementById('MERCHANT_ID').textContent)
 
-  function createOrder(amount) {
+  function createOrder(paid_for_lessons, amount, course_id) {
 
     const button = $ipsp.get('button')
     button.setMerchantId(MERCHANT_ID)
     button.setAmount(amount, 'RUB', !DEBUG)
-    button.setResponseUrl(`${window.location.origin}/lk/payment-callback/`);
+    button.setResponseUrl(`${window.location.origin}/lk/payment-callback/`)
     button.setHost('api.fondy.eu')
+    button.addField({
+      label: 'Промо код',
+      name: 'bonus_id'
+    })
+    button.addField({
+      label: 'Количество занятий',
+      name: 'paid_for_lessons',
+      value: `${paid_for_lessons}`,
+      readonly: true
+    })
     button.addField({
       label: 'ID Ученика',
       name: 'student_id',
-      value: '{{ user.student.pk }}',
+      value: `{{ user.student.pk }}`,
       readonly: true,
-      hidden: true,
+      hidden: true
     })
     button.addField({
-      label: 'Промо код',
-      name: 'bonus_id',
+      label: 'ID курса',
+      name: 'course_id',
+      value: `${course_id}`,
+      readonly: true,
+      hidden: true
     })
     window.open(button.getUrl())
     return false

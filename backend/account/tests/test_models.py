@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from common.utils import date_now
 from ..models import Student, Payment
-from course.models import GroupsOfCourses
+from course.models import Course
 
 
 pytestmark = pytest.mark.django_db
@@ -15,7 +15,7 @@ class TestPayment:
     def test_save(self):
 
         student = mixer.blend(Student)
-        group = mixer.blend(GroupsOfCourses)
+        course = mixer.blend(Course)
 
         order_time = date_now - timezone.timedelta(days=84)
         instance = mixer.blend(
@@ -23,7 +23,7 @@ class TestPayment:
             student=student,
             order_time=order_time,
             valid_until=order_time + timezone.timedelta(days=28),
-            group_of_courses=group,
+            group_of_course=course.group_of_course,
         )
         assert Payment.objects.count() == 1
         assert instance.first_payment is None
@@ -34,7 +34,7 @@ class TestPayment:
             student=student,
             order_time=order_time,
             valid_until=order_time + timezone.timedelta(days=28),
-            group_of_courses=group,
+            group_of_course=course.group_of_course,
         )
         assert Payment.objects.count() == 2
         assert first_payment.first_payment is None
@@ -45,12 +45,11 @@ class TestPayment:
             student=student,
             order_time=order_time,
             valid_until=order_time + timezone.timedelta(days=28),
-            group_of_courses=group,
+            group_of_course=course.group_of_course,
         )
         assert Payment.objects.count() == 3
         assert instance.first_payment is not None
         assert instance.first_payment == first_payment
-
 
         order_time = date_now - timezone.timedelta(days=14)
         instance = mixer.blend(
@@ -58,7 +57,7 @@ class TestPayment:
             student=student,
             order_time=order_time,
             valid_until=order_time + timezone.timedelta(days=28),
-            group_of_courses=group,
+            group_of_course=course.group_of_course,
         )
         assert Payment.objects.count() == 4
         assert instance.first_payment is not None

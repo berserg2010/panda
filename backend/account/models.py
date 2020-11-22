@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 import pytz
 
+
 from common.utils import date_now
 from common.models import CommonId
 from course.models import GroupsOfCourses
@@ -91,17 +92,18 @@ class Student(Account):
 class Payment(CommonId):
 
     paid_for_lessons = models.PositiveSmallIntegerField(verbose_name='оплачено занятий')
-    payment = models.PositiveSmallIntegerField(verbose_name='ID платежа')
-    amount = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name='сумма заказа')
+
+    payment = models.PositiveIntegerField(verbose_name='ID платежа')
+    amount = models.PositiveIntegerField(null=True, blank=True, verbose_name='сумма заказа')
 
     order = models.CharField(max_length=1024, verbose_name='ID заказа')
 
     order_time = models.DateTimeField(verbose_name='оплата была произведена')
-    valid_until = models.DateField(default=date_now + timezone.timedelta(days=28), verbose_name='действительно до')
+    valid_until = models.DateTimeField(blank=True, verbose_name='действительно до')
 
     student = models.ForeignKey(Student, on_delete=models.PROTECT, related_name='payment_student', verbose_name='ученик')
     bonus = models.ForeignKey(Student, null=True, blank=True, on_delete=models.PROTECT, related_name='payment_bonus', verbose_name='бонус')
-    group_of_courses = models.ForeignKey(GroupsOfCourses, on_delete=models.PROTECT, verbose_name='группа курса')
+    group_of_course = models.ForeignKey(GroupsOfCourses, on_delete=models.PROTECT, verbose_name='группа курса')
     first_payment = models.ForeignKey(
         'Payment',
         null=True,
@@ -124,24 +126,27 @@ class Payment(CommonId):
     get_first_data_payment.short_description = 'бесплатные занятия'
 
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
 
-        payment = Payment.objects.filter(
-            student=self.student,
-            group_of_courses=self.group_of_courses,
-            valid_until__gte=self.order_time,
-        ).first()
+        if not self.first_payment:
+            payment = Payment.objects.filter(
+                student=self.student,
+                group_of_course=self.group_of_course,
+                valid_until__gte=self.order_time,
+            ).first()
 
-        self.first_payment = payment.first_payment if (
-            payment and payment.first_payment is not None
-        ) else payment
+            self.first_payment = payment.first_payment if (
+                payment and payment.first_payment is not None
+            ) else payment
 
-        super().save(self, **kwargs)
+        if not self.valid_until:
+            self.valid_until = self.order_time + timezone.timedelta(days=28)
+
+        super().save(*args, **kwargs)
 
 
     def __str__(self):
         return f'{self.pk}'
-
 
     class Meta:
         verbose_name = 'платеж'

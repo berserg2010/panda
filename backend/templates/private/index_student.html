@@ -33,172 +33,172 @@
 
   {% endfor %}
 
-  {% if object_list %}
-
-    {% with active_paid_course=object_list|first %}
-
-      <div class="personalArea-block">
-        <div class="personalArea-block__top">
-          <span class="personalArea-block__title">Статистика</span>
-          <div class="personalArea-block__top-b"></div>
-        </div>
-        <div class="personalArea-statistics__row">
-          <div class="personalArea-statistics__col">
-            <div class="personalArea-statistics__circle">
-              <div class="personalArea-statistics__ico" id="perstatistics1"></div>
-              <div class="personalArea-statistics__hidden" id="perstatistics1-1">5</div>
-              <div class="personalArea-statistics__hidden" id="perprocent-1">0.94</div>
-            </div>
-            <span class="personalArea-statistics__subtitle">Средний бал за задания</span>
-          </div>
-
-          <div class="personalArea-statistics__col">
-            <div class="personalArea-statistics__circle">
-              <div class="personalArea-statistics__ico" id="perstatistics2"></div>
-              <div class="personalArea-statistics__hidden" id="perstatistics2-2">5</div>
-              <div class="personalArea-statistics__hidden" id="perprocent-2">
-                {{ active_paid_course.paid_course_lessons.all|get_statistic_result:'test_result' }}
-              </div>
-            </div>
-            <span class="personalArea-statistics__subtitle">Средний бал за тесты</span>
-          </div>
-
-          <div class="personalArea-statistics__col">
-            <div class="personalArea-statistics__circle">
-              <div class="personalArea-statistics__ico" id="perstatistics3"></div>
-              <div class="personalArea-statistics__hidden" id="perstatistics3-3">5</div>
-              <div class="personalArea-statistics__hidden" id="perprocent-3">0.94</div>
-            </div>
-            <span class="personalArea-statistics__subtitle">Средний бал за игры</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="personalArea-block">
-        <div class="personalArea-block__top">
-          <span class="personalArea-block__title">Текущий курс</span>
-          <div class="personalArea-block__top-b"></div>
-        </div>
-        <div class="personalArea-course">
-          <div class="personalArea-course__col">
-            <h3 class="personalArea-course__title">{{ active_paid_course }}</h3>
-            <ul>
+{#  {% if object_list %}#}
+{##}
+{#    {% with active_paid_course=object_list|first %}#}
+{##}
+{#      <div class="personalArea-block">#}
+{#        <div class="personalArea-block__top">#}
+{#          <span class="personalArea-block__title">Статистика</span>#}
+{#          <div class="personalArea-block__top-b"></div>#}
+{#        </div>#}
+{#        <div class="personalArea-statistics__row">#}
+{#          <div class="personalArea-statistics__col">#}
+{#            <div class="personalArea-statistics__circle">#}
+{#              <div class="personalArea-statistics__ico" id="perstatistics1"></div>#}
+{#              <div class="personalArea-statistics__hidden" id="perstatistics1-1">5</div>#}
+{#              <div class="personalArea-statistics__hidden" id="perprocent-1">0.94</div>#}
+{#            </div>#}
+{#            <span class="personalArea-statistics__subtitle">Средний бал за задания</span>#}
+{#          </div>#}
+{##}
+{#          <div class="personalArea-statistics__col">#}
+{#            <div class="personalArea-statistics__circle">#}
+{#              <div class="personalArea-statistics__ico" id="perstatistics2"></div>#}
+{#              <div class="personalArea-statistics__hidden" id="perstatistics2-2">5</div>#}
+{#              <div class="personalArea-statistics__hidden" id="perprocent-2">#}
+{#                {{ active_paid_course.paid_course_lessons.all|get_statistic_result:'test_result' }}#}
+{#              </div>#}
+{#            </div>#}
+{#            <span class="personalArea-statistics__subtitle">Средний бал за тесты</span>#}
+{#          </div>#}
+{##}
+{#          <div class="personalArea-statistics__col">#}
+{#            <div class="personalArea-statistics__circle">#}
+{#              <div class="personalArea-statistics__ico" id="perstatistics3"></div>#}
+{#              <div class="personalArea-statistics__hidden" id="perstatistics3-3">5</div>#}
+{#              <div class="personalArea-statistics__hidden" id="perprocent-3">0.94</div>#}
+{#            </div>#}
+{#            <span class="personalArea-statistics__subtitle">Средний бал за игры</span>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="personalArea-block">#}
+{#        <div class="personalArea-block__top">#}
+{#          <span class="personalArea-block__title">Текущий курс</span>#}
+{#          <div class="personalArea-block__top-b"></div>#}
+{#        </div>#}
+{#        <div class="personalArea-course">#}
+{#          <div class="personalArea-course__col">#}
+{#            <h3 class="personalArea-course__title">{{ active_paid_course }}</h3>#}
+{#            <ul>#}
               {#              <li>Пройдено уроков: <span>{{ active_paid_course.paid_course_lessons|finished:1|filter_count }} из {{ active_paid_course.course.courselesson_set.count }}</span></li>#}
-
+{##}
               {#              <li>До конца курса осталось: <span>~3 месяца</span></li>#}
-
-            </ul>
-          </div>
-          <div class="personalArea-course__col">
-            <h3 class="personalArea-course__title">Преподаватель</h3>
-            <div class="personalArea-course__user">
-              <div class="personalArea-course__user-img">
-                <img src="{% static 'img/videoCall-user.svg' %}" alt="">
-              </div>
-              <div class="personalArea-course__user-info">
-                <span class="personalArea-course__name">{{ active_paid_course.teacher }}</span>
-                <a href="#" class="personalArea-course__link">Посмотреть профиль</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="personalArea-block">
-        <div class="personalArea-block__top">
-          <span class="personalArea-block__title">Текущее домашнее задание</span>
-          <div class="personalArea-block__top-b"></div>
-        </div>
-        <div class="personalArea-slider__wrap range-slider__wrap">
-          <div class="personalArea-slider range-slider">
-            <div class="personalArea-slide">
-              <div class="lessonTopic">
-                <span class="lessonTopic-subtitle">Тема урока:</span>
-                <p><a href="#">Притяжательный падеж существительного.</a></p>
-                <div class="lessonTopic-bottom">
-                  <span class="lessonTopic-subtitle">Срок сдачи:</span>
-                  <p>25 мая 2020</p>
-                </div>
-              </div>
-            </div>
-            <div class="personalArea-slide">
-              <div class="lessonTopic">
-                <span class="lessonTopic-subtitle">Тема урока:</span>
-                <p><a href="#">Множественное число существительного.</a></p>
-                <div class="lessonTopic-bottom">
-                  <span class="lessonTopic-subtitle">Срок сдачи:</span>
-                  <p>28 мая 2020</p>
-                </div>
-              </div>
-            </div>
-            <div class="personalArea-slide">
-              <div class="lessonTopic">
-                <span class="lessonTopic-subtitle">Тема урока:</span>
-                <p><a href="#">Упражнения на артикли</a></p>
-                <div class="lessonTopic-bottom">
-                  <span class="lessonTopic-subtitle">Срок сдачи:</span>
-                  <p>30 мая 2020</p>
-                </div>
-              </div>
-            </div>
-            <div class="personalArea-slide">
-              <div class="lessonTopic">
-                <span class="lessonTopic-subtitle">Тема урока:</span>
-                <p><a href="#">Множественное число существительного.</a></p>
-                <div class="lessonTopic-bottom">
-                  <span class="lessonTopic-subtitle">Срок сдачи:</span>
-                  <p>28 мая 2020</p>
-                </div>
-              </div>
-            </div>
-            <div class="personalArea-slide">
-              <div class="lessonTopic">
-                <span class="lessonTopic-subtitle">Тема урока:</span>
-                <p><a href="#">Притяжательный падеж существительного.</a></p>
-                <div class="lessonTopic-bottom">
-                  <span class="lessonTopic-subtitle">Срок сдачи:</span>
-                  <p>25 мая 2020</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <input type="range" class="range" min="1" value="1" step="1" max="5">
-        </div>
-      </div>
-
-      <div class="personalArea-block">
-        <div class="personalArea-block__top personalArea-block__top-flex">
-          <span class="personalArea-block__title"><img src="{% static 'img/warning.svg' %}" alt="">Хвосты</span>
-          <div class="personalArea-block__top-b"></div>
-        </div>
-        <div class="personalArea-slider__wrap range-slider__wrap">
-          <div class="personalArea-slider range-slider">
-            <div class="personalArea-slide">
-              <div class="lessonTopic">
-                <span class="lessonTopic-subtitle">Тема урока:</span>
-                <p><a href="#">Притяжательный падеж существительного.</a></p>
-                <div class="lessonTopic-bottom">
-                  <span class="lessonTopic-subtitle">Срок сдачи:</span>
-                  <p>25 мая 2020</p>
-                </div>
-              </div>
-            </div>
-            <div class="personalArea-slide">
-              <div class="lessonTopic">
-                <span class="lessonTopic-subtitle">Тема урока:</span>
-                <p><a href="#">Множественное число существительного.</a></p>
-                <div class="lessonTopic-bottom">
-                  <span class="lessonTopic-subtitle">Срок сдачи:</span>
-                  <p>28 мая 2020</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <input type="range" class="range" min="1" value="1" step="1" max="2">
-        </div>
-      </div>
-
-    {% endwith %}
+{##}
+{#            </ul>#}
+{#          </div>#}
+{#          <div class="personalArea-course__col">#}
+{#            <h3 class="personalArea-course__title">Преподаватель</h3>#}
+{#            <div class="personalArea-course__user">#}
+{#              <div class="personalArea-course__user-img">#}
+{#                <img src="{% static 'img/videoCall-user.svg' %}" alt="">#}
+{#              </div>#}
+{#              <div class="personalArea-course__user-info">#}
+{#                <span class="personalArea-course__name">{{ active_paid_course.teacher }}</span>#}
+{#                <a href="#" class="personalArea-course__link">Посмотреть профиль</a>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="personalArea-block">#}
+{#        <div class="personalArea-block__top">#}
+{#          <span class="personalArea-block__title">Текущее домашнее задание</span>#}
+{#          <div class="personalArea-block__top-b"></div>#}
+{#        </div>#}
+{#        <div class="personalArea-slider__wrap range-slider__wrap">#}
+{#          <div class="personalArea-slider range-slider">#}
+{#            <div class="personalArea-slide">#}
+{#              <div class="lessonTopic">#}
+{#                <span class="lessonTopic-subtitle">Тема урока:</span>#}
+{#                <p><a href="#">Притяжательный падеж существительного.</a></p>#}
+{#                <div class="lessonTopic-bottom">#}
+{#                  <span class="lessonTopic-subtitle">Срок сдачи:</span>#}
+{#                  <p>25 мая 2020</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="personalArea-slide">#}
+{#              <div class="lessonTopic">#}
+{#                <span class="lessonTopic-subtitle">Тема урока:</span>#}
+{#                <p><a href="#">Множественное число существительного.</a></p>#}
+{#                <div class="lessonTopic-bottom">#}
+{#                  <span class="lessonTopic-subtitle">Срок сдачи:</span>#}
+{#                  <p>28 мая 2020</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="personalArea-slide">#}
+{#              <div class="lessonTopic">#}
+{#                <span class="lessonTopic-subtitle">Тема урока:</span>#}
+{#                <p><a href="#">Упражнения на артикли</a></p>#}
+{#                <div class="lessonTopic-bottom">#}
+{#                  <span class="lessonTopic-subtitle">Срок сдачи:</span>#}
+{#                  <p>30 мая 2020</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="personalArea-slide">#}
+{#              <div class="lessonTopic">#}
+{#                <span class="lessonTopic-subtitle">Тема урока:</span>#}
+{#                <p><a href="#">Множественное число существительного.</a></p>#}
+{#                <div class="lessonTopic-bottom">#}
+{#                  <span class="lessonTopic-subtitle">Срок сдачи:</span>#}
+{#                  <p>28 мая 2020</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="personalArea-slide">#}
+{#              <div class="lessonTopic">#}
+{#                <span class="lessonTopic-subtitle">Тема урока:</span>#}
+{#                <p><a href="#">Притяжательный падеж существительного.</a></p>#}
+{#                <div class="lessonTopic-bottom">#}
+{#                  <span class="lessonTopic-subtitle">Срок сдачи:</span>#}
+{#                  <p>25 мая 2020</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#          <input type="range" class="range" min="1" value="1" step="1" max="5">#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="personalArea-block">#}
+{#        <div class="personalArea-block__top personalArea-block__top-flex">#}
+{#          <span class="personalArea-block__title"><img src="{% static 'img/warning.svg' %}" alt="">Хвосты</span>#}
+{#          <div class="personalArea-block__top-b"></div>#}
+{#        </div>#}
+{#        <div class="personalArea-slider__wrap range-slider__wrap">#}
+{#          <div class="personalArea-slider range-slider">#}
+{#            <div class="personalArea-slide">#}
+{#              <div class="lessonTopic">#}
+{#                <span class="lessonTopic-subtitle">Тема урока:</span>#}
+{#                <p><a href="#">Притяжательный падеж существительного.</a></p>#}
+{#                <div class="lessonTopic-bottom">#}
+{#                  <span class="lessonTopic-subtitle">Срок сдачи:</span>#}
+{#                  <p>25 мая 2020</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="personalArea-slide">#}
+{#              <div class="lessonTopic">#}
+{#                <span class="lessonTopic-subtitle">Тема урока:</span>#}
+{#                <p><a href="#">Множественное число существительного.</a></p>#}
+{#                <div class="lessonTopic-bottom">#}
+{#                  <span class="lessonTopic-subtitle">Срок сдачи:</span>#}
+{#                  <p>28 мая 2020</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#          <input type="range" class="range" min="1" value="1" step="1" max="2">#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#    {% endwith %}#}
 
     {#  {% else %}#}
     {#    <div class="personalArea-block">#}
@@ -214,6 +214,6 @@
     {#      </div>#}
     {#    </div>#}
 
-  {% endif %}
+{#  {% endif %}#}
 
 </div>

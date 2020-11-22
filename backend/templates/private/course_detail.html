@@ -1,4 +1,4 @@
-{% extends './_base.html' %}
+{% extends 'private/_base.html' %}
 
 {% load static %}
 
@@ -42,7 +42,10 @@
                   class="choice-allPrice topUpAccount-btn active"
                   href=""
                   target="_blank"
-                  onclick="createOrder({{ package_of_lessons.cost }})"
+                  onclick="createOrder(
+                    `{{ package_of_lessons.count }}`,
+                    `{{ package_of_lessons.cost }}`,
+                    `{{ object.pk }}`)"
                 >
                   <b>{{ package_of_lessons.cost }} руб.</b>
                 </a>

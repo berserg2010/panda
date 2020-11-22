@@ -101,7 +101,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         'paid_for_lessons',
         'amount',
         'bonus',
-        'group_of_courses',
+        'group_of_course',
         'order_time',
         'valid_until',
         'get_first_data_payment',
@@ -111,7 +111,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         'student',
         'paid_for_lessons',
         'bonus',
-        'group_of_courses',
+        'group_of_course',
         'valid_until',
 
         'payment',
@@ -125,7 +125,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         'bonus__user__last_name',
     )
     list_filter = (
-        'group_of_courses',
+        'group_of_course',
         BonusLesson,
     )
     # readonly_fields = (

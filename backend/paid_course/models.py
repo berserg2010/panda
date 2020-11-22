@@ -21,7 +21,7 @@ class BasicRelationshipTable(CommonId):
 
 class FreeLesson(BasicRelationshipTable):
 
-    datetime = models.DateTimeField(verbose_name='дата и время занятия')
+    datetime = models.DateTimeField(null=True, blank=True, verbose_name='дата и время занятия')
 
     def __str__(self):
         return f'{self.datetime.astimezone()}'

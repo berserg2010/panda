@@ -43,7 +43,7 @@ class IndexLkView(LoginRequiredMixin, ListView):
 
             groups_courses_stat = []
 
-            for group_of_courses in active_payments.distinct('group_of_courses'):
+            for group_of_course in active_payments.distinct('group_of_course'):
 
                 group_courses_stat = {
                     'title': '',
@@ -52,8 +52,8 @@ class IndexLkView(LoginRequiredMixin, ListView):
                     'valid_until': '',
                 }
 
-                paid_filter = Q(group_of_courses=group_of_courses.group_of_courses)
-                title = group_of_courses.group_of_courses.title
+                paid_filter = Q(group_of_course=group_of_course.group_of_course)
+                title = group_of_course.group_of_course.title
                 lessons = active_payments.filter(paid_filter).aggregate(Sum('paid_for_lessons')).get('paid_for_lessons__sum', 0)
                 bonus = active_payments.filter(paid_filter & Q(bonus__isnull=False))
 
@@ -64,7 +64,7 @@ class IndexLkView(LoginRequiredMixin, ListView):
 
                 valid_until = active_payments.filter(paid_filter).latest('valid_until').valid_until
 
-                schedule = Schedule.get_student_schedule(student, group_of_courses.group_of_courses, order_time).count()
+                schedule = Schedule.get_student_schedule(student, group_of_course.group_of_course, order_time).count()
 
                 bonus -= schedule
                 lessons -= schedule
