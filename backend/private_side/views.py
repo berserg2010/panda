@@ -23,7 +23,10 @@ class IndexLkView(LoginRequiredMixin, ListView):
 
             last_payment = student.get_payment_student.filter(valid_until__gte=date_now).first()
 
+            print(last_payment)
+
             condition = last_payment is not None and last_payment.first_payment is not None
+            print(condition)
             if condition:
 
                 order_time = last_payment.first_payment.order_time
@@ -41,9 +44,12 @@ class IndexLkView(LoginRequiredMixin, ListView):
                 order_time = ''
                 active_payments = Payment.objects.none()
 
+            print(order_time)
+            print(active_payments)
+
             groups_courses_stat = []
 
-            for group_of_course in active_payments.distinct('group_of_course'):
+            for group_of_course in active_payments.order_by().distinct('group_of_course'):
 
                 group_courses_stat = {
                     'title': '',

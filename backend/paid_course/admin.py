@@ -18,16 +18,17 @@ class ScheduleInline(admin.StackedInline):
 class FreeLessonAdmin(CommonIdModelAdmin):
 
     list_display = (
-        'datetime',
         'student',
         'teacher',
+        'datetime',
         'finished',
     )
+    list_display_links = ('student', )
     fields = (
         *CommonIdModelAdmin.fields,
-        'datetime',
         'student',
         'teacher',
+        'datetime',
         'finished',
     )
     search_fields = (
@@ -47,8 +48,10 @@ class PaidCourseAdmin(CommonIdModelAdmin):
     )
     fields = (
         *CommonIdModelAdmin.fields,
-        'student', 'teacher',
-        'finished', 'course',
+        'course',
+        'student',
+        'teacher',
+        'finished',
     )
     search_fields = (
         'student',

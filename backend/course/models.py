@@ -44,6 +44,7 @@ class Course(CommonFields):
     class Meta:
         verbose_name = 'курс'
         verbose_name_plural = '03 | Курсы'
+        ordering = ('title', )
 
 
 class Level(CommonFields):
