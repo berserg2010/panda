@@ -2,7 +2,6 @@ from django.db.models import Q, Sum
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 
 from common.utils import date_now
 from account.models import Payment
@@ -23,10 +22,7 @@ class IndexLkView(LoginRequiredMixin, ListView):
 
             last_payment = student.get_payment_student.filter(valid_until__gte=date_now).first()
 
-            print(last_payment)
-
             condition = last_payment is not None and last_payment.first_payment is not None
-            print(condition)
             if condition:
 
                 order_time = last_payment.first_payment.order_time
@@ -43,9 +39,6 @@ class IndexLkView(LoginRequiredMixin, ListView):
             else:
                 order_time = ''
                 active_payments = Payment.objects.none()
-
-            print(order_time)
-            print(active_payments)
 
             groups_courses_stat = []
 
@@ -108,6 +101,18 @@ class FreeLessonLkView(LoginRequiredMixin, TemplateView):
 
     template_name = 'private/free_lesson.html'
 
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        context['payment_bonuses'] = Payment.objects.filter(
+            student=user.student,
+            bonus__isnull=False,
+        )
+
+        return context
+
 
 class StudentsListView(LoginRequiredMixin, ListView):
 
@@ -115,7 +120,6 @@ class StudentsListView(LoginRequiredMixin, ListView):
     template_name = 'private/students_list.html'
 
     def get_queryset(self):
-
         return super().get_queryset().filter(
             teacher__user=self.request.user,
             finished=False,

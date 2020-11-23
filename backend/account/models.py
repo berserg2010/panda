@@ -1,14 +1,10 @@
 from django.db import models
-from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 import pytz
 
-
-from common.utils import date_now
 from common.models import CommonId
 from course.models import GroupsOfCourses
-
 
 
 GENDER = [
@@ -119,11 +115,6 @@ class Payment(CommonId):
         return self.first_payment.order_time
     get_first_data_payment.short_description = 'первая дата оплаты'
 
-    # @property
-    # def is_bonus(self):
-    #     return True if self.bonus is not None else False
-    # get_first_data_payment.short_description = 'бесплатные занятия'
-
     def save(self, *args, **kwargs):
 
         if not self.first_payment:
@@ -132,8 +123,6 @@ class Payment(CommonId):
                 group_of_course=self.group_of_course,
                 valid_until__gte=self.order_time,
             ).first()
-
-            print(payment)
 
             self.first_payment = payment.first_payment if (
                 payment and payment.first_payment is not None

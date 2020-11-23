@@ -4,16 +4,15 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
-from django.utils.dateparse import parse_datetime
-from django.db import transaction
+from django.db import transaction, IntegrityError
+from django.utils import timezone
 import json
-from dateutil.parser import parser
 from datetime import datetime
 from copy import deepcopy
 
-from .models import Student, Payment
 from backend import settings
-from course.models import GroupsOfCourses, Course
+from .models import Student, Payment
+from course.models import Course
 from paid_course.models import FreeLesson, PaidCourse
 
 
@@ -42,6 +41,7 @@ def payment_callback(request):
             paid_for_lessons = merchant_data.get('paid_for_lessons')
 
             student = Student.objects.get(pk=student_id)
+            bonus_student = Student.objects.none()
             course = Course.objects.get(pk=course_id)
 
             payment_base = Payment(
@@ -64,6 +64,7 @@ def payment_callback(request):
 
                 payment_bonus.pk = None
                 payment_bonus.amount = None
+                payment_bonus.order_time = timezone.now()
                 payment_bonus.paid_for_lessons = 2
                 payment_bonus.bonus = bonus_student
 
@@ -85,18 +86,49 @@ def payment_callback(request):
                     student=student,
                 )
 
-            with transaction.atomic():
-                payment_base.save()
+            try:
+                with transaction.atomic():
+                    payment_base.save()
 
-                if payment_bonus is not None and payment_bonus_ is not None:
-                    payment_bonus.save()
-                    payment_bonus_.save()
+                    if payment_bonus is not None and payment_bonus_ is not None:
+                        payment_bonus.save()
+                        payment_bonus_.save()
 
-                if paid_course is not None:
-                    paid_course.save()
+                    if paid_course is not None:
+                        paid_course.save()
 
-                if free_lesson is not None:
-                    free_lesson.save()
+                    if free_lesson is not None:
+                        free_lesson.save()
+            except IntegrityError:
+                context = {'message': f'Что то пошло не так..'}
+            else:
+                send_mail(
+                    'Panda',
+                    f'{student.user.get_full_name()} оплатил {paid_for_lessons} занятий.\n'
+                    f'ID платежа: {payment_id}\n',
+                    settings.EMAIL_HOST_USER,
+                    [settings.EMAIL_HOST_USER],
+                )
+
+                bonus_str = 'Плюс 2 бонусных занятия.\n' if condition else ''
+
+                send_mail(
+                    'Panda',
+                    f'{student.user.get_full_name()}, Вы оплатили {paid_for_lessons} занятий.\n'
+                    f'{bonus_str}'
+                    f'ID платежа: {payment_id}\n',
+                    settings.EMAIL_HOST_USER,
+                    [student.user.email],
+                )
+
+                if condition:
+                    send_mail(
+                        'Panda',
+                        f'Ваш друг воспльзовался бонусным кодом.\n'
+                        f'Вам начислено 2 бонусных занятия.\n',
+                        settings.EMAIL_HOST_USER,
+                        [bonus_student.user.email],
+                    )
 
         else:
             context = {'message': f'Что то пошло не так..\nСтатус обработки заказа: {order_status}'}

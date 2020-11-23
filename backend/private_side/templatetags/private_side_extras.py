@@ -33,9 +33,12 @@ def get_last_date_lesson(paid_course: PaidCourse):
 
     schedules = paid_course.schedule_set.all()
 
+    if not schedules.exists():
+        return None
+
     count_finished_lessons = paid_course.paid_course_lessons.filter(finished=True).count()
 
-    return schedules[count_finished_lessons - 1].datetime if count_finished_lessons else '--'
+    return schedules[count_finished_lessons - 1].datetime
 
 
 @register.filter
