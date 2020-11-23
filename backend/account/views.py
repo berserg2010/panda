@@ -9,6 +9,7 @@ from django.db import transaction
 import json
 from dateutil.parser import parser
 from datetime import datetime
+from copy import deepcopy
 
 from .models import Student, Payment
 from backend import settings
@@ -59,16 +60,17 @@ def payment_callback(request):
             condition = bonus_id and Student.objects.filter(pk=bonus_id).exists()
             if condition:
                 bonus_student = Student.objects.get(pk=bonus_id)
-                payment_bonus = payment_base
+                payment_bonus = deepcopy(payment_base)
 
+                payment_bonus.pk = None
                 payment_bonus.amount = None
                 payment_bonus.paid_for_lessons = 2
                 payment_bonus.bonus = bonus_student
 
-                payment_bonus_ = payment_bonus
+                payment_bonus_ = deepcopy(payment_bonus)
+                payment_bonus_.pk = None
                 payment_bonus_.student = bonus_student
                 payment_bonus_.bonus = student
-
 
             paid_course = None
             if not PaidCourse.objects.filter(student=student, course=course).exists():

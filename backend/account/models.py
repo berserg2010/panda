@@ -115,16 +115,14 @@ class Payment(CommonId):
 
     def get_first_data_payment(self):
         if self.first_payment is None:
-            return '--'
+            return None
         return self.first_payment.order_time
     get_first_data_payment.short_description = 'первая дата оплаты'
 
-
-    @property
-    def is_bonus(self):
-        return True if self.bonus is not None else False
-    get_first_data_payment.short_description = 'бесплатные занятия'
-
+    # @property
+    # def is_bonus(self):
+    #     return True if self.bonus is not None else False
+    # get_first_data_payment.short_description = 'бесплатные занятия'
 
     def save(self, *args, **kwargs):
 
@@ -135,6 +133,8 @@ class Payment(CommonId):
                 valid_until__gte=self.order_time,
             ).first()
 
+            print(payment)
+
             self.first_payment = payment.first_payment if (
                 payment and payment.first_payment is not None
             ) else payment
@@ -143,7 +143,6 @@ class Payment(CommonId):
             self.valid_until = self.order_time + timezone.timedelta(days=28)
 
         super().save(*args, **kwargs)
-
 
     def __str__(self):
         return f'{self.pk}'
