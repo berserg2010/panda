@@ -958,12 +958,12 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$216000$O6i7NJ7NRhJc$L1aUrZn1g/QeIEAVN0nNO+toA7Zy2IdqAcDztgNziPY=",
-    "last_login": "2020-11-17T20:49:07.945Z",
+    "last_login": "2020-11-23T19:23:53Z",
     "is_superuser": false,
     "username": "vasia",
     "first_name": "Василий",
     "last_name": "Васильев",
-    "email": "vasia@yandex.ru",
+    "email": "berserg2010@yandex.ru",
     "is_staff": false,
     "is_active": true,
     "date_joined": "2020-11-17T20:37:52Z",
@@ -976,7 +976,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$216000$fePqPOqliD0W$jij2ydxgaMa1wnCyXcslhLQzGqr44q1CQ9TbqRHOF5Q=",
-    "last_login": null,
+    "last_login": "2020-11-23T19:51:18.749Z",
     "is_superuser": false,
     "username": "petr",
     "first_name": "Пётр",
@@ -1012,12 +1012,12 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$216000$wWlR5BDoIeQk$zvmMuixDluuI0+Q31/R+a3gRoLVNhAjJLEmAbuh9HeY=",
-    "last_login": "2020-11-22T20:50:01.402Z",
+    "last_login": "2020-11-23T20:42:42.226Z",
     "is_superuser": false,
     "username": "student_test",
     "first_name": "student",
     "last_name": "test",
-    "email": "student@studenttest.com",
+    "email": "berserg2010@yandex.ru",
     "is_staff": false,
     "is_active": true,
     "date_joined": "2020-11-22T20:48:30Z",
@@ -1035,10 +1035,26 @@
 },
 {
   "model": "sessions.session",
+  "pk": "m3nxmd2oi8kdq469pz9lghe4533r2bpe",
+  "fields": {
+    "session_data": ".eJxVjLEOwjAMRP8lM4pwsB3KyM43REnskgJKpaadEP9OK3WA8e69u7cJcZlLWJpOYRBzMWQOv12K-al1A_KI9T7aPNZ5GpLdFLvTZm-j6Ou6u38HJbayrhHBE8FZCFkpsWeHvTIfGQjQeZFOITlF6LxkIZWT9Ik1rtFJJPP5ArkIN7Y:1khIfa:1239aJ3leCHaU6_91gwMtvPXuHT1Qo41JsXznusMbqc",
+    "expire_date": "2020-12-07T20:42:42.289Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "wlqjhgw0vo36csc8etvvpcrnlkogb1p1",
   "fields": {
     "session_data": ".eJxVjEEOwiAQRe_C2pBCGUZcuu8ZCAODVA0kpV0Z765NutDtf-_9l_BhW4vfOi9-TuIilDj9bhTig-sO0j3UW5Ox1XWZSe6KPGiXU0v8vB7u30EJvXxrxDGRZoios46a2A6QQg6IhkdlmECZEQYFNjs8Zw3WKYhWIxmXKWbx_gDgMDet:1kelVr:-D1ONILLwxjF8QWHBTye6ulOSaH3wTzp-Ny9IODto_Q",
     "expire_date": "2020-11-30T20:54:11.916Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zbbt91cvdhwlgoxlmx8ij70ir48wkd22",
+  "fields": {
+    "session_data": ".eJxVjLEOwjAMRP8lM4pwsB3KyM43REnskgJKpaadEP9OK3WA8e69u7cJcZlLWJpOYRBzMWQOv12K-al1A_KI9T7aPNZ5GpLdFLvTZm-j6Ou6u38HJbayrhHBE8FZCFkpsWeHvTIfGQjQeZFOITlF6LxkIZWT9Ik1rtFJJPP5ArkIN7Y:1khGY2:nQkIVxSrc9Ln0XHJW8DeQJ7YvnDEoNnKnE3WdqgZPDQ",
+    "expire_date": "2020-12-07T18:26:46.722Z"
   }
 },
 {
@@ -1129,7 +1145,7 @@
   "fields": {
     "gender": "M",
     "user": 5,
-    "phone": "87654321122",
+    "phone": null,
     "native_language": null,
     "pronunciation": null,
     "timezone": "UTC",
@@ -1141,7 +1157,7 @@
     "reminders_about_lessons": true,
     "discounts": true,
     "sounds": false,
-    "age": 12
+    "age": null
   }
 },
 {
@@ -1162,6 +1178,22 @@
 },
 {
   "model": "account.payment",
+  "pk": "191f64ab-5f53-4161-82ab-7fc25c451009",
+  "fields": {
+    "paid_for_lessons": 2,
+    "payment": 309812985,
+    "amount": null,
+    "order": "Order_1396424_fe1aox2UpY_1606166120",
+    "order_time": "2020-11-23T21:15:22.564Z",
+    "valid_until": "2020-12-21T21:15:22.564Z",
+    "student": "2c5c0370-bf40-431d-8028-451b4f2b004e",
+    "bonus": "c91c1593-c14f-40a1-8578-002448484af6",
+    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
+    "first_payment": "8c55532a-440f-4808-9de7-7a6be8253cf3"
+  }
+},
+{
+  "model": "account.payment",
   "pk": "1ab9a794-1783-4a9d-918f-7caa54e03bc0",
   "fields": {
     "paid_for_lessons": 4,
@@ -1174,6 +1206,22 @@
     "bonus": null,
     "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
     "first_payment": null
+  }
+},
+{
+  "model": "account.payment",
+  "pk": "4f1296ae-1bd1-4f78-93ab-a391cb47b47e",
+  "fields": {
+    "paid_for_lessons": 2,
+    "payment": 309812985,
+    "amount": null,
+    "order": "Order_1396424_fe1aox2UpY_1606166120",
+    "order_time": "2020-11-23T21:15:22.564Z",
+    "valid_until": "2020-12-21T21:15:22.564Z",
+    "student": "c91c1593-c14f-40a1-8578-002448484af6",
+    "bonus": "2c5c0370-bf40-431d-8028-451b4f2b004e",
+    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
+    "first_payment": "b5d20bef-d18f-4715-93e9-84b35a2f7801"
   }
 },
 {
@@ -1235,6 +1283,22 @@
     "order_time": "2020-11-18T22:08:06Z",
     "valid_until": "2020-12-16T00:00:00Z",
     "student": "05f27473-652c-4c20-ae39-a2f0d5baf82d",
+    "bonus": null,
+    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
+    "first_payment": null
+  }
+},
+{
+  "model": "account.payment",
+  "pk": "b5d20bef-d18f-4715-93e9-84b35a2f7801",
+  "fields": {
+    "paid_for_lessons": 8,
+    "payment": 309812985,
+    "amount": 4000,
+    "order": "Order_1396424_fe1aox2UpY_1606166120",
+    "order_time": "2020-11-23T20:15:20Z",
+    "valid_until": "2020-12-21T20:15:20Z",
+    "student": "c91c1593-c14f-40a1-8578-002448484af6",
     "bonus": null,
     "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
     "first_payment": null
@@ -1398,7 +1462,7 @@
 },
 {
   "model": "paid_course.freelesson",
-  "pk": "e923a179-6c85-42fe-b46b-d3e71d1ccea7",
+  "pk": "c2f1ac9d-0352-4f8b-9594-caef8e0ca8a7",
   "fields": {
     "finished": false,
     "teacher": null,
@@ -1408,10 +1472,20 @@
 },
 {
   "model": "paid_course.paidcourse",
-  "pk": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3",
+  "pk": "6d06e194-0464-4a87-ac6c-d7828e6f35a0",
   "fields": {
     "finished": false,
     "teacher": null,
+    "student": "c91c1593-c14f-40a1-8578-002448484af6",
+    "course": "f719a649-12a3-45e7-83b1-96017eb9359e"
+  }
+},
+{
+  "model": "paid_course.paidcourse",
+  "pk": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3",
+  "fields": {
+    "finished": false,
+    "teacher": "af774eec-049a-4d72-817d-d791d1be45c5",
     "student": "2c5c0370-bf40-431d-8028-451b4f2b004e",
     "course": "f719a649-12a3-45e7-83b1-96017eb9359e"
   }
@@ -1438,6 +1512,14 @@
   "fields": {
     "datetime": "2020-10-29T01:43:48Z",
     "course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
+  }
+},
+{
+  "model": "paid_course.schedule",
+  "pk": 6,
+  "fields": {
+    "datetime": "2020-11-23T21:16:35Z",
+    "course": "6d06e194-0464-4a87-ac6c-d7828e6f35a0"
   }
 },
 {
