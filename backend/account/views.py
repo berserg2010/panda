@@ -57,7 +57,7 @@ def payment_callback(request):
 
             payment_bonus = None
             payment_bonus_ = None
-            condition = bonus_id and Student.objects.filter(pk=bonus_id).exists()
+            condition = bonus_id and Student.objects.filter(pk=bonus_id, user__is_active=True).exclude(pk=student.pk).exists()
             if condition:
                 bonus_student = Student.objects.get(pk=bonus_id)
                 payment_bonus = deepcopy(payment_base)
