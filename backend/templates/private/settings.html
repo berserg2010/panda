@@ -1,339 +1,153 @@
-{% extends './_base.html' %}
+{% extends 'private/_base.html' %}
 
 {% load static %}
 
-{% block title %}Настройка профиля - ЛК{% endblock %}
+{% block title %}Настройка профиля{% endblock %}
 
 {% block style %}
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 {% endblock %}
 
 {% block content %}
-<div class="personalArea-content">
-  <div class="personalArea-block">
-    <div class="personalArea-block__top">
-      <div class="personalArea-block__top-row">
-        <span class="personalArea-block__title">Информация профиля</span>
-      </div>
-      <div class="personalArea-block__top-b"></div>
-    </div>
-    <div class="profile">
-
-      <form action="POST">
-        {% csrf_token %}
-        <div class="profile-block profile-main">
-          <div class="profile-edit">Редактировать</div>
-          <div class="profile-block__wrap">
-            <span class="profile-main__subtitle">Основное</span>
-            <div class="profile-block__info profile-main__info">
-              <div class="profile-main__row">
-                <div class="profile-main__user">
-                  <img src="{% static 'img/user-img.svg' %}" alt="">
-                  <input type="file">
-                  <span>Загрузить</span>
-                </div>
-                <div class="profile-main__descr">
-                  <div class="profile-main__descr-top">
-                    <span>Ученик:</span>
-                    {{ user.first_name }}
-                  </div>
-                  <div class="profile-main__descr-row">
-                    <ul>
-                      <li>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.715 5.8425C3.795 7.965 5.535 9.705 7.6575 10.785L9.3075 9.135C9.5175 8.925 9.81 8.865 10.0725 8.9475C10.9125 9.225 11.8125 9.375 12.75 9.375C12.9489 9.375 13.1397 9.45402 13.2803 9.59467C13.421 9.73532 13.5 9.92609 13.5 10.125V12.75C13.5 12.9489 13.421 13.1397 13.2803 13.2803C13.1397 13.421 12.9489 13.5 12.75 13.5C9.36849 13.5 6.12548 12.1567 3.73439 9.76561C1.3433 7.37452 0 4.13151 0 0.75C0 0.551088 0.0790176 0.360322 0.21967 0.21967C0.360322 0.0790176 0.551088 0 0.75 0H3.375C3.57391 0 3.76468 0.0790176 3.90533 0.21967C4.04598 0.360322 4.125 0.551088 4.125 0.75C4.125 1.6875 4.275 2.5875 4.5525 3.4275C4.635 3.69 4.575 3.9825 4.365 4.1925L2.715 5.8425Z" fill="#FFB42D"/></svg>
-                        +7 964 174-xx-xx
-                      </li>
-                      <li>
-                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.4 3L8 6.75L1.6 3V1.5L8 5.25L14.4 1.5V3ZM14.4 0H1.6C0.712 0 0 0.6675 0 1.5V10.5C0 10.8978 0.168571 11.2794 0.468629 11.5607C0.768687 11.842 1.17565 12 1.6 12H14.4C14.8243 12 15.2313 11.842 15.5314 11.5607C15.8314 11.2794 16 10.8978 16 10.5V1.5C16 0.6675 15.28 0 14.4 0Z" fill="#FFB42D"/></svg>
-                        {{ user.email }}
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="profile-settings">
-                    <div class="profile-settings__row">
-                      <div class="input-block">
-                        <label for="p-1">Телефон</label>
-                        <input id="p-1" type="tel" name="tel" value="+7 964 174-xx-xx">
-                      </div>
-                      <div class="input-block">
-                        <label for="p-2">Email</label>
-                        <input id="p-2" type="email" name="email" value="{{ user.email }}">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="personalArea-content">
+    <div class="personalArea-block">
+      <div class="personalArea-block__top">
+        <div class="personalArea-block__top-row">
+          <span class="personalArea-block__title">Информация профиля</span>
         </div>
-        <div class="profile-block">
-          <div class="profile-block__wrap">
-            <span class="profile-title">Пожелания к учителю</span>
-            <div class="profile-info">
-              <ul class="profile-list">
-                <li><span>Родной язык:</span>Не важно</li>
-                <li><span>Акцент:</span>Не важно</li>
-                <li><span>Пол:</span>Не важно</li>
-                <li><span>Возраст:</span>Не важно</li>
-              </ul>
-            </div>
-            <div class="profile-settings">
-              <div class="profile-settings__inputs">
-                <div class="input-block input-select">
-                  <label for="">Родной язык</label>
-                  <div class="select">
-                    <div class="select-main">
-                      <div class="select-text">Не важно</div>
-                      <div class="input-icon">
-                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
-                      </div>
+        <div class="personalArea-block__top-b"></div>
+      </div>
+      <div class="profile">
+
+        <form method="post">
+          {% csrf_token %}
+
+          <div class="profile-block profile-main">
+            <div class="profile-edit">Редактировать</div>
+            <div class="profile-block__wrap">
+              <span class="profile-main__subtitle">Основное</span>
+              <div class="profile-block__info profile-main__info">
+                <div class="profile-main__row">
+
+                  <div class="profile-main__user">
+                    <img src="{% static 'img/user-img.svg' %}" alt="">
+                    <input type="file">
+                    <span>Загрузить</span>
+                  </div>
+
+                  <div class="profile-main__descr">
+
+                    <div class="profile-main__descr-top">
+                      {% if user.is_staff %}
+                        <span>Учитель:</span>
+                      {% else %}
+                        <span>Ученик:</span>
+                        {{ user.get_full_name }}
+                      {% endif %}
                     </div>
-                    <div class="select-info">
+
+                    <div class="profile-main__descr-row">
                       <ul>
-                        <li>Не важно</li>
-                        <li>Не важно2</li>
-                        <li>Не важно3</li>
+                        <li>
+                          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.4 3L8 6.75L1.6 3V1.5L8 5.25L14.4 1.5V3ZM14.4 0H1.6C0.712 0 0 0.6675 0 1.5V10.5C0 10.8978 0.168571 11.2794 0.468629 11.5607C0.768687 11.842 1.17565 12 1.6 12H14.4C14.8243 12 15.2313 11.842 15.5314 11.5607C15.8314 11.2794 16 10.8978 16 10.5V1.5C16 0.6675 15.28 0 14.4 0Z" fill="#FFB42D"/>
+                          </svg>
+                          {{ user.email }}
+                        </li>
+
+                        {% if user.phone %}
+                          <li>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M2.715 5.8425C3.795 7.965 5.535 9.705 7.6575 10.785L9.3075 9.135C9.5175 8.925 9.81 8.865 10.0725 8.9475C10.9125 9.225 11.8125 9.375 12.75 9.375C12.9489 9.375 13.1397 9.45402 13.2803 9.59467C13.421 9.73532 13.5 9.92609 13.5 10.125V12.75C13.5 12.9489 13.421 13.1397 13.2803 13.2803C13.1397 13.421 12.9489 13.5 12.75 13.5C9.36849 13.5 6.12548 12.1567 3.73439 9.76561C1.3433 7.37452 0 4.13151 0 0.75C0 0.551088 0.0790176 0.360322 0.21967 0.21967C0.360322 0.0790176 0.551088 0 0.75 0H3.375C3.57391 0 3.76468 0.0790176 3.90533 0.21967C4.04598 0.360322 4.125 0.551088 4.125 0.75C4.125 1.6875 4.275 2.5875 4.5525 3.4275C4.635 3.69 4.575 3.9825 4.365 4.1925L2.715 5.8425Z" fill="#FFB42D"/>
+                            </svg>
+                            {{ user.phone }}
+                          </li>
+                        {% endif %}
+
                       </ul>
                     </div>
-                    <input type="text" name="text" class="select-value">
-                  </div>
-                </div>
-                <div class="input-block input-select">
-                  <label for="">Акцент</label>
-                  <div class="select">
-                    <div class="select-main">
-                      <div class="select-text">Не важно</div>
-                      <div class="input-icon">
-                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
+
+                    <div class="profile-settings">
+                      <div class="profile-settings__row">
+                        <div class="profile-settings__input">
+                          <div class="input-block">
+                            <label for="phone">Телефон</label>
+                            <input
+                              id="phone"
+                              type="tel"
+                              name="phone"
+                              value="{{ user.phone|default_if_none:'' }}"
+                            >
+                          </div>
+                        </div>
+
+                        <div class="profile-settings__input">
+                          <div class="input-block">
+                            <label for="email">Email</label>
+                            <input
+                              id="email"
+                              type="email"
+                              name="email"
+                              value="{{ user.email }}"
+                            >
+                          </div>
+                        </div>
+
+                        <div class="profile-settings__input">
+                          <div class="input-block">
+                            <label for="current-password">Текущий пароль</label>
+                            <input
+                              id="current-password"
+                              type="password"
+                              name="current_password"
+                              value=""
+                            >
+                          </div>
+                        </div>
+
+                        <div class="profile-settings__input">
+                          <div class="input-block">
+                            <label for="new-password1">Новый пароль</label>
+                            <input
+                              id="new_password1"
+                              type="password"
+                              name="new-password1"
+                              value=""
+                            >
+                          </div>
+                        </div>
+
+                        <div class="profile-settings__input">
+                          <div class="input-block">
+                            <label for="new-password">Повторите новый пароль</label>
+                            <input
+                              id="new_password2"
+                              type="password"
+                              name="new-password2"
+                              value=""
+                            >
+                          </div>
+                        </div>
+
+                        <div class="profile-settings__input">
+                          <div class="input-block">
+                            <button class="main-btn">Сохранить</button>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
-                    <div class="select-info">
-                      <ul>
-                        <li>Не важно</li>
-                        <li>Не важно2</li>
-                        <li>Не важно3</li>
-                      </ul>
-                    </div>
-                    <input type="text" name="text" class="select-value">
-                  </div>
-                </div>
-                <div class="input-block input-select">
-                  <label for="">Пол</label>
-                  <div class="select">
-                    <div class="select-main">
-                      <div class="select-text">Не важно</div>
-                      <div class="input-icon">
-                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
-                      </div>
-                    </div>
-                    <div class="select-info">
-                      <ul>
-                        <li>Не важно</li>
-                        <li>Не важно2</li>
-                        <li>Не важно3</li>
-                      </ul>
-                    </div>
-                    <input type="text" name="text" class="select-value">
-                  </div>
-                </div>
-                <div class="input-block input-select">
-                  <label for="">Возраст</label>
-                  <div class="select">
-                    <div class="select-main">
-                      <div class="select-text">Не важно</div>
-                      <div class="input-icon">
-                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
-                      </div>
-                    </div>
-                    <div class="select-info">
-                      <ul>
-                        <li>Не важно</li>
-                        <li>Не важно2</li>
-                        <li>Не важно3</li>
-                      </ul>
-                    </div>
-                    <input type="text" name="text" class="select-value">
                   </div>
                 </div>
               </div>
-              <button class="main-btn">Сохранить</button>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="personalArea-block">
-    <div class="personalArea-block__top">
-      <div class="personalArea-block__top-row">
-        <span class="personalArea-block__title">Настройки профиля</span>
-      </div>
-      <div class="personalArea-block__top-b"></div>
-    </div>
-
-    <div class="profile">
-      <div class="profile-block">
-        <div class="profile-block__wrap">
-          <span class="profile-title">Часовой пояс</span>
-          <div class="input-block input-select profile-select">
-            <div class="select">
-              <div class="select-main">
-                <div class="select-text">Английский от 4-х лет</div>
-                <div class="input-icon">
-                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
-                </div>
-              </div>
-              <div class="select-info">
-                <ul>
-                  <li>Английский от 4-х лет</li>
-                  <li>Английский от 4-х лет2</li>
-                  <li>Английский от 4-х лет3</li>
-                </ul>
-              </div>
-              <input type="text" name="text" class="select-value">
-            </div>
-          </div>
-          <div class="profile-notifications">
-            Уведомления
-            <span>Email</span>
-          </div>
-          <div class="test-item">
-            <input type="checkbox" name="notifications" checked>
-            <span class="checkbox-ico"></span>
-            Системные уведомления
-          </div>
-          <div class="test-item">
-            <input type="checkbox" name="notifications">
-            <span class="checkbox-ico"></span>
-            Сообщения от службы поддержки
-          </div>
-          <div class="test-item">
-            <input type="checkbox" name="notifications">
-            <span class="checkbox-ico"></span>
-            Информация об оплатах
-          </div>
-          <div class="test-item">
-            <input type="checkbox" name="notifications" checked>
-            <span class="checkbox-ico"></span>
-            Напоминания об уроках
-          </div>
-          <div class="test-item">
-            <input type="checkbox" name="notifications" checked>
-            <span class="checkbox-ico"></span>
-            Скидки, акции, подарки
-          </div>
-        </div>
-      </div>
-      <div class="profile-block">
-        <div class="profile-block__wrap">
-          <div class="profile-block__select">
-            <div class="input-block input-select">
-              <label for="">Голос озвучки мужской/женский</label>
-              <div class="select">
-                <div class="select-main">
-                  <div class="select-text">Мужской</div>
-                  <div class="input-icon">
-                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
-                  </div>
-                </div>
-                <div class="select-info">
-                  <ul>
-                    <li>Мужской</li>
-                    <li>Мужской2</li>
-                    <li>Мужской3</li>
-                  </ul>
-                </div>
-                <input type="text" name="text" class="select-value">
-              </div>
-            </div>
-            <div class="input-block input-select">
-              <label for="">Акцент голоса озвучки</label>
-              <div class="select">
-                <div class="select-main">
-                  <div class="select-text">Английский</div>
-                  <div class="input-icon">
-                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>
-                  </div>
-                </div>
-                <div class="select-info">
-                  <ul>
-                    <li>Английский</li>
-                    <li>Английский2</li>
-                    <li>Английский3</li>
-                  </ul>
-                </div>
-                <input type="text" name="text" class="select-value">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="profile-block profile-block__one">
-        <div class="profile-block__wrap">
-          <div class="test-item">
-            <input type="checkbox" name="sounds" checked>
-            <span class="checkbox-ico"></span>
-            Звуки при выполнении упражнений
-          </div>
-        </div>
-      </div>
-
-      <div class="profile-block profile-block__edit">
-        <div class="profile-edit">Редактировать</div>
-        <div class="profile-block__wrap">
-          <div class="profile-block__info">
-            <ul class="profile-block__list">
-              <li><span>Email для входа</span>{{ user.email }}</li>
-              <li><span>Телефон для входа</span>Не задан</li>
-              <li><span>Пароль</span><b>··········</b></li>
-            </ul>
-            <div class="profile-settings">
-              <form method="post">
-              <div class="profile-settings__input">
-                <p>Email для входа</p>
-                <div class="input-block">
-                  <input type="email" name="email">
-                </div>
-              </div>
-              <div class="profile-settings__input">
-                <p>Телефон для входа</p>
-                <div class="input-block">
-                  <input type="tel" name="tel">
-                </div>
-              </div>
-              <div class="profile-settings__input">
-                <p>Текущий пароль</p>
-                <div class="input-block">
-                  <input type="password" name="password">
-                </div>
-              </div>
-              <div class="profile-settings__input">
-                <p>Новый пароль</p>
-                <div class="input-block">
-                  <input type="password" name="new-password1">
-                </div>
-              </div>
-              <div class="profile-settings__input">
-                <p>Повторите новый пароль</p>
-                <div class="input-block">
-                  <input type="password" name="new-password2">
-                </div>
-              </div>
-              <div class="profile-settings__input">
-                <p></p>
-                <button class="main-btn">Сохранить</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
 {% endblock %}
 
 {% block script %}
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 {% endblock %}

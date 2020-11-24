@@ -31,16 +31,13 @@ class AccountAdmin(CommonIdModelAdmin):
 
     list_display = (
         'get_full_name',
+        'get_email',
     )
     fields = (
         *CommonIdModelAdmin.fields,
         'user',
         'gender',
     )
-
-    def get_full_name(self, obj):
-        return obj.user.get_full_name()
-    get_full_name.short_description = 'И.Ф.'
 
 
 @admin.register(Teacher)
@@ -56,21 +53,26 @@ class TeacherAdmin(AccountAdmin):
 @admin.register(Student)
 class StudentAdmin(AccountAdmin):
 
+    list_display = (
+        *AccountAdmin.list_display,
+        'phone',
+        'age',
+    )
     fields = (
         *AccountAdmin.fields,
         'phone',
-        'native_language',
+        # 'native_language',
         'age',
-        'timezone',
-        'accent_of_voice_acting',
-        'system_notification',
-        'support_message',
-        'payment_info',
-        'reminders_about_lessons',
-        'discounts',
-        'voice_acting',
-        'pronunciation',
-        'sounds',
+        # 'timezone',
+        # 'accent_of_voice_acting',
+        # 'system_notification',
+        # 'support_message',
+        # 'payment_info',
+        # 'reminders_about_lessons',
+        # 'discounts',
+        # 'voice_acting',
+        # 'pronunciation',
+        # 'sounds',
     )
 
 

@@ -39,6 +39,14 @@ class Account(CommonId):
 
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, verbose_name='учётная запись')
 
+    def get_full_name(self):
+        return self.user.get_full_name()
+    get_full_name.short_description = 'И.Ф.'
+
+    def get_email(self):
+        return self.user.email
+    get_email.short_description = 'Эл. почта'
+
     class Meta:
         abstract = True
 
@@ -58,18 +66,18 @@ class Teacher(Account):
 class Student(Account):
 
     phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
-    native_language = models.CharField(max_length=20, null=True, blank=True, verbose_name='родной язык')
-    pronunciation = models.CharField(max_length=20, null=True, blank=True, verbose_name='акцент')
-    timezone = models.CharField(max_length=32, choices=TIMEZONES, default='UTC', verbose_name='часовой пояс')
-    voice_acting = models.CharField(choices=GENDER[1:], max_length=1, default='M', verbose_name='голос озвучки')
-    accent_of_voice_acting = models.CharField(max_length=20, null=True, blank=True, verbose_name='акцент голоса озвучки')
+    # native_language = models.CharField(max_length=20, null=True, blank=True, verbose_name='родной язык')
+    # pronunciation = models.CharField(max_length=20, null=True, blank=True, verbose_name='акцент')
+    # timezone = models.CharField(max_length=32, choices=TIMEZONES, default='UTC', verbose_name='часовой пояс')
+    # voice_acting = models.CharField(choices=GENDER[1:], max_length=1, default='M', verbose_name='голос озвучки')
+    # accent_of_voice_acting = models.CharField(max_length=20, null=True, blank=True, verbose_name='акцент голоса озвучки')
 
-    system_notification = models.BooleanField(default=True, verbose_name='системные уведомления')
-    support_message = models.BooleanField(default=True, verbose_name='сообщения от службы поддержки')
-    payment_info = models.BooleanField(default=True, verbose_name='информация об оплате')
-    reminders_about_lessons = models.BooleanField(default=True, verbose_name='напоминания об уроках')
-    discounts = models.BooleanField(default=True, verbose_name='скидки, акции, подарки')
-    sounds = models.BooleanField(default=False, verbose_name='звуки при выполнении упражнений')
+    # system_notification = models.BooleanField(default=True, verbose_name='системные уведомления')
+    # support_message = models.BooleanField(default=True, verbose_name='сообщения от службы поддержки')
+    # payment_info = models.BooleanField(default=True, verbose_name='информация об оплате')
+    # reminders_about_lessons = models.BooleanField(default=True, verbose_name='напоминания об уроках')
+    # discounts = models.BooleanField(default=True, verbose_name='скидки, акции, подарки')
+    # sounds = models.BooleanField(default=False, verbose_name='звуки при выполнении упражнений')
 
     age = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name='возраст')
 

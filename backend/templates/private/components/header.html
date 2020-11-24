@@ -33,9 +33,9 @@
         </div>
         <div class="header-drop">
           <ul>
+            <li><a href="{% url 'private_side:settings' %}">Настройки профиля</a></li>
 
             {% if not user.is_staff %}
-              <li><a href="{% url 'private_side:settings' %}">Настройки профиля</a></li>
               <li><a href="{% url 'private_side:courses' %}">Оплата</a></li>
               <li><a href="{% url 'private_side:free_lesson' %}">Бонусные уроки</a></li>
             {% endif %}
