@@ -8,38 +8,8 @@ from typing import List
 from datetime import datetime, timedelta
 import math
 
+from common.utils import date_now
 from paid_course.models import PaidCourse, Schedule, LessonResults
-
-
-def get_user_context(obj, is_filter=True):
-    user = obj.request.user
-    if is_filter:
-        return Q(teacher__user=user) if user.is_staff else Q(student__user=user)
-    else:
-        return user.teacher if user.is_staff else user.student
-
-
-now = timezone.now()
-
-
-class ScheduleEntity(BaseModel):
-    status: bool
-    date_value: datetime
-    course: str = ''
-    lesson: str = ''
-    teacher: str = ''
-    student: str = ''
-
-
-class WeekDay(BaseModel):
-    title: str
-    date: datetime
-    schedules: List[ScheduleEntity] = []
-
-
-class Week(BaseModel):
-    title: str
-    weekday: List[WeekDay]
 
 
 title_weeks = {
@@ -62,18 +32,38 @@ title_weekday = {
 }
 
 
+class ScheduleEntity(BaseModel):
+    finished: bool
+    datetime: datetime
+    paid_course: str = ''
+    teacher: str = ''
+    student: str = ''
+    free_lesson: bool = False
+
+
+class WeekDay(BaseModel):
+    title: str
+    date: datetime
+    schedules: List[ScheduleEntity] = []
+
+
+class Week(BaseModel):
+    title: str
+    weekday: List[WeekDay]
+
+
 def weekday_maker(dt, schedules):
     return WeekDay(
         title=title_weekday.get(dt.weekday()),
         date=dt,
         schedules=[
             ScheduleEntity(
-                status=True if (schedule.datetime >= now) else False,
-                date_value=schedule.datetime,
-                course=schedule.course.course.title,
-                lesson=schedule.course.lessons.all()[key].title,
-                teacher=schedule.course.teacher.user.get_full_name(),
-                student=schedule.course.student.user.get_full_name(),
+                finished=True if (schedule.datetime >= date_now) else False,
+                datetime=schedule.datetime,
+                paid_course=schedule.paid_course.course.title,
+                # lesson=schedule.paid_course.lessons.all()[key].title,
+                teacher=schedule.paid_course.teacher.user.get_full_name(),
+                student=schedule.paid_course.student.user.get_full_name(),
             ) for key, schedule in enumerate(schedules.filter(datetime__day=dt.day, datetime__month=dt.month, datetime__year=dt.year))
         ]
     )
@@ -92,32 +82,41 @@ def week_maker(week_number, first_day, schedules):
     )
 
 
+def get_user_context(obj, is_filter=True):
+    user = obj.request.user
+    if is_filter:
+        return Q(teacher__user=user) if user.is_staff else Q(student__user=user)
+    else:
+        return user.teacher if user.is_staff else user.student
+
+
 class TimetablesView(LoginRequiredMixin, ListView):
 
     model = PaidCourse
     template_name = 'private/timetables.html'
 
     def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        object_list = context.get('object_list')
 
         schedules = Schedule.objects.filter(
-            course_id__in=[
-                paid_course.id
-                for paid_course in get_user_context(self, is_filter=False).paidcourse_set.filter(finished=False)
+            paid_course_id__in=object_list.values_list('id', flat=True)
+        )
+
+        if schedules:
+            first_schedule = schedules.first()
+            last_schedule = schedules.last()
+
+            date_delta = last_schedule.datetime - first_schedule.datetime
+
+            context['weeks'] = [
+                week_maker(i, first_schedule.datetime, schedules)
+                for i in range(int(math.ceil(date_delta.days / 7)))
             ]
-        ).order_by('datetime')
+        else:
+            context['weeks'] = None
 
-        first_schedule = schedules.first()
-        last_schedule = schedules.last()
-
-        date_delta = last_schedule.datetime - first_schedule.datetime
-
-        ctx['weeks'] = [
-            week_maker(i, first_schedule.datetime, schedules)
-            for i in range(0, int(math.ceil(date_delta.days / 7)))
-        ]
-
-        return ctx
+        return context
 
     def get_queryset(self):
         return super().get_queryset().filter(
