@@ -60,7 +60,6 @@ class Schedule(models.Model):
             Q(datetime__gte=first_date) | Q(datetime__lte=second_date),
         )
 
-
     def __str__(self):
         return f'{self.datetime.astimezone()}'
 

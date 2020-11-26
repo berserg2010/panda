@@ -116,6 +116,8 @@ class TimetablesView(LoginRequiredMixin, ListView):
         else:
             context['weeks'] = None
 
+        context['groups'] = []
+
         return context
 
     def get_queryset(self):
