@@ -127,7 +127,7 @@ class TimetablesView(LoginRequiredMixin, ListView):
         )
 
 
-class PaidCourseListView(LoginRequiredMixin, ListView):
+class LessonsListView(LoginRequiredMixin, ListView):
 
     model = PaidCourse
     template_name = 'private/lessons.html'
@@ -136,7 +136,7 @@ class PaidCourseListView(LoginRequiredMixin, ListView):
         return super().get_queryset().filter(get_user_context(self), finished=False)
 
 
-class PaidCourseLessonView(LoginRequiredMixin, DetailView):
+class LessonDetailView(LoginRequiredMixin, DetailView):
 
     model = LessonResults
     template_name = 'private/lesson.html'

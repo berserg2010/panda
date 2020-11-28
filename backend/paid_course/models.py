@@ -39,7 +39,7 @@ class PaidCourse(BasicRelationshipTable):
     lessons = models.ManyToManyField(Lesson, through='LessonResults', related_name='paid_courses', verbose_name='уроки')
 
     def __str__(self):
-        return f'{self.course}'
+        return f'{self.course} | {self.student}'
 
     class Meta:
         verbose_name = 'оплаченный курс'

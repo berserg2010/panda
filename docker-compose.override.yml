@@ -4,7 +4,5 @@ services:
   backend:
     environment:
       - DEBUG=True
-    command:
-      ["daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application"]
     ports:
       - 8000:8000

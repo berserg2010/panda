@@ -9,6 +9,11 @@ services:
     networks:
       - db_layer
 
+  redis:
+    image: redis:alpine
+    networks:
+      - db_layer
+
   backend:
     build: backend/.
     env_file:
@@ -18,8 +23,11 @@ services:
       - ./backend:/usr/src/panda
     depends_on:
       - db
+      - redis
     networks:
       - db_layer
+    command:
+      [ "daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application" ]
 
 networks:
   db_layer:

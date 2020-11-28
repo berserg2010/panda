@@ -7,17 +7,9 @@ services:
       - HOST=0.0.0.0
     ports:
       - 8000
-#    volumes:
-#      - type: bind
-#        source: ./backend/static
-#        target: /usr/src/panda/static
-#      - media_volume:/usr/src/panda/media
-#      - ssl_volume:/usr/src/panda/ssl
     user: root
     networks:
       - proxy_back
-    command:
-      ["daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application"]
 
   proxy:
     image: nginx:1.19
@@ -28,9 +20,6 @@ services:
       - 443:443
     volumes:
       - ./proxy/templates:/etc/nginx/templates
-#      - static_volume:/usr/src/panda/static
-#      - media_volume:/usr/src/panda/media
-#      - ssl_volume:/usr/src/panda/ssl
       - type: bind
         source: ./backend/static
         target: /usr/src/panda/static
@@ -44,11 +33,6 @@ services:
       - backend
     networks:
       - proxy_back
-
-#volumes:
-#  static_volume:
-#  media_volume:
-#  ssl_volume:
 
 networks:
   proxy_back:

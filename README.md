@@ -151,7 +151,7 @@ ___
 
 ### Dump db
 
-    python3 manage.py dumpdata --indent 2 --output dump.json
+    python3 manage.py dumpdata --indent 2 --exclude contenttypes --exclude admin.logentry --output dump.json
 >
     python3 manage.py loaddata dump.json
     
@@ -163,7 +163,6 @@ ___
 В каталоге проекта `ssl` запустить
 
     openssl req -config dev.local.conf -new -sha256 -newkey rsa:2048 -nodes -keyout dev.local.key -x509 -days 365 -out dev.local.crt
-    
     
     
 
@@ -181,7 +180,6 @@ ___
     ~~python manage.py runsslserver 0.0.0.0:8000 --certificate ssl/dev.local.crt --key ssl/dev.local.key~~
 
     daphne -e ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt backend.asgi:application
-
 
 
 ### Docker

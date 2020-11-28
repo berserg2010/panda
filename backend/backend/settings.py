@@ -31,13 +31,15 @@ CORS_ORIGIN_WHITELIST = [
     'https://127.0.0.1',
     'http://192.168.1.52',
     'https://192.168.1.52',
-    'http://192.168.1.52:9000',
-    'https://192.168.1.52:9000',
-    'https://dev.local:9000',
+    'http://192.168.1.52:8000',
+    'https://192.168.1.52:8000',
+    'https://dev.local:8000',
     'http://panda-dev.ddns.net',
     'https://panda-dev.ddns.net',
 
     'https://api.fondy.eu',
+
+    '*',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -51,6 +53,19 @@ CSRF_TRUSTED_ORIGINS = [
     'https://23.108.217.143',
 ]
 
+# Channels
+ASGI_APPLICATION = 'backend.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('redis', 6379)],
+        },
+    },
+}
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -61,6 +76,7 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'rest_framework',
+    'channels',
 
     'settings_site.apps.SettingsSiteConfig',
     'auth_backend.apps.AuthBackendConfig',
@@ -109,23 +125,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'HOST': os.environ.get('POSTGRES_HOST', 'db'),
-        # 'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
-        # 'PORT': 5432,
-        # 'USER': os.environ.get('POSTGRES_USER', 'postgres'),
-        # 'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'postgres'),
-
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': config('POSTGRES_HOST', default='db'),
         'NAME': config('POSTGRES_DB', default='postgres'),

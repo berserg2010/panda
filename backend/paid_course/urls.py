@@ -2,8 +2,8 @@ from django.urls import path
 
 from .views import (
     TimetablesView,
-    PaidCourseListView,
-    PaidCourseLessonView,
+    LessonsListView,
+    LessonDetailView,
 
     NotesListView,
     VocabularyListView,
@@ -14,9 +14,9 @@ from .views import (
 urlpatterns = [
     path('timetables/', TimetablesView.as_view(), name='timetables'),
 
-    # path('lessons/', PaidCourseListView.as_view(), name='lessons'),
-    # path('lesson/<uuid:pk>', PaidCourseLessonView.as_view(), name='lesson'),
-    #
+    path('lessons/', LessonsListView.as_view(), name='lessons'),
+    path('lesson/<uuid:pk>', LessonDetailView.as_view(), name='lesson'),
+
     # path('notes/', NotesListView.as_view(), name='notes'),
     #
     # path('vocabulary/', VocabularyListView.as_view(), name='vocabulary_list'),

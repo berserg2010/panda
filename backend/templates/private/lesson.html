@@ -1,104 +1,109 @@
-{% extends './_base.html' %}
+{% extends 'private/_base.html' %}
 
 {% load static private_side_extras %}
 
-{% block title %}Урок{% endblock %}
+{% block title %}Занятие{% endblock %}
 
 {% block content %}
-    <div class="personalArea-content">
-      <div class="personalArea-block">
-        <div class="personalArea-block__top">
-          <span class="personalArea-block__title">Урок {{ object.course_lesson.number }} – {{ object.lesson.title }}</span>
-          <div class="personalArea-block__top-b"></div>
-        </div>
-        <div class="videoCall">
-          <div class="videoCall-row">
 
-            <div class="videoCall-col videoCall-col__1"  style="overflow: hidden">
-              <div class="videoCall-main">
+  <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+  <input id="chat-message-input" type="text" size="100"><br>
+  <input id="chat-message-submit" type="button" value="Send">
 
-                <div class="videoCall-user">
-                  <video
-                      id="peer-camera"
-{#                      width="300px" #}
-                      height="700px"
-                      autoplay="autoplay"
-                      class="center-block"
-                      style="display: none"
-{#                      poster="{% static 'img/videoCall-user.svg' %}"#}
-                  ></video>
-                  <button id="connect-to-peer" >
-                    <img src="{% static 'img/videoCall-user.svg' %}" height="300px">
-                  </button>
-                </div>
+  <div class="personalArea-content">
+    <div class="personalArea-block">
+      <div class="personalArea-block__top">
+        <span class="personalArea-block__title">Урок {{ object.course_lesson.number }} – {{ object.lesson.title }}</span>
+        <div class="personalArea-block__top-b"></div>
+      </div>
+      <div class="videoCall">
+        <div class="videoCall-row">
 
-                <div class="videoCall-you" style="overflow: hidden">
-                  <video
-                      id="my-camera"
-{#                      width="100px"#}
-                      height="100px"
-                      autoplay="autoplay"
-                      muted="true"
-                      class="center-block"
-                      style="display: none"
-{#                      poster="{% static 'img/videoCall-hi.svg' %}"#}
-                  ></video>
-                  <img src="{% static 'img/videoCall-hi.svg' %}" height="100px">
-                </div>
+          <div class="videoCall-col videoCall-col__1"  style="overflow: hidden">
+            <div class="videoCall-main">
 
-                <div class="videoCall-buttons">
-
-                  <ul class="videoCall-buttons__list">
-                    <li>
-                      <a href="#">
-                        <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 0C7.79565 0 8.55871 0.316071 9.12132 0.87868C9.68393 1.44129 10 2.20435 10 3V9C10 9.79565 9.68393 10.5587 9.12132 11.1213C8.55871 11.6839 7.79565 12 7 12C6.20435 12 5.44129 11.6839 4.87868 11.1213C4.31607 10.5587 4 9.79565 4 9V3C4 2.20435 4.31607 1.44129 4.87868 0.87868C5.44129 0.316071 6.20435 0 7 0V0ZM14 9C14 12.53 11.39 15.44 8 15.93V19H6V15.93C2.61 15.44 0 12.53 0 9H2C2 10.3261 2.52678 11.5979 3.46447 12.5355C4.40215 13.4732 5.67392 14 7 14C8.32608 14 9.59785 13.4732 10.5355 12.5355C11.4732 11.5979 12 10.3261 12 9H14Z" fill="#5F9F84"/></svg>
-                      </a>
-                    </li>
-                    <li><a href="#"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 4.5V1C14 0.734784 13.8946 0.48043 13.7071 0.292893C13.5196 0.105357 13.2652 0 13 0H1C0.734784 0 0.48043 0.105357 0.292893 0.292893C0.105357 0.48043 0 0.734784 0 1V11C0 11.2652 0.105357 11.5196 0.292893 11.7071C0.48043 11.8946 0.734784 12 1 12H13C13.2652 12 13.5196 11.8946 13.7071 11.7071C13.8946 11.5196 14 11.2652 14 11V7.5L18 11.5V0.5L14 4.5Z" fill="#5F9F84"/></svg></a></li>
-                    <li><a href="#"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V18C0 18.5304 0.210714 19.0391 0.585786 19.4142C0.960859 19.7893 1.46957 20 2 20H14C14.5304 20 15.0391 19.7893 15.4142 19.4142C15.7893 19.0391 16 18.5304 16 18V6L10 0ZM9.5 14V17H6.5V14H4L8 10L12 14H9.5ZM9 7V1.5L14.5 7H9Z" fill="#5F9F84"/></svg></a></li>
-                    <li><a href="#"><svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 14C21.1 14 21.99 13.1 21.99 12L22 2.00001C22 0.890014 21.1 0 20 0H3.99998C2.88998 0 1.99997 0.890014 1.99997 2.00001V12C2.00002 13.1 2.88998 14 3.99998 14H0V16H24V14H20ZM13 10.47V8.27998C10.22 8.27998 8.38997 9.12997 6.99998 11C7.56 8.33 9.10997 5.66999 13 5.12999V2.99999L17 6.72997L13 10.47Z" fill="#5F9F84"/></svg></a></li>
-                  </ul>
-{#                  <button id="connect-to-peer-btn" class="videoCall-buttons__btn">#}
-                  <button id="end-call" class="videoCall-buttons__btn">
-                    <svg width="30" height="12" viewBox="0 0 30 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 2.5C13 2.5 11.0625 2.8125 9.25 3.4V7.275C9.25 7.775 8.9625 8.2 8.55 8.4C7.325 9.0125 6.2125 9.8 5.2125 10.7125C5 10.9375 4.6875 11.075 4.375 11.075C4 11.075 3.6875 10.925 3.4625 10.7L0.3625 7.6C0.1375 7.375 0 7.0625 0 6.725C0 6.375 0.1375 6.0625 0.3625 5.8375C4.175 2.2125 9.325 0 15 0C20.675 0 25.825 2.2125 29.6375 5.8375C29.8625 6.0625 30 6.375 30 6.725C30 7.0625 29.8625 7.375 29.6375 7.6L26.5375 10.7C26.3125 10.925 26 11.075 25.625 11.075C25.3125 11.075 25 10.9375 24.775 10.7125C23.7875 9.8 22.675 9.0125 21.45 8.4C21.0375 8.2 20.75 7.775 20.75 7.275V3.4C18.9375 2.8125 17 2.5 15 2.5Z" fill="#F8FFFC"/></svg>
-                  </button>
-{#                  </button>#}
-                </div>
-
+              <div class="videoCall-user">
+                <video
+                  id="peer-camera"
+                  {#                      width="300px" #}
+                  height="700px"
+                  autoplay="autoplay"
+                  class="center-block"
+                  style="display: none"
+                  {#                      poster="{% static 'img/videoCall-user.svg' %}"#}
+                ></video>
+                <button id="connect-to-peer" >
+                  <img src="{% static 'img/videoCall-user.svg' %}" height="300px">
+                </button>
               </div>
-            </div>
 
-            <div class="videoCall-col videoCall-col__2">
-              <span class="videoCall-title">Read the next and atch the head to the appropriate time of day</span>
-              <div class="videoCall-rectangle"></div>
-              <div class="videoCall-text">
-                <p>Read the next and atch the head to the appropriate time of day</p>
+              <div class="videoCall-you" style="overflow: hidden">
+                <video
+                  id="my-camera"
+                  {#                      width="100px"#}
+                  height="100px"
+                  autoplay="autoplay"
+                  muted="muted"
+                  class="center-block"
+                  style="display: none"
+                  {#                      poster="{% static 'img/videoCall-hi.svg' %}"#}
+                ></video>
+                <img src="{% static 'img/videoCall-hi.svg' %}" height="100px">
               </div>
-              <div class="videoCall-drag">
-                <ul class="categories-list options">
-                  <li class="card"><a href="#">Eat your dinner</a></li>
-                  <li class="card"><a href="#">Eat your</a></li>
-                  <li class="card"><a href="#">Dinner</a></li>
-                  <li class="card"><a href="#">Eat your dinner</a></li>
+
+              <div class="videoCall-buttons">
+
+                <ul class="videoCall-buttons__list">
+                  <li>
+                    <a href="#">
+                      <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 0C7.79565 0 8.55871 0.316071 9.12132 0.87868C9.68393 1.44129 10 2.20435 10 3V9C10 9.79565 9.68393 10.5587 9.12132 11.1213C8.55871 11.6839 7.79565 12 7 12C6.20435 12 5.44129 11.6839 4.87868 11.1213C4.31607 10.5587 4 9.79565 4 9V3C4 2.20435 4.31607 1.44129 4.87868 0.87868C5.44129 0.316071 6.20435 0 7 0V0ZM14 9C14 12.53 11.39 15.44 8 15.93V19H6V15.93C2.61 15.44 0 12.53 0 9H2C2 10.3261 2.52678 11.5979 3.46447 12.5355C4.40215 13.4732 5.67392 14 7 14C8.32608 14 9.59785 13.4732 10.5355 12.5355C11.4732 11.5979 12 10.3261 12 9H14Z" fill="#5F9F84"/></svg>
+                    </a>
+                  </li>
+                  <li><a href="#"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 4.5V1C14 0.734784 13.8946 0.48043 13.7071 0.292893C13.5196 0.105357 13.2652 0 13 0H1C0.734784 0 0.48043 0.105357 0.292893 0.292893C0.105357 0.48043 0 0.734784 0 1V11C0 11.2652 0.105357 11.5196 0.292893 11.7071C0.48043 11.8946 0.734784 12 1 12H13C13.2652 12 13.5196 11.8946 13.7071 11.7071C13.8946 11.5196 14 11.2652 14 11V7.5L18 11.5V0.5L14 4.5Z" fill="#5F9F84"/></svg></a></li>
+                  <li><a href="#"><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V18C0 18.5304 0.210714 19.0391 0.585786 19.4142C0.960859 19.7893 1.46957 20 2 20H14C14.5304 20 15.0391 19.7893 15.4142 19.4142C15.7893 19.0391 16 18.5304 16 18V6L10 0ZM9.5 14V17H6.5V14H4L8 10L12 14H9.5ZM9 7V1.5L14.5 7H9Z" fill="#5F9F84"/></svg></a></li>
+                  <li><a href="#"><svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 14C21.1 14 21.99 13.1 21.99 12L22 2.00001C22 0.890014 21.1 0 20 0H3.99998C2.88998 0 1.99997 0.890014 1.99997 2.00001V12C2.00002 13.1 2.88998 14 3.99998 14H0V16H24V14H20ZM13 10.47V8.27998C10.22 8.27998 8.38997 9.12997 6.99998 11C7.56 8.33 9.10997 5.66999 13 5.12999V2.99999L17 6.72997L13 10.47Z" fill="#5F9F84"/></svg></a></li>
                 </ul>
-                <span class="videoCall-title videoCall-title__center">Time for everything</span>
-                <div class="videoCall-input answers">
-                  <span>Noon</span>
-                  <div class="videoCall-dragTest">
-                    <div class="answers-wrap option"></div>
-                  </div>
-                  <input type="text">
-                </div>
+                {#                  <button id="connect-to-peer-btn" class="videoCall-buttons__btn">#}
+                <button id="end-call" class="videoCall-buttons__btn">
+                  <svg width="30" height="12" viewBox="0 0 30 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 2.5C13 2.5 11.0625 2.8125 9.25 3.4V7.275C9.25 7.775 8.9625 8.2 8.55 8.4C7.325 9.0125 6.2125 9.8 5.2125 10.7125C5 10.9375 4.6875 11.075 4.375 11.075C4 11.075 3.6875 10.925 3.4625 10.7L0.3625 7.6C0.1375 7.375 0 7.0625 0 6.725C0 6.375 0.1375 6.0625 0.3625 5.8375C4.175 2.2125 9.325 0 15 0C20.675 0 25.825 2.2125 29.6375 5.8375C29.8625 6.0625 30 6.375 30 6.725C30 7.0625 29.8625 7.375 29.6375 7.6L26.5375 10.7C26.3125 10.925 26 11.075 25.625 11.075C25.3125 11.075 25 10.9375 24.775 10.7125C23.7875 9.8 22.675 9.0125 21.45 8.4C21.0375 8.2 20.75 7.775 20.75 7.275V3.4C18.9375 2.8125 17 2.5 15 2.5Z" fill="#F8FFFC"/></svg>
+                </button>
+                {#                  </button>#}
               </div>
-              <div class="videoCall-bottom">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </p>
+
+            </div>
+          </div>
+
+          <div class="videoCall-col videoCall-col__2">
+            <span class="videoCall-title">Read the next and atch the head to the appropriate time of day</span>
+            <div class="videoCall-rectangle"></div>
+            <div class="videoCall-text">
+              <p>Read the next and atch the head to the appropriate time of day</p>
+            </div>
+            <div class="videoCall-drag">
+              <ul class="categories-list options">
+                <li class="card"><a href="#">Eat your dinner</a></li>
+                <li class="card"><a href="#">Eat your</a></li>
+                <li class="card"><a href="#">Dinner</a></li>
+                <li class="card"><a href="#">Eat your dinner</a></li>
+              </ul>
+              <span class="videoCall-title videoCall-title__center">Time for everything</span>
+              <div class="videoCall-input answers">
+                <span>Noon</span>
+                <div class="videoCall-dragTest">
+                  <div class="answers-wrap option"></div>
+                </div>
+                <input type="text">
               </div>
             </div>
-
+            <div class="videoCall-bottom">
+              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </p>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
+  </div>
 
 {% endblock %}
 
@@ -160,121 +165,10 @@
 
     navigator.getWebcam = (constraints) => {
       return navigator.mediaDevices.getUserMedia(constraints) ||
-      navigator.webkitGetUserMedia(constraints) ||
-      navigator.mozGetUserMedia(constraints) ||
-      navigator.msGetUserMedia(constraints)
+        navigator.webkitGetUserMedia(constraints) ||
+        navigator.mozGetUserMedia(constraints) ||
+        navigator.msGetUserMedia(constraints)
     }
-
-
-    const peer = new Peer(
-      is_staff ? teacher : student,
-      {
-        host: 'dev.local',
-        port: 9000,
-        path: '/myapp',
-        secure: true,
-        config: {
-          'iceServers': [
-            { url: 'stun:stun.l.google.com:19302' },
-            { url: 'stun:stun1.l.google.com:19302' },
-            {
-              url: 'turn:numb.viagenie.ca',
-              username: '{{ 'NUMB_WEBRTC_USERNAME'|get_settings_var }}',
-              credential: '{{ 'NUMB_WEBRTC_CREDENTIAL'|get_settings_var }}'
-            }
-          ]
-        },
-        debug: 3,
-      }
-    )
-
-{#    let dataConnection = peer.connect()#}
-
-    peer.on('open', (id) => {
-
-      console.info('peer open: ', id, peer.id)
-
-      $('#peer-id-label').text(id)
-    })
-
-
-{#    peer.on('connection', (dataConnection) => {#}
-{#      console.log('connection')#}
-{##}
-{#      dataConnection.on('data', handleCommand)#}
-{#    })#}
-
-
-{#    const handleCommand = (data) => {#}
-{#      console.log('data', data)#}
-{#    }#}
-
-
-    peer.on('call', (mediaConnection) => {
-
-      console.info('peer call: ', mediaConnection)
-
-      let getCall = confirm('Принять звонок?')
-
-      if (getCall) {
-
-        mediaConnection.answer(window.localStream)
-
-        getPeerStream(mediaConnection)
-
-        mediaConnection.on('close', () => {
-          console.log('mediaConnection close')
-        })
-
-        mediaConnection.on('error', () => {
-          console.error('mediaConnection error')
-        })
-
-      } else {
-        console.log('Escape call')
-      }
-    })
-
-
-    peer.on('disconnected', () => {
-      console.info('peer disconnected')
-    })
-
-    peer.on('close', () => {
-      console.info('peer close')
-    })
-
-    peer.on('error', (error) => {
-      console.error(error)
-    })
-
-
-    $(() => {
-
-      handleWebcam()
-
-      $('#connect-to-peer').click(() => {
-
-        const mediaConnection = peer.call(
-          is_staff ? student : teacher,
-          window.localStream
-        )
-
-        console.info('peer.call: ', mediaConnection)
-
-        getPeerStream(mediaConnection)
-
-      })
-
-      $('#end-call').click(() => {
-
-{#        dataConnection.send('command')#}
-
-        closeConnection()
-      })
-
-    })
-
 
     const handleWebcam = (constraints = { video: true, audio: false }) => {
 
@@ -294,45 +188,6 @@
         })
     }
 
-
-    const getPeerStream = (mediaConnection) => {
-
-      if (window.existingCall) {
-        window.existingCall.close()
-      }
-
-      window.existingCall = mediaConnection
-
-      mediaConnection.on('stream', (stream) => {
-
-        const video = document.getElementById('peer-camera')
-        video.srcObject = stream
-
-      })
-
-      handleStyleTrigger('videoCall-user', true)
-
-    }
-
-
-    const handlerScreen = (constraints = { cursor: 'always', displaySurface: 'monitor' }) => {
-
-      navigator.mediaDevices.getDisplayMedia({
-        video: constraints
-      })
-        .then((stream) => {
-
-          const video = document.getElementById('my-camera')
-          video.srcObject = stream
-
-          window.localStream = stream
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-    }
-
-
     const handleStyleTrigger = (className, condition) => {
 
       const videoNode = document.getElementsByClassName(className)[0].children
@@ -346,15 +201,107 @@
       }
     }
 
-    const closeConnection = () => {
-
-      handleStyleTrigger('videoCall-user', false)
-
-      window.existingCall.close()
-
-      peer.destroy()
+    const iceConfiguration = {
+      iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' },
+        {#        { urls: 'stun:stun1.l.google.com:19302' },#}
+        {
+          urls: 'turn:numb.viagenie.ca',
+          username: '{{ 'NUMB_WEBRTC_USERNAME'|get_settings_var }}',
+          credential: '{{ 'NUMB_WEBRTC_CREDENTIAL'|get_settings_var }}'
+        }
+      ]
     }
 
+    const yourVideo = document.getElementById('my-camera'),
+      theirVideo = document.getElementById('peer-camera')
+    let yourConnection, theirConnection
+
+    navigator.getWebcam({ video: true, audio: false })
+      .then((stream) => {
+
+        window.localStream = stream
+        yourVideo.srcObject = stream
+
+        startPeerConnection(stream)
+
+        handleStyleTrigger('videoCall-you', true)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+    const startPeerConnection = (stream) => {
+
+      yourConnection = new RTCPeerConnection(iceConfiguration);
+      theirConnection = new RTCPeerConnection(iceConfiguration);
+
+      // Setup stream listening
+      yourConnection.addStream(stream);
+      theirConnection.ontrack = (e) => {
+        theirVideo.srcObject = e.stream
+      }
+
+      // Setup ice handling
+      yourConnection.onicecandidate = function (event) {
+        if (event.candidate) {
+          theirConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+        }
+      };
+
+      theirConnection.onicecandidate = function (event) {
+        if (event.candidate) {
+          yourConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+        }
+      };
+
+      // Begin the offer
+      yourConnection.createOffer(function (offer) {
+        yourConnection.setLocalDescription(offer);
+        theirConnection.setRemoteDescription(offer);
+
+        theirConnection.createAnswer(function (offer) {
+          theirConnection.setLocalDescription(offer);
+          yourConnection.setRemoteDescription(offer);
+        });
+      });
+    };
+
+  </script>
+
+  <script>
+
+    const chatSocket = new WebSocket(
+      `wss://${window.location.host}/ws/chat/`
+    );
+
+    chatSocket.onmessage = function(e) {
+      const data = JSON.parse(e.data);
+      document.querySelector('#chat-log').value += (data.message + '\n');
+    };
+
+    chatSocket.onclose = function(e) {
+      console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+      if (e.keyCode === 13) {  // enter, return
+        document.querySelector('#chat-message-submit').click();
+      }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+      const messageInputDom = document.querySelector('#chat-message-input');
+      const message = messageInputDom.value;
+
+      chatSocket.send(JSON.stringify({
+        'message': message
+      }));
+
+      messageInputDom.value = '';
+    };
   </script>
 
 {% endblock %}
