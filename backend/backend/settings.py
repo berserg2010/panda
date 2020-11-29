@@ -38,8 +38,6 @@ CORS_ORIGIN_WHITELIST = [
     'https://panda-dev.ddns.net',
 
     'https://api.fondy.eu',
-
-    '*',
 ]
 
 CSRF_TRUSTED_ORIGINS = [

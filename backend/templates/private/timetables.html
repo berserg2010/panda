@@ -5,64 +5,63 @@
 {% block title %}Расписание{% endblock %}
 
 {% block content %}
-  {% with course=object_list.first %}
-    <div class="personalArea-content">
-      <div class="personalArea-block">
-        <div class="personalArea-block__top">
-          <span class="personalArea-block__title">Расписание</span>
-          <div class="personalArea-block__top-b"></div>
-        </div>
+  <div class="personalArea-content">
+    <div class="personalArea-block">
+      <div class="personalArea-block__top">
+        <span class="personalArea-block__title">Расписание</span>
+        <div class="personalArea-block__top-b"></div>
+      </div>
 
-        <div class="timetables">
+      <div class="timetables">
 
-          {% for week in weeks %}
+        {% for key, week in weeks.items|dictsort:0 %}
 
-            <div class="timetables-block range-slider__wrap">
+          <div class="timetables-block range-slider__wrap">
 
-              <span class="timetables-title">{{ week.title }}</span>
-              <div class="timetables-slider range-slider">
+            {% if forloop.first %}
+              <span class="timetables-title">Текущая неделя</span>
+            {% endif %}
+            <div class="timetables-slider range-slider">
 
-                {% for weekday in week.weekday %}
+              {% for key, weekday in week.items|dictsort:0 %}
 
-                  <div class="timetables-slide">
-                    <div class="timetables-wrap">
-                      <span class="timetables-subtitle">{{ weekday.date|date:'d M' }}, {{weekday.title}}</span>
+                <div class="timetables-slide">
+                  <div class="timetables-wrap">
+                    <span class="timetables-subtitle">{{ weekday.date|date }}</span>
 
-                      {% for schedule in weekday.schedules %}
+                    {% for schedule in weekday.schedule|dictsort:'time' %}
 
-                        <div class="timetables-item {% if schedule.status %}active{% endif %}">
-                          <div class="timetables-item__top">
-                            <span>{{ schedule.date_value }}</span>
-                            <span>{% if schedule.status %}Не пройдено{% else %}Пройдено{% endif %}</span>
-                          </div>
-                          <ul>
-                            <li>{{ schedule.course }}</li>
-                            <li>{{ schedule.lesson }}</li>
-                            <li>
-                              {% if user.is_staff %}
-                                Ученик {{ schedule.student }}
-                              {% else %}
-                                Учитель {{ schedule.teacher }}
-                              {% endif %}
-                            </li>
-                          </ul>
+                      <div class="timetables-item {% if not schedule.finished %}active{% endif %}">
+                        <div class="timetables-item__top">
+                          <span>{{ schedule.time }}</span>
+                          <span>{% if schedule.finished %}Пройдено{% else %}Не пройдено{% endif %}</span>
                         </div>
+                        <ul>
+                          <li>{{ schedule.title }}</li>
+                          <li>
+                            {% if user.is_staff %}
+                              Ученик {{ schedule.student }}
+                            {% else %}
+                              Учитель {{ schedule.teacher|default_if_none:'--' }}
+                            {% endif %}
+                          </li>
+                        </ul>
+                      </div>
 
-                      {% endfor %}
+                    {% endfor %}
 
-                    </div>
                   </div>
+                </div>
 
-                {% endfor %}
+              {% endfor %}
 
-              </div>
-              <input type="range" class="range" min="1" value="1" step="1" max="4">
             </div>
+            <input type="range" class="range" min="1" value="1" step="1" max="4">
+          </div>
 
-          {% endfor %}
+        {% endfor %}
 
-        </div>
       </div>
     </div>
-  {% endwith %}
+  </div>
 {% endblock %}

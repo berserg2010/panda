@@ -1,85 +1,29 @@
+from django.contrib.auth import get_user_model
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.db.models import Q
-from pydantic import BaseModel
-from typing import List
-from datetime import datetime, timedelta
+from pydantic import BaseModel, PyObject
+from typing import List, Optional
+from datetime import datetime, timedelta, time
 import math
+from pytz import timezone as tz
 
 from common.utils import date_now
-from paid_course.models import PaidCourse, Schedule, LessonResults
-
-
-title_weeks = {
-    0: 'Первая неделя',
-    1: 'Вторая неделя',
-    2: 'Третья неделя',
-    3: 'Четвертая неделя',
-    4: 'Пятая неделя',
-    5: 'Шестая неделя',
-    6: 'Седьмая неделя',
-}
-title_weekday = {
-    0: 'Понедельник',
-    1: 'Вториник',
-    2: 'Среда',
-    3: 'Четверг',
-    4: 'Пятница',
-    5: 'Суббота',
-    6: 'Воскресенье',
-}
+from account.models import Teacher, Student
+from paid_course.models import FreeLesson, PaidCourse, Schedule, LessonResults
 
 
 class ScheduleEntity(BaseModel):
     finished: bool
-    datetime: datetime
-    paid_course: str = ''
-    teacher: str = ''
-    student: str = ''
-    free_lesson: bool = False
+    time: time
+    title: str = ''
+    teacher: Optional[Teacher] = None
+    student: Student
 
-
-class WeekDay(BaseModel):
-    title: str
-    date: datetime
-    schedules: List[ScheduleEntity] = []
-
-
-class Week(BaseModel):
-    title: str
-    weekday: List[WeekDay]
-
-
-def weekday_maker(dt, schedules):
-    return WeekDay(
-        title=title_weekday.get(dt.weekday()),
-        date=dt,
-        schedules=[
-            ScheduleEntity(
-                finished=True if (schedule.datetime >= date_now) else False,
-                datetime=schedule.datetime,
-                paid_course=schedule.paid_course.course.title,
-                # lesson=schedule.paid_course.lessons.all()[key].title,
-                teacher=schedule.paid_course.teacher.user.get_full_name(),
-                student=schedule.paid_course.student.user.get_full_name(),
-            ) for key, schedule in enumerate(schedules.filter(datetime__day=dt.day, datetime__month=dt.month, datetime__year=dt.year))
-        ]
-    )
-
-
-def week_maker(week_number, first_day, schedules):
-
-    weekday = [
-        weekday_maker((first_day + timedelta(days=d)), schedules)
-        for d in range((week_number * 7), ((week_number * 7) + 7))
-    ]
-
-    return Week(
-        title=title_weeks.get(week_number),
-        weekday=weekday
-    )
+    class Config:
+        arbitrary_types_allowed = True
 
 
 def get_user_context(obj, is_filter=True):
@@ -96,27 +40,77 @@ class TimetablesView(LoginRequiredMixin, ListView):
     template_name = 'private/timetables.html'
 
     def get_context_data(self, **kwargs):
+
         context = super().get_context_data(**kwargs)
+        context['weeks'] = {}
+
         object_list = context.get('object_list')
+
+        free_lessons = FreeLesson.objects.filter(
+            get_user_context(self),
+            finished=False,
+        )
+
+        finished_lessons_count = LessonResults.objects.filter(
+            paid_course_id__in=object_list.values_list('id', flat=True)
+        ).count()
 
         schedules = Schedule.objects.filter(
             paid_course_id__in=object_list.values_list('id', flat=True)
-        )
+        )[finished_lessons_count:]
+
+        weeks = {}
 
         if schedules:
-            first_schedule = schedules.first()
-            last_schedule = schedules.last()
+            for schedule in schedules:
 
-            date_delta = last_schedule.datetime - first_schedule.datetime
+                dt = schedule.datetime
+                week_dt = dt.isocalendar()[1]
+                weekday_dt = dt.isocalendar()[2]
 
-            context['weeks'] = [
-                week_maker(i, first_schedule.datetime, schedules)
-                for i in range(int(math.ceil(date_delta.days / 7)))
-            ]
-        else:
-            context['weeks'] = None
+                schedule_entity = ScheduleEntity(
+                    finished=schedule.paid_course.finished,
+                    time=dt.time(),
+                    title=schedule.paid_course.course.title,
+                    teacher=schedule.paid_course.teacher,
+                    student=schedule.paid_course.student,
+                )
 
-        context['groups'] = []
+                weekdays = weeks.get(week_dt)
+
+                if weekdays and weekdays.get(weekday_dt):
+                    weeks[week_dt][weekday_dt]['schedule'] += [schedule_entity]
+                elif weekdays:
+                    weeks[week_dt][weekday_dt] = {'date': dt.date(), 'schedule': [schedule_entity]}
+                else:
+                    weeks[week_dt] = {weekday_dt: {'date': dt.date(), 'schedule': [schedule_entity]}}
+
+
+        if free_lessons:
+            for free_lesson in free_lessons:
+
+                dt = free_lesson.datetime
+                week_dt = dt.isocalendar()[1]
+                weekday_dt = dt.isocalendar()[2]
+
+                schedule_entity = ScheduleEntity(
+                    finished=free_lesson.finished,
+                    time=dt.time(),
+                    title='Бесплатное занятие',
+                    teacher=free_lesson.teacher,
+                    student=free_lesson.student,
+                )
+
+                weekdays = weeks.get(week_dt)
+
+                if weekdays and weekdays.get(weekday_dt):
+                    weeks[week_dt][weekday_dt]['schedule'] += [schedule_entity]
+                elif weekdays:
+                    weeks[week_dt][weekday_dt] = {'date': dt.date(), 'schedule': [schedule_entity]}
+                else:
+                    weeks[week_dt] = {weekday_dt: {'date': dt.date(), 'schedule': [schedule_entity]}}
+
+        context['weeks'] = weeks
 
         return context
 
