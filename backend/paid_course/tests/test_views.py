@@ -6,6 +6,7 @@ from rest_framework.status import HTTP_200_OK
 from datetime import datetime
 from pytz import timezone as tz
 
+from .conftest import ParameterStorage
 from course.models import GroupsOfCourses, PackageOfLessons, Course
 from ..models import FreeLesson, PaidCourse, Schedule, LessonResults
 from ..views import ScheduleEntity
@@ -21,59 +22,76 @@ class TestTimetablesView:
         res = student_register.get(reverse('private_side:timetables'))
         assert res.status_code == HTTP_200_OK
 
-
-    def test_context_student(self, student_register):
-
-        date_now = timezone.datetime(2020, 1, 1, 12, 00, tzinfo=tz('UTC'))
+    def test_context_student(self, student_register, create_course,
+                             create_free_lesson, create_paid_course, create_schedule):
 
         res = student_register.get('/lk/timetables/')
         assert res.status_code == HTTP_200_OK
+        assert res.context['weeks'] == {}
 
-        context = res.context
+        user = res.context['user']
 
-        assert context['weeks'] == {}
+        start_dt = timezone.datetime(2020, 1, 1, 12, 00, tzinfo=tz('UTC'))
+        week_1 = start_dt.isocalendar()[1]
+        day_1 = start_dt.isocalendar()[2]
 
-        user = context['user']
+        td_2_hours_dt = start_dt + timezone.timedelta(hours=2)
 
-        group_of_course = mixer.blend(GroupsOfCourses)
-        package_of_lessons = mixer.blend(PackageOfLessons)
-        course = mixer.blend(
-            Course,
-            is_published=True,
-            group_of_course=group_of_course,
-            package_of_lessons=package_of_lessons,
-        )
+        td_1_day_dt = start_dt + timezone.timedelta(days=1)
+        day_2 = td_1_day_dt.isocalendar()[2]
 
-        date_free_lesson = date_now + timezone.timedelta(days=1)
+        td_8_days_dt = start_dt + timezone.timedelta(days=8)
+        week_2 = td_8_days_dt.isocalendar()[1]
+        day_3 = td_8_days_dt.isocalendar()[2]
 
-        free_lesson = mixer.blend(
-            FreeLesson,
-            finished=False,
-            datetime=date_free_lesson,
-            student=user.student,
-        )
+        free_lesson = create_free_lesson(user.student, start_dt)
         assert FreeLesson.objects.count() == 1
 
-        paid_course = mixer.blend(
-            PaidCourse,
-            finished=False,
-            course=course,
-            student=user.student,
-        )
+        course = create_course(is_published=True)
+        assert Course.objects.count() == 1
+
+        result_data_free_lesson = {
+            week_1: {
+                day_1: {
+                    'date': start_dt.date(),
+                    'schedule': [
+                        ParameterStorage.free_lesson_data(free_lesson, start_dt),
+                    ]
+                },
+            },
+        }
+        res = student_register.get('/lk/timetables/')
+        assert res.status_code == HTTP_200_OK
+        assert res.context['weeks'] == result_data_free_lesson
+
+        paid_course = create_paid_course(user.student, course)
         assert PaidCourse.objects.count() == 1
 
+        schedule_2_hours = create_schedule(paid_course, td_2_hours_dt)
+        schedule_1_day = create_schedule(paid_course, td_1_day_dt)
+        schedule_8_days = create_schedule(paid_course, td_8_days_dt)
+
         result_data = {
-            date_free_lesson.isocalendar()[1]: {
-                date_free_lesson.isocalendar()[2]: {
-                    'date': date_free_lesson.date(),
+            week_1: {
+                day_1: {
+                    'date': start_dt.date(),
                     'schedule': [
-                        ScheduleEntity(
-                            finished=free_lesson.finished,
-                            time=date_free_lesson.time(),
-                            title='Бесплатное занятие',
-                            teacher=free_lesson.teacher,
-                            student=free_lesson.student,
-                        ),
+                        ParameterStorage.schedule_data(schedule_2_hours, td_2_hours_dt),
+                        ParameterStorage.free_lesson_data(free_lesson, start_dt),
+                    ],
+                },
+                day_2: {
+                    'date': td_1_day_dt.date(),
+                    'schedule': [
+                        ParameterStorage.schedule_data(schedule_1_day, td_1_day_dt),
+                    ],
+                },
+            },
+            week_2: {
+                day_3: {
+                    'date': td_8_days_dt.date(),
+                    'schedule': [
+                        ParameterStorage.schedule_data(schedule_8_days, td_8_days_dt),
                     ],
                 },
             },
@@ -81,82 +99,4 @@ class TestTimetablesView:
 
         res = student_register.get('/lk/timetables/')
         assert res.status_code == HTTP_200_OK
-
-        context = res.context
-
-        assert context['weeks'] == result_data
-
-        date_schedule_2_hours = date_free_lesson + timezone.timedelta(hours=2)
-        schedule_2_hours = mixer.blend(
-            Schedule,
-            datetime=date_schedule_2_hours,
-            paid_course=paid_course,
-        )
-        date_schedule_1_day = date_free_lesson + timezone.timedelta(days=1)
-        schedule_1_day = mixer.blend(
-            Schedule,
-            datetime=date_schedule_1_day,
-            paid_course=paid_course,
-        )
-        date_schedule_8_days = date_free_lesson + timezone.timedelta(days=8)
-        schedule_8_days = mixer.blend(
-            Schedule,
-            datetime=date_schedule_8_days,
-            paid_course=paid_course,
-        )
-        res = student_register.get('/lk/timetables/')
-        assert res.status_code == HTTP_200_OK
-
-        context = res.context
-
-        result_data = {
-            date_free_lesson.isocalendar()[1]: {
-                date_free_lesson.isocalendar()[2]: {
-                    'date': date_free_lesson.date(),
-                    'schedule': [
-                        ScheduleEntity(
-                            finished=False,
-                            time=date_schedule_2_hours.time(),
-                            title=schedule_2_hours.paid_course.course.title,
-                            teacher=schedule_2_hours.paid_course.teacher,
-                            student=schedule_2_hours.paid_course.student,
-                        ),
-                        ScheduleEntity(
-                            finished=False,
-                            time=date_free_lesson.time(),
-                            title='Бесплатное занятие',
-                            teacher=None,
-                            student=user.student,
-                        ),
-                    ],
-                },
-                date_schedule_1_day.isocalendar()[2]: {
-                    'date': date_schedule_1_day.date(),
-                    'schedule': [
-                        ScheduleEntity(
-                            finished=False,
-                            time=date_schedule_1_day.time(),
-                            title=schedule_1_day.paid_course.course.title,
-                            teacher=schedule_1_day.paid_course.teacher,
-                            student=schedule_1_day.paid_course.student,
-                        ),
-                    ],
-                },
-            },
-            date_schedule_8_days.isocalendar()[1]: {
-                date_schedule_8_days.isocalendar()[2]: {
-                    'date': date_schedule_8_days.date(),
-                    'schedule': [
-                        ScheduleEntity(
-                            finished=False,
-                            time=date_schedule_8_days.time(),
-                            title=schedule_8_days.paid_course.course.title,
-                            teacher=schedule_8_days.paid_course.teacher,
-                            student=schedule_8_days.paid_course.student,
-                        ),
-                    ],
-                },
-            },
-        }
-
-        assert context['weeks'] == result_data
+        assert res.context['weeks'] == result_data

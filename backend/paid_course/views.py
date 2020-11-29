@@ -69,7 +69,7 @@ class TimetablesView(LoginRequiredMixin, ListView):
                 weekday_dt = dt.isocalendar()[2]
 
                 schedule_entity = ScheduleEntity(
-                    finished=schedule.paid_course.finished,
+                    finished=schedule.paid_course.finished, # !!!
                     time=dt.time(),
                     title=schedule.paid_course.course.title,
                     teacher=schedule.paid_course.teacher,
