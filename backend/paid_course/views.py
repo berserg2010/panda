@@ -34,6 +34,49 @@ def get_user_context(obj, is_filter=True):
         return user.teacher if user.is_staff else user.student
 
 
+def schedule_entity_adapter(schedules, weeks):
+
+    if schedules:
+        for schedule in schedules:
+
+            dt = schedule.datetime
+            week_dt = dt.isocalendar()[1]
+            weekday_dt = dt.isocalendar()[2]
+            
+            title = ''
+            teacher = None
+            student = None
+
+            if isinstance(schedule, Schedule):
+                title = schedule.paid_course.course.title
+                teacher = schedule.paid_course.teacher
+                student = schedule.paid_course.student
+
+            if isinstance(schedule, FreeLesson):
+                title = 'Бесплатное занятие'
+                teacher = schedule.teacher
+                student = schedule.student
+
+            schedule_entity = ScheduleEntity(
+                finished=schedule.finished,
+                time=dt.time(),
+                title=title,
+                teacher=teacher,
+                student=student,
+            )
+
+            weekdays = weeks.get(week_dt)
+
+            if weekdays and weekdays.get(weekday_dt):
+                weeks[week_dt][weekday_dt]['schedule'] += [schedule_entity]
+            elif weekdays:
+                weeks[week_dt][weekday_dt] = {'date': dt.date(), 'schedule': [schedule_entity]}
+            else:
+                weeks[week_dt] = {weekday_dt: {'date': dt.date(), 'schedule': [schedule_entity]}}
+
+    return weeks
+
+
 class TimetablesView(LoginRequiredMixin, ListView):
 
     model = PaidCourse
@@ -61,54 +104,8 @@ class TimetablesView(LoginRequiredMixin, ListView):
 
         weeks = {}
 
-        if schedules:
-            for schedule in schedules:
-
-                dt = schedule.datetime
-                week_dt = dt.isocalendar()[1]
-                weekday_dt = dt.isocalendar()[2]
-
-                schedule_entity = ScheduleEntity(
-                    finished=schedule.paid_course.finished, # !!!
-                    time=dt.time(),
-                    title=schedule.paid_course.course.title,
-                    teacher=schedule.paid_course.teacher,
-                    student=schedule.paid_course.student,
-                )
-
-                weekdays = weeks.get(week_dt)
-
-                if weekdays and weekdays.get(weekday_dt):
-                    weeks[week_dt][weekday_dt]['schedule'] += [schedule_entity]
-                elif weekdays:
-                    weeks[week_dt][weekday_dt] = {'date': dt.date(), 'schedule': [schedule_entity]}
-                else:
-                    weeks[week_dt] = {weekday_dt: {'date': dt.date(), 'schedule': [schedule_entity]}}
-
-
-        if free_lessons:
-            for free_lesson in free_lessons:
-
-                dt = free_lesson.datetime
-                week_dt = dt.isocalendar()[1]
-                weekday_dt = dt.isocalendar()[2]
-
-                schedule_entity = ScheduleEntity(
-                    finished=free_lesson.finished,
-                    time=dt.time(),
-                    title='Бесплатное занятие',
-                    teacher=free_lesson.teacher,
-                    student=free_lesson.student,
-                )
-
-                weekdays = weeks.get(week_dt)
-
-                if weekdays and weekdays.get(weekday_dt):
-                    weeks[week_dt][weekday_dt]['schedule'] += [schedule_entity]
-                elif weekdays:
-                    weeks[week_dt][weekday_dt] = {'date': dt.date(), 'schedule': [schedule_entity]}
-                else:
-                    weeks[week_dt] = {weekday_dt: {'date': dt.date(), 'schedule': [schedule_entity]}}
+        weeks = schedule_entity_adapter(schedules, weeks)
+        weeks = schedule_entity_adapter(free_lessons, weeks)
 
         context['weeks'] = weeks
 

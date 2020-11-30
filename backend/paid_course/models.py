@@ -48,6 +48,8 @@ class PaidCourse(BasicRelationshipTable):
 
 class Schedule(models.Model):
 
+    finished = models.BooleanField(default=False, verbose_name='занятие проведено')
+
     datetime = models.DateTimeField(verbose_name='дата и время занятия')
 
     paid_course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT, verbose_name='курс')
