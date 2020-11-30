@@ -31,7 +31,7 @@ class TestTimetablesView:
 
         user = res.context['user']
 
-        start_dt = timezone.datetime(2020, 1, 1, 12, 00, tzinfo=tz('UTC'))
+        start_dt = timezone.now()
         week_1 = start_dt.isocalendar()[1]
         day_1 = start_dt.isocalendar()[2]
 
@@ -47,9 +47,6 @@ class TestTimetablesView:
         free_lesson = create_free_lesson(user.student, start_dt)
         assert FreeLesson.objects.count() == 1
 
-        course = create_course(is_published=True)
-        assert Course.objects.count() == 1
-
         result_data_free_lesson = {
             week_1: {
                 day_1: {
@@ -63,6 +60,9 @@ class TestTimetablesView:
         res = student_register.get('/lk/timetables/')
         assert res.status_code == HTTP_200_OK
         assert res.context['weeks'] == result_data_free_lesson
+
+        course = create_course(is_published=True)
+        assert Course.objects.count() == 1
 
         paid_course = create_paid_course(user.student, course)
         assert PaidCourse.objects.count() == 1

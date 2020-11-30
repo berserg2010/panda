@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -39,7 +40,7 @@ def schedule_entity_adapter(schedules, weeks):
     if schedules:
         for schedule in schedules:
 
-            dt = schedule.datetime
+            dt = schedule.datetime.astimezone()
             week_dt = dt.isocalendar()[1]
             weekday_dt = dt.isocalendar()[2]
             
@@ -77,9 +78,8 @@ def schedule_entity_adapter(schedules, weeks):
     return weeks
 
 
-class TimetablesView(LoginRequiredMixin, ListView):
+class TimetablesView(LoginRequiredMixin, TemplateView):
 
-    model = PaidCourse
     template_name = 'private/timetables.html'
 
     def get_context_data(self, **kwargs):
@@ -87,20 +87,19 @@ class TimetablesView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['weeks'] = {}
 
-        object_list = context.get('object_list')
+        user = self.request.user
+
+        today_start = datetime.combine(date_now.astimezone(), time())
 
         free_lessons = FreeLesson.objects.filter(
             get_user_context(self),
-            finished=False,
+            datetime__gte=today_start,
         )
 
-        finished_lessons_count = LessonResults.objects.filter(
-            paid_course_id__in=object_list.values_list('id', flat=True)
-        ).count()
-
         schedules = Schedule.objects.filter(
-            paid_course_id__in=object_list.values_list('id', flat=True)
-        )[finished_lessons_count:]
+            Q(paid_course__teacher__user=user) if user.is_staff else Q(paid_course__student__user=user),
+            datetime__gte=today_start,
+        )
 
         weeks = {}
 
@@ -110,12 +109,6 @@ class TimetablesView(LoginRequiredMixin, ListView):
         context['weeks'] = weeks
 
         return context
-
-    def get_queryset(self):
-        return super().get_queryset().filter(
-            get_user_context(self),
-            finished=False,
-        )
 
 
 class LessonsListView(LoginRequiredMixin, ListView):

@@ -940,7 +940,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$H3k6buJaugjv$490uWl5dRK5dhPTd1WseGN89Usirw1JQ9aQr2CGqT4g=",
-    "last_login": "2020-11-16T20:54:11.851Z",
+    "last_login": "2020-11-30T20:57:08.047Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -958,7 +958,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$216000$O6i7NJ7NRhJc$L1aUrZn1g/QeIEAVN0nNO+toA7Zy2IdqAcDztgNziPY=",
-    "last_login": "2020-11-23T19:23:53Z",
+    "last_login": "2020-11-30T20:58:45.740Z",
     "is_superuser": false,
     "username": "vasia",
     "first_name": "Василий",
@@ -976,7 +976,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$216000$fePqPOqliD0W$jij2ydxgaMa1wnCyXcslhLQzGqr44q1CQ9TbqRHOF5Q=",
-    "last_login": "2020-11-23T19:51:18.749Z",
+    "last_login": "2020-11-30T21:01:33.187Z",
     "is_superuser": false,
     "username": "petr",
     "first_name": "Пётр",
@@ -1012,7 +1012,7 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$216000$wWlR5BDoIeQk$zvmMuixDluuI0+Q31/R+a3gRoLVNhAjJLEmAbuh9HeY=",
-    "last_login": "2020-11-23T20:42:42.226Z",
+    "last_login": "2020-11-29T02:24:32.633Z",
     "is_superuser": false,
     "username": "student_test",
     "first_name": "student",
@@ -1035,10 +1035,18 @@
 },
 {
   "model": "sessions.session",
-  "pk": "m3nxmd2oi8kdq469pz9lghe4533r2bpe",
+  "pk": "fgnovk5fc447k7ir3zqhjins4qvfdtei",
   "fields": {
-    "session_data": ".eJxVjLEOwjAMRP8lM4pwsB3KyM43REnskgJKpaadEP9OK3WA8e69u7cJcZlLWJpOYRBzMWQOv12K-al1A_KI9T7aPNZ5GpLdFLvTZm-j6Ou6u38HJbayrhHBE8FZCFkpsWeHvTIfGQjQeZFOITlF6LxkIZWT9Ik1rtFJJPP5ArkIN7Y:1khIfa:1239aJ3leCHaU6_91gwMtvPXuHT1Qo41JsXznusMbqc",
-    "expire_date": "2020-12-07T20:42:42.289Z"
+    "session_data": ".eJxVjEEOwiAQRe_C2pBCGUZcuu8ZCAODVA0kpV0Z765NutDtf-_9l_BhW4vfOi9-TuIilDj9bhTig-sO0j3UW5Ox1XWZSe6KPGiXU0v8vB7u30EJvXxrxDGRZoios46a2A6QQg6IhkdlmECZEQYFNjs8Zw3WKYhWIxmXKWbx_gDgMDet:1kjqEN:tMVZXshyjjmZAMYhCi_PlVvcbcYarbCqa-VJYsRpyak",
+    "expire_date": "2020-12-14T20:57:07.754Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "gtbisd8u0t8qfdvk7xyj5emn8jdg0ese",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pBCGUZcuu8ZCAODVA0kpV0Z765NutDtf-_9l_BhW4vfOi9-TuIilDj9bhTig-sO0j3UW5Ox1XWZSe6KPGiXU0v8vB7u30EJvXxrxDGRZoios46a2A6QQg6IhkdlmECZEQYFNjs8Zw3WKYhWIxmXKWbx_gDgMDet:1kjqEO:84FfQ9DVrmeXUEbDOy5VED3HlN8pP-iDvi2OnWsAbpE",
+    "expire_date": "2020-12-14T20:57:08.104Z"
   }
 },
 {
@@ -1104,17 +1112,6 @@
     "gender": "M",
     "user": 4,
     "phone": "+76543210123",
-    "native_language": null,
-    "pronunciation": null,
-    "timezone": "UTC",
-    "voice_acting": "M",
-    "accent_of_voice_acting": null,
-    "system_notification": true,
-    "support_message": true,
-    "payment_info": true,
-    "reminders_about_lessons": true,
-    "discounts": true,
-    "sounds": false,
     "age": 10
   }
 },
@@ -1125,17 +1122,6 @@
     "gender": "M",
     "user": 2,
     "phone": "+98765432121",
-    "native_language": null,
-    "pronunciation": null,
-    "timezone": "UTC",
-    "voice_acting": "M",
-    "accent_of_voice_acting": null,
-    "system_notification": true,
-    "support_message": true,
-    "payment_info": true,
-    "reminders_about_lessons": true,
-    "discounts": true,
-    "sounds": false,
     "age": 14
   }
 },
@@ -1146,17 +1132,6 @@
     "gender": "M",
     "user": 5,
     "phone": null,
-    "native_language": null,
-    "pronunciation": null,
-    "timezone": "UTC",
-    "voice_acting": "M",
-    "accent_of_voice_acting": null,
-    "system_notification": true,
-    "support_message": true,
-    "payment_info": true,
-    "reminders_about_lessons": true,
-    "discounts": true,
-    "sounds": false,
     "age": null
   }
 },
@@ -1178,22 +1153,6 @@
 },
 {
   "model": "account.payment",
-  "pk": "191f64ab-5f53-4161-82ab-7fc25c451009",
-  "fields": {
-    "paid_for_lessons": 2,
-    "payment": 309812985,
-    "amount": null,
-    "order": "Order_1396424_fe1aox2UpY_1606166120",
-    "order_time": "2020-11-23T21:15:22.564Z",
-    "valid_until": "2020-12-21T21:15:22.564Z",
-    "student": "2c5c0370-bf40-431d-8028-451b4f2b004e",
-    "bonus": "c91c1593-c14f-40a1-8578-002448484af6",
-    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
-    "first_payment": "8c55532a-440f-4808-9de7-7a6be8253cf3"
-  }
-},
-{
-  "model": "account.payment",
   "pk": "1ab9a794-1783-4a9d-918f-7caa54e03bc0",
   "fields": {
     "paid_for_lessons": 4,
@@ -1210,18 +1169,50 @@
 },
 {
   "model": "account.payment",
-  "pk": "4f1296ae-1bd1-4f78-93ab-a391cb47b47e",
+  "pk": "1d576cee-635d-434b-930d-07a52e74ca2f",
   "fields": {
     "paid_for_lessons": 2,
-    "payment": 309812985,
+    "payment": 310480196,
     "amount": null,
-    "order": "Order_1396424_fe1aox2UpY_1606166120",
-    "order_time": "2020-11-23T21:15:22.564Z",
-    "valid_until": "2020-12-21T21:15:22.564Z",
+    "order": "Order_1396424_NeEvr8jFWo_1606244875",
+    "order_time": "2020-11-24T19:08:09.665Z",
+    "valid_until": "2020-12-22T19:08:09.665Z",
+    "student": "2c5c0370-bf40-431d-8028-451b4f2b004e",
+    "bonus": "c91c1593-c14f-40a1-8578-002448484af6",
+    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
+    "first_payment": "8c55532a-440f-4808-9de7-7a6be8253cf3"
+  }
+},
+{
+  "model": "account.payment",
+  "pk": "20455ec7-a3ed-418e-81c9-575370a4274f",
+  "fields": {
+    "paid_for_lessons": 2,
+    "payment": 310480196,
+    "amount": null,
+    "order": "Order_1396424_NeEvr8jFWo_1606244875",
+    "order_time": "2020-11-24T19:08:09.665Z",
+    "valid_until": "2020-12-22T19:08:09.665Z",
     "student": "c91c1593-c14f-40a1-8578-002448484af6",
     "bonus": "2c5c0370-bf40-431d-8028-451b4f2b004e",
     "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
-    "first_payment": "b5d20bef-d18f-4715-93e9-84b35a2f7801"
+    "first_payment": "26016751-45a0-4ad6-9f26-eb527af13d4e"
+  }
+},
+{
+  "model": "account.payment",
+  "pk": "26016751-45a0-4ad6-9f26-eb527af13d4e",
+  "fields": {
+    "paid_for_lessons": 12,
+    "payment": 310480196,
+    "amount": 4800,
+    "order": "Order_1396424_NeEvr8jFWo_1606244875",
+    "order_time": "2020-11-24T18:07:55Z",
+    "valid_until": "2020-12-22T18:07:55Z",
+    "student": "c91c1593-c14f-40a1-8578-002448484af6",
+    "bonus": null,
+    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
+    "first_payment": null
   }
 },
 {
@@ -1283,22 +1274,6 @@
     "order_time": "2020-11-18T22:08:06Z",
     "valid_until": "2020-12-16T00:00:00Z",
     "student": "05f27473-652c-4c20-ae39-a2f0d5baf82d",
-    "bonus": null,
-    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
-    "first_payment": null
-  }
-},
-{
-  "model": "account.payment",
-  "pk": "b5d20bef-d18f-4715-93e9-84b35a2f7801",
-  "fields": {
-    "paid_for_lessons": 8,
-    "payment": 309812985,
-    "amount": 4000,
-    "order": "Order_1396424_fe1aox2UpY_1606166120",
-    "order_time": "2020-11-23T20:15:20Z",
-    "valid_until": "2020-12-21T20:15:20Z",
-    "student": "c91c1593-c14f-40a1-8578-002448484af6",
     "bonus": null,
     "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
     "first_payment": null
@@ -1462,20 +1437,30 @@
 },
 {
   "model": "paid_course.freelesson",
-  "pk": "c2f1ac9d-0352-4f8b-9594-caef8e0ca8a7",
+  "pk": "744fdc20-342c-4662-9e99-76254d4d44e4",
   "fields": {
     "finished": false,
-    "teacher": null,
+    "teacher": "af774eec-049a-4d72-817d-d791d1be45c5",
     "student": "c91c1593-c14f-40a1-8578-002448484af6",
-    "datetime": null
+    "datetime": "2020-11-26T19:03:18Z"
+  }
+},
+{
+  "model": "paid_course.freelesson",
+  "pk": "c9358389-d0cf-41c1-83fb-3fc76e7f4327",
+  "fields": {
+    "finished": true,
+    "teacher": null,
+    "student": "2c5c0370-bf40-431d-8028-451b4f2b004e",
+    "datetime": "2020-11-30T09:00:00Z"
   }
 },
 {
   "model": "paid_course.paidcourse",
-  "pk": "6d06e194-0464-4a87-ac6c-d7828e6f35a0",
+  "pk": "c3716301-9262-4e8b-a17e-144fd901259b",
   "fields": {
     "finished": false,
-    "teacher": null,
+    "teacher": "af774eec-049a-4d72-817d-d791d1be45c5",
     "student": "c91c1593-c14f-40a1-8578-002448484af6",
     "course": "f719a649-12a3-45e7-83b1-96017eb9359e"
   }
@@ -1494,32 +1479,54 @@
   "model": "paid_course.schedule",
   "pk": 1,
   "fields": {
+    "finished": true,
     "datetime": "2020-10-26T23:03:03Z",
-    "course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
+    "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
   }
 },
 {
   "model": "paid_course.schedule",
   "pk": 3,
   "fields": {
-    "datetime": "2020-10-28T01:43:39Z",
-    "course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
+    "finished": true,
+    "datetime": "2020-11-30T12:00:00Z",
+    "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
   }
 },
 {
   "model": "paid_course.schedule",
   "pk": 4,
   "fields": {
-    "datetime": "2020-10-29T01:43:48Z",
-    "course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
+    "finished": true,
+    "datetime": "2020-11-30T06:00:00Z",
+    "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
   }
 },
 {
   "model": "paid_course.schedule",
-  "pk": 6,
+  "pk": 7,
   "fields": {
-    "datetime": "2020-11-23T21:16:35Z",
-    "course": "6d06e194-0464-4a87-ac6c-d7828e6f35a0"
+    "finished": false,
+    "datetime": "2020-11-30T13:11:03Z",
+    "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
+  }
+},
+{
+  "model": "paid_course.schedule",
+  "pk": 8,
+  "fields": {
+    "finished": false,
+    "datetime": "2020-12-01T06:00:00Z",
+    "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
+  }
+},
+{
+  "model": "paid_course.schedule",
+  "pk": 9,
+  "fields": {
+    "finished": false,
+    "datetime": "2020-12-01T09:00:00Z",
+    "paid_course": "c3716301-9262-4e8b-a17e-144fd901259b"
   }
 },
 {
@@ -1534,6 +1541,20 @@
     "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3",
     "course_lesson": null,
     "lesson": "19b2f4d4-5b02-4fb6-a56b-9caa23e1c7ad"
+  }
+},
+{
+  "model": "paid_course.lessonresults",
+  "pk": "d049b9fa-a379-49e7-84d8-35d2565c4c0b",
+  "fields": {
+    "finished": false,
+    "test_result": 0.0,
+    "word_result": 0.0,
+    "game_result": 0.0,
+    "note": "",
+    "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3",
+    "course_lesson": null,
+    "lesson": "476a78e1-8f4b-4f72-b54f-6c1f83b956ba"
   }
 },
 {
