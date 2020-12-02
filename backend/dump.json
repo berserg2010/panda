@@ -958,7 +958,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$216000$O6i7NJ7NRhJc$L1aUrZn1g/QeIEAVN0nNO+toA7Zy2IdqAcDztgNziPY=",
-    "last_login": "2020-11-30T20:58:45.740Z",
+    "last_login": "2020-12-02T18:56:55.798Z",
     "is_superuser": false,
     "username": "vasia",
     "first_name": "Василий",
@@ -1047,6 +1047,14 @@
   "fields": {
     "session_data": ".eJxVjEEOwiAQRe_C2pBCGUZcuu8ZCAODVA0kpV0Z765NutDtf-_9l_BhW4vfOi9-TuIilDj9bhTig-sO0j3UW5Ox1XWZSe6KPGiXU0v8vB7u30EJvXxrxDGRZoios46a2A6QQg6IhkdlmECZEQYFNjs8Zw3WKYhWIxmXKWbx_gDgMDet:1kjqEO:84FfQ9DVrmeXUEbDOy5VED3HlN8pP-iDvi2OnWsAbpE",
     "expire_date": "2020-12-14T20:57:08.104Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "h31yfgiv1lsqh10zvx7s5wq6fves67c2",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEdCgO4dO83NENnkKqBpI-V8d-1SRe6veec-1IDbWsZtkXmYWJ1VkadfrdE40PqDvhO9db02Oo6T0nvij7ooq-N5Xk53L-DQkv51l4w2WiJM7hovLUukWNEMTGHxAEBs_fceYAAuQ9CMYCMuXfWd4Co3h_X_zc1:1kkXJ9:LXgvF1JoYom3oKyEptoKvkjxSS2t9ioSM9YR0stVkvc",
+    "expire_date": "2020-12-16T18:56:55.934Z"
   }
 },
 {
@@ -1367,6 +1375,7 @@
     "description": "",
     "is_published": true,
     "group_of_course": "cd0a90b4-9acc-4562-8107-8505636cc220",
+    "image": "img/course/default.jpg",
     "package_of_lessons": [
       4,
       5,
@@ -1382,6 +1391,7 @@
     "description": "",
     "is_published": true,
     "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
+    "image": "img/course/1570947443.jpg",
     "package_of_lessons": [
       1,
       2,
@@ -1516,7 +1526,7 @@
   "pk": 8,
   "fields": {
     "finished": false,
-    "datetime": "2020-12-01T06:00:00Z",
+    "datetime": "2020-12-02T06:00:00Z",
     "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
   }
 },
