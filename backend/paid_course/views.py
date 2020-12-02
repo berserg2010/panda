@@ -10,7 +10,9 @@ from typing import List, Optional
 from datetime import datetime, timedelta, time
 import math
 from pytz import timezone as tz
+import os
 
+from backend import settings
 from common.utils import date_now
 from account.models import Teacher, Student
 from paid_course.models import FreeLesson, PaidCourse, Schedule, LessonResults

@@ -6,6 +6,7 @@ from rest_framework.status import HTTP_200_OK
 from datetime import datetime
 from pytz import timezone as tz
 
+from common.utils import date_now
 from .conftest import ParameterStorage
 from course.models import GroupsOfCourses, PackageOfLessons, Course
 from ..models import FreeLesson, PaidCourse, Schedule, LessonResults
@@ -31,7 +32,7 @@ class TestTimetablesView:
 
         user = res.context['user']
 
-        start_dt = timezone.now()
+        start_dt = date_now
         week_1 = start_dt.isocalendar()[1]
         day_1 = start_dt.isocalendar()[2]
 

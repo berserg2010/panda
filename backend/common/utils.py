@@ -1,8 +1,11 @@
 from django.contrib import admin
 from django.utils import timezone
+import os
 
-
-date_now = timezone.now()
+if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
+    date_now = timezone.now()
+else:
+    date_now = timezone.datetime(2020, 1, 1, 0, 0)
 
 
 def hardware_inline(model):
