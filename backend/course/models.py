@@ -35,6 +35,8 @@ class Course(CommonFields):
 
     group_of_course = models.ForeignKey(GroupsOfCourses, on_delete=models.PROTECT, verbose_name='группа курса')
 
+    image = models.ImageField(upload_to='img/course/', default='img/course/default.jpg', verbose_name='изображение курса')
+
     package_of_lessons = models.ManyToManyField(PackageOfLessons, related_name='courses', verbose_name='пакеты занятий')
     lessons = models.ManyToManyField(Lesson, through='CourseLesson', related_name='courses', verbose_name='уроки')
 

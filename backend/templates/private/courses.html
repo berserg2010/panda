@@ -1,4 +1,4 @@
-{% extends './_base.html' %}
+{% extends 'private/_base.html' %}
 
 {% load static %}
 
@@ -12,7 +12,7 @@
         <div class="courses-col">
           <a href="{% url 'private_side:course_detail' course.pk %}" class="courses-wrap">
             <div class="courses-img">
-              <img src="{% static 'img/courses-1.jpg' %}" alt="">
+              <img src="{{ course.image.url }}" alt="{{ course.title }}">
             </div>
             <div class="courses-info">
               <span class="courses-name">{{ course.title }}</span>

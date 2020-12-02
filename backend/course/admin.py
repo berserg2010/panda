@@ -42,6 +42,7 @@ class CourseAdmin(CommonFieldsModelAdmin):
         'package_of_lessons',
         'group_of_course',
         'is_published',
+        'image',
     )
     search_fields = (
         'title',

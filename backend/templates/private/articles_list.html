@@ -13,61 +13,63 @@
       </div>
       <div class="materials">
 
-{#        <div class="materials-top">#}
-{#          <div class="materials-col">#}
-{#            <div class="input-block input-select">#}
-{#              <label for="v-4">Выберите курс</label>#}
-{#              <div class="select">#}
-{#                <div class="select-main">#}
-{#                  <div class="select-text">Английский от 4-х лет</div>#}
-{#                  <div class="input-icon">#}
-{#                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="select-info">#}
-{#                  <ul>#}
-{#                    <li>Английский от 4-х лет</li>#}
-{#                    <li>Английский от 4-х лет2</li>#}
-{#                    <li>Английский от 4-х лет3</li>#}
-{#                  </ul>#}
-{#                </div>#}
-{#                <input type="text" name="text" class="select-value">#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{##}
-{#          <div class="materials-col">#}
-{#            <div class="input-block input-select">#}
-{#              <label for="v-4">Выберите Урок</label>#}
-{#              <div class="select">#}
-{#                <div class="select-main">#}
-{#                  <div class="select-text">Урок 1. Введение. Алфавит.</div>#}
-{#                  <div class="input-icon">#}
-{#                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="select-info">#}
-{#                  <ul>#}
-{#                    <li>Урок 1. Введение. Алфавит.</li>#}
-{#                    <li>Урок 1. Введение. Алфавит.2</li>#}
-{#                    <li>Урок 1. Введение. Алфавит.3</li>#}
-{#                  </ul>#}
-{#                </div>#}
-{#                <input type="text" name="text" class="select-value">#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
+        {#        <div class="materials-top">#}
+        {#          <div class="materials-col">#}
+        {#            <div class="input-block input-select">#}
+        {#              <label for="v-4">Выберите курс</label>#}
+        {#              <div class="select">#}
+        {#                <div class="select-main">#}
+        {#                  <div class="select-text">Английский от 4-х лет</div>#}
+        {#                  <div class="input-icon">#}
+        {#                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>#}
+        {#                  </div>#}
+        {#                </div>#}
+        {#                <div class="select-info">#}
+        {#                  <ul>#}
+        {#                    <li>Английский от 4-х лет</li>#}
+        {#                    <li>Английский от 4-х лет2</li>#}
+        {#                    <li>Английский от 4-х лет3</li>#}
+        {#                  </ul>#}
+        {#                </div>#}
+        {#                <input type="text" name="text" class="select-value">#}
+        {#              </div>#}
+        {#            </div>#}
+        {#          </div>#}
+        {##}
+        {#          <div class="materials-col">#}
+        {#            <div class="input-block input-select">#}
+        {#              <label for="v-4">Выберите Урок</label>#}
+        {#              <div class="select">#}
+        {#                <div class="select-main">#}
+        {#                  <div class="select-text">Урок 1. Введение. Алфавит.</div>#}
+        {#                  <div class="input-icon">#}
+        {#                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z" fill="#6B6B6B"/></svg>#}
+        {#                  </div>#}
+        {#                </div>#}
+        {#                <div class="select-info">#}
+        {#                  <ul>#}
+        {#                    <li>Урок 1. Введение. Алфавит.</li>#}
+        {#                    <li>Урок 1. Введение. Алфавит.2</li>#}
+        {#                    <li>Урок 1. Введение. Алфавит.3</li>#}
+        {#                  </ul>#}
+        {#                </div>#}
+        {#                <input type="text" name="text" class="select-value">#}
+        {#              </div>#}
+        {#            </div>#}
+        {#          </div>#}
+        {#        </div>#}
 
         <div class="materials-wrap">
-{#          <span class="materials-subtitle">Урок 1. Введение. Алфавит.</span>#}
+          {#          <span class="materials-subtitle">Урок 1. Введение. Алфавит.</span>#}
           <div class="materials-block scrollbar-outer">
             <ul>
 
               {% for article in object_list %}
 
                 <li><a href="{{ article.url }}">
-                  <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.0156 0.984375C16.3906 0.984375 17.5625 1.48438 18.5312 2.48438C19.5 3.45312 19.9844 4.625 19.9844 6C19.9844 7.375 19.5 8.5625 18.5312 9.5625C17.5625 10.5312 16.3906 11.0156 15.0156 11.0156H10.9844V9.09375H15.0156C15.8594 9.09375 16.5781 8.79688 17.1719 8.20312C17.7969 7.57812 18.1094 6.84375 18.1094 6C18.1094 5.15625 17.7969 4.4375 17.1719 3.84375C16.5781 3.21875 15.8594 2.90625 15.0156 2.90625H10.9844V0.984375H15.0156ZM6.01562 6.98438V5.01562H13.9844V6.98438H6.01562ZM2.78125 3.84375C2.1875 4.4375 1.89062 5.15625 1.89062 6C1.89062 6.84375 2.1875 7.57812 2.78125 8.20312C3.40625 8.79688 4.14062 9.09375 4.98438 9.09375H9.01562V11.0156H4.98438C3.60938 11.0156 2.4375 10.5312 1.46875 9.5625C0.5 8.5625 0.015625 7.375 0.015625 6C0.015625 4.625 0.5 3.45312 1.46875 2.48438C2.4375 1.48438 3.60938 0.984375 4.98438 0.984375H9.01562V2.90625H4.98438C4.14062 2.90625 3.40625 3.21875 2.78125 3.84375Z" fill="#5F9F84"/></svg>
+                  <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.0156 0.984375C16.3906 0.984375 17.5625 1.48438 18.5312 2.48438C19.5 3.45312 19.9844 4.625 19.9844 6C19.9844 7.375 19.5 8.5625 18.5312 9.5625C17.5625 10.5312 16.3906 11.0156 15.0156 11.0156H10.9844V9.09375H15.0156C15.8594 9.09375 16.5781 8.79688 17.1719 8.20312C17.7969 7.57812 18.1094 6.84375 18.1094 6C18.1094 5.15625 17.7969 4.4375 17.1719 3.84375C16.5781 3.21875 15.8594 2.90625 15.0156 2.90625H10.9844V0.984375H15.0156ZM6.01562 6.98438V5.01562H13.9844V6.98438H6.01562ZM2.78125 3.84375C2.1875 4.4375 1.89062 5.15625 1.89062 6C1.89062 6.84375 2.1875 7.57812 2.78125 8.20312C3.40625 8.79688 4.14062 9.09375 4.98438 9.09375H9.01562V11.0156H4.98438C3.60938 11.0156 2.4375 10.5312 1.46875 9.5625C0.5 8.5625 0.015625 7.375 0.015625 6C0.015625 4.625 0.5 3.45312 1.46875 2.48438C2.4375 1.48438 3.60938 0.984375 4.98438 0.984375H9.01562V2.90625H4.98438C4.14062 2.90625 3.40625 3.21875 2.78125 3.84375Z" fill="#5F9F84"/>
+                  </svg>
                   {{ article.title }}
                 </a></li>
 

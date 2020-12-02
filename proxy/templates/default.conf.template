@@ -34,5 +34,8 @@ server {
     location /static {
         alias /usr/src/panda/static;
     }
+    location /media {
+        alias /usr/src/panda/media;
+    }
 
 }

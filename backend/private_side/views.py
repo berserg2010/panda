@@ -8,8 +8,8 @@ from account.models import Payment
 from paid_course.models import PaidCourse, Schedule
 
 
-class IndexLkView(LoginRequiredMixin, ListView):
-    model = PaidCourse
+class IndexLkView(LoginRequiredMixin, TemplateView):
+
     template_name = 'private/index.html'
 
     def get_context_data(self, **kwargs):
@@ -63,7 +63,11 @@ class IndexLkView(LoginRequiredMixin, ListView):
 
                 valid_until = active_payments.filter(paid_filter).latest('valid_until').valid_until
 
-                schedule = Schedule.get_student_schedule(student, group_of_course.group_of_course, order_time).count()
+                schedule = Schedule.get_student_schedule(
+                    student,
+                    group_of_course.group_of_course,
+                    order_time
+                ).count()
 
                 bonus -= schedule
                 lessons -= schedule
@@ -76,7 +80,6 @@ class IndexLkView(LoginRequiredMixin, ListView):
                 groups_courses_stat.append(group_courses_stat)
 
             context['groups_courses_stat'] = groups_courses_stat
-
 
         return context
 

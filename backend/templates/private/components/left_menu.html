@@ -1,7 +1,11 @@
 {% load static %}
 
 <div class="menu">
-  <div class="menu-arrow"><svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.78 5.68804e-05L9.19 1.42006L2.83 7.78006L9.19 14.1401L7.78 15.5601L-3.40075e-07 7.78006L7.78 5.68804e-05Z" fill="#6B6B6B"/></svg></div>
+  <div class="menu-arrow">
+    <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7.78 5.68804e-05L9.19 1.42006L2.83 7.78006L9.19 14.1401L7.78 15.5601L-3.40075e-07 7.78006L7.78 5.68804e-05Z" fill="#6B6B6B"/>
+    </svg>
+  </div>
   <div class="menu-over">
     <div class="menu-wrap">
       <div class="menu-mob">
@@ -28,34 +32,34 @@
           </a>
         </li>
 
-        {% url 'private_side:lessons' as lessons_url %}
-        <li>
-          <a href="{% url 'private_side:lessons' %}" class="{% if lessons_url == request.get_full_path %}active{% endif %}">
-            <b class="menu-ico"><img src="{% static 'img/menu-ico-6.svg' %}" alt=""></b>
-            <span>Занятия</span>
-          </a>
-        </li>
+{#        {% url 'private_side:lessons' as lessons_url %}#}
+{#        <li>#}
+{#          <a href="{% url 'private_side:lessons' %}" class="{% if lessons_url == request.get_full_path %}active{% endif %}">#}
+{#            <b class="menu-ico"><img src="{% static 'img/menu-ico-6.svg' %}" alt=""></b>#}
+{#            <span>Занятия</span>#}
+{#          </a>#}
+{#        </li>#}
 
         {% if user.is_staff %}
-          {% include './teacher_menu.html' %}
+          {% include 'private/components/teacher_menu.html' %}
         {% else %}
-          {% include './student_menu.html' %}
+          {% include 'private/components/student_menu.html' %}
         {% endif %}
 
       </ul>
 
-{#      {% if not user.is_staff %}#}
-{#        <div class="menu-row">#}
-{#          <a href="#" class="menu-col">#}
-{#            <b class="menu-ico"><img src="{% static 'img/menu-ico-11.svg' %}" alt=""></b>#}
-{#            <span>домашние задания</span>#}
-{#          </a>#}
-{#          <a href="#" class="menu-col">#}
-{#            <b class="menu-ico"><img src="{% static 'img/menu-ico-12.svg' %}" alt=""></b>#}
-{#            <span>План занятий</span>#}
-{#          </a>#}
-{#        </div>#}
-{#      {% endif %}#}
+      {#      {% if not user.is_staff %}#}
+      {#        <div class="menu-row">#}
+      {#          <a href="#" class="menu-col">#}
+      {#            <b class="menu-ico"><img src="{% static 'img/menu-ico-11.svg' %}" alt=""></b>#}
+      {#            <span>домашние задания</span>#}
+      {#          </a>#}
+      {#          <a href="#" class="menu-col">#}
+      {#            <b class="menu-ico"><img src="{% static 'img/menu-ico-12.svg' %}" alt=""></b>#}
+      {#            <span>План занятий</span>#}
+      {#          </a>#}
+      {#        </div>#}
+      {#      {% endif %}#}
 
       <div class="menu-bg">
         <img src="{% static 'img/menu-bg.svg' %}" alt="">

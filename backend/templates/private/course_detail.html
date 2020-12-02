@@ -13,7 +13,7 @@
       <div class="courses-col courses-col__big">
         <div class="courses-wrap">
           <div class="courses-img">
-            <img src="{% static 'img/courses-1.jpg' %}" alt="">
+              <img src="{{ object.image.url }}" alt="{{ object.title }}">
           </div>
           <div class="courses-info">
             <span class="courses-name">{{ object.title }}</span>
