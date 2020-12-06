@@ -54,6 +54,16 @@ def send_mail_request_user_reject(email: str) -> None:
     _body_send_mail(body, email)
 
 
+def send_mail_recover_password(email: str, password: str) -> None:
+
+    body = (
+        'Вы восстановили пароль.\n'
+        f'Логин: {email}\n'
+        f'Пароль: {password}'
+    )
+    _body_send_mail(body, email)
+
+
 def send_mail_payment(email: str,
                       payment_id, student_name: str, number_for_lessons: int,
                       is_free_lessons: bool=False) -> None:

@@ -1,7 +1,12 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
-from account.views import request_user, register, payment_callback
+from account.views import (
+    request_user,
+    # register,
+    payment_callback,
+    recover_password,
+)
 
 
 app_name = 'account'
@@ -19,6 +24,8 @@ urlpatterns = [
         name='login',
     ),
     path('logout/', LogoutView.as_view(), name='logout'),
+
+    path('recover_password/', recover_password, name='recover_password'),
 
     path('payment-callback/', payment_callback, name='payment_callback'),
 

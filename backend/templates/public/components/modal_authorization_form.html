@@ -1,4 +1,5 @@
 {% load static %}
+
 <div id="modal-overlay" class="modal-overlay"></div>
 <div id="modal" class="modal">
   <div class="modal-over scrollbar-outer">
@@ -18,13 +19,13 @@
 
       <div class="modal-content">
 
-        {% include './form_login.html' %}
+        {% include 'public/components/form_login.html' %}
 
-        {#        {% include './form_password_recovery.html' %}#}
+        {% include 'public/components/form_recover_password.html' %}
 
-{#        {% include './form_register.html' %}#}
+        {#        {% include './form_register.html' %}#}
 
-        {% include './form_request_user.html' %}
+        {% include 'public/components/form_request_user.html' %}
 
       </div>
     </div>

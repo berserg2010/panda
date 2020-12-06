@@ -37,7 +37,7 @@ def create_student(create_user_handler):
         mixer.blend(
             Student,
             user=user,
-            payment=mixer.blend(Payment),
+            # payment=mixer.blend(Payment),
         )
         return user
     return _create_student

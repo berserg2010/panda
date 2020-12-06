@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db import transaction, IntegrityError
 
-from common.utils import date_now
+from common.utils import date_now, new_password
 from account.models import RequestUser, Student
 from account.services.mail import (
     send_mail_request_user_accept,
@@ -12,11 +12,11 @@ from account.services.mail import (
 
 def request_user_accept(obj: RequestUser) -> str:
 
-    password = get_user_model().objects.make_random_password()
+    password, password_hash = new_password()
     user = get_user_model()(
         username=obj.email,
         email=obj.email,
-        password=make_password(password),
+        password=password_hash,
         first_name=obj.first_name,
         last_name=obj.last_name,
     )

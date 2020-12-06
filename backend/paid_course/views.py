@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import time
 
-from common.utils import date_now
+from common.utils import date_now, get_user_context
 from account.models import Teacher, Student
 from paid_course.models import FreeLesson, PaidCourse, Schedule, LessonResults
 
@@ -21,14 +21,6 @@ class ScheduleEntity(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
-
-
-def get_user_context(obj, is_filter=True):
-    user = obj.request.user
-    if is_filter:
-        return Q(teacher__user=user) if user.is_staff else Q(student__user=user)
-    else:
-        return user.teacher if user.is_staff else user.student
 
 
 def schedule_entity_adapter(schedules, weeks):

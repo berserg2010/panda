@@ -5,12 +5,16 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.db import transaction, IntegrityError
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.contrib.auth.models import User
 import json
 from datetime import datetime
 from copy import deepcopy
 
+from common.utils import new_password
 from account.models import Student, Payment
-from account.forms import RequestUserForm, UserRegisterForm
+from account.forms import RequestUserForm, RecoverPasswordForm, UserRegisterForm
 from account.services.mail import (
     send_mail_request_user,
     send_mail_request_user_admin,
@@ -18,55 +22,104 @@ from account.services.mail import (
     send_mail_request_user_accept_admin,
     send_mail_payment,
     send_mail_payment_admin,
-    send_mail_bonus,
+    send_mail_bonus, send_mail_recover_password,
 )
 from course.models import Course
 from paid_course.models import FreeLesson, PaidCourse
 
 
+def _message_success(message):
+    return {
+        'status': 'success',
+        'message': message,
+    }
+
+
+def _message_error(message):
+    return {
+        'status': 'error',
+        'message': message,
+    }
+
+
 def request_user(request):
+    message = {}
 
     if request.method == 'POST':
-
         form = RequestUserForm(request.POST)
 
         if form.is_valid():
-            user = form.save()
+            user = get_user_model().objects.filter(email=form.cleaned_data.get('email')).exists()
 
-            send_mail_request_user(user.email)
-            send_mail_request_user_admin(user)
+            if user:
+                message = _message_error('Вы уже зарегистрированы!')
+            else:
+                user = form.save()
 
-            # messages.success(request, 'Вы оставили заявку!')
-            return JsonResponse({'message': 'ok'})
+                send_mail_request_user(user.email)
+                send_mail_request_user_admin(user)
 
-        messages.error(request, 'Неудалось оставить заявку, проверьте данные.')
-        return JsonResponse({'message': 'error'})
+                message = _message_success('Вы оставили заявку!')
+        else:
+            message = _message_error('Некоректные данные')
+
+    return JsonResponse(message)
 
 
-def register(request):
+def recover_password(request):
+    message = {}
 
     if request.method == 'POST':
-
-        form = UserRegisterForm(request.POST)
+        form = RecoverPasswordForm(request.POST)
 
         if form.is_valid():
+            email = form.cleaned_data.get('email')
 
-            user = form.save()
+            try:
+                user = get_user_model().objects.get(username=email)
+            except ObjectDoesNotExist:
+                message = _message_error('Нет такого пользователя')
+            except MultipleObjectsReturned:
+                message = _message_error('Это невозможно! Найдено несколько пользователей!')
+            else:
+                password, password_hash = new_password()
+                user.password = password_hash
+                user.save()
 
-            student = Student.objects.create(
-                user=user,
-                phone=request.POST.get(),
-            )
+                send_mail_recover_password(email, password)
 
-            send_mail_request_user_accept(user.email, request.POST.get('password'))
-            send_mail_request_user_accept_admin(student)
+                message = _message_success(f'Новый пароль отправлен на почту {email}')
+            finally:
+                return JsonResponse(message)
 
-            login(request, user)
-            messages.success(request, 'Вы оставили заявку!')
-            return JsonResponse({'message': 'ok'})
+        else:
+            return JsonResponse(_message_error('Некоректный адрес эл. почты'))
 
-        messages.error(request, 'Неудалось оставить заявку, проверьте данные.')
-        return JsonResponse({'message': 'error'})
+
+# def register(request):
+#
+#     if request.method == 'POST':
+#
+#         form = UserRegisterForm(request.POST)
+#
+#         if form.is_valid():
+#
+#             user = form.save()
+#
+#             student = Student.objects.create(
+#                 user=user,
+#                 phone=request.POST.get(),
+#             )
+#
+#             send_mail_request_user_accept(user.email, request.POST.get('password'))
+#             send_mail_request_user_accept_admin(student)
+#
+#             login(request, user)
+#             messages.success(request, 'Вы оставили заявку!')
+#             return JsonResponse({'message': 'ok'})
+#
+#         messages.error(request, 'Неудалось оставить заявку, проверьте данные.')
+#         return JsonResponse({'message': 'error'})
 
 
 @csrf_exempt
@@ -158,14 +211,14 @@ def payment_callback(request):
 
                 send_mail_payment(
                     student.user.email,
-                    payment_id, student.user.get_full_name(), paid_for_lessons,
+                    payment_id, student.user.first_name, paid_for_lessons,
                     condition
                 )
 
                 if condition:
                     send_mail_bonus(bonus_student.user.email)
 
-                send_mail_payment_admin(payment_id, student.user.get_full_name(), paid_for_lessons)
+                send_mail_payment_admin(payment_id, student.user.first_name, paid_for_lessons)
 
         else:
             context = {'message': f'Что то пошло не так..\nСтатус обработки заказа: {order_status}'}

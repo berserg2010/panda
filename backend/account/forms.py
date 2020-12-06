@@ -19,6 +19,10 @@ class RequestUserForm(forms.ModelForm):
 		)
 
 
+class RecoverPasswordForm(forms.Form):
+	email = forms.EmailField(required=True)
+
+
 class UserRegisterForm(UserCreationForm):
 
 	email = forms.EmailField(required=True)

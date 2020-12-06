@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from common.utils import date_now
+from common.utils import date_now, get_user_context
 from account.models import Payment
 from paid_course.models import PaidCourse, Schedule
 
@@ -13,36 +13,37 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
     template_name = 'private/index.html'
 
     def get_context_data(self, **kwargs):
+
         context = super().get_context_data(**kwargs)
         user = self.request.user
 
         if not user.is_staff:
 
+            groups_courses_stat = []
             student = user.student
 
-            last_payment = student.get_payment_student.filter(valid_until__gte=date_now).first()
+            last_payment_qs = student.get_payment_student.filter(valid_until__gte=date_now)
 
-            condition = last_payment is not None and last_payment.first_payment is not None
-            if condition:
+            for last_payment_inst in last_payment_qs.order_by('group_of_course__pk', '-valid_until').distinct('group_of_course'):
 
-                order_time = last_payment.first_payment.order_time
-                combine_filter = Q(
-                    Q(student=student),
-                    Q(order_time__gte=order_time)
-                    | Q(valid_until__gte=date_now),
-                )
-                active_payments = Payment.objects.filter(combine_filter).order_by()
+                last_payment = last_payment_qs.filter(group_of_course=last_payment_inst.group_of_course).first()
 
-            elif last_payment is not None:
-                order_time = last_payment.order_time
-                active_payments = Payment.objects.filter(pk=last_payment.pk)
-            else:
-                order_time = ''
-                active_payments = Payment.objects.none()
+                condition = last_payment is not None and last_payment.first_payment is not None
+                if condition:
+                    order_time = last_payment.first_payment.order_time
+                    combine_filter = Q(
+                        Q(order_time__gte=order_time) | Q(valid_until__gte=date_now),
+                    )
+                    # active_payments = last_payment_qs.filter(combine_filter).order_by()
+                    active_payments = last_payment_qs.filter(combine_filter).order_by('-valid_until')
 
-            groups_courses_stat = []
+                elif last_payment is not None:
+                    order_time = last_payment.order_time
+                    active_payments = last_payment_qs.filter(pk=last_payment.pk)
 
-            for group_of_course in active_payments.order_by().distinct('group_of_course'):
+                else:
+                    order_time = ''
+                    active_payments = Payment.objects.none()
 
                 group_courses_stat = {
                     'title': '',
@@ -51,8 +52,8 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
                     'valid_until': '',
                 }
 
-                paid_filter = Q(group_of_course=group_of_course.group_of_course)
-                title = group_of_course.group_of_course.title
+                title = last_payment_inst.group_of_course.title
+                paid_filter = Q(group_of_course=last_payment_inst.group_of_course)
                 lessons = active_payments.filter(paid_filter).aggregate(Sum('paid_for_lessons')).get('paid_for_lessons__sum', 0)
                 bonus = active_payments.filter(paid_filter & Q(bonus__isnull=False))
 
@@ -65,7 +66,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
 
                 schedule = Schedule.get_student_schedule(
                     student,
-                    group_of_course.group_of_course,
+                    last_payment_inst.group_of_course,
                     order_time
                 ).count()
 
@@ -82,17 +83,6 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
             context['groups_courses_stat'] = groups_courses_stat
 
         return context
-
-
-    def get_queryset(self):
-
-        user = self.request.user
-        user_filter = Q(teacher__user=user) if user.is_staff else Q(student__user=user)
-
-        return super().get_queryset().filter(
-            user_filter,
-            finished=False,
-        )
 
 
 class SettingsLkView(LoginRequiredMixin, TemplateView):

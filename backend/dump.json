@@ -958,12 +958,12 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$216000$O6i7NJ7NRhJc$L1aUrZn1g/QeIEAVN0nNO+toA7Zy2IdqAcDztgNziPY=",
-    "last_login": "2020-12-02T18:56:55.798Z",
+    "last_login": "2020-12-02T18:56:55Z",
     "is_superuser": false,
-    "username": "vasia",
+    "username": "berserg2010@gmail.com",
     "first_name": "Василий",
     "last_name": "Васильев",
-    "email": "berserg2010@yandex.ru",
+    "email": "berserg2010@gmail.com",
     "is_staff": false,
     "is_active": true,
     "date_joined": "2020-11-17T20:37:52Z",
@@ -1008,29 +1008,19 @@
   }
 },
 {
-  "model": "auth.user",
-  "pk": 5,
-  "fields": {
-    "password": "pbkdf2_sha256$216000$wWlR5BDoIeQk$zvmMuixDluuI0+Q31/R+a3gRoLVNhAjJLEmAbuh9HeY=",
-    "last_login": "2020-11-29T02:24:32.633Z",
-    "is_superuser": false,
-    "username": "student_test",
-    "first_name": "student",
-    "last_name": "test",
-    "email": "berserg2010@yandex.ru",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-11-22T20:48:30Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
   "model": "sessions.session",
   "pk": "3op0cf705eo6v4ofe8qn8uodw0r5nmr2",
   "fields": {
     "session_data": ".eJxVjEEOwiAQRe_C2pBCGUZcuu8ZCAODVA0kpV0Z765NutDtf-_9l_BhW4vfOi9-TuIilDj9bhTig-sO0j3UW5Ox1XWZSe6KPGiXU0v8vB7u30EJvXxrxDGRZoios46a2A6QQg6IhkdlmECZEQYFNjs8Zw3WKYhWIxmXKWbx_gDgMDet:1kelVa:kWc_VQuVk4wn0B0IdDMnFivnFNKvFu0gf4x2UF_amGw",
     "expire_date": "2020-11-30T20:53:54.459Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9v7thjblbrw5ps4a8jazuadf4kz1avxm",
+  "fields": {
+    "session_data": ".eJxVjEsOwjAMBe-SNYrUJrVjluw5Q2XXLimgROpnhbg7VOoCtm9m3sv1vK253xab-0nd2ZE7_W7Cw8PKDvTO5Vb9UMs6T-J3xR908deq9rwc7t9B5iV_a0ZSEYCAFli4Q6CgraSG44CUEtoYRogQNWCrDVJnUYRCBOyIAdz7A-pAN3U:1km2Zo:V-LvhGq6Pul167Xs9y-u7_nDe1q8c7UOdUduWRiPzVA",
+    "expire_date": "2020-12-20T22:32:20.750Z"
   }
 },
 {
@@ -1051,10 +1041,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "h31yfgiv1lsqh10zvx7s5wq6fves67c2",
+  "pk": "ngisgm2bynig6d3joarkvszonunzwto1",
   "fields": {
-    "session_data": ".eJxVjMsOwiAQRf-FtSEdCgO4dO83NENnkKqBpI-V8d-1SRe6veec-1IDbWsZtkXmYWJ1VkadfrdE40PqDvhO9db02Oo6T0nvij7ooq-N5Xk53L-DQkv51l4w2WiJM7hovLUukWNEMTGHxAEBs_fceYAAuQ9CMYCMuXfWd4Co3h_X_zc1:1kkXJ9:LXgvF1JoYom3oKyEptoKvkjxSS2t9ioSM9YR0stVkvc",
-    "expire_date": "2020-12-16T18:56:55.934Z"
+    "session_data": ".eJxVjMsOwiAQRf-FtSHlDS7d-w1kZgCpGkhKuzL-uzbpQrf3nHNfLMK21riNvMQ5sTPz7PS7IdAjtx2kO7Rb59TbuszId4UfdPBrT_l5Ody_gwqjfuvinKCihUEjUpiykgJVsUY6MiQ1Zh0KKULnlJus1d4klAWCBi8SCMPeH9zVN6c:1klx6Y:5Ko7LjU2xQxzwQ5VD-uFjZTZCFp4R5COof5uOtCP0JY",
+    "expire_date": "2020-12-20T16:41:46.303Z"
   }
 },
 {
@@ -1097,7 +1087,9 @@
   "model": "account.requestuser",
   "pk": "532760b8-d2e1-480a-9ea9-78ea34441daf",
   "fields": {
-    "name": "student_test",
+    "accept": null,
+    "first_name": "student_test",
+    "last_name": "",
     "email": "student@studenttest.com",
     "phone": "87654321122",
     "sending_date": "2020-11-22T20:47:48.883Z",
@@ -1105,12 +1097,25 @@
   }
 },
 {
+  "model": "account.requestuser",
+  "pk": "8266b993-fb6e-4c8a-b07f-4ae7aa280c01",
+  "fields": {
+    "accept": true,
+    "first_name": "Сергей",
+    "last_name": "Закамсков",
+    "email": "berserg2010@yandex.ru",
+    "phone": "9216497348",
+    "sending_date": "2020-12-06T17:55:55.790Z",
+    "check_date": "2020-12-06T17:48:11.366Z"
+  }
+},
+{
   "model": "account.teacher",
   "pk": "af774eec-049a-4d72-817d-d791d1be45c5",
   "fields": {
     "gender": "M",
-    "user": 3,
-    "native_speaker": ""
+    "phone": null,
+    "user": 3
   }
 },
 {
@@ -1118,9 +1123,8 @@
   "pk": "05f27473-652c-4c20-ae39-a2f0d5baf82d",
   "fields": {
     "gender": "M",
-    "user": 4,
     "phone": "+76543210123",
-    "age": 10
+    "user": 4
   }
 },
 {
@@ -1128,19 +1132,8 @@
   "pk": "2c5c0370-bf40-431d-8028-451b4f2b004e",
   "fields": {
     "gender": "M",
-    "user": 2,
     "phone": "+98765432121",
-    "age": 14
-  }
-},
-{
-  "model": "account.student",
-  "pk": "c91c1593-c14f-40a1-8578-002448484af6",
-  "fields": {
-    "gender": "M",
-    "user": 5,
-    "phone": null,
-    "age": null
+    "user": 2
   }
 },
 {
@@ -1170,54 +1163,6 @@
     "order_time": "2020-09-17T19:29:04Z",
     "valid_until": "2020-10-17T00:00:00Z",
     "student": "2c5c0370-bf40-431d-8028-451b4f2b004e",
-    "bonus": null,
-    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
-    "first_payment": null
-  }
-},
-{
-  "model": "account.payment",
-  "pk": "1d576cee-635d-434b-930d-07a52e74ca2f",
-  "fields": {
-    "paid_for_lessons": 2,
-    "payment": 310480196,
-    "amount": null,
-    "order": "Order_1396424_NeEvr8jFWo_1606244875",
-    "order_time": "2020-11-24T19:08:09.665Z",
-    "valid_until": "2020-12-22T19:08:09.665Z",
-    "student": "2c5c0370-bf40-431d-8028-451b4f2b004e",
-    "bonus": "c91c1593-c14f-40a1-8578-002448484af6",
-    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
-    "first_payment": "8c55532a-440f-4808-9de7-7a6be8253cf3"
-  }
-},
-{
-  "model": "account.payment",
-  "pk": "20455ec7-a3ed-418e-81c9-575370a4274f",
-  "fields": {
-    "paid_for_lessons": 2,
-    "payment": 310480196,
-    "amount": null,
-    "order": "Order_1396424_NeEvr8jFWo_1606244875",
-    "order_time": "2020-11-24T19:08:09.665Z",
-    "valid_until": "2020-12-22T19:08:09.665Z",
-    "student": "c91c1593-c14f-40a1-8578-002448484af6",
-    "bonus": "2c5c0370-bf40-431d-8028-451b4f2b004e",
-    "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
-    "first_payment": "26016751-45a0-4ad6-9f26-eb527af13d4e"
-  }
-},
-{
-  "model": "account.payment",
-  "pk": "26016751-45a0-4ad6-9f26-eb527af13d4e",
-  "fields": {
-    "paid_for_lessons": 12,
-    "payment": 310480196,
-    "amount": 4800,
-    "order": "Order_1396424_NeEvr8jFWo_1606244875",
-    "order_time": "2020-11-24T18:07:55Z",
-    "valid_until": "2020-12-22T18:07:55Z",
-    "student": "c91c1593-c14f-40a1-8578-002448484af6",
     "bonus": null,
     "group_of_course": "963e8e0d-613f-41c7-8b02-cd97727993b3",
     "first_payment": null
@@ -1447,32 +1392,12 @@
 },
 {
   "model": "paid_course.freelesson",
-  "pk": "744fdc20-342c-4662-9e99-76254d4d44e4",
-  "fields": {
-    "finished": false,
-    "teacher": "af774eec-049a-4d72-817d-d791d1be45c5",
-    "student": "c91c1593-c14f-40a1-8578-002448484af6",
-    "datetime": "2020-11-26T19:03:18Z"
-  }
-},
-{
-  "model": "paid_course.freelesson",
   "pk": "c9358389-d0cf-41c1-83fb-3fc76e7f4327",
   "fields": {
     "finished": true,
     "teacher": null,
     "student": "2c5c0370-bf40-431d-8028-451b4f2b004e",
     "datetime": "2020-11-30T09:00:00Z"
-  }
-},
-{
-  "model": "paid_course.paidcourse",
-  "pk": "c3716301-9262-4e8b-a17e-144fd901259b",
-  "fields": {
-    "finished": false,
-    "teacher": "af774eec-049a-4d72-817d-d791d1be45c5",
-    "student": "c91c1593-c14f-40a1-8578-002448484af6",
-    "course": "f719a649-12a3-45e7-83b1-96017eb9359e"
   }
 },
 {
@@ -1528,15 +1453,6 @@
     "finished": false,
     "datetime": "2020-12-02T06:00:00Z",
     "paid_course": "d6c23eb3-9e22-412f-992f-fa0fd5af51e3"
-  }
-},
-{
-  "model": "paid_course.schedule",
-  "pk": 9,
-  "fields": {
-    "finished": false,
-    "datetime": "2020-12-01T09:00:00Z",
-    "paid_course": "c3716301-9262-4e8b-a17e-144fd901259b"
   }
 },
 {

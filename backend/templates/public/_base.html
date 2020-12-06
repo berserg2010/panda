@@ -56,6 +56,7 @@
       'login-form': 'login/',
       {#'register-form': 'register/',#}
       'request-user-form': 'request_user/',
+      'recover-password': 'recover_password/',
     }
 
     const instance = axios.create({
@@ -71,15 +72,18 @@
 
     instance.post(`${urls_actions[form.id]}`, formData)
       .then(({ data }) => {
-        if (form.id === 'request-user-form' && data.message === 'ok') {
+
+        console.info(data)
+
+        if (form.id === 'login-form') {
+          window.location.pathname = 'lk/'
+        } else if (data.status === 'error') {
+          console.error(data.message)
+        } else {
           modal.classList.remove('open')
           modalOverlay.classList.remove('open-overlay')
 
-          console.info('Заявка отправлена')
-        } else if (data.message === 'error') {
-          console.error(data)
-        } else {
-          window.location.pathname = 'lk/'
+          console.info(data.message)
         }
         form.reset()
       })
