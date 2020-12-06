@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-import pytz
 
 from common.models import CommonId
 from course.models import GroupsOfCourses
@@ -13,17 +12,22 @@ GENDER = [
     ('F', 'female'),
 ]
 
-TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
-
 
 class RequestUser(CommonId):
 
-    name = models.CharField(max_length=50, verbose_name='имя')
+    accept = models.BooleanField(null=True, default=None, verbose_name='заявка принята')
+
+    first_name = models.CharField(max_length=50, verbose_name='имя')
+    last_name = models.CharField(max_length=50, verbose_name='фамилия')
     email = models.CharField(max_length=50, verbose_name='эл. почта')
     phone = models.CharField(max_length=20, verbose_name='телефон')
 
     sending_date = models.DateTimeField(auto_now_add=True, verbose_name='дата отправки')
     check_date = models.DateTimeField(null=True, blank=True, verbose_name='дата проверки')
+
+    def get_full_name(self):
+        return f'{self.first_name} {self.last_name}'
+    get_full_name.short_description = 'И.Ф.'
 
     def __str__(self):
         return self.email
@@ -36,6 +40,7 @@ class RequestUser(CommonId):
 class Account(CommonId):
 
     gender = models.CharField(choices=GENDER, max_length=1, default='U', verbose_name='пол')
+    phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
 
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, verbose_name='учётная запись')
 
@@ -53,8 +58,6 @@ class Account(CommonId):
 
 class Teacher(Account):
 
-    native_speaker = models.CharField(max_length=100, default='', blank=True, verbose_name='родной язык')
-
     def __str__(self):
         return self.user.get_full_name()
 
@@ -64,10 +67,6 @@ class Teacher(Account):
 
 
 class Student(Account):
-
-    phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
-
-    age = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name='возраст')
 
     @property
     def get_payment_student(self):

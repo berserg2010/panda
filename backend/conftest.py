@@ -77,7 +77,7 @@ class ParameterStorage:
         'email': 'root@asdfasdf.com',
         'first_name': 'first_root',
         'last_name': 'last_root',
-        'password': 'lkasdjlkasdflaksdjf',
+        'password': get_user_model().objects.make_random_password(),
     }
 
     user_auth = {
@@ -85,5 +85,5 @@ class ParameterStorage:
         'email': 'user@asdfasdf.com',
         'first_name': 'first_user',
         'last_name': 'last_user',
-        'password': 'lkasdjlkasdflaksdjf',
+        'password': get_user_model().objects.make_random_password(),
     }

@@ -1,25 +1,32 @@
 from django.contrib import admin
 
-from common.utils import CommonIdModelAdmin, CommonFieldsModelAdmin, hardware_inline
-from .models import Lesson, Test, Word, Example, Article, Book
+from common.utils import CommonIdModelAdmin, CommonFieldsModelAdmin, base_inline
+from .models import (
+    Lesson,
+    Test,
+    Word,
+    Example,
+    Article,
+    Book,
+)
 
 
-@hardware_inline(Test.lessons.through)
+@base_inline(Test.lessons.through)
 class TestInline(admin.TabularInline):
     pass
 
 
-@hardware_inline(Test.homework_lessons.through)
+@base_inline(Test.homework_lessons.through)
 class TestHomeworkInline(admin.TabularInline):
     pass
 
 
-@hardware_inline(Word.lessons.through)
+@base_inline(Word.lessons.through)
 class WordInline(admin.TabularInline):
     pass
 
 
-@hardware_inline(Example.words.through)
+@base_inline(Example.words.through)
 class ExampleInline(admin.TabularInline):
     pass
 

@@ -3,8 +3,8 @@ from mixer.backend.django import mixer
 from django.utils import timezone
 
 from common.utils import date_now
-from ..models import Student, Payment
 from course.models import Course
+from ..models import Student, Payment
 
 
 pytestmark = pytest.mark.django_db

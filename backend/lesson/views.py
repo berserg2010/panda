@@ -5,12 +5,10 @@ from .models import Lesson, Article
 
 
 class MaterialsListView(LoginRequiredMixin, ListView):
-
     model = Lesson
     template_name = 'private/materials.html'
 
 
 class ArticlesListView(LoginRequiredMixin, ListView):
-
     model = Article
     template_name = 'private/articles_list.html'

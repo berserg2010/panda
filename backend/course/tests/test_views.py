@@ -1,7 +1,7 @@
 import pytest
 from mixer.backend.django import mixer
 
-from course.models import Course, CourseLesson
+from course.models import Course
 
 
 pytestmark = pytest.mark.django_db
@@ -16,5 +16,4 @@ def courses_generate():
 class TestCourse:
 
     def test_compare_course(self):
-
         assert Course.objects.count() == 5

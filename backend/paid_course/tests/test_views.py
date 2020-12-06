@@ -1,16 +1,12 @@
 import pytest
 from django.urls import reverse
 from django.utils import timezone
-from mixer.backend.django import mixer
 from rest_framework.status import HTTP_200_OK
-from datetime import datetime
-from pytz import timezone as tz
 
 from common.utils import date_now
+from course.models import Course
 from .conftest import ParameterStorage
-from course.models import GroupsOfCourses, PackageOfLessons, Course
-from ..models import FreeLesson, PaidCourse, Schedule, LessonResults
-from ..views import ScheduleEntity
+from ..models import FreeLesson, PaidCourse
 
 
 pytestmark = pytest.mark.django_db

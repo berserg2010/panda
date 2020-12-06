@@ -1,0 +1,53 @@
+from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
+from django.db import transaction, IntegrityError
+
+from common.utils import date_now
+from account.models import RequestUser, Student
+from account.services.mail import (
+    send_mail_request_user_accept,
+    send_mail_request_user_reject,
+)
+
+
+def request_user_accept(obj: RequestUser) -> str:
+
+    password = get_user_model().objects.make_random_password()
+    user = get_user_model()(
+        username=obj.email,
+        email=obj.email,
+        password=make_password(password),
+        first_name=obj.first_name,
+        last_name=obj.last_name,
+    )
+    student = Student(
+        user=user,
+        phone=obj.phone,
+    )
+    obj.accept = True
+    obj.check_date = date_now
+
+    try:
+        with transaction.atomic():
+            user.save()
+            student.save()
+            obj.save()
+
+    except IntegrityError:
+        message = 'Что то пошло не так..'
+    else:
+        message = 'Заявка принята'
+        send_mail_request_user_accept(user.email, password)
+
+    return message
+
+
+def request_user_reject(obj: RequestUser) -> str:
+
+    obj.accept = False
+    obj.check_date = date_now
+    obj.save()
+
+    send_mail_request_user_reject(obj.email)
+
+    return 'Заявка отклонена'

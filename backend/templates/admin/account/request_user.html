@@ -1,0 +1,9 @@
+{% extends 'admin/change_form.html' %}
+
+{% block submit_buttons_bottom %}
+  {{ block.super }}
+  <div class="submit-row">
+    <input type="submit" class="default" value="Принять заявку" name="_request_user_accept" />
+    <input type="submit" class="default" style="background-color: #ba2121; float: left; margin: 0" value="Отклонить заявку" name="_request_user_reject" />
+  </div>
+{% endblock %}

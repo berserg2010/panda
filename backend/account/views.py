@@ -1,6 +1,5 @@
-from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
+from django.http import JsonResponse
 from django.contrib.auth import login
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
@@ -10,10 +9,64 @@ import json
 from datetime import datetime
 from copy import deepcopy
 
-from backend import settings
-from .models import Student, Payment
+from account.models import Student, Payment
+from account.forms import RequestUserForm, UserRegisterForm
+from account.services.mail import (
+    send_mail_request_user,
+    send_mail_request_user_admin,
+    send_mail_request_user_accept,
+    send_mail_request_user_accept_admin,
+    send_mail_payment,
+    send_mail_payment_admin,
+    send_mail_bonus,
+)
 from course.models import Course
 from paid_course.models import FreeLesson, PaidCourse
+
+
+def request_user(request):
+
+    if request.method == 'POST':
+
+        form = RequestUserForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+
+            send_mail_request_user(user.email)
+            send_mail_request_user_admin(user)
+
+            # messages.success(request, 'Вы оставили заявку!')
+            return JsonResponse({'message': 'ok'})
+
+        messages.error(request, 'Неудалось оставить заявку, проверьте данные.')
+        return JsonResponse({'message': 'error'})
+
+
+def register(request):
+
+    if request.method == 'POST':
+
+        form = UserRegisterForm(request.POST)
+
+        if form.is_valid():
+
+            user = form.save()
+
+            student = Student.objects.create(
+                user=user,
+                phone=request.POST.get(),
+            )
+
+            send_mail_request_user_accept(user.email, request.POST.get('password'))
+            send_mail_request_user_accept_admin(student)
+
+            login(request, user)
+            messages.success(request, 'Вы оставили заявку!')
+            return JsonResponse({'message': 'ok'})
+
+        messages.error(request, 'Неудалось оставить заявку, проверьте данные.')
+        return JsonResponse({'message': 'error'})
 
 
 @csrf_exempt
@@ -102,33 +155,17 @@ def payment_callback(request):
             except IntegrityError:
                 context = {'message': f'Что то пошло не так..'}
             else:
-                send_mail(
-                    'Panda',
-                    f'{student.user.get_full_name()} оплатил {paid_for_lessons} занятий.\n'
-                    f'ID платежа: {payment_id}\n',
-                    settings.EMAIL_HOST_USER,
-                    [settings.EMAIL_HOST_USER],
-                )
 
-                bonus_str = 'Плюс 2 бонусных занятия.\n' if condition else ''
-
-                send_mail(
-                    'Panda',
-                    f'{student.user.get_full_name()}, Вы оплатили {paid_for_lessons} занятий.\n'
-                    f'{bonus_str}'
-                    f'ID платежа: {payment_id}\n',
-                    settings.EMAIL_HOST_USER,
-                    [student.user.email],
+                send_mail_payment(
+                    student.user.email,
+                    payment_id, student.user.get_full_name(), paid_for_lessons,
+                    condition
                 )
 
                 if condition:
-                    send_mail(
-                        'Panda',
-                        f'Ваш друг воспльзовался бонусным кодом.\n'
-                        f'Вам начислено 2 бонусных занятия.\n',
-                        settings.EMAIL_HOST_USER,
-                        [bonus_student.user.email],
-                    )
+                    send_mail_bonus(bonus_student.user.email)
+
+                send_mail_payment_admin(payment_id, student.user.get_full_name(), paid_for_lessons)
 
         else:
             context = {'message': f'Что то пошло не так..\nСтатус обработки заказа: {order_status}'}

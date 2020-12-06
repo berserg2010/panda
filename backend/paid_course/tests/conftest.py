@@ -66,7 +66,7 @@ class ParameterStorage:
     def free_lesson_data(free_lesson, dt) -> ScheduleEntity:
         return ScheduleEntity(
             finished=free_lesson.finished,
-            time=dt.astimezone().time(),
+            time=dt.time(),
             title='Бесплатное занятие',
             teacher=free_lesson.teacher,
             student=free_lesson.student,
@@ -75,8 +75,8 @@ class ParameterStorage:
     @staticmethod
     def schedule_data(schedule, dt) -> ScheduleEntity:
         return ScheduleEntity(
-            finished=False, # !!!
-            time=dt.astimezone().time(),
+            finished=schedule.finished,
+            time=dt.time(),
             title=schedule.paid_course.course.title,
             teacher=schedule.paid_course.teacher,
             student=schedule.paid_course.student,

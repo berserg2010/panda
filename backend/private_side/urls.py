@@ -15,6 +15,7 @@ urlpatterns = [
     path('', IndexLkView.as_view(), name='index'),
 
     path('settings/', SettingsLkView.as_view(), name='settings'),
+
     path('free-lesson/', FreeLessonLkView.as_view(), name='free_lesson'),
     path('students/', StudentsListView.as_view(), name='students'),
 
@@ -23,5 +24,4 @@ urlpatterns = [
 
     # path('', include('lesson.urls')),
 
-    path('', include('account.urls')),
 ]

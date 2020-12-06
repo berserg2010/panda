@@ -1,14 +1,17 @@
 from django.contrib import admin
 from django.utils import timezone
+from datetime import datetime
 import os
+
 
 if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
     date_now = timezone.now()
 else:
-    date_now = timezone.datetime(2020, 1, 1, 0, 0)
+    # date_now = datetime(2018, 1, 1, tzinfo=timezone.get_current_timezone())
+    date_now = datetime(2018, 1, 1, tzinfo=timezone.utc)
 
 
-def hardware_inline(model):
+def base_inline(model):
     def wrapped(cls):
 
         cls.model = model
@@ -21,15 +24,9 @@ def hardware_inline(model):
 class CommonIdModelAdmin(admin.ModelAdmin):
 
     fields = ('id', )
-    # list_display_links = ("description",)
-    # list_filter = ["manufacturer"]
     list_select_related = False
     preserve_filters = False
-    # save_as = True
-    # save_as_continue = False
     save_on_top = True
-    # search_fields = ["inventory_number", "description"]
-    # exclude = ("workstation", )
     readonly_fields = ('id', )
 
 

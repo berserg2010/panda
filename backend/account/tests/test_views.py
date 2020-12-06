@@ -25,7 +25,8 @@ def test_get_private_side(url, client_fixture, errors, request):
 def test_request_user(client):
 
     data = {
-        'name': 'Vasia',
+        'first_name': 'Vasia',
+        'last_name': 'Vasiliev',
         'email': 'vasia@yandex.ru',
         'phone': '7896543210',
     }
@@ -36,7 +37,8 @@ def test_request_user(client):
     assert RequestUser.objects.count() == 1
 
     req_user = RequestUser.objects.get(email=data.get('email'))
-    assert req_user.name == data.get('name')
+    assert req_user.first_name == data.get('first_name')
+    assert req_user.last_name == data.get('last_name')
     assert req_user.email == data.get('email')
     assert req_user.phone == data.get('phone')
 

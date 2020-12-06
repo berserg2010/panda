@@ -4,11 +4,6 @@ from django.db.models import Sum, Q, QuerySet
 register = template.Library()
 
 
-# @register.filter
-# def finished(paid_course_lessons: [LessonResults], check: bool) -> [LessonResults]:
-#     return paid_course_lessons.filter(finished=check)
-
-
 @register.filter
 def filter_group_of_courses_sum_paid_for_lessons(obj: QuerySet, value_filter) -> int:
 

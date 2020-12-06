@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from common.utils import hardware_inline, CommonIdModelAdmin, CommonFieldsModelAdmin
+from common.utils import base_inline, CommonIdModelAdmin, CommonFieldsModelAdmin
 from course.models import (
     GroupsOfCourses,
     Course,
@@ -10,9 +10,9 @@ from course.models import (
 )
 
 
-@hardware_inline(Course)
-class CourseInline(admin.TabularInline):
-    pass
+# @base_inline(Course)
+# class CourseInline(admin.TabularInline):
+#     pass
 
 
 @admin.register(GroupsOfCourses)

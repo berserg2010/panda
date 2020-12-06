@@ -1,30 +1,55 @@
 from django.contrib import admin
+from django.http import HttpResponseRedirect
 
 from common.utils import CommonIdModelAdmin
 from .models import RequestUser, Teacher, Student, Payment
+from .services.request_user import request_user_accept, request_user_reject
 
 
 @admin.register(RequestUser)
 class RequestUserAdmin(CommonIdModelAdmin):
 
     list_display = (
-        *CommonIdModelAdmin.list_display,
-        'name',
         'email',
+        'get_full_name',
         'phone',
         'sending_date',
         'check_date',
+        'accept',
     )
+    list_display_links = ('email', )
+    list_filter = ('accept', )
+    change_form_template = 'admin/account/request_user.html'
     fields = (
         *CommonIdModelAdmin.fields,
-        'name',
         'email',
+        'first_name',
+        'last_name',
         'phone',
         'sending_date',
         'check_date',
+        'accept',
     )
-    readonly_fields = ('sending_date', )
+    readonly_fields = (
+        'id',
+        'sending_date',
+        'check_date',
+        'accept',
+    )
     save_on_top = False
+
+    def response_change(self, request, obj):
+        if '_request_user_accept' in request.POST:
+            result = request_user_accept(obj)
+            self.message_user(request, result)
+
+            return HttpResponseRedirect('.')
+        elif '_request_user_reject' in request.POST:
+            request_user_reject(obj)
+            self.message_user(request, 'Заявка отклонена')
+
+            return HttpResponseRedirect('.')
+        return super().response_change(request, obj)
 
 
 class AccountAdmin(CommonIdModelAdmin):
@@ -32,48 +57,25 @@ class AccountAdmin(CommonIdModelAdmin):
     list_display = (
         'get_full_name',
         'get_email',
+        'phone',
     )
     fields = (
         *CommonIdModelAdmin.fields,
         'user',
+        'phone',
         'gender',
-    )
-
-
-@admin.register(Teacher)
-class TeacherAdmin(AccountAdmin):
-
-    fields = (
-        *AccountAdmin.fields,
-        'native_speaker',
     )
     save_on_top = False
 
 
+@admin.register(Teacher)
+class TeacherAdmin(AccountAdmin):
+    pass
+
+
 @admin.register(Student)
 class StudentAdmin(AccountAdmin):
-
-    list_display = (
-        *AccountAdmin.list_display,
-        'phone',
-        'age',
-    )
-    fields = (
-        *AccountAdmin.fields,
-        'phone',
-        # 'native_language',
-        'age',
-        # 'timezone',
-        # 'accent_of_voice_acting',
-        # 'system_notification',
-        # 'support_message',
-        # 'payment_info',
-        # 'reminders_about_lessons',
-        # 'discounts',
-        # 'voice_acting',
-        # 'pronunciation',
-        # 'sounds',
-    )
+    pass
 
 
 class BonusLesson(admin.SimpleListFilter):

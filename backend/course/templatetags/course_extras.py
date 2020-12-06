@@ -1,7 +1,5 @@
 from django import template
 
-# from course.models import LessonResults
-
 
 register = template.Library()
 
@@ -20,13 +18,3 @@ def string_lines_to_list(string: str):
         return (line.strip() for line in string.splitlines() )
     except IndexError:
         return ''
-
-#
-# @register.filter
-# def finished(paid_course_lessons: [LessonResults], check: bool) -> [LessonResults]:
-#     return paid_course_lessons.filter(finished=check)
-#
-#
-# @register.filter
-# def filter_count(paid_course_lessons: [LessonResults]) -> [LessonResults]:
-#     return paid_course_lessons.count()

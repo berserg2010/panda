@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from common.utils import hardware_inline, CommonIdModelAdmin, CommonFieldsModelAdmin
+from common.utils import base_inline, CommonIdModelAdmin
 from paid_course.models import (
     Schedule,
     FreeLesson,
@@ -9,7 +9,7 @@ from paid_course.models import (
 )
 
 
-@hardware_inline(Schedule)
+@base_inline(Schedule)
 class ScheduleInline(admin.StackedInline):
     pass
 

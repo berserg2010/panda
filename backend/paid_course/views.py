@@ -1,18 +1,12 @@
-from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils import timezone
 from django.db.models import Q
-from pydantic import BaseModel, PyObject
-from typing import List, Optional
-from datetime import datetime, timedelta, time
-import math
-from pytz import timezone as tz
-import os
+from pydantic import BaseModel
+from typing import Optional
+from datetime import time
 
-from backend import settings
 from common.utils import date_now
 from account.models import Teacher, Student
 from paid_course.models import FreeLesson, PaidCourse, Schedule, LessonResults
@@ -42,7 +36,7 @@ def schedule_entity_adapter(schedules, weeks):
     if schedules:
         for schedule in schedules:
 
-            dt = schedule.datetime.astimezone()
+            dt = schedule.datetime
             week_dt = dt.isocalendar()[1]
             weekday_dt = dt.isocalendar()[2]
             
@@ -91,7 +85,7 @@ class TimetablesView(LoginRequiredMixin, TemplateView):
 
         user = self.request.user
 
-        today_start = datetime.combine(date_now.astimezone(), time())
+        today_start = date_now
 
         free_lessons = FreeLesson.objects.filter(
             get_user_context(self),

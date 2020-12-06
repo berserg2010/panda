@@ -77,7 +77,6 @@ INSTALLED_APPS = [
     'channels',
 
     'settings_site.apps.SettingsSiteConfig',
-    'auth_backend.apps.AuthBackendConfig',
     'account.apps.AccountConfig',
     'public_side.apps.PublicSideConfig',
     'private_side.apps.PrivateSideConfig',
@@ -154,9 +153,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
@@ -165,7 +161,6 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/lk/'
-# LOGOUT_URL = 'auth_backend:logout'
 LOGOUT_REDIRECT_URL = '/'
 
 admin.AdminSite.site_header = 'Panda'.upper()
