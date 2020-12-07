@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'channels',
+    'django_cleanup.apps.CleanupConfig',
 
     'settings_site.apps.SettingsSiteConfig',
     'account.apps.AccountConfig',

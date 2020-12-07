@@ -18,15 +18,15 @@
         <div class="personalArea-block__top-b"></div>
       </div>
       <div class="profile">
+        <div class="profile-block profile-main">
+          <div class="profile-edit">Редактировать</div>
+          <div class="profile-block__wrap">
+            <span class="profile-main__subtitle">Основное</span>
+            <div class="profile-block__info profile-main__info">
 
-        <form method="post">
-          {% csrf_token %}
+              <form method="post">
+                {% csrf_token %}
 
-          <div class="profile-block profile-main">
-            <div class="profile-edit">Редактировать</div>
-            <div class="profile-block__wrap">
-              <span class="profile-main__subtitle">Основное</span>
-              <div class="profile-block__info profile-main__info">
                 <div class="profile-main__row">
 
                   <div class="profile-main__user">
@@ -69,62 +69,43 @@
 
                     <div class="profile-settings">
                       <div class="profile-settings__row">
+
+                        <div class="profile-settings__input">
+                          <div class="input-block">
+                            <label for="first_name">Имя</label>
+                            <input
+                                id="first_name"
+                                type="text"
+                                name="first_name"
+                                value="{{ user.first_name }}"
+                            >
+                          </div>
+                        </div>
+
+                        <div class="profile-settings__input">
+                          <div class="input-block">
+                            <label for="last_name">Фамилия</label>
+                            <input
+                                id="last_name"
+                                type="text"
+                                name="last_name"
+                                value="{{ user.last_name }}"
+                            >
+                          </div>
+                        </div>
+
                         <div class="profile-settings__input">
                           <div class="input-block">
                             <label for="phone">Телефон</label>
                             <input
-                              id="phone"
-                              type="tel"
-                              name="phone"
-                              value="{{ user.phone|default_if_none:'' }}"
-                            >
-                          </div>
-                        </div>
-
-                        <div class="profile-settings__input">
-                          <div class="input-block">
-                            <label for="email">Email</label>
-                            <input
-                              id="email"
-                              type="email"
-                              name="email"
-                              value="{{ user.email }}"
-                            >
-                          </div>
-                        </div>
-
-                        <div class="profile-settings__input">
-                          <div class="input-block">
-                            <label for="current-password">Текущий пароль</label>
-                            <input
-                              id="current-password"
-                              type="password"
-                              name="current_password"
-                              value=""
-                            >
-                          </div>
-                        </div>
-
-                        <div class="profile-settings__input">
-                          <div class="input-block">
-                            <label for="new-password1">Новый пароль</label>
-                            <input
-                              id="new_password1"
-                              type="password"
-                              name="new-password1"
-                              value=""
-                            >
-                          </div>
-                        </div>
-
-                        <div class="profile-settings__input">
-                          <div class="input-block">
-                            <label for="new-password">Повторите новый пароль</label>
-                            <input
-                              id="new_password2"
-                              type="password"
-                              name="new-password2"
-                              value=""
+                                id="phone"
+                                type="tel"
+                                name="phone"
+                                {% if user.is_staff %}
+                                value="{{ user.teacher.phone }}"
+                                {% else %}
+                                value="{{ user.student.phone }}"
+                                {% endif %}
                             >
                           </div>
                         </div>
@@ -138,11 +119,13 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
-              </div>
+              </form>
+
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
