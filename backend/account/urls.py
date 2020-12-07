@@ -6,6 +6,7 @@ from account.views import (
     # register,
     payment_callback,
     recover_password,
+    SettingsUserView,
 )
 
 
@@ -14,7 +15,7 @@ app_name = 'account'
 
 urlpatterns = [
 
-    path('request_user/', request_user, name='request_user'),
+    path('request-user/', request_user, name='request_user'),
 
     # path('register/', register, name='register'),
 
@@ -25,8 +26,10 @@ urlpatterns = [
     ),
     path('logout/', LogoutView.as_view(), name='logout'),
 
-    path('recover_password/', recover_password, name='recover_password'),
+    path('recover-password/', recover_password, name='recover_password'),
 
     path('payment-callback/', payment_callback, name='payment_callback'),
+
+    path('settings-user/', SettingsUserView.as_view(), name='settings_user'),
 
 ]

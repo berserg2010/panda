@@ -85,11 +85,6 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class SettingsLkView(LoginRequiredMixin, TemplateView):
-
-    template_name = 'private/settings.html'
-
-
 class FreeLessonLkView(LoginRequiredMixin, TemplateView):
 
     template_name = 'private/free_lesson.html'

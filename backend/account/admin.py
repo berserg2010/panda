@@ -64,6 +64,7 @@ class AccountAdmin(CommonIdModelAdmin):
         'user',
         'phone',
         'gender',
+        'avatar',
     )
     save_on_top = False
 

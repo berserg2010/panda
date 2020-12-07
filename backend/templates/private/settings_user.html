@@ -24,14 +24,28 @@
             <span class="profile-main__subtitle">Основное</span>
             <div class="profile-block__info profile-main__info">
 
-              <form method="post">
+              <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div class="profile-main__row">
 
                   <div class="profile-main__user">
-                    <img src="{% static 'img/user-img.svg' %}" alt="">
-                    <input type="file">
+                    {% if user.is_staff %}
+                      <img
+                        src="{{ user.teacher.avatar.url }}"
+                        alt="{{ user.teacher.avatar.title }}"
+                        width="100px"
+                        height="100px"
+                      >
+                    {% else %}
+                      <img
+                        src="{{ user.student.avatar.url }}"
+                        alt="{{ user.student.avatar.title }}"
+                        width="100px"
+                        height="100px"
+                      >
+                    {% endif %}
+                    <input type="file" name="avatar">
                     <span>Загрузить</span>
                   </div>
 
@@ -74,10 +88,10 @@
                           <div class="input-block">
                             <label for="first_name">Имя</label>
                             <input
-                                id="first_name"
-                                type="text"
-                                name="first_name"
-                                value="{{ user.first_name }}"
+                              id="first_name"
+                              type="text"
+                              name="first_name"
+                              value="{{ user.first_name }}"
                             >
                           </div>
                         </div>
@@ -86,10 +100,10 @@
                           <div class="input-block">
                             <label for="last_name">Фамилия</label>
                             <input
-                                id="last_name"
-                                type="text"
-                                name="last_name"
-                                value="{{ user.last_name }}"
+                              id="last_name"
+                              type="text"
+                              name="last_name"
+                              value="{{ user.last_name }}"
                             >
                           </div>
                         </div>
@@ -98,14 +112,14 @@
                           <div class="input-block">
                             <label for="phone">Телефон</label>
                             <input
-                                id="phone"
-                                type="tel"
-                                name="phone"
-                                {% if user.is_staff %}
-                                value="{{ user.teacher.phone }}"
-                                {% else %}
-                                value="{{ user.student.phone }}"
-                                {% endif %}
+                              id="phone"
+                              type="tel"
+                              name="phone"
+                              {% if user.is_staff %}
+                              value="{{ user.teacher.phone }}"
+                              {% else %}
+                              value="{{ user.student.phone }}"
+                              {% endif %}
                             >
                           </div>
                         </div>
@@ -115,12 +129,11 @@
                             <button class="main-btn">Сохранить</button>
                           </div>
                         </div>
-
                       </div>
                     </div>
                   </div>
-
                 </div>
+
               </form>
 
             </div>

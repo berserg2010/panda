@@ -46,7 +46,7 @@
 
 {% block script %}{% endblock %}
 
-<script src="{% static 'js/scripts.min.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
 
 <script>
 
@@ -55,8 +55,8 @@
     const urls_actions = {
       'login-form': 'login/',
       {#'register-form': 'register/',#}
-      'request-user-form': 'request_user/',
-      'recover-password': 'recover_password/',
+      'request-user-form': 'request-user/',
+      'recover-password': 'recover-password/',
     }
 
     const instance = axios.create({

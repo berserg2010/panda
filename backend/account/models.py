@@ -42,6 +42,8 @@ class Account(CommonId):
     gender = models.CharField(choices=GENDER, max_length=1, default='U', verbose_name='пол')
     phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='телефон')
 
+    avatar = models.ImageField(upload_to='img/account/', default='img/account/default.svg', verbose_name='аватар')
+
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, verbose_name='учётная запись')
 
     def get_full_name(self):

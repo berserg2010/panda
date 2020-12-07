@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import login
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
@@ -7,14 +7,21 @@ from django.db import transaction, IntegrityError
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
+from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
 import json
 from datetime import datetime
 from copy import deepcopy
 
 from common.utils import new_password
 from account.models import Student, Payment
-from account.forms import RequestUserForm, RecoverPasswordForm, UserRegisterForm
+from account.forms import (
+    RequestUserForm,
+    RecoverPasswordForm,
+    SettingsUserForm,
+)
 from account.services.mail import (
     send_mail_request_user,
     send_mail_request_user_admin,
@@ -94,32 +101,6 @@ def recover_password(request):
 
         else:
             return JsonResponse(_message_error('Некоректный адрес эл. почты'))
-
-
-# def register(request):
-#
-#     if request.method == 'POST':
-#
-#         form = UserRegisterForm(request.POST)
-#
-#         if form.is_valid():
-#
-#             user = form.save()
-#
-#             student = Student.objects.create(
-#                 user=user,
-#                 phone=request.POST.get(),
-#             )
-#
-#             send_mail_request_user_accept(user.email, request.POST.get('password'))
-#             send_mail_request_user_accept_admin(student)
-#
-#             login(request, user)
-#             messages.success(request, 'Вы оставили заявку!')
-#             return JsonResponse({'message': 'ok'})
-#
-#         messages.error(request, 'Неудалось оставить заявку, проверьте данные.')
-#         return JsonResponse({'message': 'error'})
 
 
 @csrf_exempt
@@ -228,3 +209,26 @@ def payment_callback(request):
             'public/blank_status_operation.html',
             context,
         )
+
+
+class SettingsUserView(LoginRequiredMixin, FormView):
+
+    template_name = 'private/settings_user.html'
+    form_class = SettingsUserForm
+    success_url = reverse_lazy('account:settings_user')
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        print(request.FILES.get('avatar'))
+
+        files = request.FILES.getlist('avatar')
+
+        if form.is_valid():
+            for f in files:
+                print('form_valid', f)
+            return self.form_valid(form)
+        else:
+            print('form_invalid')
+            return self.form_invalid(form)

@@ -1,4 +1,5 @@
 {% load static %}
+
 <header class="header header-second">
   <div class="wrapper">
     <div class="header-bar">
@@ -21,9 +22,25 @@
     <div class="header-lk">
       <div class="header-user">
         <div class="header-user__top">
+
           <div class="header-user__img">
-            <img src="{% static 'img/videoCall-user.svg' %}" alt="">
+            {% if user.is_staff %}
+              <img
+                src="{{ user.teacher.avatar.url }}"
+                alt="{{ user.teacher.avatar.title }}"
+                width="56px"
+                height="56px"
+              >
+            {% else %}
+              <img
+                src="{{ user.student.avatar.url }}"
+                alt="{{ user.student.avatar.title }}"
+                width="56px"
+                height="56px"
+              >
+            {% endif %}
           </div>
+
           <span class="header-user__name">{{ user.first_name }}</span>
           <span class="header-user__arrow">
             <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,13 +50,7 @@
         </div>
         <div class="header-drop">
           <ul>
-            <li><a href="{% url 'private_side:settings' %}">Настройки профиля</a></li>
-
-            {% if not user.is_staff %}
-              <li><a href="{% url 'private_side:courses' %}">Оплата</a></li>
-              <li><a href="{% url 'private_side:free_lesson' %}">Бонусные уроки</a></li>
-            {% endif %}
-
+            <li><a href="{% url 'account:settings_user' %}">Настройки профиля</a></li>
             <li><a href="{% url 'account:logout' %}">Выход</a></li>
           </ul>
         </div>

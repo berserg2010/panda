@@ -41,7 +41,7 @@
 
 {% url 'private_side:free_lesson' as free_lesson_url %}
 <li>
-  <a href="{% url 'private_side:free_lesson' %}" class="{% if tests_courses_list_url == request.get_full_path %}active{% endif %}">
+  <a href="{% url 'private_side:free_lesson' %}" class="{% if free_lesson_url == request.get_full_path %}active{% endif %}">
     <b class="menu-ico"><img src="{% static 'img/menu-ico-10.svg' %}" alt=""></b>
     <span>Бесплатные уроки<i>Пригласить друзей</i></span>
   </a>

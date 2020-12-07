@@ -23,6 +23,14 @@ class RecoverPasswordForm(forms.Form):
 	email = forms.EmailField(required=True)
 
 
+class SettingsUserForm(forms.Form):
+
+	first_name = forms.CharField(required=False)
+	last_name = forms.CharField(required=False)
+	phone = forms.CharField(required=False)
+	avatar = forms.ImageField(required=False)
+
+
 class UserRegisterForm(UserCreationForm):
 
 	email = forms.EmailField(required=True)
