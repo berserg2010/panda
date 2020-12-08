@@ -80,7 +80,7 @@ class TimetablesView(LoginRequiredMixin, TemplateView):
         today_start = date_now
 
         free_lessons = FreeLesson.objects.filter(
-            get_user_context(self),
+            get_user_context(self.request),
             datetime__gte=today_start,
         )
 
@@ -105,7 +105,7 @@ class LessonsListView(LoginRequiredMixin, ListView):
     template_name = 'private/lessons.html'
 
     def get_queryset(self):
-        return super().get_queryset().filter(get_user_context(self), finished=False)
+        return super().get_queryset().filter(get_user_context(self.request), finished=False)
 
 
 class LessonDetailView(LoginRequiredMixin, DetailView):
@@ -121,7 +121,7 @@ class NotesListView(ListView):
 
     def get_queryset(self):
         return super().get_queryset().filter(
-            get_user_context(self),
+            get_user_context(self.request),
         ).exclude(
             paid_course_lessons__note='',
         )
@@ -133,7 +133,7 @@ class VocabularyListView(LoginRequiredMixin, ListView):
     template_name = 'private/vocabulary_list.html'
 
     def get_queryset(self):
-        return super().get_queryset().filter(get_user_context(self))
+        return super().get_queryset().filter(get_user_context(self.request))
 
 
 class VocabularyDetailView(LoginRequiredMixin, DetailView):

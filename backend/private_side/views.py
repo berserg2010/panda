@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from common.utils import date_now, get_user_context
+from common.utils import date_now
 from account.models import Payment
 from paid_course.models import PaidCourse, Schedule
 

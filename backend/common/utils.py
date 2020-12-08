@@ -13,8 +13,8 @@ else:
     date_now = datetime(2018, 1, 1, tzinfo=timezone.utc)
 
 
-def get_user_context(obj, is_filter=True):
-    user = obj.request.user
+def get_user_context(request, is_filter=True):
+    user = request.user
     if is_filter:
         return Q(teacher__user=user) if user.is_staff else Q(student__user=user)
     else:

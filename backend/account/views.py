@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import login
 from django.contrib import messages
@@ -15,7 +16,7 @@ import json
 from datetime import datetime
 from copy import deepcopy
 
-from common.utils import new_password
+from common.utils import new_password, get_user_context
 from account.models import Student, Payment
 from account.forms import (
     RequestUserForm,
@@ -222,9 +223,16 @@ class SettingsUserView(LoginRequiredMixin, FormView):
 
         if form.is_valid():
 
-            print(form.cleaned_data.get('data'))
-            print(form.cleaned_data.get('files'))
+            user = request.user
+            current_user = get_user_context(request, is_filter=False)
+
+            user.first_name = form.cleaned_data.get('first_name')
+            user.last_name = form.cleaned_data.get('last_name')
+
+            current_user.phone = form.cleaned_data.get('phone')
+            current_user.avatar = form.cleaned_data.get('avatar')
+
+            user.save()
+            current_user.save()
 
             return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
