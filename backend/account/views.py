@@ -218,17 +218,13 @@ class SettingsUserView(LoginRequiredMixin, FormView):
     success_url = reverse_lazy('account:settings_user')
 
     def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-
-        print(request.FILES.get('avatar'))
-
-        files = request.FILES.getlist('avatar')
+        form = self.get_form()
 
         if form.is_valid():
-            for f in files:
-                print('form_valid', f)
+
+            print(form.cleaned_data.get('data'))
+            print(form.cleaned_data.get('files'))
+
             return self.form_valid(form)
         else:
-            print('form_invalid')
             return self.form_invalid(form)
