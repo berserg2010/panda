@@ -3,7 +3,6 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 from account.views import (
     request_user,
-    # register,
     payment_callback,
     recover_password,
     SettingsUserView,
@@ -17,8 +16,6 @@ urlpatterns = [
 
     path('request-user/', request_user, name='request_user'),
 
-    # path('register/', register, name='register'),
-
     path(
         'login/',
         LoginView.as_view(template_name='public/index.html', redirect_authenticated_user=True),
@@ -30,6 +27,6 @@ urlpatterns = [
 
     path('payment-callback/', payment_callback, name='payment_callback'),
 
-    path('settings-user/', SettingsUserView.as_view(), name='settings_user'),
+    path('lk/settings-user/', SettingsUserView.as_view(), name='settings_user'),
 
 ]

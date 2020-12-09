@@ -11711,7 +11711,7 @@ footer {
 }
 .profile-main__user img,
 .profile-main__user svg {
-  display: block;
+  /*display: block;*/
   position: absolute;
   top: 50%;
   left: 50%;

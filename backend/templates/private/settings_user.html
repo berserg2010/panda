@@ -32,6 +32,7 @@
                   <div class="profile-main__user">
                     {% if user.is_staff %}
                       <img
+                        id="current_avatar"
                         src="{{ user.teacher.avatar.url }}"
                         alt="{{ user.teacher.avatar.title }}"
                         width="100px"
@@ -39,13 +40,31 @@
                       >
                     {% else %}
                       <img
+                        id="current_avatar"
                         src="{{ user.student.avatar.url }}"
                         alt="{{ user.student.avatar.title }}"
                         width="100px"
                         height="100px"
                       >
                     {% endif %}
-                    <input type="file" name="avatar">
+
+                    <img
+                      id="image_container"
+                      width="100px"
+                      height="100px"
+                      src="#"
+                      alt="Загруженное изображение"
+                      hidden="hidden"
+                    />
+
+                    <input
+                      id="input_file"
+                      type="file"
+                      name="avatar"
+                      autocomplete="off"
+                      accept="image/png, image/jpeg, image/gif"
+                    >
+
                     <span>Загрузить</span>
                   </div>
 
@@ -146,4 +165,33 @@
 
 {% block script %}
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+  <script>
+
+    const input_file = document.getElementById('input_file')
+    const current_avatar = document.getElementById('current_avatar')
+    const image_container = document.getElementById('image_container')
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          image_container.src = e.target.result
+          showImageWrapper(true)
+        }
+        reader.readAsDataURL(input.files[0])
+      }
+    }
+
+    input_file.oninput = function() {
+      readURL(this)
+    }
+
+    let showImageWrapper = (state) => {
+      current_avatar.hidden = state
+      image_container.hidden = !state
+    }
+
+  </script>
+
 {% endblock %}

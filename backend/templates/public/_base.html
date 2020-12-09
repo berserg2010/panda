@@ -9,12 +9,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!--<meta property="og:image" content="path/to/image.jpg">
-    <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">-->
-
   <meta name="theme-color" content="#000">
   <meta name="msapplication-navbutton-color" content="#000">
   <meta name="apple-mobile-web-app-status-bar-style" content="#000">
@@ -30,16 +24,16 @@
 <body>
 
 <header class="header">
-  {% include './components/header.html' %}
+  {% include 'public/components/header.html' %}
 </header>
 
 {% block content %}{% endblock %}
 
 <footer class="footer">
-  {% include './components/footer.html' %}
+  {% include 'public/components/footer.html' %}
 </footer>
 
-{% include './components/modal_authorization_form.html' %}
+{% include 'public/components/modal_authorization_form.html' %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -54,7 +48,6 @@
 
     const urls_actions = {
       'login-form': 'login/',
-      {#'register-form': 'register/',#}
       'request-user-form': 'request-user/',
       'recover-password': 'recover-password/',
     }

@@ -51,7 +51,7 @@ def _message_error(message):
 
 
 def request_user(request):
-    message = {}
+    message = _message_error('Некорректные данные')
 
     if request.method == 'POST':
         form = RequestUserForm(request.POST)
@@ -68,14 +68,14 @@ def request_user(request):
                 send_mail_request_user_admin(user)
 
                 message = _message_success('Вы оставили заявку!')
-        else:
-            message = _message_error('Некоректные данные')
 
     return JsonResponse(message)
 
 
 def recover_password(request):
     message = {}
+
+
 
     if request.method == 'POST':
         form = RecoverPasswordForm(request.POST)
@@ -101,7 +101,7 @@ def recover_password(request):
                 return JsonResponse(message)
 
         else:
-            return JsonResponse(_message_error('Некоректный адрес эл. почты'))
+            return JsonResponse(_message_error('Некорректный адрес эл. почты'))
 
 
 @csrf_exempt
