@@ -52,7 +52,7 @@
       'recover-password': 'recover-password/',
     }
 
-    const instance = axios.create({
+    const client = axios.create({
       baseURL: `${window.location.origin}/`,
       withCredentials: true,
       xsrfCookieName: 'csrftoken',
@@ -63,7 +63,7 @@
     const modalOverlay = document.getElementById('modal-overlay')
     const modal = document.getElementById('modal')
 
-    instance.post(`${urls_actions[form.id]}`, formData)
+    client.post(`${urls_actions[form.id]}`, formData)
       .then(({ data }) => {
 
         console.info(data)
@@ -75,9 +75,8 @@
         } else {
           modal.classList.remove('open')
           modalOverlay.classList.remove('open-overlay')
-
-          console.info(data.message)
         }
+        alert(data.message)
         form.reset()
       })
       .catch((e) => {
