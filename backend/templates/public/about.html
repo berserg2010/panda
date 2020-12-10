@@ -1,145 +1,139 @@
-{% extends './_base.html' %}
+{% extends 'public/_base.html' %}
 
 {% load static %}
 
 {% block title %}О школе{% endblock %}
 
-
 {% block content %}
-<!-- start process -->
-<section class="process">
-  <div class="wrapper">
-    <div class="process-info">
-      <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <span class="section-subtitle">About school</span>
-        <h2 class="section-title">О школе</h2>
-      </div>
-      <div class="process-img">
-        <img src="{% static 'img/process-img-2.svg' %}" alt="">
-      </div>
-      <div class="process-text">
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Hello Panda обучает детей и взрослых по всей Украине и за рубежом английскому и китайскому языку с использованием современных мультимедийных технологий в процессе обучения.</p>
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Языковые курсы в школе Hello Panda рассчитаны на учащихся в начальной школе и дошкольников (от 4-х лет).</p>
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Преподаватели школы – дипломированные украинские преподаватели, также сертифицированные носители языка – проходили строгий отбор, чтобы попасть в нашу команду.</p>
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Они предоставляют качественное образование и готовят абитуриентов к экзаменам IELTS, TOEFL, HSK, HSKK.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end process -->
-<!-- start statistics -->
-<section class="statistics">
-  <div class="wrapper">
-    <div class="section-top">
-      <span class="section-subtitle">Figures</span>
-      <h2 class="section-title">Цифры</h2>
-    </div>
-    <div class="statistics-row">
-      <div class="statistics-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="statistics-ico">
-          <div class="statistics-ico" id="statistics1"></div>
-          <div class="statistics-hidden" id="statistics1-1">15</div>
-          <div class="statistics-hidden" id="procent-1">0.66</div>
+  <section class="process">
+    <div class="wrapper">
+      <div class="process-info">
+        <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <span class="section-subtitle">About school</span>
+          <h2 class="section-title">О школе</h2>
         </div>
-        <span class="statistics-subtitle">Постоянных преподавателей</span>
-      </div>
-      <div class="statistics-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="statistics-ico">
-          <div class="statistics-ico" id="statistics2"></div>
-          <div class="statistics-hidden" id="statistics2-2">750</div>
-          <div class="statistics-hidden" id="procent-2">0.66</div>
+        <div class="process-img">
+          <img src="{% static 'img/process-img-2.svg' %}" alt="">
         </div>
-        <span class="statistics-subtitle">Успешно сданных экзаменов</span>
-      </div>
-      <div class="statistics-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="statistics-ico">
-          <div class="statistics-ico" id="statistics3"></div>
-          <div class="statistics-hidden" id="statistics3-3">150</div>
-          <div class="statistics-hidden" id="procent-3">0.66</div>
-        </div>
-        <span class="statistics-subtitle">Полученных грантов</span>
-      </div>
-      <div class="statistics-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="statistics-ico">
-          <div class="statistics-ico" id="statistics4"></div>
-          <div class="statistics-hidden" id="statistics4-4">1500</div>
-          <div class="statistics-hidden" id="procent-4">0.66</div>
-        </div>
-        <span class="statistics-subtitle">Довольных учеников</span>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end statistics -->
-<!-- start mission -->
-<section class="mission">
-  <div class="mission-bg mission-bg__1">
-    <div class="mission-img mission-img__1">
-      <img src="{% static 'img/mission-bg-1.svg' %}" alt="">
-    </div>
-    <div class="mission-img mission-img__2">
-      <img src="{% static 'img/mission-bg-2.png' %}" alt="">
-    </div>
-  </div>
-  <div class="mission-bg mission-bg__2">
-    <div class="mission-img mission-img__3">
-      <img src="{% static 'img/mission-bg-3.svg' %}" alt="">
-    </div>
-  </div>
-  <div class="wrapper">
-    <div class="mission-row">
-      <div class="mission-col mission-col__1">
-        <div class="mission-mob mission-mob__1">
-          <img src="{% static 'img/mission-mob-1.svg' %}" alt="">
-        </div>
-        <div class="mission-info">
-          <h3 class="mission-title" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Миссия</h3>
-          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Миссия Hello Panda – способствовать развитию языковых навыков и индивидуальных способностей учащихся, а также помочь им в самореализации в настоящем и будущем.</p>
-          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Мы создали школу, в которой ученик получает качественное образование, востребованное сегодня. </p>
-        </div>
-      </div>
-      <div class="mission-col mission-col__2">
-        <div class="mission-mob mission-mob__2">
-          <img src="{% static 'img/mission-mob-2.svg' %}" alt="">
-        </div>
-        <div class="mission-info">
-          <h3 class="mission-title" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Наша цель</h3>
-          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">• Предоставление качественного образования подрастающему поколению с учетом психологии современных детей и подростков</p>
-          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">• Формирование устойчивых коммуникативных навыков, которые позволяют ученику быстро заговорить</p>
-          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">• Помощь в преодолении языкового и культурного барьера, который позволит раскрыть потенциал ученика</p>
-          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">• Предоставление качественных материалов и эффективных методик, разработанных лучшими специалистами</p>
+        <div class="process-text">
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Hello Panda обучает детей и взрослых по всей Украине и за рубежом английскому и китайскому языку с использованием современных мультимедийных технологий в процессе обучения.</p>
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Языковые курсы в школе Hello Panda рассчитаны на учащихся в начальной школе и дошкольников (от 4-х лет).</p>
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Преподаватели школы – дипломированные украинские преподаватели, также сертифицированные носители языка – проходили строгий отбор, чтобы попасть в нашу команду.</p>
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Они предоставляют качественное образование и готовят абитуриентов к экзаменам IELTS, TOEFL, HSK, HSKK.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- end mission -->
-<!-- start teacher -->
-<section class="teacher teacher-second">
-  <div class="teacher-bg teacher-bg__1">
-    <img src="{% static 'img/teacher-bg-1.svg' %}" alt="">
-  </div>
-  <div class="teacher-bg teacher-bg__2">
-    <img src="{% static 'img/teacher-bg-2.svg' %}" alt="">
-  </div>
-  <div class="wrapper">
-    <div class="section-top section-center" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-      <span class="section-subtitle">Story</span>
-      <h2 class="section-title">история</h2>
-    </div>
-    <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Школа иностранных языков Hello Panda была основана в 2018 году командой профессиональных методистов, преподавателей и переводчиков с целью предоставления качественных услуг по обучению детей и взрослых двум самым востребованным языкам в мире: Английскому и Китайскому. <br>С момента основания школа Hello Panda помогла многим ученикам заговорить на иностранном языке, успешно сдать выпускные и международные тесты, а также оказала содействие в получении стипендий на обучение в КНР.</p>
-    <div class="teacher-descr">
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">В основе работы и стратегического развития Hello Panda лежат пять принципов:</p>
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Участие:</b> родители и ученики получают максимум информации об учебном процессе и имеют возможность участвовать в выборе наиболее эффективной программы для своего ребенка</p>
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Партнерство:</b> мы достигаем цели, работая сообща.</p>
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Качество:</b> наши преподаватели имели опыт жизни и обучения в США и КНР, позволивший им освоить современные методики преподавания и избавиться от акцента.</p>
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Мотивация:</b> мы стремимся к созданию лучшего мира посредством образования.</p>
-      <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Интернациональность:</b> мы обучаем всех, вне зависимости от национальности и места проживания</p>
-    </div>
-  </div>
-</section>
-<!-- end teacher -->
+  </section>
 
-{% include './components/form_trial_lesson.html' %}
+  <section class="statistics">
+    <div class="wrapper">
+      <div class="section-top">
+        <span class="section-subtitle">Figures</span>
+        <h2 class="section-title">Цифры</h2>
+      </div>
+      <div class="statistics-row">
+        <div class="statistics-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="statistics-ico">
+            <div class="statistics-ico" id="statistics1"></div>
+            <div class="statistics-hidden" id="statistics1-1">15</div>
+            <div class="statistics-hidden" id="procent-1">0.66</div>
+          </div>
+          <span class="statistics-subtitle">Постоянных преподавателей</span>
+        </div>
+        <div class="statistics-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="statistics-ico">
+            <div class="statistics-ico" id="statistics2"></div>
+            <div class="statistics-hidden" id="statistics2-2">750</div>
+            <div class="statistics-hidden" id="procent-2">0.66</div>
+          </div>
+          <span class="statistics-subtitle">Успешно сданных экзаменов</span>
+        </div>
+        <div class="statistics-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="statistics-ico">
+            <div class="statistics-ico" id="statistics3"></div>
+            <div class="statistics-hidden" id="statistics3-3">150</div>
+            <div class="statistics-hidden" id="procent-3">0.66</div>
+          </div>
+          <span class="statistics-subtitle">Полученных грантов</span>
+        </div>
+        <div class="statistics-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="statistics-ico">
+            <div class="statistics-ico" id="statistics4"></div>
+            <div class="statistics-hidden" id="statistics4-4">1500</div>
+            <div class="statistics-hidden" id="procent-4">0.66</div>
+          </div>
+          <span class="statistics-subtitle">Довольных учеников</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="mission-bg mission-bg__1">
+      <div class="mission-img mission-img__1">
+        <img src="{% static 'img/mission-bg-1.svg' %}" alt="">
+      </div>
+      <div class="mission-img mission-img__2">
+        <img src="{% static 'img/mission-bg-2.png' %}" alt="">
+      </div>
+    </div>
+    <div class="mission-bg mission-bg__2">
+      <div class="mission-img mission-img__3">
+        <img src="{% static 'img/mission-bg-3.svg' %}" alt="">
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="mission-row">
+        <div class="mission-col mission-col__1">
+          <div class="mission-mob mission-mob__1">
+            <img src="{% static 'img/mission-mob-1.svg' %}" alt="">
+          </div>
+          <div class="mission-info">
+            <h3 class="mission-title" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Миссия</h3>
+            <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Миссия Hello Panda – способствовать развитию языковых навыков и индивидуальных способностей учащихся, а также помочь им в самореализации в настоящем и будущем.</p>
+            <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Мы создали школу, в которой ученик получает качественное образование, востребованное сегодня. </p>
+          </div>
+        </div>
+        <div class="mission-col mission-col__2">
+          <div class="mission-mob mission-mob__2">
+            <img src="{% static 'img/mission-mob-2.svg' %}" alt="">
+          </div>
+          <div class="mission-info">
+            <h3 class="mission-title" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Наша цель</h3>
+            <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">• Предоставление качественного образования подрастающему поколению с учетом психологии современных детей и подростков</p>
+            <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">• Формирование устойчивых коммуникативных навыков, которые позволяют ученику быстро заговорить</p>
+            <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">• Помощь в преодолении языкового и культурного барьера, который позволит раскрыть потенциал ученика</p>
+            <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">• Предоставление качественных материалов и эффективных методик, разработанных лучшими специалистами</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="teacher teacher-second">
+    <div class="teacher-bg teacher-bg__1">
+      <img src="{% static 'img/teacher-bg-1.svg' %}" alt="">
+    </div>
+    <div class="teacher-bg teacher-bg__2">
+      <img src="{% static 'img/teacher-bg-2.svg' %}" alt="">
+    </div>
+    <div class="wrapper">
+      <div class="section-top section-center" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+        <span class="section-subtitle">Story</span>
+        <h2 class="section-title">история</h2>
+      </div>
+      <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Школа иностранных языков Hello Panda была основана в 2018 году командой профессиональных методистов, преподавателей и переводчиков с целью предоставления качественных услуг по обучению детей и взрослых двум самым востребованным языкам в мире: Английскому и Китайскому. <br>С момента основания школа Hello Panda помогла многим ученикам заговорить на иностранном языке, успешно сдать выпускные и международные тесты, а также оказала содействие в получении стипендий на обучение в КНР.</p>
+      <div class="teacher-descr">
+        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">В основе работы и стратегического развития Hello Panda лежат пять принципов:</p>
+        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Участие:</b> родители и ученики получают максимум информации об учебном процессе и имеют возможность участвовать в выборе наиболее эффективной программы для своего ребенка</p>
+        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Партнерство:</b> мы достигаем цели, работая сообща.</p>
+        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Качество:</b> наши преподаватели имели опыт жизни и обучения в США и КНР, позволивший им освоить современные методики преподавания и избавиться от акцента.</p>
+        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Мотивация:</b> мы стремимся к созданию лучшего мира посредством образования.</p>
+        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true"><b>• Интернациональность:</b> мы обучаем всех, вне зависимости от национальности и места проживания</p>
+      </div>
+    </div>
+  </section>
+
+  {% include 'public/components/form_trial_lesson.html' %}
 
 {% endblock %}

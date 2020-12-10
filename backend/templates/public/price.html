@@ -1,121 +1,126 @@
-{% extends './_base.html' %}
+{% extends 'public/_base.html' %}
 
 {% load static %}
 
 {% block title %}Стоимость{% endblock %}
 
 {% block content %}
-<!-- start process -->
-<section class="process process-second">
-  <div class="wrapper">
-    <div class="process-info">
-      <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <span class="section-subtitle">Cost</span>
-        <h2 class="section-title">Стоимость</h2>
-      </div>
-      <div class="process-img">
-        <img src="{% static 'img/process-img.svg' %}" alt="">
-      </div>
-      <div class="process-text">
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Стоимость обучения рассчитывается в зависимости от выбранной интенсивности занятий в месяц и от выбранного преподавателя.</p>
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Ниже вы можете ознакомиться с нашими тарифами на обучение и выбрать желаемый.</p>
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Мы рекомендуем минимальную интенсивность 2-4 раза в неделю, чтобы сохранять качество обучения.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end process -->
-<!-- start price -->
-<section class="price">
-  <div class="stages-mob">
-    <svg width="375" height="230" viewBox="0 0 375 230" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M-62.9426 105.515C-62.9426 105.515 17.1384 -56.8903 151.319 30.6736C285.5 118.238 433 10.0178 433 10.0178L377.585 230C377.585 230 -71 200.064 -71 199.066C-71 198.068 -62.9426 105.515 -62.9426 105.515Z" fill="#5F9F84"/><path d="M-10.8814 88.5707C-10.8814 88.5707 59.8693 -54.1917 178.417 22.7816C296.964 99.7549 293.768 78.9216 354.058 83.7462C414.349 88.5707 378.32 198 378.32 198C378.32 198 -18 171.684 -18 170.807C-18 169.93 -10.8814 88.5707 -10.8814 88.5707Z" fill="#FFB42D"/></svg>
-  </div>
-  <div class="stages-bg" style="background-image: url({% static 'img/stages-bg.svg' %});"></div>
-  <div class="wrapper">
-    <div class="price-row">
-      <div class="price-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="price-wrap">
-          <div class="price-num"><b>От</b><span>300</span><b>грн.</b></div>
-          <p>Занятия с русскоговорящим преподавателем</p>
-          <ul class="price-list">
-            <li>4 занятия в месяц - 300 грн.</li>
-            <li>8-12 занятий в месяц - 250 грн.</li>
-            <li>16-20 занятий в месяц - 220 грн.</li>
-          </ul>
-          <div class="price-wrap__bg">
-            <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 67C0 67 206.068 60.5826 274.214 47.5C342.361 34.4174 349 0 349 0V62C349 64.7614 346.761 67 344 67H0Z" fill="url(#dfop)"/><defs><linearGradient id="dfop" x1="344.463" y1="1.62031" x2="217.612" y2="196.375" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC000"/><stop offset="1" stop-color="#FF8A00"/></linearGradient></defs></svg>
-          </div>
+  <section class="process process-second">
+    <div class="wrapper">
+      <div class="process-info">
+        <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <span class="section-subtitle">Cost</span>
+          <h2 class="section-title">Стоимость</h2>
         </div>
-      </div>
-      <div class="price-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="price-wrap">
-          <div class="price-num"><b>От</b><span>400</span><b>грн.</b></div>
-          <p>Занятия с русскоговорящим преподавателем</p>
-          <ul class="price-list">
-            <li>4 занятия в месяц - 300 грн.</li>
-            <li>8-12 занятий в месяц - 250 грн.</li>
-            <li>16-20 занятий в месяц - 220 грн.</li>
-          </ul>
-          <div class="price-wrap__bg">
-            <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 67C0 67 206.068 60.5826 274.214 47.5C342.361 34.4174 349 0 349 0V62C349 64.7614 346.761 67 344 67H0Z" fill="url(#dfop2)"/><defs><linearGradient id="dfop2" x1="344.463" y1="1.62031" x2="217.612" y2="196.375" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC000"/><stop offset="1" stop-color="#FF8A00"/></linearGradient></defs></svg>
-          </div>
+        <div class="process-img">
+          <img src="{% static 'img/process-img.svg' %}" alt="">
         </div>
-      </div>
-      <div class="price-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="price-wrap">
-          <div class="price-num"><b>От</b><span>220</span><b>грн.</b></div>
-          <p>Занятия с русскоговорящим преподавателем</p>
-          <ul class="price-list">
-            <li>4 занятия в месяц - 300 грн.</li>
-            <li>8-12 занятий в месяц - 250 грн.</li>
-            <li>16-20 занятий в месяц - 220 грн.</li>
-          </ul>
-          <div class="price-wrap__bg">
-            <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 67C0 67 206.068 60.5826 274.214 47.5C342.361 34.4174 349 0 349 0V62C349 64.7614 346.761 67 344 67H0Z" fill="url(#dfop3)"/><defs><linearGradient id="dfop3" x1="344.463" y1="1.62031" x2="217.612" y2="196.375" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC000"/><stop offset="1" stop-color="#FF8A00"/></linearGradient></defs></svg>
-          </div>
+        <div class="process-text">
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Стоимость обучения рассчитывается в зависимости от выбранной интенсивности занятий в месяц и от выбранного преподавателя.</p>
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Ниже вы можете ознакомиться с нашими тарифами на обучение и выбрать желаемый.</p>
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Мы рекомендуем минимальную интенсивность 2-4 раза в неделю, чтобы сохранять качество обучения.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- end price -->
-<!-- start conveniently -->
-<section class="conveniently">
-  <div class="teacher-bg teacher-bg__1">
-    <img src="{% static 'img/teacher-bg-1.svg' %}" alt="">
-  </div>
-  <div class="teacher-bg teacher-bg__2">
-    <img src="{% static 'img/teacher-bg-2.svg' %}" alt="">
-  </div>
-  <div class="wrapper">
-    <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-      <span class="section-subtitle">everything is convenient</span>
-      <h2 class="section-title">все удобно</h2>
-    </div>
-    <div class="conveniently-row">
-      <div class="faq-col faq-col__big" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="faq-wrap">
-          <h3 class="faq-title">Начните бесплатно</h3>
-          <p>Первый пробный урок в Hello Panda бесплатный. <br>Во время урока ученики могут проверить, подходит ли им наша школа,а преподаватели могут определить уровень владения языком и подобрать эффективную методику обучения для ученика.</p>
-        </div>
-      </div>
-      <div class="faq-col faq-col__big" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="faq-wrap">
-          <h3 class="faq-title">Учитесь в удобное время</h3>
-          <p>В Hello Panda не нужно подстраиваться под график преподавателя или группы. Вы выбираете удобное время – а мы подбираем преподавателя. <br>При непредвиденных обстоятельствах у Вас есть возможность перенести урок, если предупредите об это заранее.</p>
-        </div>
-      </div>
-      <div class="faq-col faq-col__big" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <div class="faq-wrap">
-          <h3 class="faq-title">Получайте бесплатные уроки</h3>
-          <p>Мы всегда стараемся стимулировать наших учеников разными способами, в том числе предоставляя им возможность получить бесплатные уроки. Если ученик приведет своего друга в Hello Panda, то они оба получат бесплатные уроки.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end conveniently -->
+  </section>
 
-{% include './components/form_trial_lesson.html' %}
+  <section class="price">
+    <div class="stages-mob">
+      <svg width="375" height="230" viewBox="0 0 375 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M-62.9426 105.515C-62.9426 105.515 17.1384 -56.8903 151.319 30.6736C285.5 118.238 433 10.0178 433 10.0178L377.585 230C377.585 230 -71 200.064 -71 199.066C-71 198.068 -62.9426 105.515 -62.9426 105.515Z" fill="#5F9F84"></path>
+        <path d="M-10.8814 88.5707C-10.8814 88.5707 59.8693 -54.1917 178.417 22.7816C296.964 99.7549 293.768 78.9216 354.058 83.7462C414.349 88.5707 378.32 198 378.32 198C378.32 198 -18 171.684 -18 170.807C-18 169.93 -10.8814 88.5707 -10.8814 88.5707Z" fill="#FFB42D"></path>
+      </svg>
+    </div>
+    <div class="stages-bg"></div>
+    <div class="wrapper">
+      <div class="price-row">
+        <div class="price-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="price-wrap">
+            <div class="price-num"><b>От</b><span>300</span><b>грн.</b></div>
+            <p>Занятия с русскоговорящим преподавателем</p>
+            <ul class="price-list">
+              <li>4 занятия в месяц - 300 грн.</li>
+              <li>8-12 занятий в месяц - 250 грн.</li>
+              <li>16-20 занятий в месяц - 220 грн.</li>
+            </ul>
+            <div class="price-wrap__bg">
+              <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 67C0 67 206.068 60.5826 274.214 47.5C342.361 34.4174 349 0 349 0V62C349 64.7614 346.761 67 344 67H0Z" fill="url(#dfop)"></path><defs><linearGradient id="dfop" x1="344.463" y1="1.62031" x2="217.612" y2="196.375" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC000"></stop><stop offset="1" stop-color="#FF8A00"></stop></linearGradient></defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="price-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="price-wrap">
+            <div class="price-num"><b>От</b><span>400</span><b>грн.</b></div>
+            <p>Занятия с русскоговорящим преподавателем</p>
+            <ul class="price-list">
+              <li>4 занятия в месяц - 300 грн.</li>
+              <li>8-12 занятий в месяц - 250 грн.</li>
+              <li>16-20 занятий в месяц - 220 грн.</li>
+            </ul>
+            <div class="price-wrap__bg">
+              <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 67C0 67 206.068 60.5826 274.214 47.5C342.361 34.4174 349 0 349 0V62C349 64.7614 346.761 67 344 67H0Z" fill="url(#dfop2)"></path><defs><linearGradient id="dfop2" x1="344.463" y1="1.62031" x2="217.612" y2="196.375" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC000"></stop><stop offset="1" stop-color="#FF8A00"></stop></linearGradient></defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="price-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="price-wrap">
+            <div class="price-num"><b>От</b><span>220</span><b>грн.</b></div>
+            <p>Занятия с русскоговорящим преподавателем</p>
+            <ul class="price-list">
+              <li>4 занятия в месяц - 300 грн.</li>
+              <li>8-12 занятий в месяц - 250 грн.</li>
+              <li>16-20 занятий в месяц - 220 грн.</li>
+            </ul>
+            <div class="price-wrap__bg">
+              <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 67C0 67 206.068 60.5826 274.214 47.5C342.361 34.4174 349 0 349 0V62C349 64.7614 346.761 67 344 67H0Z" fill="url(#dfop3)"></path><defs><linearGradient id="dfop3" x1="344.463" y1="1.62031" x2="217.612" y2="196.375" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC000"></stop><stop offset="1" stop-color="#FF8A00"></stop></linearGradient></defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="conveniently">
+    <div class="teacher-bg teacher-bg__1">
+      <img src="{% static 'img/teacher-bg-1.svg' %}" alt="">
+    </div>
+    <div class="teacher-bg teacher-bg__2">
+      <img src="{% static 'img/teacher-bg-2.svg' %}" alt="">
+    </div>
+    <div class="wrapper">
+      <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+        <span class="section-subtitle">everything is convenient</span>
+        <h2 class="section-title">все удобно</h2>
+      </div>
+      <div class="conveniently-row">
+        <div class="faq-col faq-col__big" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="faq-wrap">
+            <h3 class="faq-title">Начните бесплатно</h3>
+            <p>Первый пробный урок в Hello Panda бесплатный. <br>Во время урока ученики могут проверить, подходит ли им наша школа,а преподаватели могут определить уровень владения языком и подобрать эффективную методику обучения для ученика.</p>
+          </div>
+        </div>
+        <div class="faq-col faq-col__big" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="faq-wrap">
+            <h3 class="faq-title">Учитесь в удобное время</h3>
+            <p>В Hello Panda не нужно подстраиваться под график преподавателя или группы. Вы выбираете удобное время – а мы подбираем преподавателя. <br>При непредвиденных обстоятельствах у Вас есть возможность перенести урок, если предупредите об это заранее.</p>
+          </div>
+        </div>
+        <div class="faq-col faq-col__big" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="faq-wrap">
+            <h3 class="faq-title">Получайте бесплатные уроки</h3>
+            <p>Мы всегда стараемся стимулировать наших учеников разными способами, в том числе предоставляя им возможность получить бесплатные уроки. Если ученик приведет своего друга в Hello Panda, то они оба получат бесплатные уроки.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include 'public/components/form_trial_lesson.html' %}
 
 {% endblock %}

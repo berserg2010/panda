@@ -75,8 +75,6 @@ def request_user(request):
 def recover_password(request):
     message = {}
 
-
-
     if request.method == 'POST':
         form = RecoverPasswordForm(request.POST)
 
@@ -230,7 +228,9 @@ class SettingsUserView(LoginRequiredMixin, FormView):
             user.last_name = form.cleaned_data.get('last_name')
 
             current_user.phone = form.cleaned_data.get('phone')
-            current_user.avatar = form.cleaned_data.get('avatar')
+
+            if form.cleaned_data.get('avatar'):
+                current_user.avatar = form.cleaned_data.get('avatar')
 
             user.save()
             current_user.save()

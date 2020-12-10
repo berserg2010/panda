@@ -1,80 +1,93 @@
-{% extends './_base.html' %}
+{% extends 'public/_base.html' %}
 
 {% load static %}
 
 {% block title %}Преподаватели{% endblock %}
 
-
 {% block content %}
-<!-- start process -->
-<section class="process">
-  <div class="wrapper">
-    <div class="process-info">
-      <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <span class="section-subtitle">Teachers</span>
-        <h2 class="section-title">Преподаватели</h2>
-      </div>
-      <div class="process-img">
-        <img src="{% static 'img/process-img-2.svg' %}" alt="">
-      </div>
-      <div class="process-text">
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Преподаватели Hello Panda используют только передовые современные методики, формируют интерес у учеников посредством интерактивных игр и обсуждений на самые актуальные темы.</p>
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Все наши преподаватели имеют опыт преподавания от 3- лет и многие имеют международные дипломы и сертификаты.</p>
-        <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Русскоязычные преподаватели имели большой опыт с носителями языка в США и Великобритании, а непосредственно преподаватели-носители языка также владеют русским языком. </p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end process -->
-<!-- start instructor -->
-<section class="instructor">
-  <div class="wrapper">
-    <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-      <span class="section-subtitle">We have the best teachers!</span>
-      <h2 class="section-title">У нас лучшие преподаватели !</h2>
-    </div>
-  </div>
-  <div class="instructor-slider">
-    <div class="instructor-slide">
-      <div class="instructor-video">
-        <div class="instructor-overlay" style="background-image: url({% static 'img/stages-1.jpg' %});">
-          <div class="instructor-play"><svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg"><circle opacity="0.8" cx="44" cy="44" r="44" fill="#F8FFFC"/><path d="M34.3333 23.9915V64.8248L66.4166 44.4081L34.3333 23.9915Z" fill="#FFB42D"/></svg></div>
-        </div>
-        <iframe src="https://www.youtube.com/embed/3pbmO66vWDY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <span class="instructor-url">https://www.youtube.com/embed/3pbmO66vWDY?autoplay=1</span>
-      </div>
-    </div>
-    <div class="instructor-slide">
-      <div class="instructor-video">
-        <div class="instructor-overlay" style="background-image: url({% static 'img/stages-2.jpg' %});">
-          <div class="instructor-play"><svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg"><circle opacity="0.8" cx="44" cy="44" r="44" fill="#F8FFFC"/><path d="M34.3333 23.9915V64.8248L66.4166 44.4081L34.3333 23.9915Z" fill="#FFB42D"/></svg></div>
-        </div>
-        <iframe src="https://www.youtube.com/embed/3pbmO66vWDY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <span class="instructor-url">https://www.youtube.com/embed/3pbmO66vWDY?autoplay=1</span>
-      </div>
-    </div>
-    <div class="instructor-slide">
-      <div class="instructor-video">
-        <div class="instructor-overlay" style="background-image: url({% static 'img/stages-1.jpg' %});">
-          <div class="instructor-play"><svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg"><circle opacity="0.8" cx="44" cy="44" r="44" fill="#F8FFFC"/><path d="M34.3333 23.9915V64.8248L66.4166 44.4081L34.3333 23.9915Z" fill="#FFB42D"/></svg></div>
-        </div>
-        <iframe src="https://www.youtube.com/embed/3pbmO66vWDY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <span class="instructor-url">https://www.youtube.com/embed/3pbmO66vWDY?autoplay=1</span>
-      </div>
-    </div>
-    <div class="instructor-slide">
-      <div class="instructor-video">
-        <div class="instructor-overlay" style="background-image: url({% static 'img/stages-2.jpg' %});">
-          <div class="instructor-play"><svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg"><circle opacity="0.8" cx="44" cy="44" r="44" fill="#F8FFFC"/><path d="M34.3333 23.9915V64.8248L66.4166 44.4081L34.3333 23.9915Z" fill="#FFB42D"/></svg></div>
-        </div>
-        <iframe src="https://www.youtube.com/embed/3pbmO66vWDY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <span class="instructor-url">https://www.youtube.com/embed/3pbmO66vWDY?autoplay=1</span>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end instructor -->
 
-{% include './components/form_trial_lesson.html' %}
+  <section class="process">
+    <div class="wrapper">
+      <div class="process-info">
+        <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <span class="section-subtitle">Teachers</span>
+          <h2 class="section-title">Преподаватели</h2>
+        </div>
+        <div class="process-img">
+          <img src="{% static 'img/process-img-2.svg' %}" alt="">
+        </div>
+        <div class="process-text">
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Преподаватели Hello Panda используют только передовые современные методики, формируют интерес у учеников посредством интерактивных игр и обсуждений на самые актуальные темы.</p>
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Все наши преподаватели имеют опыт преподавания от 3- лет и многие имеют международные дипломы и сертификаты.</p>
+          <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Русскоязычные преподаватели имели большой опыт с носителями языка в США и Великобритании, а непосредственно преподаватели-носители языка также владеют русским языком. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="instructor">
+    <div class="wrapper">
+      <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+        <span class="section-subtitle">We have the best teachers!</span>
+        <h2 class="section-title">У нас лучшие преподаватели !</h2>
+      </div>
+    </div>
+    <div class="instructor-slider">
+      <div class="instructor-slide">
+        <div class="instructor-video">
+          <div class="instructor-overlay" style="background-image: url({% static 'img/stages-1.jpg' %});">
+            <div class="instructor-play">
+              <svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.8" cx="44" cy="44" r="44" fill="#F8FFFC"></circle><path d="M34.3333 23.9915V64.8248L66.4166 44.4081L34.3333 23.9915Z" fill="#FFB42D"/>
+              </svg>
+            </div>
+          </div>
+          <iframe src="https://www.youtube.com/embed/3pbmO66vWDY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <span class="instructor-url">https://www.youtube.com/embed/3pbmO66vWDY?autoplay=1</span>
+        </div>
+      </div>
+      <div class="instructor-slide">
+        <div class="instructor-video">
+          <div class="instructor-overlay" style="background-image: url({% static 'img/stages-2.jpg' %});">
+            <div class="instructor-play">
+              <svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.8" cx="44" cy="44" r="44" fill="#F8FFFC"></circle><path d="M34.3333 23.9915V64.8248L66.4166 44.4081L34.3333 23.9915Z" fill="#FFB42D"></path>
+              </svg>
+            </div>
+          </div>
+          <iframe src="https://www.youtube.com/embed/3pbmO66vWDY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <span class="instructor-url">https://www.youtube.com/embed/3pbmO66vWDY?autoplay=1</span>
+        </div>
+      </div>
+      <div class="instructor-slide">
+        <div class="instructor-video">
+          <div class="instructor-overlay" style="background-image: url({% static 'img/stages-1.jpg' %});">
+            <div class="instructor-play">
+              <svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.8" cx="44" cy="44" r="44" fill="#F8FFFC"></circle><path d="M34.3333 23.9915V64.8248L66.4166 44.4081L34.3333 23.9915Z" fill="#FFB42D"></path>
+              </svg>
+            </div>
+          </div>
+          <iframe src="https://www.youtube.com/embed/3pbmO66vWDY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <span class="instructor-url">https://www.youtube.com/embed/3pbmO66vWDY?autoplay=1</span>
+        </div>
+      </div>
+      <div class="instructor-slide">
+        <div class="instructor-video">
+          <div class="instructor-overlay" style="background-image: url({% static 'img/stages-2.jpg' %});">
+            <div class="instructor-play">
+              <svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.8" cx="44" cy="44" r="44" fill="#F8FFFC"></circle><path d="M34.3333 23.9915V64.8248L66.4166 44.4081L34.3333 23.9915Z" fill="#FFB42D"/>
+              </svg>
+            </div>
+          </div>
+          <iframe src="https://www.youtube.com/embed/3pbmO66vWDY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <span class="instructor-url">https://www.youtube.com/embed/3pbmO66vWDY?autoplay=1</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include 'public/components/form_trial_lesson.html' %}
 
 {% endblock %}

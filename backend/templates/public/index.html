@@ -1,17 +1,17 @@
-{% extends './_base.html' %}
+{% extends 'public/_base.html' %}
 
 {% load static %}
 
 {% block title %}Главная{% endblock %}
 
 {% block content %}
-  <!-- start main -->
+
   <section class="main">
-    <div class="main-bg" style="background-image: url({% static 'img/main-bg.jpg' %});"></div>
-    <div class="main-bg main-bg__mob" style="background-image: url({% static 'img/main-bg-mob.svg' %});"></div>
+    <div class="main-bg"></div>
+    <div class="main-bg main-bg__mob"></div>
     <div class="wrapper">
       <div class="main-info">
-        <h1 class="main-title" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Изучение языка с нами увлекательно. Присоединяйся! </h1>
+        <h1 class="main-title" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Изучение языка с нами увлекательно. Присоединяйся!</h1>
         <div class="main-img">
           <img src="{% static 'img/main-img.svg' %}" alt="">
         </div>
@@ -34,8 +34,7 @@
       </div>
     </div>
   </section>
-  <!-- end main -->
-  <!-- start about -->
+
   <section class="about">
     <div class="about-bg about-bg__1">
       <img src="{% static 'img/about-bg-1.svg' %}" alt="">
@@ -44,17 +43,29 @@
       <img src="{% static 'img/about-bg-2.svg' %}" alt="">
     </div>
     <div class="wrapper">
-      <div class="section-top section-center" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <div
+        class="section-top section-center"
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-once="true"
+      >
         <span class="section-subtitle">ABOUT SCHOOL</span>
         <h2 class="section-title">О школе</h2>
       </div>
-      <div class="about-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <div
+        class="about-text"
+        data-aos="fade-up"
+        data-aos-duration="500"
+        data-aos-once="true"
+      >
         <p>Онлайн школа Hello Panda дает возможность выучить или улучшить знания по самым востребованным языкам в мире – английскому и китайскому – эффективным и увлекательным способом.</p>
       </div>
       <div class="about-row">
         <div class="about-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
           <div class="about-ico__bg">
-            <svg width="223" height="225" viewBox="0 0 223 225" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M199.551 107.781C196.487 144.088 113.717 205.919 63.893 184.011C6.05767 158.578 74.8649 40.4697 99.1091 20.0343C123.353 -0.401738 131.163 3.18837 142.757 41.6578C154.351 80.1277 202.616 71.4726 199.551 107.781Z" fill="#F0F0F0"/></svg>
+            <svg width="223" height="225" viewBox="0 0 223 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M199.551 107.781C196.487 144.088 113.717 205.919 63.893 184.011C6.05767 158.578 74.8649 40.4697 99.1091 20.0343C123.353 -0.401738 131.163 3.18837 142.757 41.6578C154.351 80.1277 202.616 71.4726 199.551 107.781Z" fill="#F0F0F0"></path>
+            </svg>
           </div>
           <div class="about-ico">
             <img src="{% static 'img/about-ico-1.svg' %}" alt="">
@@ -63,7 +74,9 @@
         </div>
         <div class="about-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
           <div class="about-ico__bg">
-            <svg width="174" height="201" viewBox="0 0 174 201" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M139.378 26.7321C166.632 52.2803 163.74 158.163 114.443 184.309C57.2165 214.657 5.96612 84.2246 4.94355 51.7323C3.92032 19.2397 11.7732 15.2406 50.0859 30.3732C88.3987 45.5064 112.123 1.18339 139.378 26.7321Z" fill="#F0F0F0"/></svg>
+            <svg width="174" height="201" viewBox="0 0 174 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M139.378 26.7321C166.632 52.2803 163.74 158.163 114.443 184.309C57.2165 214.657 5.96612 84.2246 4.94355 51.7323C3.92032 19.2397 11.7732 15.2406 50.0859 30.3732C88.3987 45.5064 112.123 1.18339 139.378 26.7321Z" fill="#F0F0F0"></path>
+            </svg>
           </div>
           <div class="about-ico">
             <img src="{% static 'img/about-ico-2.svg' %}" alt="">
@@ -72,7 +85,9 @@
         </div>
         <div class="about-col" data-aos="fade-right" data-aos-duration="500" data-aos-once="true">
           <div class="about-ico__bg">
-            <svg width="188" height="211" viewBox="0 0 188 211" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.2791 151.153C1.08787 116.596 47.6682 21.466 103.371 18.1414C168.032 14.2843 160.519 154.223 147.962 184.208C135.406 214.194 126.602 214.573 98.0267 184.903C69.4517 155.232 29.4702 185.709 15.2791 151.153Z" fill="#F0F0F0"/></svg>
+            <svg width="188" height="211" viewBox="0 0 188 211" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2791 151.153C1.08787 116.596 47.6682 21.466 103.371 18.1414C168.032 14.2843 160.519 154.223 147.962 184.208C135.406 214.194 126.602 214.573 98.0267 184.903C69.4517 155.232 29.4702 185.709 15.2791 151.153Z" fill="#F0F0F0"></path>
+            </svg>
           </div>
           <div class="about-ico">
             <img src="{% static 'img/about-ico-3.svg' %}" alt="">
@@ -82,8 +97,7 @@
       </div>
     </div>
   </section>
-  <!-- end about -->
-  <!-- start training -->
+
   <section class="training">
     <div class="wrapper">
       <div class="section-top section-center" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
@@ -127,10 +141,9 @@
       </div>
     </div>
   </section>
-  <!-- end training -->
-  <!-- start action -->
+
   <section class="action">
-    <div class="action-mob" style="background-image: url({% static 'img/action-bg.svg' %});"></div>
+    <div class="action-mob"></div>
     <div class="action-bg action-bg__1">
       <img src="{% static 'img/action-bg-1.svg' %}" alt="">
     </div>
@@ -148,8 +161,7 @@
       </div>
     </div>
   </section>
-  <!-- end action -->
-  <!-- start teacher -->
+
   <section class="teacher">
     <div class="teacher-bg teacher-bg__1">
       <img src="{% static 'img/teacher-bg-1.svg' %}" alt="">
@@ -168,9 +180,7 @@
       <p data-aos="fade-up" data-aos-duration="500" data-aos-once="true">Преподаватели Hello Panda используют только передовые современные методики, формируют интерес у учеников посредством интерактивных игр и обсуждений на самые актуальные темы. Все наши преподаватели имеют опыт преподавания от 3-х лет и многие имеют международные дипломы и сертификаты. Русскоязычные преподаватели имели большой опыт с носителями языка в США и Великобритании, а непосредственно преподаватели-носители языка также владеют русским языком.</p>
     </div>
   </section>
-  <!-- end teacher -->
 
-  <!-- start testimonials -->
-  {% include './components/slider_testimonials.html' %}
+  {% include 'public/components/slider_testimonials.html' %}
 
 {% endblock %}
