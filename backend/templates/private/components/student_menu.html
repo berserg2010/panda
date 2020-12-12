@@ -1,7 +1,7 @@
 {% load static %}
 
 {% url 'private_side:courses' as courses_url %}
-<li class="menu-li">
+<li>
   <a href="{% url 'private_side:courses' %}" class="{% if courses_url == request.get_full_path %}active{% endif %}">
     <b class="menu-ico"><img src="{% static 'img/menu-ico-3.svg' %}" alt=""></b>
     <span>Курсы</span>
