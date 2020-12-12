@@ -2703,7 +2703,7 @@ footer {
 .wrapper {
   max-width: 1170px;
   margin: 0 auto;
-  padding: 0 30px
+  /*padding: 0 30px*/
 }
 .section-top {
   /*padding: 34px 0 41px;*/
@@ -2741,8 +2741,6 @@ footer {
 .section-center .section-subtitle {
   top: 0;
   left: 50%;
-  -webkit-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
   transform: translate(-50%, 0)
 }
 .scroll-wrapper>.scroll-content {
@@ -2757,7 +2755,6 @@ footer {
 }
 .scrollbar-outer>.scroll-element .scroll-element_track {
   background: #fff;
-  -webkit-border-radius: 4px;
   border-radius: 4px
 }
 .scrollbar-outer>.scroll-element.scroll-y .scroll-element_outer {
@@ -2766,39 +2763,43 @@ footer {
 }
 .scrollbar-outer>.scroll-element .scroll-bar {
   background: #ffb42d;
-  -webkit-border-radius: 4px;
   border-radius: 4px
 }
 
- /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
   visibility: hidden;
-  min-width: 250px;
-  margin-left: -125px;
-  background-color: #ffb42d;
-  color: #fff;
-  text-align: center;
+  width: 328px;
+  margin-left: -164px;
+  background-color: #5f9f84;;
   border-style: solid;
   border-width: 1px;
   border-radius: 5px;
   border-color: white;
   padding: 16px;
   position: fixed;
-  z-index: 3;
   left: 50%;
-  bottom: 30px;
+  bottom: 32px;
+  z-index: 3;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  color: #fff;
 }
 #snackbar.show {
   visibility: visible;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein .5s, fadeout .5s 5s; /* In func showMessage setTimeout 5500 */
 }
 @keyframes fadein {
   from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+  to {bottom: 32px; opacity: 1;}
 }
 @keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
+  from {bottom: 32px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
+}
+#snackbar.show.show-error {
+  background: #ff4b4b;
 }
 
 @media only screen and (max-width:1040px) {
@@ -2806,7 +2807,7 @@ footer {
     padding-top: 60px
   }
   .wrapper {
-    padding: 0 20px
+    padding: 0 20px;
   }
 }
 @media only screen and (max-width:960px) {
@@ -2828,8 +2829,6 @@ footer {
   .section-subtitle {
     top: 16px;
     left: 50%;
-    -webkit-transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0)
   }
   .section-center {
@@ -3567,21 +3566,28 @@ footer {
   width: 100%;
   height: 110px;
   padding: 19px 0;
+  padding-left: 32px;
+  padding-right: 32px;
   background: #f8fffc;
   box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
   /*z-index: 500;*/
   z-index: 2;
 }
 .header .wrapper,
+.header-second .wrapper,
 .header-row,
 .header-btns,
 .header-list,
-.header-list li a,
-.header-menu {
+.header-menu,
+.header-list li a {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+}
+.header .wrapper,
+.header-second .wrapper {
+  justify-content: space-between;
 }
 .header-row {
   /*padding-top: 8px;*/
@@ -3592,9 +3598,6 @@ footer {
 }
 .header-row .header-btns {
   margin-left: 32px;
-}
-.header .wrapper {
-  justify-content: space-between
 }
 .header-bar {
   display: none;
@@ -3736,18 +3739,19 @@ footer {
   flex-flow: row nowrap;
   align-items: center;
   cursor: pointer;
-  /*padding: 0 30px 0 14px;*/
+  padding: 0;
+  padding-right: 16px;
   position: relative;
 }
-.header-user__img {
-  margin-right: 16px;
+.header-second .header-user__img {
+  /*margin-right: 16px;*/
   width: 56px;
   height: 56px;
   overflow: hidden;
   position: relative;
 }
-.header-user__img img,
-.header-user__img svg {
+.header-second .header-user__img img,
+.header-second .header-user__img svg {
   display: block;
   position: absolute;
   top: 50%;
@@ -3759,11 +3763,15 @@ footer {
   border: 3px solid #ffb42d;
   object-fit: cover;
 }
-.header-user__name {
+.header-second .header-user__name {
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
-  color: #6b6b6b
+  color: #6b6b6b;
+}
+.header-second .header-user__name{
+  margin-left: 16px;
+  margin-right: 16px;
 }
 .header-user__arrow {
   position: absolute;
@@ -3900,6 +3908,7 @@ footer {
     box-shadow: 0 4px 4px rgba(0, 0, 0, .1)
   }
   .header .wrapper,
+  .header-second .wrapper,
   .header-btns,
   .header-list,
   .header-menu,
@@ -3910,6 +3919,11 @@ footer {
     justify-content: flex-start;
     align-items: stretch;
   }
+  .header-second .wrapper {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
   .header-bar {
     display: block
   }
@@ -4022,7 +4036,7 @@ footer {
   }
   .header-user__arrow,
   .header-user__name {
-    display: none
+    display: none;
   }
 }
 .main {

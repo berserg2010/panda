@@ -35,7 +35,7 @@
 
 {% include 'public/components/modal_authorization_form.html' %}
 
-<div id="snackbar" class="show">Привет</div>
+<div id="snackbar"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -68,22 +68,38 @@
     client.post(`${urls_actions[form.id]}`, formData)
       .then(({ data }) => {
 
-        console.info(data)
-
         if (form.id === 'login-form') {
           window.location.pathname = 'lk/'
-        } else if (data.status === 'error') {
-          console.error(data.message)
         } else {
           modal.classList.remove('open')
           modalOverlay.classList.remove('open-overlay')
         }
-        alert(data.message)
+
+        showMessage(data)
+
         form.reset()
       })
       .catch((e) => {
         console.error(e)
       })
+  }
+
+  const showMessage = (data) => {
+
+    const snackbar = document.getElementById('snackbar')
+    snackbar.innerText = data.message
+
+    if (data.status === 'error') {
+      snackbar.classList.add('show-error')
+    }
+
+    snackbar.classList.add('show')
+
+    setTimeout(() => {
+      snackbar.innerText = ''
+      snackbar.classList.toggle('show')
+      snackbar.classList.remove('show-error')
+    }, 5500) // In #snackbar.show animation fadeout .5s 5s
   }
 
 </script>
