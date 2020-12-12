@@ -8,6 +8,7 @@ from account.services.mail import (
     send_mail_request_user_accept,
     send_mail_request_user_reject,
 )
+from paid_course.models import FreeLesson
 
 
 def request_user_accept(obj: RequestUser) -> str:
@@ -24,6 +25,9 @@ def request_user_accept(obj: RequestUser) -> str:
         user=user,
         phone=obj.phone,
     )
+    free_lesson = FreeLesson(
+        student=student,
+    )
     obj.accept = True
     obj.check_date = date_now
 
@@ -31,6 +35,7 @@ def request_user_accept(obj: RequestUser) -> str:
         with transaction.atomic():
             user.save()
             student.save()
+            free_lesson.save()
             obj.save()
 
     except IntegrityError:

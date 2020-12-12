@@ -21,6 +21,11 @@
             {% if forloop.first %}
               <span class="timetables-title">Текущая неделя</span>
             {% endif %}
+
+            {% if forloop.counter0 == 1 %}
+              <span class="timetables-title">Следующие недели</span>
+            {% endif %}
+
             <div class="timetables-slider range-slider">
 
               {% for key, weekday in week.items|dictsort:0 %}

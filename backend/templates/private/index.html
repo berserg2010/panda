@@ -6,6 +6,8 @@
 
 {% block content %}
 
+  {{ free_lessons|unordered_list }}
+
   {% if user.is_staff %}
     {% include 'private/index_teacher.html' %}
   {% else %}
