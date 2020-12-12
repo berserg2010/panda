@@ -4,11 +4,11 @@ from django.contrib.auth.models import AnonymousUser
 def get_account(request):
     user = request.user
 
-    if isinstance(user, AnonymousUser) or user.is_superuser:
-        account = None
-    elif user.is_staff:
+    if hasattr(user, 'teacher'):
         account = user.teacher
-    else:
+    elif hasattr(user, 'student'):
         account = user.student
+    else:
+        account = None
 
     return {'account': account}
