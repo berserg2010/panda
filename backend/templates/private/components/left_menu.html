@@ -12,21 +12,20 @@
         <img src="{% static 'img/menu-bg.svg' %}" alt="">
       </div>
 
-
       <ul class="menu-list">
 
         {% url 'private_side:index' as index_url %}
         <li>
-          <a href="{% url 'private_side:index' %}" class="{% if index_url == request.get_full_path %}active{% endif %}">
-            <b class="menu-ico"><img src="{% static 'img/menu-ico-1.svg' %}" alt=""></b>
+          <a href="{% url 'private_side:index' %}" {% if index_url == request.get_full_path %}class="active"{% endif %}>
+            <b class="menu-ico"><img src="{% static 'img/menu-ico-1.svg' %}" width="32" height="32" alt=""></b>
             <span>Личный кабинет</span>
           </a>
         </li>
 
         {% url 'private_side:timetables' as timetables_url %}
         <li>
-          <a href="{% url 'private_side:timetables' %}" class="{% if timetables_url == request.get_full_path %}active{% endif %}">
-            <b class="menu-ico"><img src="{% static 'img/menu-ico-2.svg' %}" alt=""></b>
+          <a href="{% url 'private_side:timetables' %}" {% if timetables_url == request.get_full_path %}class="active"{% endif %}>
+            <b class="menu-ico"><img src="{% static 'img/menu-ico-2.svg' %}" width="32" height="32" alt=""></b>
             <span>Расписание</span>
           </a>
         </li>

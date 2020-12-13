@@ -2,8 +2,8 @@
 
 {% url 'private_side:courses' as courses_url %}
 <li>
-  <a href="{% url 'private_side:courses' %}" class="{% if courses_url == request.get_full_path %}active{% endif %}">
-    <b class="menu-ico"><img src="{% static 'img/menu-ico-3.svg' %}" alt=""></b>
+  <a href="{% url 'private_side:courses' %}" {% if courses_url == request.get_full_path %}class="active"{% endif %}>
+    <b class="menu-ico"><img src="{% static 'img/menu-ico-3.svg' %}" width="32" height="32" alt=""></b>
     <span>Курсы</span>
   </a>
 </li>
@@ -41,8 +41,8 @@
 
 {% url 'private_side:free_lesson' as free_lesson_url %}
 <li>
-  <a href="{% url 'private_side:free_lesson' %}" class="{% if free_lesson_url == request.get_full_path %}active{% endif %}">
-    <b class="menu-ico"><img src="{% static 'img/menu-ico-10.svg' %}" alt=""></b>
+  <a href="{% url 'private_side:free_lesson' %}" {% if free_lesson_url == request.get_full_path %}class="active"{% endif %}>
+    <b class="menu-ico"><img src="{% static 'img/menu-ico-10.svg' %}" width="32" height="32" alt=""></b>
     <span>Бесплатные уроки<i>Пригласить друзей</i></span>
   </a>
 </li>

@@ -6004,7 +6004,8 @@ $(function() {
         afterShow: function() {
           var t = $(".fancybox-caption"),
             e = t.clone().addClass("caption--image");
-          $(".fancybox-slide--current .fancybox-content").append(e), t.not(".caption--image").addClass("caption--bottom")
+          $(".fancybox-slide--current .fancybox-content").append(e),
+            t.not(".caption--image").addClass("caption--bottom")
         }
       }),
 
@@ -6018,30 +6019,63 @@ $(function() {
         }, 900),
           $(".header").removeClass("header-active")
       }),
-      $(".header-bar").on("click", function() {
-        $(".header").toggleClass("header-active"),
-          $(i).removeClass("open"),
-          $(".modal-overlay").removeClass("open-overlay"),
-        $(".menu").length && $(".menu").toggleClass("menu-active")
+
+      $('.header-bar').on('click', function() {
+        $('.header').toggleClass('header-active'),
+          $(i).removeClass('open'),
+          $('.modal-overlay').removeClass('open-overlay'),
+          $('.menu').length && $('.menu').toggleClass('menu-active')
       }),
+
       $(".drop-text").on("click", function(t) {
         t.preventDefault(), $(this).parents(".drop").toggleClass("active"), $(window).width() <= 960 && $(this).next().slideToggle()
       }),
-      $(".header-user__top").on("click", function() {
-        $(".header-user").toggleClass("active")
+
+      $('.header-user__top').on('click', function() {
+        $('.header-user').toggleClass('active')
       }),
-      $(document).on("click", function(t) {
-        var e = $(".header");
-        e.is(t.target) || 0 !== e.has(t.target).length || $(".form-btn").is(t.target) || $(".header").removeClass("header-active")
+
+      // $(document).on("click", function(t) {
+      //   var e = $(".header");
+      //   e.is(t.target) || 0 !== e.has(t.target).length || $(".form-btn").is(t.target) || $(".header").removeClass("header-active")
+      // }),
+
+      $(document).on('click', function(e) {
+
+        const is_contains = (target, el) => {
+          return el === target || el.contains(target)
+        }
+
+        const target = e.target
+
+        const header = document.querySelector('.header')
+        const headerBar = document.querySelector('.header-bar')
+        const menu = document.querySelector('.menu')
+        // const formBtn = document.querySelector('.form-btn')
+
+        const is_headerBar = is_contains(target, headerBar)
+        const is_menu = is_contains(target, menu)
+        
+        if (!is_headerBar && !is_menu) {
+          header.classList.remove('header-active')
+          menu.classList.remove('menu-active')
+        }
+
       }),
+
       $(document).on("click", function(t) {
         var e = $(".drop");
-        e.is(t.target) || 0 !== e.has(t.target).length || $(".form-btn").is(t.target) || $(".drop").removeClass("active")
+        e.is(t.target)
+        || 0 !== e.has(t.target).length
+        || $(".form-btn").is(t.target)
+        || $(".drop").removeClass("active")
       }),
-      $(document).on("click", function(t) {
-        var e = $(".header-user");
-        e.is(t.target) || 0 !== e.has(t.target).length || $(".header-user").removeClass("active")
+
+      $(document).on('click', function(t) {
+        var e = $('.header-user');
+        e.is(t.target) || 0 !== e.has(t.target).length || $('.header-user').removeClass('active')
       }),
+
       $(".slick-current.slick-active .instructor-overlay").on("click", function() {
         var t = $(this).parents(".instructor-video");
         url = $(t).find(".instructor-url").text(), $(t).addClass("active"), $(t).find("iframe").attr("src", url)
