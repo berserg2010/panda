@@ -49,7 +49,7 @@ class TestTimetablesView:
                 day_1: {
                     'date': start_dt.date(),
                     'schedule': [
-                        ParameterStorage.free_lesson_data(free_lesson, start_dt),
+                        ParameterStorage.schedule_data(free_lesson, start_dt),
                     ]
                 },
             },
@@ -73,8 +73,8 @@ class TestTimetablesView:
                 day_1: {
                     'date': start_dt.date(),
                     'schedule': [
+                        ParameterStorage.schedule_data(free_lesson, start_dt),
                         ParameterStorage.schedule_data(schedule_2_hours, td_2_hours_dt),
-                        ParameterStorage.free_lesson_data(free_lesson, start_dt),
                     ],
                 },
                 day_2: {

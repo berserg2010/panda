@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import (
     TimetablesView,
+    reschedule_lesson,
     LessonsListView,
     LessonDetailView,
 
@@ -13,6 +14,7 @@ from .views import (
 
 urlpatterns = [
     path('timetables/', TimetablesView.as_view(), name='timetables'),
+    path('reschedule_lesson/', reschedule_lesson, name='reschedule_lesson'),
 
     path('lessons/', LessonsListView.as_view(), name='lessons'),
     path('lesson/<uuid:pk>', LessonDetailView.as_view(), name='lesson'),

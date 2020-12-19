@@ -16,3 +16,5 @@ PASSWORD_HASHERS = (
 )
 
 DEFAULT_FILE_STORAGE = 'inmemorystorage.InMemoryStorage'
+
+TIME_ZONE = 'UTC'

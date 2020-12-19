@@ -16,7 +16,12 @@ import json
 from datetime import datetime
 from copy import deepcopy
 
-from common.utils import new_password, get_user_context
+from common.utils import (
+    new_password,
+    get_user_context,
+    message_success,
+    message_error,
+)
 from account.models import Student, Payment
 from account.forms import (
     RequestUserForm,
@@ -36,22 +41,8 @@ from course.models import Course
 from paid_course.models import FreeLesson, PaidCourse
 
 
-def _message_success(message):
-    return {
-        'status': 'success',
-        'message': message,
-    }
-
-
-def _message_error(message):
-    return {
-        'status': 'error',
-        'message': message,
-    }
-
-
 def request_user(request):
-    message = _message_error('Некорректные данные')
+    message = message_error('Некорректные данные')
 
     if request.method == 'POST':
         form = RequestUserForm(request.POST)
@@ -60,14 +51,14 @@ def request_user(request):
             user = get_user_model().objects.filter(email=form.cleaned_data.get('email')).exists()
 
             if user:
-                message = _message_error('Вы уже зарегистрированы!')
+                message = message_error('Вы уже зарегистрированы!')
             else:
                 user = form.save()
 
                 send_mail_request_user(user.email)
                 send_mail_request_user_admin(user)
 
-                message = _message_success('Вы оставили заявку!')
+                message = message_success('Вы оставили заявку!')
 
     return JsonResponse(message)
 
@@ -84,9 +75,9 @@ def recover_password(request):
             try:
                 user = get_user_model().objects.get(username=email)
             except ObjectDoesNotExist:
-                message = _message_error('Нет такого пользователя')
+                message = message_error('Нет такого пользователя')
             except MultipleObjectsReturned:
-                message = _message_error('Это невозможно! Найдено несколько пользователей!')
+                message = message_error('Это невозможно! Найдено несколько пользователей!')
             else:
                 password, password_hash = new_password()
                 user.password = password_hash
@@ -94,12 +85,12 @@ def recover_password(request):
 
                 send_mail_recover_password(email, password)
 
-                message = _message_success(f'Новый пароль отправлен на почту {email}')
+                message = message_success(f'Новый пароль отправлен на почту {email}')
             finally:
                 return JsonResponse(message)
 
         else:
-            return JsonResponse(_message_error('Некорректный адрес эл. почты'))
+            return JsonResponse(message_error('Некорректный адрес эл. почты'))
 
 
 @csrf_exempt

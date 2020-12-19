@@ -1,6 +1,6 @@
 {% extends 'private/_base.html' %}
 
-{% load static %}
+{% load static private_side_extras %}
 
 {% block title %}Расписание{% endblock %}
 
@@ -51,6 +51,13 @@
                             {% endif %}
                           </li>
                         </ul>
+                        <div class="master-bottom">
+
+                          {#                          <a href="{% url 'private_side:lesson' paid_course_lesson.pk %}" class="second-btn">Начать урок</a>#}
+
+                          <a href="#" class="main-btn master-btn">Перенести урок</a>
+
+                        </div>
                       </div>
 
                     {% endfor %}
@@ -61,11 +68,18 @@
               {% endfor %}
 
             </div>
+
             <input type="range" class="range" min="1" value="1" step="1" max="4">
+
           </div>
 
         {% endfor %}
 
+
+      </div>
+
+      <div class="personalArea-block__bottom">
+        <p class="bottom_text">*Занятие можно переносить не позже чем за 8 часов до начала урока</p>
       </div>
     </div>
   </div>

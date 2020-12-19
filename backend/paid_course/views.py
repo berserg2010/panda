@@ -1,14 +1,24 @@
+from django.http import JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.utils import timezone
+from django.contrib.auth import get_user_model
 from pydantic import BaseModel
 from typing import Optional
 from datetime import time
+from typing import Union
 
-from common.utils import date_now, get_user_context
+from common.utils import (
+    date_now,
+    get_user_context,
+    message_success,
+    message_error,
+)
 from account.models import Teacher, Student
+from account.services.mail import send_mail_reschedule_lesson
 from paid_course.models import FreeLesson, PaidCourse, Schedule, LessonResults
 
 
@@ -18,6 +28,7 @@ class ScheduleEntity(BaseModel):
     title: str = ''
     teacher: Optional[Teacher] = None
     student: Student
+    lesson: Union[Schedule, FreeLesson]
 
     class Config:
         arbitrary_types_allowed = True
@@ -28,23 +39,19 @@ def schedule_entity_adapter(schedules, weeks):
     if schedules:
         for schedule in schedules:
 
-            dt = schedule.datetime
+            dt = schedule.datetime.astimezone()
             week_dt = dt.isocalendar()[1]
             weekday_dt = dt.isocalendar()[2]
             
             title = ''
-            teacher = None
-            student = None
+            teacher = schedule.teacher
+            student = schedule.student
 
             if isinstance(schedule, Schedule):
                 title = schedule.paid_course.course.title
-                teacher = schedule.paid_course.teacher
-                student = schedule.paid_course.student
 
             if isinstance(schedule, FreeLesson):
-                title = 'Бесплатное занятие'
-                teacher = schedule.teacher
-                student = schedule.student
+                title = schedule._meta.verbose_name
 
             schedule_entity = ScheduleEntity(
                 finished=schedule.finished,
@@ -52,12 +59,17 @@ def schedule_entity_adapter(schedules, weeks):
                 title=title,
                 teacher=teacher,
                 student=student,
+                lesson=schedule,
             )
 
             weekdays = weeks.get(week_dt)
 
             if weekdays and weekdays.get(weekday_dt):
-                weeks[week_dt][weekday_dt]['schedule'] += [schedule_entity]
+                weekday = weeks[week_dt][weekday_dt]
+                weekday['schedule'] += [schedule_entity]
+                sorted_weekday = sorted(weekday['schedule'], key=lambda x: x.time)
+                weeks[week_dt][weekday_dt]['schedule'] = sorted_weekday
+
             elif weekdays:
                 weeks[week_dt][weekday_dt] = {'date': dt.date(), 'schedule': [schedule_entity]}
             else:
@@ -97,6 +109,20 @@ class TimetablesView(LoginRequiredMixin, TemplateView):
         context['weeks'] = weeks
 
         return context
+
+
+def reschedule_lesson(request):
+    message = message_error('Отменить занятие можно за 8 часов до начала.')
+
+    if request.method == 'POST':
+
+        lesson = request.POST.get('lesson')
+
+        if lesson.datetime >= date_now - timezone.timedelta(hours=8):
+            send_mail_reschedule_lesson(lesson)
+            message = message_success('Вы отправили заявку.')
+
+    return JsonResponse(message)
 
 
 class LessonsListView(LoginRequiredMixin, ListView):

@@ -63,21 +63,12 @@ def create_schedule():
 class ParameterStorage:
 
     @staticmethod
-    def free_lesson_data(free_lesson, dt) -> ScheduleEntity:
-        return ScheduleEntity(
-            finished=free_lesson.finished,
-            time=dt.time(),
-            title='Бесплатное занятие',
-            teacher=free_lesson.teacher,
-            student=free_lesson.student,
-        )
-
-    @staticmethod
-    def schedule_data(schedule, dt) -> ScheduleEntity:
+    def schedule_data(schedule: Schedule, dt) -> ScheduleEntity:
         return ScheduleEntity(
             finished=schedule.finished,
             time=dt.time(),
-            title=schedule.paid_course.course.title,
-            teacher=schedule.paid_course.teacher,
-            student=schedule.paid_course.student,
+            title=schedule.paid_course.course.title if hasattr(schedule, 'paid_course') else schedule._meta.verbose_name,
+            teacher=schedule.teacher,
+            student=schedule.student,
+            lesson=schedule,
         )

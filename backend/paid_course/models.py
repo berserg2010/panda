@@ -27,8 +27,8 @@ class FreeLesson(BasicRelationshipTable):
         return f'{self.datetime}'
 
     class Meta:
-        verbose_name = 'бесплатное занятие'
-        verbose_name_plural = '01 | Бесплатные занятия'
+        verbose_name = 'пробное занятие'
+        verbose_name_plural = '01 | Пробные занятия'
         ordering = ('datetime', )
 
 
@@ -61,6 +61,14 @@ class Schedule(models.Model):
             Q(paid_course__course__group_of_course=groups_courses),
             Q(datetime__gte=first_date) | Q(datetime__lte=second_date),
         )
+
+    @property
+    def student(self):
+        return self.paid_course.student
+
+    @property
+    def teacher(self):
+        return self.paid_course.teacher
 
     def __str__(self):
         return f'{self.datetime.astimezone()}'

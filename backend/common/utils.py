@@ -26,6 +26,20 @@ def new_password() -> tuple:
     return password, make_password(password)
 
 
+def message_success(message):
+    return {
+        'status': 'success',
+        'message': message,
+    }
+
+
+def message_error(message):
+    return {
+        'status': 'error',
+        'message': message,
+    }
+
+
 def base_inline(model):
     def wrapped(cls):
 

@@ -2,6 +2,7 @@ from django.core.mail import send_mail
 
 from backend import settings
 from account.models import RequestUser, Student
+from paid_course.models import FreeLesson, Schedule
 
 
 def send_mail_request_user(email: str) -> None:
@@ -66,7 +67,7 @@ def send_mail_recover_password(email: str, password: str) -> None:
 
 def send_mail_payment(email: str,
                       payment_id, student_name: str, number_for_lessons: int,
-                      is_free_lessons: bool=False) -> None:
+                      is_free_lessons: bool = False) -> None:
 
     free_lessons = 'Плюс 2 бесплатных занятия.\n' if is_free_lessons else ''
 
@@ -90,13 +91,31 @@ def send_mail_payment_admin(payment_id, student_name: str, number_for_lessons: i
 def send_mail_bonus(email: str) -> None:
 
     body = (
-        f'Ваш друг воспльзовался бонусным кодом.\n'
+        f'Ваш друг воспользовался бонусным кодом.\n'
         f'Вам начислено 2 бесплатных занятия.\n'
     )
     _body_send_mail(body, email)
 
 
-def _body_send_mail(body: str, email: str=settings.EMAIL_HOST_USER):
+def send_mail_reschedule_lesson(lesson: Schedule or FreeLesson) -> None:
+
+    student = lesson.student
+    dt_old = lesson.datetime
+
+    body = '''
+    Заявка о переносе занятия отправлена.
+    '''
+    _body_send_mail(body, student.user.email)
+
+    body = (
+        f'Оставлена заявку о переносе занятия.\n'
+        f'Ученика: {student.pk}, {student.get_full_name()}.\n '
+        f'Занятие: {lesson._meta.verbose_name}, {lesson.pk}.'
+    )
+    _body_send_mail(body)
+
+
+def _body_send_mail(body: str, email: str = settings.EMAIL_HOST_USER):
     send_mail(
         'Panda',
         body,

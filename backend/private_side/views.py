@@ -29,7 +29,16 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
                     'group_of_course__pk', '-valid_until'
             ).distinct('group_of_course'):
 
-                last_payment = last_payment_qs.filter(group_of_course=last_payment_inst.group_of_course).first()
+                last_payment = last_payment_qs.filter(
+                    group_of_course=last_payment_inst.group_of_course
+                ).first()
+
+                print(
+                    last_payment.paid_for_lessons,
+                    last_payment.order_time,
+                    last_payment.group_of_course,
+                    last_payment.first_payment,
+                )
 
                 condition = last_payment is not None and last_payment.first_payment is not None
                 if condition:
@@ -37,7 +46,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
                     combine_filter = Q(
                         Q(order_time__gte=order_time) | Q(valid_until__gte=date_now),
                     )
-                    active_payments = last_payment_qs.filter(combine_filter).order_by('-valid_until')
+                    active_payments = last_payment_qs.filter(combine_filter).order_by('valid_until')
 
                 elif last_payment is not None:
                     order_time = last_payment.order_time
