@@ -6323,7 +6323,7 @@ footer {
     padding: 32px;
   }
 }
-@media only screen and (max-width:550px) {
+@media only screen and (max-width:600px) {
   .personalArea,
   .personalArea.personalArea-active {
     padding: 16px;
@@ -6659,14 +6659,14 @@ footer {
   background: #f0f0f0;
   box-shadow: 0 4px 4px rgba(0, 0, 0, .1);
   border-radius: 10px;
-  margin-bottom: 34px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 16px;
+
+  margin-bottom: 32px;
+  padding: 24px;
+
   position: relative;
 }
 .personalArea-block__top {
-  padding: 28px 15px 0
+  /*padding: 16px;*/
 }
 .personalArea-block__top img,
 .personalArea-block__top svg {
@@ -6688,7 +6688,8 @@ footer {
   line-height: 1;
   font-weight: 300;
   color: #2f2f2f;
-  padding-bottom: 30px
+  /*padding-bottom: 30px*/
+  padding-bottom: 16px;
 }
 .personalArea-block__title b {
   font-weight: 400
@@ -6931,8 +6932,11 @@ footer {
   }
 }
 @media only screen and (max-width:600px) {
+
   .personalArea-block {
-    margin-bottom: 30px
+    margin-bottom: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .personalArea-statistics__col {
     width: 100%
@@ -6947,11 +6951,11 @@ footer {
 }
 @media only screen and (max-width:550px) {
   .personalArea-block__top {
-    padding: 24px 15px 0
+    /*padding: 16px;*/
   }
   .personalArea-block__title {
     display: block;
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
   }
   .personalArea-block__title b {
     display: block
@@ -8052,10 +8056,13 @@ footer {
 }
 
 .timetables {
-  padding: 46px 0 35px
+  margin: 0;
+  margin-bottom: 32px;
+  padding: 0;
+  padding-top: 32px;
 }
 .timetables-block {
-  position: relative
+  position: relative;
 }
 .timetables-block .range {
   display: none;
@@ -8070,21 +8077,27 @@ footer {
   line-height: 1;
   font-weight: 300;
   color: #2f2f2f;
-  padding: 0 15px 10px
+
+  padding: 16px;
+  padding-top: 0;
 }
-/*.timetables-slider {*/
-/*  !*padding: 0 8px*!*/
-/*  padding: 0;*/
-/*}*/
+.timetables-slider {
+  margin-bottom: 32px;
+}
 .timetables-slide {
-  padding: 20px 8px 30px
+  padding-right: 16px;
+}
+.timetables-slide:last-child {
+  padding-right: 0;
 }
 .timetables-wrap {
-  width: 300px;
+  width: 296px;
   background: #f8fffc;
+  box-sizing: border-box;
   border: 1px solid #ffb42d;
   border-radius: 10px;
-  padding: 18px 16px
+
+  padding: 16px;
 }
 .timetables-subtitle {
   display: block;
@@ -8092,14 +8105,22 @@ footer {
   line-height: 1;
   font-weight: 600;
   color: #2f2f2f;
-  padding-bottom: 19px
+
+  padding-bottom: 16px
 }
 .timetables-item {
   background: #ffb42d;
   box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
   border-radius: 10px;
-  padding: 14px 16px 10px;
-  margin-bottom: 15px
+
+  margin-bottom: 16px;
+  padding: 16px;
+}
+.timetables-item:last-child {
+  margin-bottom: 0;
+}
+.timetables-item.active {
+  background: #5f9f84;
 }
 .timetables-item__top {
   display: flex;
@@ -8110,46 +8131,62 @@ footer {
   line-height: 17px;
   font-weight: 600;
   color: #f8fffc;
-  padding-bottom: 9px;
+
+  box-sizing: border-box;
   border-bottom: 1px solid #f8fffc;
-  margin-bottom: 7px
+
+  margin-bottom: 16px;
+  padding-bottom: 8px;
 }
 .timetables-item__top a {
   color: #f8fffc
 }
+.timetables-item ul {
+  margin-bottom: 16px;
+}
 .timetables-item ul li {
-  padding-bottom: 5px;
   font-size: 14px;
   line-height: 17px;
   font-weight: 600;
-  color: #f8fffc
+  color: #f8fffc;
+
+  margin-bottom: 8px;
+}
+.timetables-item ul li:last-child {
+  margin-bottom: 0;
 }
 .timetables-item ul li a {
   color: #f8fffc
 }
-.timetables-item.active {
-  background: #5f9f84
+.timetables-item button {
+  display: block;
+
+  height: auto;
+  margin: 0 auto;
+  padding: 4px 8px;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, .5);
+
+  font-size: 10px;
+
 }
-@media only screen and (max-width:550px) {
+
+@media only screen and (max-width:600px) {
   .timetables {
-    padding: 15px 0
+    margin-bottom: 16px;
+    padding-top: 16px;
   }
-  .timetables-wrap {
-    width: 265px;
-    padding: 24px 10px 16px
+  .timetables-title {
+    padding-left: 8px;
+    padding-right: 8px;
   }
-  .timetables-block {
-    padding-bottom: 30px
+  .timetables-slider {
+    margin-bottom: 16px;
   }
   .timetables-block .range {
     display: block
-  }
-  .timetables-subtitle {
-    text-align: center
-  }
-  .timetables-slide {
-    padding: 14px 8px 30px
-    /*padding-bottom: 30px;*/
   }
 }
 
@@ -10907,4 +10944,20 @@ footer {
 .tooltip:hover .tooltip__text {
   visibility: visible;
   opacity: 1;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }

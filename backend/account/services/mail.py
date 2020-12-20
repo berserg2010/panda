@@ -108,9 +108,9 @@ def send_mail_reschedule_lesson(lesson: Schedule or FreeLesson) -> None:
     _body_send_mail(body, student.user.email)
 
     body = (
-        f'Оставлена заявку о переносе занятия.\n'
-        f'Ученика: {student.pk}, {student.get_full_name()}.\n '
-        f'Занятие: {lesson._meta.verbose_name}, {lesson.pk}.'
+        f'Оставлена заявка о переносе занятия.\n'
+        f'Ученик: {student.pk}, {student.get_full_name()}.\n'
+        f'{lesson._meta.verbose_name.capitalize()}, {lesson.pk}.'
     )
     _body_send_mail(body)
 

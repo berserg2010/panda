@@ -10,6 +10,7 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import time
 from typing import Union
+import json
 
 from common.utils import (
     date_now,
@@ -116,7 +117,16 @@ def reschedule_lesson(request):
 
     if request.method == 'POST':
 
-        lesson = request.POST.get('lesson')
+        data = json.loads(request.body)
+
+        class_name = data.get('class_name')
+        obj_id = data.get('obj_id')
+
+        condition = class_name == Schedule.__name__
+        if condition:
+            lesson = Schedule.objects.get(pk=obj_id)
+        else:
+            lesson = FreeLesson.objects.get(pk=obj_id)
 
         if lesson.datetime >= date_now - timezone.timedelta(hours=8):
             send_mail_reschedule_lesson(lesson)

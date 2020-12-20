@@ -1,7 +1,16 @@
 from django import template
 from django.conf import settings
+from django.utils import timezone
+from typing import Union
+from datetime import datetime
 
-from paid_course.models import PaidCourse, LessonResults
+from common.utils import date_now
+from paid_course.models import (
+    FreeLesson,
+    PaidCourse,
+    LessonResults,
+    Schedule,
+)
 
 
 register = template.Library()
@@ -43,4 +52,17 @@ def get_last_date_lesson(paid_course: PaidCourse):
 
 @register.filter
 def get_settings_var(name: str):
-    return getattr(settings, name, '')
+    settings_var = getattr(settings, name, '')
+    return settings_var
+
+
+@register.filter
+def get_classname(obj: Union[Schedule, FreeLesson]):
+    classname = obj.__class__.__name__
+    return classname
+
+
+@register.filter
+def is_time_delta_8_hours(dt: datetime):
+    condition = date_now <= dt - timezone.timedelta(hours=8)
+    return condition

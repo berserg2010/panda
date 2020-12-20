@@ -786,7 +786,8 @@
     return a
   }, b.prototype.cleanUpEvents = function() {
     var b = this;
-    b.options.dots && null !== b.$dots && a("li", b.$dots).off("click.slick", b.changeSlide).off("mouseenter.slick", a.proxy(b.interrupt, b, !0)).off("mouseleave.slick", a.proxy(b.interrupt, b, !1)), b.$slider.off("focus.slick blur.slick"), b.options.arrows === !0 && b.slideCount > b.options.slidesToShow && (b.$prevArrow && b.$prevArrow.off("click.slick", b.changeSlide), b.$nextArrow && b.$nextArrow.off("click.slick", b.changeSlide)), b.$list.off("touchstart.slick mousedown.slick", b.swipeHandler), b.$list.off("touchmove.slick mousemove.slick", b.swipeHandler), b.$list.off("touchend.slick mouseup.slick", b.swipeHandler), b.$list.off("touchcancel.slick mouseleave.slick", b.swipeHandler), b.$list.off("click.slick", b.clickHandler), a(document).off(b.visibilityChange, b.visibility), b.cleanUpSlideEvents(), b.options.accessibility === !0 && b.$list.off("keydown.slick", b.keyHandler), b.options.focusOnSelect === !0 && a(b.$slideTrack).children().off("click.slick", b.selectHandler), a(window).off("orientationchange.slick.slick-" + b.instanceUid, b.orientationChange), a(window).off("resize.slick.slick-" + b.instanceUid, b.resize), a("[draggable!=true]", b.$slideTrack).off("dragstart", b.preventDefault), a(window).off("load.slick.slick-" + b.instanceUid, b.setPosition), a(document).off("ready.slick.slick-" + b.instanceUid, b.setPosition)
+    b.options.dots && null !== b.$dots && a("li", b.$dots).off("click.slick", b.changeSlide).off("mouseenter.slick", a.proxy(b.interrupt, b, !0)).off("mouseleave.slick", a.proxy(b.interrupt, b, !1)), b.$slider.off("focus.slick blur.slick"), b.options.arrows === !0 && b.slideCount > b.options.slidesToShow && (b.$prevArrow && b.$prevArrow.off("click.slick", b.changeSlide), b.$nextArrow && b.$nextArrow.off("click.slick", b.changeSlide)), b.$list.off("touchstart.slick mousedown.slick", b.swipeHandler), b.$list.off("touchmove.slick mousemove.slick", b.swipeHandler), b.$list.off("touchend.slick mouseup.slick", b.swipeHandler), b.$list.off("touchcancel.slick mouseleave.slick", b.swipeHandler), b.$list.off("click.slick", b.clickHandler), a(document).off(b.visibilityChange, b.visibility), b.cleanUpSlideEvents(), b.options.accessibility === !0 && b.$list.off("keydown.slick", b.keyHandler), b.options.focusOnSelect === !0 && a(b.$slideTrack).children().off("click.slick", b.selectHandler), a(window).off("orientationchange.slick.slick-" + b.instanceUid, b.orientationChange), a(window).off("resize.slick.slick-" + b.instanceUid, b.resize), a("[draggable!=true]", b.$slideTrack).off("dragstart", b.preventDefault), a(window).off("load.slick.slick-" + b.instanceUid, b.setPosition),
+      a(document).off("ready.slick.slick-" + b.instanceUid, b.setPosition)
   }, b.prototype.cleanUpSlideEvents = function() {
     var b = this;
     b.$list.off("mouseenter.slick", a.proxy(b.interrupt, b, !0)), b.$list.off("mouseleave.slick", a.proxy(b.interrupt, b, !1))
@@ -930,7 +931,8 @@
       action: "end"
     }, b.swipeHandler), b.$list.on("touchcancel.slick mouseleave.slick", {
       action: "end"
-    }, b.swipeHandler), b.$list.on("click.slick", b.clickHandler), a(document).on(b.visibilityChange, a.proxy(b.visibility, b)), b.options.accessibility === !0 && b.$list.on("keydown.slick", b.keyHandler), b.options.focusOnSelect === !0 && a(b.$slideTrack).children().on("click.slick", b.selectHandler), a(window).on("orientationchange.slick.slick-" + b.instanceUid, a.proxy(b.orientationChange, b)), a(window).on("resize.slick.slick-" + b.instanceUid, a.proxy(b.resize, b)), a("[draggable!=true]", b.$slideTrack).on("dragstart", b.preventDefault), a(window).on("load.slick.slick-" + b.instanceUid, b.setPosition), a(document).on("ready.slick.slick-" + b.instanceUid, b.setPosition)
+    }, b.swipeHandler), b.$list.on("click.slick", b.clickHandler), a(document).on(b.visibilityChange, a.proxy(b.visibility, b)), b.options.accessibility === !0 && b.$list.on("keydown.slick", b.keyHandler), b.options.focusOnSelect === !0 && a(b.$slideTrack).children().on("click.slick", b.selectHandler), a(window).on("orientationchange.slick.slick-" + b.instanceUid, a.proxy(b.orientationChange, b)), a(window).on("resize.slick.slick-" + b.instanceUid, a.proxy(b.resize, b)), a("[draggable!=true]", b.$slideTrack).on("dragstart", b.preventDefault), a(window).on("load.slick.slick-" + b.instanceUid, b.setPosition),
+      a(document).on("ready.slick.slick-" + b.instanceUid, b.setPosition)
   }, b.prototype.initUI = function() {
     var a = this;
     a.options.arrows === !0 && a.slideCount > a.options.slidesToShow && (a.$prevArrow.show(), a.$nextArrow.show()), a.options.dots === !0 && a.slideCount > a.options.slidesToShow && a.$dots.show()
@@ -6024,7 +6026,7 @@ $(function() {
         $('.header').toggleClass('header-active'),
           $(i).removeClass('open'),
           $('.modal-overlay').removeClass('open-overlay'),
-          $('.menu').length && $('.menu').toggleClass('menu-active')
+        $('.menu').length && $('.menu').toggleClass('menu-active')
       }),
 
       $(".drop-text").on("click", function(t) {
@@ -6055,7 +6057,7 @@ $(function() {
 
         const is_headerBar = is_contains(target, headerBar)
         const is_menu = is_contains(target, menu)
-        
+
         if (!is_headerBar && !is_menu) {
           header.classList.remove('header-active')
           menu.classList.remove('menu-active')
@@ -6469,6 +6471,7 @@ $(function() {
   });
 
 
+// Copy bonus
 const copyCode = () => {
   const inputCode = document.getElementById('inputCode')
   navigator.clipboard.writeText(inputCode.value)
@@ -6480,4 +6483,47 @@ const copyCode = () => {
 const outFunc = () => {
   const tooltip = document.getElementById('myTooltip')
   tooltip.innerHTML = 'Копировать в буфер обмена'
+}
+
+
+// Snackbar
+const showMessage = (data) => {
+
+  const snackbar = document.getElementById('snackbar')
+  snackbar.innerText = data.message
+
+  if (data.status === 'error') {
+    snackbar.classList.add('show-error')
+  }
+
+  snackbar.classList.add('show')
+
+  setTimeout(() => {
+    snackbar.innerText = ''
+    snackbar.classList.toggle('show')
+    snackbar.classList.remove('show-error')
+  }, 5500) // In #snackbar.show animation fadeout .5s 5s
+}
+
+
+// Reschedule lesson
+function rescheduleLessonHandler(t) {
+
+  const class_name = t.getAttribute('data-class_name')
+  const obj_id = t.getAttribute('data-obj_id')
+  
+  client.post('reschedule_lesson/', {
+    class_name,
+    obj_id,
+  })
+    .then(({data}) => {
+
+      t.style.setProperty('display', 'none')
+
+      showMessage(data)
+
+    })
+    .catch((e) => {
+      console.error(e)
+    })
 }

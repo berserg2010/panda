@@ -84,24 +84,6 @@
       })
   }
 
-  const showMessage = (data) => {
-
-    const snackbar = document.getElementById('snackbar')
-    snackbar.innerText = data.message
-
-    if (data.status === 'error') {
-      snackbar.classList.add('show-error')
-    }
-
-    snackbar.classList.add('show')
-
-    setTimeout(() => {
-      snackbar.innerText = ''
-      snackbar.classList.toggle('show')
-      snackbar.classList.remove('show-error')
-    }, 5500) // In #snackbar.show animation fadeout .5s 5s
-  }
-
 </script>
 
 </body>

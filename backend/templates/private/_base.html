@@ -32,7 +32,10 @@
 
 </section>
 
+<div id="snackbar"></div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://api.fondy.eu/static_common/v1/checkout/ipsp.js"></script>
 
 {% block script %}{% endblock %}
@@ -43,7 +46,7 @@
 {{ 'MERCHANT_ID'|get_settings_var|json_script:'MERCHANT_ID' }}
 
 <script>
-
+  // Fondy
   const DEBUG = JSON.parse(document.getElementById('DEBUG').textContent)
   const MERCHANT_ID = JSON.parse(document.getElementById('MERCHANT_ID').textContent)
 
@@ -81,6 +84,15 @@
     window.open(button.getUrl())
     return false
   }
+
+  // Reschedule lesson
+  const client = axios.create({
+    baseURL: `${window.location.origin}/lk/`,
+    contentType: 'application/json; charset=utf-8',
+    withCredentials: true,
+    xsrfCookieName: 'csrftoken',
+    xsrfHeaderName: 'X-CSRFToken',
+  })
 
 </script>
 
