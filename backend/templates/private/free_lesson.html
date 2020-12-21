@@ -27,21 +27,21 @@
 
           <ul class="lesson-social">
 
-            {% if settings_site.vkontakte %}
-              <li><a href="{{ settings_site.vkontakte }}"><img src="{% static 'img/vk.svg' %}" alt=""></a></li>
-            {% endif %}
+            <li>
+              <a href="https://vk.com/share.php?url={{ request.scheme }}://{{ request.get_host }}&text={{ account.pk }}" target="_blank"><img src="{% static 'img/vk.svg' %}" alt=""></a>
+            </li>
 
-            {% if settings_site.telegram %}
-              <li><a href="{{ settings_site.telegram }}"><img src="{% static 'img/tg.svg' %}" alt=""></a></li>
-            {% endif %}
+            <li>
+              <a href="https://t.me/share/url?url={{ request.scheme }}://{{ request.get_host }}&text={{ account.pk }}" target="_blank"><img src="{% static 'img/tg.svg' %}" alt=""></a>
+            </li>
 
-            {% if settings_site.whatsapp %}
-              <li><a href="{{ settings_site.whatsapp }}"><img src="{% static 'img/what.svg' %}" alt=""></a></li>
-            {% endif %}
-
-            {% if settings_site.facebook %}
-              <li><a href="{{ settings_site.facebook }}"><img src="{% static 'img/fb.svg' %}" alt=""></a></li>
-            {% endif %}
+{#            {% if settings_site.whatsapp %}#}
+{#              <li><a href="{{ settings_site.whatsapp }}"><img src="{% static 'img/what.svg' %}" alt=""></a></li>#}
+{#            {% endif %}#}
+{##}
+{#            {% if settings_site.facebook %}#}
+{#              <li><a href="{{ settings_site.facebook }}"><img src="{% static 'img/fb.svg' %}" alt=""></a></li>#}
+{#            {% endif %}#}
 
           </ul>
 
