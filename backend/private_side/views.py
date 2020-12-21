@@ -2,6 +2,7 @@ from django.db.models import Q, Sum
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.encoding import iri_to_uri, quote
 
 from common.utils import date_now
 from private_side.services.context import get_free_lessons
@@ -98,7 +99,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class FreeLessonLkView(LoginRequiredMixin, TemplateView):
+class FreeLessonView(LoginRequiredMixin, TemplateView):
 
     template_name = 'private/free_lesson.html'
 

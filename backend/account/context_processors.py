@@ -1,14 +1,14 @@
 from django.contrib.auth.models import AnonymousUser
 
 
-def get_account(request):
+def account(request):
     user = request.user
 
     if hasattr(user, 'teacher'):
-        account = user.teacher
+        _account = user.teacher
     elif hasattr(user, 'student'):
-        account = user.student
+        _account = user.student
     else:
-        account = None
+        _account = AnonymousUser()
 
-    return {'account': account}
+    return {'account': _account}

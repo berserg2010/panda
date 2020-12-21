@@ -28,11 +28,15 @@
           <ul class="lesson-social">
 
             <li>
-              <a href="https://vk.com/share.php?url={{ request.scheme }}://{{ request.get_host }}&text={{ account.pk }}" target="_blank"><img src="{% static 'img/vk.svg' %}" alt=""></a>
+              <a href="https://vk.com/share.php?url={{ request.scheme }}://{{ request.get_host }}&title={{ account.pk }}" target="_blank">
+                <img src="{% static 'img/vk.svg' %}" alt="">
+              </a>
             </li>
 
             <li>
-              <a href="https://t.me/share/url?url={{ request.scheme }}://{{ request.get_host }}&text={{ account.pk }}" target="_blank"><img src="{% static 'img/tg.svg' %}" alt=""></a>
+              <a href="https://t.me/share/url?url={{ request.scheme }}://{{ request.get_host }}&text={{ account.pk }}" target="_blank">
+                <img src="{% static 'img/tg.svg' %}" alt="">
+              </a>
             </li>
 
 {#            {% if settings_site.whatsapp %}#}
