@@ -39,13 +39,17 @@
               </a>
             </li>
 
-{#            {% if settings_site.whatsapp %}#}
-{#              <li><a href="{{ settings_site.whatsapp }}"><img src="{% static 'img/what.svg' %}" alt=""></a></li>#}
-{#            {% endif %}#}
-{##}
-{#            {% if settings_site.facebook %}#}
-{#              <li><a href="{{ settings_site.facebook }}"><img src="{% static 'img/fb.svg' %}" alt=""></a></li>#}
-{#            {% endif %}#}
+            <li>
+              <a href="https://wa.me/?text={{ account.pk }}" target="_blank">
+                <img src="{% static 'img/what.svg' %}" alt="">
+              </a>
+            </li>
+
+            <li>
+              <a href="https://connect.facebook.net/en_US/sdk.js?href={{ request.scheme }}://{{ request.get_host }}" target="_blank">
+                <img src="{% static 'img/fb.svg' %}" alt="">
+              </a>
+            </li>
 
           </ul>
 
@@ -67,34 +71,36 @@
       </div>
     </div>
 
-    <div class="personalArea-block">
-      <div class="personalArea-block__top">
-        <span class="personalArea-block__title">История приглашений</span>
-        <div class="personalArea-block__top-b"></div>
+    {% if payment_bonuses %}
+      <div class="personalArea-block">
+        <div class="personalArea-block__top">
+          <span class="personalArea-block__title">История приглашений</span>
+          <div class="personalArea-block__top-b"></div>
+        </div>
+
+        <div class="lesson-table">
+
+          {% for payment_bonus in payment_bonuses %}
+
+            <div class="lesson-table__row">
+              <div class="lesson-table__col lesson-table__col-1">
+                {{ payment_bonus.order_time|date }}
+              </div>
+              <div class="lesson-table__col lesson-table__col-2">
+                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 11.1719L16.5938 0.578125L18 1.98438L6 13.9844L0.421875 8.40625L1.82812 7L6 11.1719Z" fill="#5F9F84"></path>
+                </svg>
+                <p>Приглашение принято</p>
+              </div>
+              <div class="lesson-table__col lesson-table__col-3">
+                <span>+{{ payment_bonus.paid_for_lessons }}</span> Урока
+              </div>
+            </div>
+
+          {% endfor %}
+
+        </div>
       </div>
-
-      <div class="lesson-table">
-
-        {% for payment_bonus in payment_bonuses %}
-
-          <div class="lesson-table__row">
-            <div class="lesson-table__col lesson-table__col-1">
-              {{ payment_bonus.order_time|date }}
-            </div>
-            <div class="lesson-table__col lesson-table__col-2">
-              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 11.1719L16.5938 0.578125L18 1.98438L6 13.9844L0.421875 8.40625L1.82812 7L6 11.1719Z" fill="#5F9F84"></path>
-              </svg>
-              <p>Приглашение принято</p>
-            </div>
-            <div class="lesson-table__col lesson-table__col-3">
-              <span>+{{ payment_bonus.paid_for_lessons }}</span> Урока
-            </div>
-          </div>
-
-        {% endfor %}
-
-      </div>
-    </div>
+    {% endif %}
   </div>
 {% endblock %}
