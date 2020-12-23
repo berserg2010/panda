@@ -1325,7 +1325,6 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   margin: 0;
   padding: 0;
   position: absolute;
-  /*z-index: 10*/
 }
 .scrollbar-inner>.scroll-element div {
   display: block;
@@ -1388,7 +1387,6 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   margin: 0;
   padding: 0;
   position: absolute;
-  /*z-index: 10*/
 }
 .scrollbar-outer>.scroll-element {
   background-color: #fff
@@ -3585,6 +3583,9 @@ footer {
 .header-bar__2 {
   opacity: 0;
   visibility: hidden
+}
+#menu__close {
+  fill: #2F2F2F;
 }
 .header-logo {
   max-width: 143px;
@@ -6557,7 +6558,7 @@ footer {
   width: 100%;
   height: 170px;
   background: #ffb42d;
-  padding: 32px 16px;
+  padding: 24px 16px;
   padding-bottom: 0;
 }
 .menu-footer .footer-social {
@@ -10915,7 +10916,6 @@ footer {
   display: inline-block;
 }
 .tooltip .tooltip__text {
-  /*visibility: hidden;*/
   width: 140px;
   background-color: #555;
   color: #fff;
@@ -10939,7 +10939,6 @@ footer {
   border-width: 5px;
   border-style: solid;
   border-color: #555 transparent transparent transparent;
-  /*z-index: 10*/;
 }
 .tooltip:hover .tooltip__text {
   visibility: visible;

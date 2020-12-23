@@ -46,7 +46,7 @@
             </li>
 
             <li>
-              <a href="https://connect.facebook.net/en_US/sdk.js?href={{ request.scheme }}://{{ request.get_host }}" target="_blank">
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.scheme }}://{{ request.get_host }}&t={{ account.pk }}" target="_blank">
                 <img src="{% static 'img/fb.svg' %}" alt="">
               </a>
             </li>
@@ -72,6 +72,7 @@
     </div>
 
     {% if payment_bonuses %}
+
       <div class="personalArea-block">
         <div class="personalArea-block__top">
           <span class="personalArea-block__title">История приглашений</span>
@@ -101,6 +102,7 @@
 
         </div>
       </div>
+
     {% endif %}
   </div>
 {% endblock %}
