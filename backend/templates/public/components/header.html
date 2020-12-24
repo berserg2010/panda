@@ -1,6 +1,12 @@
 {% load static %}
 
 <div class="wrapper">
+  <div class="header-logo">
+    <a href="{% url 'public_side:index' %}">
+      <img src="{% static 'img/logo.svg' %}" alt="logo">
+    </a>
+  </div>
+
   <div class="header-bar">
     <div class="header-bar__1">
       <svg fill="none" height="27" viewBox="0 0 27 27" width="27" xmlns="http://www.w3.org/2000/svg">
@@ -10,15 +16,9 @@
 
     <div class="header-bar__2">
       <svg viewBox="0 0 24 24" width="24" height="24">
-        <path d="M 7.0351562 6.0507812 A 1 1 0 0 0 6.34375 6.34375 A 1 1 0 0 0 6.34375 7.7578125 L 10.585938 12 L 6.34375 16.242188 A 1 1 0 0 0 6.34375 17.65625 A 1 1 0 0 0 7.7578125 17.65625 L 12 13.414062 L 16.242188 17.65625 A 1 1 0 0 0 17.65625 17.65625 A 1 1 0 0 0 17.65625 16.242188 L 13.414062 12 L 17.65625 7.7578125 A 1 1 0 0 0 17.65625 6.34375 A 1 1 0 0 0 16.242188 6.34375 L 12 10.585938 L 7.7578125 6.34375 A 1 1 0 0 0 7.0351562 6.0507812 z"></path>
+        <path d="m 19.071068,4.9289322 a 1,1 0 0 0 -1.414214,0 L 12,10.585786 6.3431458,4.9289322 a 1,1 0 0 0 -1.4142136,0 1,1 0 0 0 0,1.4142136 L 10.585786,12 4.9289322,17.656854 a 1,1 0 0 0 0,1.414214 1,1 0 0 0 1.4142136,0 L 12,13.414214 l 5.656854,5.656854 a 1,1 0 0 0 1.414214,0 1,1 0 0 0 0,-1.414214 L 13.414214,12 19.071068,6.3431458 a 1,1 0 0 0 0,-1.4142136 z"></path>
       </svg>
     </div>
-  </div>
-
-  <div class="header-logo">
-    <a href="{% url 'public_side:index' %}">
-      <img src="{% static 'img/logo.svg' %}" alt="logo">
-    </a>
   </div>
 
   <div class="header-row">
@@ -51,7 +51,7 @@
 
     <div class="header-btns">
       {% if request.user.is_authenticated %}
-        <a href="{% url 'private_side:index' %}" class="second-btn">Личный кабинет</a>
+        <a href="{% url 'private_side:index' %}" class="button-modal second-btn">Личный кабинет</a>
       {% else %}
         <a href="modal-checkIn" class="button-modal main-btn">Начать бесплатно</a>
         <a href="modal-logging" class="button-modal second-btn">Вход</a>

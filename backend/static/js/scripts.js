@@ -4885,7 +4885,12 @@
         var t = this,
           e = t.current ? t.current.opts : t.opts,
           n = t.$refs.container;
-        t.hasHiddenControls = !1, t.idleSecondsCounter = 0, n.toggleClass("fancybox-show-toolbar", !(!e.toolbar || !e.buttons)).toggleClass("fancybox-show-infobar", !!(e.infobar && t.group.length > 1)).toggleClass("fancybox-show-caption", !!t.$caption).toggleClass("fancybox-show-nav", !!(e.arrows && t.group.length > 1)).toggleClass("fancybox-is-modal", !!e.modal)
+        t.hasHiddenControls = !1, t.idleSecondsCounter = 0,
+          n.toggleClass("fancybox-show-toolbar", !(!e.toolbar || !e.buttons))
+            .toggleClass("fancybox-show-infobar", !!(e.infobar && t.group.length > 1))
+            .toggleClass("fancybox-show-caption", !!t.$caption)
+            .toggleClass("fancybox-show-nav", !!(e.arrows && t.group.length > 1))
+            .toggleClass("fancybox-is-modal", !!e.modal)
       },
       toggleControls: function() {
         this.hasHiddenControls ? this.showControls() : this.hideControls()
@@ -6011,23 +6016,100 @@ $(function() {
         }
       }),
 
-      $(".header-menu_, .main-info_").on("click", "a", function(t) {
-        t.preventDefault();
-        var e = $(this).attr("href"),
-          a = $(e).offset().top;
 
-        $("html, body").animate({
-          scrollTop: a
-        }, 900),
-          $(".header").removeClass("header-active")
-      }),
-
+      // header-bar click -> header-active
       $('.header-bar').on('click', function() {
-        $('.header').toggleClass('header-active'),
-          $(i).removeClass('open'),
-          $('.modal-overlay').removeClass('open-overlay'),
-        $('.menu').length && $('.menu').toggleClass('menu-active')
+
+        const header = document.querySelector('.header')
+        const headerRow = document.querySelector('.header-row')
+        const modalOverlay = document.querySelector('.modal-overlay')
+        const modal = document.querySelector('.modal')
+
+        const e = $(this).attr('href')
+
+        const modalIsOpen = modal.classList.contains('open')
+
+        if (!modalIsOpen) {
+          headerRow.classList.toggle('menu--open')
+        } else {
+          modalOverlay.classList.remove('open-overlay')
+          modal.classList.remove('open')
+
+          $('.modal').find('.modal-tab').removeClass('active')
+          $('.modal').find('#' + e).addClass('active')
+        }
+
+        header.classList.toggle('header-active')
+
       }),
+
+      Array.from(document.getElementsByClassName('button-modal')).forEach(function(element) {
+          element.addEventListener('click', function(t) {
+            t.preventDefault()
+
+            const header = document.querySelector('.header')
+            const headerRow = document.querySelector('.header-row')
+            const modalOverlay = document.querySelector('.modal-overlay')
+            const modal = document.querySelector('.modal')
+
+            const e = $(this).attr('href')
+            console.info(e)
+
+            const menuIsOpen = headerRow.classList.contains('menu--open')
+
+            header.classList.add('header-active')
+
+            if (menuIsOpen) {
+              headerRow.classList.remove('menu--open')
+            }
+
+            modalOverlay.classList.add('open-overlay')
+            modal.classList.add('open')
+            modal.classList.add(e)
+
+            $('.modal').find('.modal-tab').removeClass('active')
+            $('.modal').find('#' + e).addClass('active')
+          })
+        }
+      ),
+
+
+      $(document).on('click', function(e) {
+
+        const is_contains = (target, el) => {
+          if (el) {
+            return el === target || el.contains(target)
+          }
+          return null
+        }
+
+        const target = e.target
+
+        const header = document.querySelector('.header')
+        const headerBar = document.querySelector('.header-bar')
+        const headerRow = document.querySelector('.header-row')
+        const menu = document.querySelector('.menu')
+        const buttonModal = document.querySelector('.button-modal')
+        const formBtn = document.querySelector('.form-btn')
+        const modalOverlay = document.querySelector('.modal-overlay')
+        const modal = document.querySelector('.modal')
+
+        const isHeaderBar = is_contains(target, headerBar)
+        const isMenu = is_contains(target, menu)
+        const isButtonModal = is_contains(target, buttonModal)
+
+        if (!isHeaderBar && !isButtonModal && !isMenu) {
+          header.classList.remove('header-active')
+          headerRow.classList.remove('menu--open')
+          menu && menu.classList.remove('menu-active')
+
+          modalOverlay.classList = ''
+          modalOverlay.classList.add('modal-overlay')
+          modal.classList = ''
+          modal.classList.add('modal')
+        }
+      }),
+
 
       $(".drop-text").on("click", function(t) {
         t.preventDefault(), $(this).parents(".drop").toggleClass("active"), $(window).width() <= 960 && $(this).next().slideToggle()
@@ -6037,33 +6119,6 @@ $(function() {
         $('.header-user').toggleClass('active')
       }),
 
-      // $(document).on("click", function(t) {
-      //   var e = $(".header");
-      //   e.is(t.target) || 0 !== e.has(t.target).length || $(".form-btn").is(t.target) || $(".header").removeClass("header-active")
-      // }),
-
-      $(document).on('click', function(e) {
-
-        const is_contains = (target, el) => {
-          return el === target || el.contains(target)
-        }
-
-        const target = e.target
-
-        const header = document.querySelector('.header')
-        const headerBar = document.querySelector('.header-bar')
-        const menu = document.querySelector('.menu')
-        // const formBtn = document.querySelector('.form-btn')
-
-        const is_headerBar = is_contains(target, headerBar)
-        const is_menu = is_contains(target, menu)
-
-        if (!is_headerBar && !is_menu) {
-          header.classList.remove('header-active')
-          menu.classList.remove('menu-active')
-        }
-
-      }),
 
       $(document).on("click", function(t) {
         var e = $(".drop");
@@ -6344,25 +6399,27 @@ $(function() {
       $(".methods-col__menu").on("click", function(t) {
         $(this).toggleClass("active")
       });
-    var i = $(".modal");
+
+    var i = $('.modal');
     if (
-      $(".button-modal").on("click", function(t) {
-        t.preventDefault(),
-          $(".header").removeClass("header-active");
+      // $('.button-modal').on('click', function(t) {
+      //   t.preventDefault()
+      //     // ,
+      //     // $(".header").removeClass('header-active');
+      //
+      //   var e = $(this).attr("href");
+      //
+      //   $(i).addClass("open"),
+      //     $(".modal-overlay").addClass("open-overlay"),
+      //     $(".modal").addClass(e),
+      //     $(".modal").find(".modal-tab").removeClass("active"),
+      //     $(".modal").find("#" + e).addClass("active")
+      // }),
 
-        var e = $(this).attr("href");
-
-        $(i).addClass("open"),
-          $(".modal-overlay").addClass("open-overlay"),
-          $(".modal").addClass(e),
-          $(".modal").find(".modal-tab").removeClass("active"),
-          $(".modal").find("#" + e).addClass("active")
-      }),
-
-        $(".modal-close, .modal-overlay").on("click", function() {
-          $(i).removeClass("open"),
-            $(".modal-overlay").removeClass("open-overlay")
-        }),
+      // $(".modal-close, .modal-overlay").on("click", function() {
+      //   $(i).removeClass("open"),
+      //     $(".modal-overlay").removeClass("open-overlay")
+      // }),
 
         $(".scrollbar-outer,.menu-over").scrollbar(),
 
@@ -6511,7 +6568,7 @@ function rescheduleLessonHandler(t) {
 
   const class_name = t.getAttribute('data-class_name')
   const obj_id = t.getAttribute('data-obj_id')
-  
+
   client.post('reschedule_lesson/', {
     class_name,
     obj_id,
