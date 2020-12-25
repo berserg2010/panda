@@ -6027,10 +6027,10 @@ $(function() {
 
         const e = $(this).attr('href')
 
-        const modalIsOpen = modal.classList.contains('open')
+        const modalIsOpen = modal?.classList.contains('open')
 
         if (!modalIsOpen) {
-          headerRow.classList.toggle('menu--open')
+          headerRow?.classList.toggle('menu--open')
         } else {
           modalOverlay.classList.remove('open-overlay')
           modal.classList.remove('open')
@@ -6053,11 +6053,10 @@ $(function() {
             const modal = document.querySelector('.modal')
 
             const e = $(this).attr('href')
-            console.info(e)
-
-            const menuIsOpen = headerRow.classList.contains('menu--open')
 
             header.classList.add('header-active')
+
+            const menuIsOpen = headerRow.classList.contains('menu--open')
 
             if (menuIsOpen) {
               headerRow.classList.remove('menu--open')
@@ -6089,16 +6088,18 @@ $(function() {
         const headerBar = document.querySelector('.header-bar')
         const headerRow = document.querySelector('.header-row')
         const menu = document.querySelector('.menu')
-        const buttonModal = document.querySelector('.button-modal')
+        const buttonsModal = document.querySelectorAll('.button-modal')
         const formBtn = document.querySelector('.form-btn')
         const modalOverlay = document.querySelector('.modal-overlay')
         const modal = document.querySelector('.modal')
 
         const isHeaderBar = is_contains(target, headerBar)
+        const isHeaderRow = is_contains(target, headerRow)
+        const isModal = is_contains(target, modal)
+        const isButtonModal = target.classList.contains('button-modal')
         const isMenu = is_contains(target, menu)
-        const isButtonModal = is_contains(target, buttonModal)
 
-        if (!isHeaderBar && !isButtonModal && !isMenu) {
+        if (!isHeaderBar && !isHeaderRow && !isModal && !isButtonModal && !isMenu) {
           header.classList.remove('header-active')
           headerRow.classList.remove('menu--open')
           menu && menu.classList.remove('menu-active')

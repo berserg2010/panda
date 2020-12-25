@@ -3956,13 +3956,15 @@ footer {
     margin: 0;
     /*margin-top: 32px;*/
   }
-  .header .header-btns .button-modal {
+  .header .button-modal,
+  .header .second-btn {
     display: block;
     width: 100%;
     margin: 0;
     margin-bottom: 16px;
   }
-  .header .header-btns .button-modal:last-child {
+  .header .button-modal:last-child,
+  .header .second-btn:last-child {
     margin-bottom: 0;
   }
 }
