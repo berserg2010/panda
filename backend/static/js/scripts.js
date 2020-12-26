@@ -6024,6 +6024,7 @@ $(function() {
         const headerRow = document.querySelector('.header-row')
         const modalOverlay = document.querySelector('.modal-overlay')
         const modal = document.querySelector('.modal')
+        const menu = document.querySelector('.menu')
 
         const e = $(this).attr('href')
 
@@ -6031,6 +6032,7 @@ $(function() {
 
         if (!modalIsOpen) {
           headerRow?.classList.toggle('menu--open')
+          menu?.classList.toggle('menu--open')
         } else {
           modalOverlay.classList.remove('open-overlay')
           modal.classList.remove('open')
@@ -6100,14 +6102,16 @@ $(function() {
         const isMenu = is_contains(target, menu)
 
         if (!isHeaderBar && !isHeaderRow && !isModal && !isButtonModal && !isMenu) {
-          header.classList.remove('header-active')
-          headerRow.classList.remove('menu--open')
-          menu && menu.classList.remove('menu-active')
+          header?.classList.remove('header-active')
+          headerRow?.classList.remove('menu--open')
+          menu?.classList.remove('menu--open')
 
-          modalOverlay.classList = ''
-          modalOverlay.classList.add('modal-overlay')
-          modal.classList = ''
-          modal.classList.add('modal')
+          if (modal) {
+            modalOverlay.classList = ''
+            modalOverlay?.classList.add('modal-overlay')
+            modal.classList = ''
+            modal?.classList.add('modal')
+          }
         }
       }),
 
@@ -6422,7 +6426,7 @@ $(function() {
       //     $(".modal-overlay").removeClass("open-overlay")
       // }),
 
-        $(".scrollbar-outer,.menu-over").scrollbar(),
+      $(".scrollbar-outer,.menu-over").scrollbar(),
 
       $(".datepicker").length && $(".datepicker").datepicker({
           dateFormat: "dd-mm-yy",
