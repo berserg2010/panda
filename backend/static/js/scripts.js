@@ -6017,12 +6017,11 @@ $(function() {
       }),
 
 
-      // header-bar click -> header-active
+      // Menu/authentication modal
       $('.header-bar').on('click', function() {
 
         const header = document.querySelector('.header')
         const headerRow = document.querySelector('.header-row')
-        const modalOverlay = document.querySelector('.modal-overlay')
         const modal = document.querySelector('.modal')
         const menu = document.querySelector('.menu')
 
@@ -6030,19 +6029,18 @@ $(function() {
 
         const modalIsOpen = modal?.classList.contains('open')
 
-        if (!modalIsOpen) {
+        if (modalIsOpen) {
+          modalHiddenHandler({ force: false })
+        } else {
           headerRow?.classList.toggle('menu--open')
           menu?.classList.toggle('menu--open')
-        } else {
-          modalOverlay.classList.remove('open-overlay')
-          modal.classList.remove('open')
 
           $('.modal').find('.modal-tab').removeClass('active')
           $('.modal').find('#' + e).addClass('active')
         }
 
         header.classList.toggle('header-active')
-
+        scrollHiddenHandler()
       }),
 
       Array.from(document.getElementsByClassName('button-modal')).forEach(function(element) {
@@ -6051,7 +6049,6 @@ $(function() {
 
             const header = document.querySelector('.header')
             const headerRow = document.querySelector('.header-row')
-            const modalOverlay = document.querySelector('.modal-overlay')
             const modal = document.querySelector('.modal')
 
             const e = $(this).attr('href')
@@ -6064,9 +6061,9 @@ $(function() {
               headerRow.classList.remove('menu--open')
             }
 
-            modalOverlay.classList.add('open-overlay')
-            modal.classList.add('open')
-            modal.classList.add(e)
+            modalHiddenHandler({ force: true })
+            modal?.classList.add(e)
+            scrollHiddenHandler(true)
 
             $('.modal').find('.modal-tab').removeClass('active')
             $('.modal').find('#' + e).addClass('active')
@@ -6076,21 +6073,12 @@ $(function() {
 
 
       $(document).on('click', function(e) {
-
-        const is_contains = (target, el) => {
-          if (el) {
-            return el === target || el.contains(target)
-          }
-          return null
-        }
-
         const target = e.target
 
         const header = document.querySelector('.header')
         const headerBar = document.querySelector('.header-bar')
         const headerRow = document.querySelector('.header-row')
         const menu = document.querySelector('.menu')
-        const buttonsModal = document.querySelectorAll('.button-modal')
         const formBtn = document.querySelector('.form-btn')
         const modalOverlay = document.querySelector('.modal-overlay')
         const modal = document.querySelector('.modal')
@@ -6106,11 +6094,10 @@ $(function() {
           headerRow?.classList.remove('menu--open')
           menu?.classList.remove('menu--open')
 
+          scrollHiddenHandler(false)
+
           if (modal) {
-            modalOverlay.classList = ''
-            modalOverlay?.classList.add('modal-overlay')
-            modal.classList = ''
-            modal?.classList.add('modal')
+            modalHiddenHandler({ clean: true })
           }
         }
       }),
@@ -6588,4 +6575,37 @@ function rescheduleLessonHandler(t) {
     .catch((e) => {
       console.error(e)
     })
+}
+
+
+// Scroll hidden
+const scrollHiddenHandler = (force) => {
+  const html = document.querySelector('html')
+  const body = document.querySelector('body')
+
+  html.classList.toggle('scroll-hidden', force)
+  body.classList.toggle('scroll-hidden', force)
+}
+
+const modalHiddenHandler = ({ force = undefined, clean = false }) => {
+  const modalOverlay = document.querySelector('.modal-overlay')
+  const modal = document.querySelector('.modal')
+
+  if (!clean) {
+    modalOverlay?.classList.toggle('open-overlay', force)
+    modal?.classList.toggle('open', force)
+  } else {
+    modalOverlay.classList = ''
+    modalOverlay?.classList.add('modal-overlay')
+    modal.classList = ''
+    modal?.classList.add('modal')
+  }
+}
+
+
+const is_contains = (target, el) => {
+  if (el) {
+    return el === target || el.contains(target)
+  }
+  return null
 }

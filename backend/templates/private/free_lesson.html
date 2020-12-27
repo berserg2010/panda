@@ -28,12 +28,6 @@
           <ul class="lesson-social">
 
             <li>
-              <a href="https://vk.com/share.php?url={{ request.scheme }}://{{ request.get_host }}&title={{ account.pk }}" target="_blank">
-                <img src="{% static 'img/vk.svg' %}" alt="">
-              </a>
-            </li>
-
-            <li>
               <a href="https://t.me/share/url?url={{ request.scheme }}://{{ request.get_host }}&text={{ account.pk }}" target="_blank">
                 <img src="{% static 'img/tg.svg' %}" alt="">
               </a>
@@ -51,9 +45,15 @@
               </a>
             </li>
 
-          </ul>
+            <li>
+              <a href="https://vk.com/share.php?url={{ request.scheme }}://{{ request.get_host }}&title={{ account.pk }}" target="_blank">
+                <img src="{% static 'img/vk.svg' %}" alt="">
+              </a>
+            </li>
 
+          </ul>
         </div>
+
         <div class="lesson-col lesson-col__2">
           <div class="lesson-col__row">
             <span class="lesson-num">1</span>
