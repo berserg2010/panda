@@ -6536,12 +6536,12 @@ const outFunc = () => {
 
 
 // Snackbar
-const showMessage = (data) => {
+const showMessage = ({ status, message }) => {
 
   const snackbar = document.getElementById('snackbar')
-  snackbar.innerText = data.message
+  snackbar.innerText = message
 
-  if (data.status === 'error') {
+  if (status === 'error') {
     snackbar.classList.add('show-error')
   }
 
@@ -6551,7 +6551,7 @@ const showMessage = (data) => {
     snackbar.innerText = ''
     snackbar.classList.toggle('show')
     snackbar.classList.remove('show-error')
-  }, 5500) // In #snackbar.show animation fadeout .5s 5s
+  }, 10500) // In #snackbar.show animation fadeout .5s 10s
 }
 
 
@@ -6566,11 +6566,8 @@ function rescheduleLessonHandler(t) {
     obj_id,
   })
     .then(({data}) => {
-
       t.style.setProperty('display', 'none')
-
       showMessage(data)
-
     })
     .catch((e) => {
       console.error(e)

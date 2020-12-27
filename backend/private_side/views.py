@@ -11,7 +11,6 @@ from paid_course.models import PaidCourse, Schedule
 
 
 class IndexLkView(LoginRequiredMixin, TemplateView):
-
     template_name = 'private/index.html'
 
     def get_context_data(self, **kwargs):
@@ -100,7 +99,6 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
 
 
 class FreeLessonView(LoginRequiredMixin, TemplateView):
-
     template_name = 'private/free_lesson.html'
 
     def get_context_data(self, **kwargs):
@@ -117,7 +115,6 @@ class FreeLessonView(LoginRequiredMixin, TemplateView):
 
 
 class StudentsListView(LoginRequiredMixin, ListView):
-
     model = PaidCourse
     template_name = 'private/students_list.html'
 

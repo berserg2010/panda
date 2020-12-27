@@ -8,7 +8,6 @@
 }
 
 :root {
-  /*--menu-width: 345px;*/
   --menu-width: 360px;
   --header-height-large: 110px;
   --header-height-large-lk: 90px;
@@ -2777,27 +2776,32 @@ footer {
 
 #snackbar {
   visibility: hidden;
-  width: 328px;
-  margin-left: -164px;
-  background-color: #5f9f84;;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 5px;
-  border-color: white;
-  padding: 16px;
+
   position: fixed;
+  width: calc(var(--menu-width) - 2 * 16px);
+  margin-left: calc((var(--menu-width) - 2 * 16px) / -2);
+  padding: 16px;
   left: 50%;
   bottom: 32px;
-  z-index: 3;
+
   font-size: 14px;
   font-weight: 600;
   line-height: 22px;
   text-align: center;
   color: #fff;
+
+  background-color: #5f9f84;
+
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #009e5f;
+
+  z-index: 3;
 }
 #snackbar.show {
   visibility: visible;
-  animation: fadein .5s, fadeout .5s 5s; /* In func showMessage setTimeout 5500 */
+  animation: fadein .5s, fadeout .5s 10s; /* In func showMessage setTimeout 10500 */
 }
 @keyframes fadein {
   from {bottom: 0; opacity: 0;}
@@ -2808,7 +2812,9 @@ footer {
   to {bottom: 0; opacity: 0;}
 }
 #snackbar.show.show-error {
-  background: #ff4b4b;
+  background-color: #ff4b4b;
+
+  border-color: #ff0000;
 }
 
 @media only screen and (max-width:768px) {

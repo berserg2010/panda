@@ -1,20 +1,18 @@
-from django.contrib.auth.models import User
-from django.http import JsonResponse, HttpResponse
-from django.contrib.auth import login
-from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
-from django.db import transaction, IntegrityError
-from django.utils import timezone
-from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
-from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
-import json
-from datetime import datetime
 from copy import deepcopy
+from datetime import datetime
+import json
+
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.db import transaction, IntegrityError
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.edit import FormView
 
 from common.utils import (
     new_password,
@@ -31,14 +29,16 @@ from account.forms import (
 from account.services.mail import (
     send_mail_request_user,
     send_mail_request_user_admin,
-    send_mail_request_user_accept,
-    send_mail_request_user_accept_admin,
     send_mail_payment,
     send_mail_payment_admin,
     send_mail_bonus, send_mail_recover_password,
 )
 from course.models import Course
 from paid_course.models import FreeLesson, PaidCourse
+
+
+class AccountLoginView(LoginView):
+    template_name = 'public/index.html'
 
 
 def request_user(request):
@@ -134,7 +134,9 @@ def payment_callback(request):
 
             payment_bonus = None
             payment_bonus_ = None
-            condition = bonus_id and Student.objects.filter(pk=bonus_id, user__is_active=True).exclude(pk=student.pk).exists()
+            condition = bonus_id and Student.objects.filter(
+                pk=bonus_id, user__is_active=True
+            ).exclude(pk=student.pk).exists()
             if condition:
                 bonus_student = Student.objects.get(pk=bonus_id)
                 payment_bonus = deepcopy(payment_base)

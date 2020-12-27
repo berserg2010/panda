@@ -136,7 +136,6 @@ def reschedule_lesson(request):
 
 
 class LessonsListView(LoginRequiredMixin, ListView):
-
     model = PaidCourse
     template_name = 'private/lessons.html'
 
@@ -145,13 +144,11 @@ class LessonsListView(LoginRequiredMixin, ListView):
 
 
 class LessonDetailView(LoginRequiredMixin, DetailView):
-
     model = LessonResults
     template_name = 'private/lesson.html'
 
 
 class NotesListView(ListView):
-
     model = PaidCourse
     template_name = 'private/notes.html'
 
@@ -164,7 +161,6 @@ class NotesListView(ListView):
 
 
 class VocabularyListView(LoginRequiredMixin, ListView):
-
     model = PaidCourse
     template_name = 'private/vocabulary_list.html'
 
@@ -173,6 +169,5 @@ class VocabularyListView(LoginRequiredMixin, ListView):
 
 
 class VocabularyDetailView(LoginRequiredMixin, DetailView):
-
     model = LessonResults
     template_name = 'private/vocabulary_detail.html'

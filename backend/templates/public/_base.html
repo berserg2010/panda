@@ -13,7 +13,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Your Website Title" />
   <meta property="og:description" content="Your description" />
-{#  <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />#}
 
   <meta name="theme-color" content="#000" />
   <meta name="msapplication-navbutton-color" content="#000" />
@@ -21,7 +20,7 @@
 
   <title>{% block title %}{% endblock %}</title>
 
-{#  <link rel="stylesheet" href="{% static 'css/main.min.css' %}">#}
+  {#  <link rel="stylesheet" href="{% static 'css/main.min.css' %}">#}
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
   {% block style %}{% endblock %}
@@ -51,11 +50,16 @@
 <script src="{% static 'js/scripts.js' %}"></script>
 
 <script>
+  {% if form.errors %}
+      showMessage({ status: 'error', message: 'Эл. почта или пароль введены неверно!' })
+  {% endif %}
+</script>
+
+<script>
 
   function formSubmitHandler(form) {
 
     const urls_actions = {
-      'login-form': 'login/',
       'request-user-form': 'request-user/',
       'recover-password': 'recover-password/',
     }
@@ -68,18 +72,11 @@
     })
 
     const formData = new FormData(form)
-    const modalOverlay = document.getElementById('modal-overlay')
-    const modal = document.getElementById('modal')
 
     client.post(`${urls_actions[form.id]}`, formData)
       .then(({ data }) => {
 
-        if (form.id === 'login-form') {
-          window.location.pathname = 'lk/'
-        } else {
-          modal.classList.remove('open')
-          modalOverlay.classList.remove('open-overlay')
-        }
+        modalHiddenHandler({ force: false })
 
         showMessage(data)
 
