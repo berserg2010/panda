@@ -2,9 +2,21 @@ version: '3.8'
 
 services:
 
+  pgbouncer:
+    image: edoburu/pgbouncer
+    env_file:
+      - env/db.env
+    ports:
+      - 5432:5432
+    depends_on:
+      - db
+    networks:
+      - db_layer
+
   backend:
     environment:
       - HOST=0.0.0.0
+      - POSTGRES_HOST=pgbouncer
     ports:
       - 8000
     user: root
