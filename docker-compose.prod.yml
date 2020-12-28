@@ -7,7 +7,7 @@ services:
     env_file:
       - env/db.env
     ports:
-      - 5432:5432
+      - 6432:5432
     depends_on:
       - db
     networks:
@@ -17,6 +17,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - POSTGRES_HOST=pgbouncer
+      - POSTGRES_PORT=6432
     ports:
       - 8000
     user: root
