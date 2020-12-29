@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db import transaction, IntegrityError
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -101,7 +101,7 @@ def payment_callback(request):
         order_status = request.POST.get('order_status')
 
         if response_status == 'success' and order_status == 'approved':
-            context = {'message': 'Операция прошла успешно'}
+            context = message_success('Оплата прошла успешно!')
 
             payment_id = request.POST.get('payment_id')
             order_id = request.POST.get('order_id')
@@ -179,7 +179,7 @@ def payment_callback(request):
                     if free_lesson is not None:
                         free_lesson.save()
             except IntegrityError:
-                context = {'message': f'Что то пошло не так..'}
+                context = message_error(f'Что то пошло не так..')
             else:
 
                 send_mail_payment(
@@ -194,13 +194,15 @@ def payment_callback(request):
                 send_mail_payment_admin(payment_id, student.user.first_name, paid_for_lessons)
 
         else:
-            context = {'message': f'Что то пошло не так..\nСтатус обработки заказа: {order_status}'}
+            context = message_error(f'Что то пошло не так..\nСтатус обработки заказа: {order_status}')
 
         return render(
             request,
             'public/blank_status_operation.html',
             context,
         )
+
+    return HttpResponseRedirect('/')
 
 
 class SettingsUserView(LoginRequiredMixin, FormView):

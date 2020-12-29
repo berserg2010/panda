@@ -1,45 +1,53 @@
-{% extends 'public/_base.html' %}
-
 {% load static %}
 
-{% block title %}Статус операции{% endblock %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
 
-{% block content %}
-  <section class="notFound">
-    <div class="notFound-bg notFound-bg__1">
-      <img src="{% static 'img/notFound-bg-1.svg' %}" alt="">
-    </div>
-    <div class="notFound-bg notFound-bg__2">
-      <img src="{% static 'img/notFound-bg-2.svg' %}" alt="">
-    </div>
-    <div class="wrapper">
-      <div class="notFound-info">
-        <div class="notFound-img">
-          <img src="{% static 'img/notFound-img.svg' %}" alt="">
-        </div>
-        <h1 class="notFound-title">{{ message }}</h1>
-        <a href="{% url 'public_side:index' %}" class="main-btn">Перейти на главную</a>
-        <p>Окно закроется через <span id="timer"></span></p>
-      </div>
-    </div>
+  <meta charset="utf-8" />
+  <meta name="description" content="" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}" />
+
+  <meta name="theme-color" content="#000" />
+  <meta name="msapplication-navbutton-color" content="#000" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#000" />
+
+  <title>Статус оплаты</title>
+
+  {#  <link rel="stylesheet" href="{% static 'css/main.min.css' %}">#}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="body__payment_callback">
+<main class="main__payment_callback">
+  <section class="payment_callback{% if status == 'error' %} payment_callback--error{% endif %}">
+    <h1 class="payment_callback__h1">{% if status == 'success' %}Все в порядке!{% else %}Ошибка!{% endif %}</h1>
+    <p>{{ message }}</p>
+    <p>Можно закрыть вкладку.</p>
   </section>
-{% endblock %}
+  <img class="payment_callback__img_top" src="{% static 'img/action-bg-2.svg' %}" width="270px">
+  <img class="payment_callback__img_bottom" src="{% static 'img/process-img.svg' %}" width="320px">
+</main>
 
-{% block script %}
-  <script>
+{#  <script>#}
+{##}
+{#    const timer_tag = document.getElementById('timer')#}
+{#    let count = 5#}
+{#    timer_tag.innerHTML = count#}
+{##}
+{#    setInterval(() => {#}
+{#      --count#}
+{#      timer_tag.innerHTML = count#}
+{#    }, 1000)#}
+{##}
+{#    setTimeout(() => {#}
+{#      self.close()#}
+{#    }, (count + 1) * 1000)#}
+{##}
+{#  </script>#}
 
-    const timer_tag = document.getElementById('timer')
-    let count = 5
-    timer_tag.innerHTML = count
-
-    setInterval(() => {
-      --count
-      timer_tag.innerHTML = count
-    }, 1000)
-
-    setTimeout(() => {
-      self.close()
-    }, (count + 1) * 1000)
-
-  </script>
-{% endblock %}
+</body>
+</html>

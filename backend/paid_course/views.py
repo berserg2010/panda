@@ -1,16 +1,16 @@
-from django.http import JsonResponse
-from django.views.generic import TemplateView
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
+from datetime import time
+import json
+from pydantic import BaseModel
+from typing import Union, Optional
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.http import JsonResponse
 from django.utils import timezone
-from django.contrib.auth import get_user_model
-from pydantic import BaseModel
-from typing import Optional
-from datetime import time
-from typing import Union
-import json
+from django.views.generic import TemplateView
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 from common.utils import (
     date_now,
@@ -112,6 +112,7 @@ class TimetablesView(LoginRequiredMixin, TemplateView):
         return context
 
 
+@login_required
 def reschedule_lesson(request):
     message = message_error('Отменить занятие можно за 8 часов до начала.')
 
@@ -148,7 +149,7 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
     template_name = 'private/lesson.html'
 
 
-class NotesListView(ListView):
+class NotesListView(LoginRequiredMixin, ListView):
     model = PaidCourse
     template_name = 'private/notes.html'
 
