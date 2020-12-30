@@ -4364,9 +4364,9 @@ footer {
   color: #f8fffc;
   padding-bottom: 52px
 }
-.action-info .second-btn {
-  padding: 13px 20px
-}
+/*.action-info .second-btn {*/
+/*  padding: 13px 20px*/
+/*}*/
 .action-title {
   font-size: 32px;
   line-height: 39px;
@@ -4952,15 +4952,12 @@ footer {
 .join-form .input-block {
   margin-bottom: 15px;
   position: relative;
-  /*z-index: 2*/
 }
 .join-form .main-btn {
   display: block;
   width: 100%;
   border: 1px solid #f8fffc;
-  padding: 12px 25px;
   position: relative;
-  /*z-index: 2*/
 }
 .join-title {
   font-size: 32px;
@@ -4971,12 +4968,10 @@ footer {
   max-width: 740px;
   padding-bottom: 19px;
   position: relative;
-  /*z-index: 2*/
 }
 .join-checkbox {
   padding-bottom: 20px;
   position: relative;
-  /*z-index: 2*/
 }
 .join-img {
   position: absolute;
@@ -5446,7 +5441,7 @@ footer {
 }
 .price .wrapper {
   position: relative;
-  /*z-index: 2*/
+  padding: 0 30px;
 }
 .price-row {
   display: flex;
@@ -5524,6 +5519,8 @@ footer {
   font-size: 48px;
   line-height: 60px;
   font-weight: 900;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-image: linear-gradient(243.23deg, #ffc000 1.55%, #ff8a00 95.8%);
   color: #ffb42d;
   padding: 0 8px 0 20px

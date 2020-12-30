@@ -26,3 +26,5 @@ pytest-django==4.1.0
 dj-inmemorystorage==2.1.0
 
 pydantic==1.7.3
+
+sentry-sdk==0.19.5

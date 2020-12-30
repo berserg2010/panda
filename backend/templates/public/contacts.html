@@ -5,43 +5,46 @@
 {% block title %}Контакты{% endblock %}
 
 {% block content %}
-  <section class="contatcs">
-    <div class="contatcs-bg contatcs-bg__1">
-      <img src="{% static 'img/contatcs-bg-1.svg' %}" alt="">
+  <section class="contacts">
+    <div class="contacts-bg contacts-bg__1">
+      <img src="{% static 'img/contacts-bg-1.svg' %}" alt="">
     </div>
-    <div class="contatcs-bg contatcs-bg__2">
-      <img src="{% static 'img/contatcs-bg-2.svg' %}" alt="">
+    <div class="contacts-bg contacts-bg__2">
+      <img src="{% static 'img/contacts-bg-2.svg' %}" alt="">
     </div>
     <div class="wrapper">
       <div class="section-top" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
         <span class="section-subtitle">Contacts</span>
         <h2 class="section-title">Контакты</h2>
       </div>
-      <div class="contatcs-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+      <div class="contacts-text" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
         <p>Если ты принял решение учиться в нашей школе или у тебя возникли другие вопросы, касающиеся процесса обучения у нас – связывайся с нами любым удобным способом. Наши консультанты помогут по любому вопросу, а наши кураторы готовы проконсультировать и проверить уровень твоего английского или китайского и подобрать нужную программу.</p>
       </div>
-      <div class="contatcs-row">
-        <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-          <div class="contatcs-wrap">
-            <div class="contatcs-ico">
-              <img src="{% static 'img/contatcs-ico-1.svg' %}" alt="">
+      <div class="contacts-row">
+        <div class="contacts-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="contacts-wrap">
+            <div class="contacts-ico">
+              <img src="{% static 'img/contacts-ico-1.svg' %}" alt="">
             </div>
 
             <ul>
               <li>
                 <a href="tel:{{ settings_site.phone_first }}">{{ settings_site.phone_first }}</a>
               </li>
-              <li>
-                <a href="tel:{{ settings_site.phone_second }}">{{ settings_site.phone_second }}</a>
-              </li>
+
+              {% if settings_site.phone_second %}
+                <li>
+                  <a href="tel:{{ settings_site.phone_second }}">{{ settings_site.phone_second }}</a>
+                </li>
+              {% endif %}
             </ul>
 
           </div>
         </div>
-        <div class="contatcs-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-          <div class="contatcs-wrap">
-            <div class="contatcs-ico">
-              <img src="{% static 'img/contatcs-ico-2.svg' %}" alt="">
+        <div class="contacts-col" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+          <div class="contacts-wrap">
+            <div class="contacts-ico">
+              <img src="{% static 'img/contacts-ico-2.svg' %}" alt="">
             </div>
 
             <ul>
@@ -58,13 +61,21 @@
 
       </div>
 
-      <div class="contatcs-social" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
-        <span class="contatcs-social__subtitle">Мы так же и в социальных сетях:</span>
+      <div class="contacts-social" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+        <span class="contacts-social__subtitle">Мы так же и в социальных сетях:</span>
         <ul>
+
+          {% if settings_site.instagram %}
+            <li>
+              <a href="{{ settings_site.instagram }}" target="_blank">
+                <img src="{% static 'img/ico-inst.svg' %}" alt="">
+              </a>
+            </li>
+          {% endif %}
 
           {% if settings_site.vkontakte %}
             <li>
-              <a href="{{ settings_site.vkontakte }}">
+              <a href="{{ settings_site.vkontakte }}" target="_blank">
                 <img src="{% static 'img/ico-vk.svg' %}" alt="">
               </a>
             </li>
@@ -72,7 +83,7 @@
 
           {% if settings_site.telegram %}
             <li>
-              <a href="{{ settings_site.telegram }}">
+              <a href="{{ settings_site.telegram }}" target="_blank">
                 <img src="{% static 'img/ico-tg.svg' %}" alt="">
               </a>
             </li>
@@ -80,7 +91,7 @@
 
           {% if settings_site.whatsapp %}
             <li>
-              <a href="{{ settings_site.whatsapp }}">
+              <a href="{{ settings_site.whatsapp }}" target="_blank">
                 <img src="{% static 'img/ico-what.svg' %}" alt="">
               </a>
             </li>
@@ -88,7 +99,7 @@
 
           {% if settings_site.facebook %}
             <li>
-              <a href="{{ settings_site.facebook }}">
+              <a href="{{ settings_site.facebook }}" target="_blank">
                 <img src="{% static 'img/ico-fb.svg' %}" alt="">
               </a>
             </li>
@@ -103,6 +114,6 @@
     {% include 'public/components/section_faq.html' %}
   </section>
 
-  {% include 'public/components/section_all_questions.html' %}
+  {#  {% include 'public/components/section_all_questions.html' %}#}
 
 {% endblock %}
