@@ -23,13 +23,28 @@
 </head>
 <body class="body__payment_callback">
 <main class="main__payment_callback">
+
+  <img class="payment_callback__img_top" src="{% static 'img/action-bg-2.svg' %}" width="270px">
+
+  {% if status == 'error' %}
+    <img class="payment_callback__img_bottom" src="{% static 'img/mission-mob-2_r.svg' %}" width="360px">
+  {% else %}
+    <img class="payment_callback__img_bottom" src="{% static 'img/process-img_r.svg' %}" width="320px">
+  {% endif %}
+
   <section class="payment_callback{% if status == 'error' %} payment_callback--error{% endif %}">
     <h1 class="payment_callback__h1">{% if status == 'success' %}Все в порядке!{% else %}Ошибка!{% endif %}</h1>
     <p>{{ message }}</p>
+
+    {% if status == 'error' %}
+      <p>Техническая поддержка:</p>
+      <a href="mailto:{{ settings_site.email_support }}">{{ settings_site.email_support }}</a>
+      <a href="tel:{{ settings_site.phone_second }}">{{ settings_site.phone_second }}</a>
+    {% endif %}
+
     <p>Можно закрыть вкладку.</p>
   </section>
-  <img class="payment_callback__img_top" src="{% static 'img/action-bg-2.svg' %}" width="270px">
-  <img class="payment_callback__img_bottom" src="{% static 'img/process-img.svg' %}" width="320px">
+
 </main>
 
 {#  <script>#}

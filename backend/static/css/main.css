@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800;900&display=swap);
 @font-face {
-  font-family: Calibri;
+  font-family: Calibri Georgia sans-serif;
   font-weight: 400;
   font-style: normal;
   src: url(../fonts/Calibri/Calibri.eot);
@@ -10952,6 +10952,9 @@ footer {
   border-radius: 5px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
 }
+.payment_callback.payment_callback--error {
+  border-color: #ff0000;
+}
 .payment_callback__h1 {
   display: block;
   margin: 0;
@@ -10961,9 +10964,14 @@ footer {
   font-size: 24px;
   text-align: center;
 }
-.payment_callback p {
+.payment_callback p,
+.payment_callback a {
   text-align: center;
   margin-bottom: 16px;
+  transition: none;
+}
+.payment_callback a {
+  display: block;
 }
 .payment_callback p:last-child {
   margin-bottom: 0;
@@ -10980,8 +10988,7 @@ footer {
   position: absolute;
   bottom: 0;
   right: 0;
-
-  transform: scale(-1, 1);
+  z-index: -1;
 }
 
 .visually-hidden:not(:focus):not(:active) {
