@@ -159,12 +159,6 @@ def payment_callback(request):
                     course=course,
                 )
 
-            free_lesson = None
-            if not Payment.objects.filter(student=student, bonus__isnull=True).exists():
-                free_lesson = FreeLesson(
-                    student=student,
-                )
-
             try:
                 with transaction.atomic():
                     payment_base.save()
@@ -176,8 +170,6 @@ def payment_callback(request):
                     if paid_course is not None:
                         paid_course.save()
 
-                    if free_lesson is not None:
-                        free_lesson.save()
             except IntegrityError:
                 context = message_error(f'Что то пошло не так..')
             else:
