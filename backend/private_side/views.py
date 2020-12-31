@@ -72,7 +72,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
                     student,
                     last_payment_inst.group_of_course,
                     order_time
-                ).count()
+                ).filter(finished=True).count()
 
                 bonus -= schedule
                 lessons -= schedule
