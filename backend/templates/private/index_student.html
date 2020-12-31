@@ -15,9 +15,14 @@
       </div>
 
       <div class="personalArea-balance">
-
         <div class="personalArea-balance__info">
-          <p>Занятие запланировано на <span>{{ free_lesson.datetime }}</span></p>
+
+          {% if free_lesson.datetime %}
+            <p>Занятие запланировано на <span>{{ free_lesson.datetime }}</span></p>
+          {% else %}
+            <p>Занятие ещё не внесли в расписание.</p>
+          {% endif %}
+
         </div>
 
         <a href="{% url 'private_side:courses' %}" class="main-btn">Оплатить занятия</a>

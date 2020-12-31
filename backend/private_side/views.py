@@ -33,13 +33,6 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
                     group_of_course=last_payment_inst.group_of_course
                 ).first()
 
-                print(
-                    last_payment.paid_for_lessons,
-                    last_payment.order_time,
-                    last_payment.group_of_course,
-                    last_payment.first_payment,
-                )
-
                 condition = last_payment is not None and last_payment.first_payment is not None
                 if condition:
                     order_time = last_payment.first_payment.order_time
