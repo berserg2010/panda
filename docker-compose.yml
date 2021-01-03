@@ -6,6 +6,8 @@ services:
     image: postgres
     env_file:
       - env/db.env
+    volumes:
+    - /var/lib/postgresql/hellopanda:/var/lib/postgresql/data
     networks:
       - db_layer
 
