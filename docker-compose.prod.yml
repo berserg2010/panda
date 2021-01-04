@@ -2,12 +2,19 @@ version: '3.8'
 
 services:
 
+  db:
+    restart: always
+
+  redis:
+    restart: always
+
   pgbouncer:
     image: edoburu/pgbouncer
     env_file:
       - env/db.env
     ports:
       - 6432:5432
+    restart: always
     depends_on:
       - db
     networks:
@@ -23,6 +30,7 @@ services:
     user: root
     command:
       [ "daphne", "-b", "0.0.0.0", "-p", "8000", "backend.asgi:application" ]
+    restart: always
     networks:
       - proxy_back
 
@@ -44,6 +52,7 @@ services:
       - type: bind
         source: ./backend/ssl
         target: /usr/src/hello_panda/ssl
+    restart: always
     depends_on:
       - backend
     networks:
