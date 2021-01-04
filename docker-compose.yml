@@ -7,7 +7,7 @@ services:
     env_file:
       - env/db.env
     volumes:
-    - /var/lib/postgresql/hellopanda:/var/lib/postgresql/data
+    - /var/lib/postgresql/hello_panda:/var/lib/postgresql/data
     networks:
       - db_layer
 
@@ -22,14 +22,12 @@ services:
       - env/back.env
       - env/db.env
     volumes:
-      - ./backend:/usr/src/panda
+      - ./backend:/usr/src/hello_panda
     depends_on:
       - db
       - redis
     networks:
       - db_layer
-    command:
-      [ "daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application" ]
 
 networks:
   db_layer:

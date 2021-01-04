@@ -21,6 +21,8 @@ services:
     ports:
       - 8000
     user: root
+    command:
+      [ "daphne", "-b", "0.0.0.0", "-p", "8000", "backend.asgi:application" ]
     networks:
       - proxy_back
 
@@ -35,13 +37,13 @@ services:
       - ./proxy/templates:/etc/nginx/templates
       - type: bind
         source: ./backend/static
-        target: /usr/src/panda/static
+        target: /usr/src/hello_panda/static
       - type: bind
         source: ./backend/media
-        target: /usr/src/panda/media
+        target: /usr/src/hello_panda/media
       - type: bind
         source: ./backend/ssl
-        target: /usr/src/panda/ssl
+        target: /usr/src/hello_panda/ssl
     depends_on:
       - backend
     networks:

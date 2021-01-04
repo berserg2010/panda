@@ -6,3 +6,5 @@ services:
       - DEBUG=True
     ports:
       - 8000:8000
+    command:
+      [ "daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application" ]
