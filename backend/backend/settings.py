@@ -1,11 +1,12 @@
-from django.contrib import admin
-from django.core.management import utils
 from corsheaders.defaults import default_headers
+from decouple import config
 import os
 from pathlib import Path
-from decouple import config
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+
+from django.contrib import admin
+from django.core.management import utils
 
 
 sentry_sdk.init(
@@ -175,12 +176,11 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# LOGIN_URL = '/login/'
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/lk/'
 LOGOUT_REDIRECT_URL = '/'
 
-admin.AdminSite.site_header = 'Panda'.upper()
+admin.AdminSite.site_header = config('PROJECT_NAME', default='project').upper()
 admin.AdminSite.empty_value_display = '--'
 
 NUMB_WEBRTC_USERNAME = config('NUMB_WEBRTC_USERNAME', default='')

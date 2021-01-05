@@ -1,10 +1,11 @@
 version: '3.8'
 
 services:
+
   backend:
     environment:
       - DEBUG=True
     ports:
       - 8000:8000
     command:
-      [ "daphne", "-e", "ssl:8000:privateKey=ssl/dev.local.key:certKey=ssl/dev.local.crt", "backend.asgi:application" ]
+      [ "daphne", "-e", "ssl:8000:privateKey=ssl/${PROJECT_NAME}.key:certKey=ssl/${PROJECT_NAME}.crt", "backend.asgi:application" ]

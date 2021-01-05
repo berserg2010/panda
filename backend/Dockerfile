@@ -1,3 +1,5 @@
+ARG PROJECT_NAME=project
+
 FROM python:3.7
 
 MAINTAINER <berserg2010@gmail.com>
@@ -6,7 +8,7 @@ ENV PYTHONUNBUFFERED 1
 
 RUN useradd --no-create-home --system --uid 1000 --user-group node
 
-WORKDIR /usr/src/panda
+WORKDIR /usr/src/${PROJECT_NAME}
 
 COPY --chown=1000:1000 requirements.txt ./requirements.txt
 

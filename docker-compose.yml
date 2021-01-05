@@ -7,7 +7,7 @@ services:
     env_file:
       - env/db.env
     volumes:
-    - /var/lib/postgresql/hello_panda:/var/lib/postgresql/data
+      - /var/lib/postgresql/${PROJECT_NAME}:/var/lib/postgresql/data
     networks:
       - db_layer
 
@@ -17,12 +17,16 @@ services:
       - db_layer
 
   backend:
-    build: backend/.
+    build:
+      context: backend/.
+      args:
+        PROJECT_NAME: ${PROJECT_NAME}
     env_file:
+      - env/common.env
       - env/back.env
       - env/db.env
     volumes:
-      - ./backend:/usr/src/hello_panda
+      - ./backend:/usr/src/${PROJECT_NAME}
     depends_on:
       - db
       - redis

@@ -22,7 +22,6 @@ services:
 
   backend:
     environment:
-      - HOST=0.0.0.0
       - POSTGRES_HOST=pgbouncer
       - POSTGRES_PORT=6432
     ports:
@@ -37,21 +36,21 @@ services:
   proxy:
     image: nginx:1.19
     env_file:
-      - env/proxy.env
+      - env/common.env
     ports:
-      - 80:80
-      - 443:443
+      - ${PROXY_PORT_V4}:80
+      - ${PROXY_PORT_V6}:443
     volumes:
       - ./proxy/templates:/etc/nginx/templates
       - type: bind
         source: ./backend/static
-        target: /usr/src/hello_panda/static
+        target: /usr/src/${PROJECT_NAME}/static
       - type: bind
         source: ./backend/media
-        target: /usr/src/hello_panda/media
+        target: /usr/src/${PROJECT_NAME}/media
       - type: bind
         source: ./backend/ssl
-        target: /usr/src/hello_panda/ssl
+        target: /usr/src/${PROJECT_NAME}/ssl
     restart: always
     depends_on:
       - backend
