@@ -20,7 +20,8 @@
 
 
 ### Docker
-
+    
+    cp .env.template .env
     ln .env env/common.env
 
     docker-compose run backend python manage.py dumpdata --indent 2 --exclude contenttypes --exclude admin.logentry --output dump.json
