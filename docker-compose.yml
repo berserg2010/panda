@@ -21,8 +21,8 @@ services:
       context: backend/.
       args:
         PROJECT_NAME: ${PROJECT_NAME}
-        UID: ${UID}
-        GID: ${GID}
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
     env_file:
       - env/common.env
       - env/back.env
