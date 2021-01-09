@@ -19,6 +19,7 @@ server {
 
     ssl_certificate_key /usr/src/${PROJECT_NAME}/ssl/privkey.pem;
     ssl_certificate     /usr/src/${PROJECT_NAME}/ssl/fullchain.pem;
+    ssl_trusted_certificate /usr/src/${PROJECT_NAME}/ssl/chain.pem;
 
     ssl_dhparam /usr/src/${PROJECT_NAME}/ssl/dhparams.pem;
 }
@@ -31,6 +32,7 @@ server {
 
     ssl_certificate_key /usr/src/${PROJECT_NAME}/ssl/privkey.pem;
     ssl_certificate     /usr/src/${PROJECT_NAME}/ssl/fullchain.pem;
+    ssl_trusted_certificate /usr/src/${PROJECT_NAME}/ssl/chain.pem;
 
     ssl_dhparam /usr/src/${PROJECT_NAME}/ssl/dhparams.pem;
 

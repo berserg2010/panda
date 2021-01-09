@@ -4,24 +4,31 @@
 
 ### SSL
 
-В `/etc/hosts` добавить `127.0.0.1 localhost dev.local`.
 
 В каталоге проекта `ssl` запустить
 
     openssl dhparam -out dhparams.pem 4096
     
-dev:
+Dev:
 
-    openssl req -config .conf -new -sha256 -newkey rsa:2048 -nodes -keyout privkey.pem -x509 -days 365 -out fullchain.pem -subj '/CN=localhost'
+В `/etc/hosts` добавить `127.0.0.1 localhost ${HOST_NAME}`.
 
-prod:
+    openssl req -config .conf -new -sha256 -newkey rsa:2048 -nodes\
+        -keyout privkey.pem -x509 -days 365\
+        -out fullchain.pem -subj '/CN=localhost'
+
+Prod:
 
     certbot certonly --standalone\
-        -d hellopanda.com.ua,www.hellopanda.com.ua\
+        -d ${HOST_NAME},www.${HOST_NAME}\
         --email hellopanda.development@gmail.com\
         --rsa-key-size 4096\
         --agree-tos
     
+    ln /etc/letsencrypt/archive/${PROJECT_NAME}/privkey1.pem privkey.pem
+    ln /etc/letsencrypt/archive/${PROJECT_NAME}/fullchain1.pem fullchain.pem
+    ln /etc/letsencrypt/archive/${PROJECT_NAME}/chain1.pem chain.pem
+
 
 ### Запуск RTC-сервера
 
