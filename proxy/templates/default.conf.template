@@ -29,8 +29,10 @@ server {
 
     server_name ${HOST_NAME};
 
-    ssl_certificate     /usr/src/${PROJECT_NAME}/ssl/${PROJECT_NAME}.crt;
-    ssl_certificate_key /usr/src/${PROJECT_NAME}/ssl/${PROJECT_NAME}.key;
+    ssl_certificate     /usr/src/${PROJECT_NAME}/ssl/key.pem;
+    ssl_certificate_key /usr/src/${PROJECT_NAME}/ssl/csr.pem;
+
+    ssl_dhparam /usr/src/${PROJECT_NAME}/ssl/dhparams.pem;
 
     location / {
         proxy_pass http://${PROJECT_NAME};
