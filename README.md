@@ -12,7 +12,7 @@
     
 dev:
 
-    openssl req -config .conf -new -sha256 -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out csr.pem -subj '/CN=localhost'
+    openssl req -config .conf -new -sha256 -newkey rsa:2048 -nodes -keyout privkey.pem -x509 -days 365 -out fullchain.pem -subj '/CN=localhost'
 
 prod:
 
