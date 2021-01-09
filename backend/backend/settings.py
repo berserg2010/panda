@@ -40,7 +40,7 @@ CORS_ALLOW_HEADERS = default_headers + (
 )
 CORS_ORIGIN_WHITELIST = [
     config('HOST_NAME'),
-    
+
     'https://api.fondy.eu',
 ]
 
