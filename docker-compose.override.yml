@@ -8,4 +8,4 @@ services:
     ports:
       - 8000:8000
     command:
-      [ "daphne", "-e", "ssl:8000:privateKey=ssl/${PROJECT_NAME}.key:certKey=ssl/${PROJECT_NAME}.crt", "backend.asgi:application" ]
+      [ "daphne", "-b", "0.0.0.0", "-p", "8000", "backend.asgi:application" ]

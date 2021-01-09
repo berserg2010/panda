@@ -208,3 +208,9 @@ pip-selfcheck.json
 **/static/admin
 **/static/rest_framework
 staticfiles
+
+
+### SSL ###
+**/ssl/
+**/ssl/**
+!**/ssl/.conf

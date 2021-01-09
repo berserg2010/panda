@@ -17,8 +17,10 @@ server {
     server_name www.${HOST_NAME};
     return 301 https://${HOST_NAME}$request_uri;
 
-    ssl_certificate     /usr/src/${PROJECT_NAME}/ssl/${PROJECT_NAME}.crt;
-    ssl_certificate_key /usr/src/${PROJECT_NAME}/ssl/${PROJECT_NAME}.key;
+    ssl_certificate_key /usr/src/${PROJECT_NAME}/ssl/key.pem;
+    ssl_certificate     /usr/src/${PROJECT_NAME}/ssl/csr.pem;
+
+    ssl_dhparam /usr/src/${PROJECT_NAME}/ssl/dhparams.pem;
 }
 
 server {

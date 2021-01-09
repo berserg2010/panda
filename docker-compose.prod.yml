@@ -49,7 +49,7 @@ services:
         source: ./backend/media
         target: /usr/src/${PROJECT_NAME}/media
       - type: bind
-        source: ./backend/ssl
+        source: ./ssl
         target: /usr/src/${PROJECT_NAME}/ssl
     restart: always
     depends_on:

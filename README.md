@@ -8,8 +8,19 @@
 
 В каталоге проекта `ssl` запустить
 
-    openssl req -config dev.local.conf -new -sha256 -newkey rsa:2048 -nodes -keyout dev.local.key -x509 -days 365 -out dev.local.crt
+    openssl dhparam -out dhparams.pem 4096
     
+dev:
+
+    openssl req -config .conf -new -sha256 -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out csr.pem -subj '/CN=localhost'
+
+prod:
+
+    certbot certonly --standalone\
+        -d hellopanda.com.ua,www.hellopanda.com.ua\
+        --email hellopanda.development@gmail.com\
+        --rsa-key-size 4096\
+        --agree-tos
     
 
 ### Запуск RTC-сервера
