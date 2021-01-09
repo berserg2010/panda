@@ -39,18 +39,8 @@ CORS_ALLOW_HEADERS = default_headers + (
     'contenttype',
 )
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost',
-    'https://localhost',
-    'http://127.0.0.1',
-    'https://127.0.0.1',
-    'http://192.168.1.52',
-    'https://192.168.1.52',
-    'http://192.168.1.52:8000',
-    'https://192.168.1.52:8000',
-    'https://dev.local:8000',
-    'http://panda-dev.ddns.net',
-    'https://panda-dev.ddns.net',
-
+    config('HOST_NAME'),
+    
     'https://api.fondy.eu',
 ]
 
