@@ -2958,7 +2958,7 @@ footer {
   position: relative;
 }
 .input-wrap {
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 }
 .input-wrap:last-child {
   margin-bottom: 0;
@@ -3096,8 +3096,15 @@ footer {
 .radio {
   display: flex;
   align-items: center;
-  min-height: 26px;
+  /*min-height: 26px;*/
   position: relative
+}
+.checkbox {
+  justify-content: space-between;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 300;
+  color: #2f2f2f
 }
 .checkbox-ico,
 .radio-ico {
@@ -3110,6 +3117,25 @@ footer {
   top: 0;
   left: 0;
   transition: .2s
+}
+.checkbox-ico {
+  top: 2px;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  border: 1px solid #ffb42d
+}
+.checkbox-ico::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: #ffb42d;
+  transition: .2s;
+  opacity: 0
 }
 .checkbox-ico img,
 .checkbox-ico svg,
@@ -3138,52 +3164,16 @@ footer {
   font-weight: 700;
   color: #6b6b6b;
   position: relative;
-  /*z-index: 2*/
 }
 .checkbox p a:hover,
 .radio p a:hover {
-  text-decoration: underline
+  text-decoration: underline;
 }
 .checkbox input,
 .radio input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-  /*z-index: 2*/
+  margin: 24px;
 }
-.checkbox {
-  padding: 0 0 0 28px;
-  font-size: 20px;
-  line-height: 1;
-  font-weight: 300;
-  color: #2f2f2f
-}
-.checkbox-ico {
-  top: 2px;
-  width: 15px;
-  height: 15px;
-  border-radius: 2px;
-  border: 1px solid #ffb42d
-}
-.checkbox-ico::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: 11px;
-  height: 11px;
-  border-radius: 2px;
-  background: #ffb42d;
-  transition: .2s;
-  opacity: 0
-}
-.checkbox input:checked+.checkbox-ico::after {
-  opacity: 1
-}
+
 .radio {
   padding: 0 0 0 28px;
   font-size: 20px;
@@ -3246,6 +3236,12 @@ footer {
   opacity: 0;
   backface-visibility: hidden;
 }
+.modal-over {
+  position: relative;
+  width: 100%;
+  height: inherit;
+
+}
 .modal-bg,
 .modal-img {
   position: absolute;
@@ -3256,6 +3252,9 @@ footer {
 .modal-img svg {
   display: block;
 }
+.modal-bg__mob {
+  display: none;
+}
 .modal-bg__1 {
   top: 0;
   left: 0;
@@ -3264,22 +3263,9 @@ footer {
   bottom: 0;
   right: 0;
 }
-.modal-bg__mob {
-  display: none;
-}
 .modal-img {
   bottom: 16px;
   left: 16px;
-}
-.modal-over {
-  width: 100%;
-  height: inherit;
-}
-.modal-over>.scroll-element .scroll-element_track {
-  background: #f0f0f0
-}
-.modal-over>.scroll-element .scroll-bar {
-  background: #5f9f84
 }
 .modal-wrap {
   width: 100%;
@@ -3288,6 +3274,8 @@ footer {
   padding-top: 32px;
   padding-left: 16px;
   padding-right: 16px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .modal-content {
   width: 100%;
@@ -3297,7 +3285,8 @@ footer {
   display: none
 }
 .modal-tab.active {
-  display: block
+  display: block;
+  margin-bottom: 48px;
 }
 .modal .input-block {
   margin-bottom: 32px;
@@ -3387,12 +3376,12 @@ footer {
 .modal-text a:hover {
   text-decoration: underline
 }
-.modal-checkbox {
-  padding-bottom: 20px
-}
-.modal-checkbox .checkbox {
-  padding-left: 31px
-}
+/*.modal-checkbox {*/
+/*  padding-bottom: 20px*/
+/*}*/
+/*.modal-checkbox .checkbox {*/
+/*  padding-left: 31px*/
+/*}*/
 .modal-checkbox .checkbox p {
   font-size: 14px;
   max-width: 300px
