@@ -9,10 +9,6 @@
   <form id="request-user-form" method="post" onsubmit="event.preventDefault();formSubmitHandler(this);return false">
     {% csrf_token %}
 
-{#    <div class="input-block">#}
-{#      <p class="text-error">Логин или пароль введен не верно!</p>#}
-{#    </div>#}
-
     {% include 'public/components/input_form_request.html' %}
 
     <div class="modal-btns modal-btns__big">
