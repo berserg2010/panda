@@ -7,7 +7,7 @@ from django.utils.encoding import iri_to_uri, quote
 from common.utils import date_now
 from private_side.services.context import get_free_lessons
 from account.models import Payment
-from paid_course.models import PaidCourse, Schedule
+from paid_course.models import FreeLesson, PaidCourse, Schedule
 
 
 class IndexLkView(LoginRequiredMixin, TemplateView):
@@ -26,7 +26,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
             last_payment_qs = student.get_payment_student.filter(valid_until__gte=date_now)
 
             for last_payment_inst in last_payment_qs.order_by(
-                    'group_of_course__pk', '-valid_until'
+                'group_of_course__pk', '-valid_until'
             ).distinct('group_of_course'):
 
                 last_payment = last_payment_qs.filter(
@@ -107,12 +107,19 @@ class FreeLessonView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class StudentsListView(LoginRequiredMixin, ListView):
-    model = PaidCourse
+class StudentsListView(LoginRequiredMixin, TemplateView):
     template_name = 'private/students_list.html'
 
-    def get_queryset(self):
-        return super().get_queryset().filter(
-            teacher__user=self.request.user,
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        students_paid_courses = PaidCourse.objects.filter(
+            teacher__user=user,
             finished=False,
         )
+
+        context['current_courses'] = students_paid_courses
+
+        return context
