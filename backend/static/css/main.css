@@ -8100,6 +8100,9 @@ footer {
 .timetables-item ul {
   margin-bottom: 16px;
 }
+.timetables-item ul:last-child {
+  margin-bottom: 0;
+}
 .timetables-item ul li {
   font-size: 14px;
   line-height: 17px;

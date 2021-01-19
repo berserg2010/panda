@@ -52,7 +52,7 @@
                           </li>
                         </ul>
 
-                      {% if schedule.lesson.datetime|is_time_delta_8_hours %}
+                      {% if not schedule.finished and schedule.lesson.datetime|is_time_delta_8_hours %}
                         <button
                           type="button"
                           id="reschedule_lesson"
