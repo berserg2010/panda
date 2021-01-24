@@ -3,7 +3,7 @@ from mixer.backend.django import mixer
 
 from course.models import GroupsOfCourses, PackageOfLessons, Course
 from paid_course.models import FreeLesson, PaidCourse, Schedule
-from paid_course.views import ScheduleEntity
+from paid_course.servicers.timetables import ScheduleEntity
 
 
 pytestmark = pytest.mark.django_db

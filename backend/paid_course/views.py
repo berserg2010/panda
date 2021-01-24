@@ -1,11 +1,7 @@
-from datetime import time
 import json
-from pydantic import BaseModel
-from typing import Union, Optional
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
 from django.http import JsonResponse
 from django.utils import timezone
 from django.views.generic import TemplateView
@@ -18,65 +14,9 @@ from common.utils import (
     message_success,
     message_error,
 )
-from account.models import Teacher, Student
 from account.services.mail import send_mail_reschedule_lesson
 from paid_course.models import FreeLesson, PaidCourse, Schedule, LessonResults
-
-
-class ScheduleEntity(BaseModel):
-    finished: bool
-    time: time
-    title: str = ''
-    teacher: Optional[Teacher] = None
-    student: Student
-    lesson: Union[Schedule, FreeLesson]
-
-    class Config:
-        arbitrary_types_allowed = True
-
-
-def schedule_entity_adapter(schedules, weeks):
-
-    if schedules:
-        for schedule in schedules:
-
-            dt = schedule.datetime.astimezone()
-            week_dt = dt.isocalendar()[1]
-            weekday_dt = dt.isocalendar()[2]
-            
-            title = ''
-            teacher = schedule.teacher
-            student = schedule.student
-
-            if isinstance(schedule, Schedule):
-                title = schedule.paid_course.course.title
-
-            if isinstance(schedule, FreeLesson):
-                title = schedule._meta.verbose_name
-
-            schedule_entity = ScheduleEntity(
-                finished=schedule.finished,
-                time=dt.time(),
-                title=title,
-                teacher=teacher,
-                student=student,
-                lesson=schedule,
-            )
-
-            weekdays = weeks.get(week_dt)
-
-            if weekdays and weekdays.get(weekday_dt):
-                weekday = weeks[week_dt][weekday_dt]
-                weekday['schedule'] += [schedule_entity]
-                sorted_weekday = sorted(weekday['schedule'], key=lambda x: x.time)
-                weeks[week_dt][weekday_dt]['schedule'] = sorted_weekday
-
-            elif weekdays:
-                weeks[week_dt][weekday_dt] = {'date': dt.date(), 'schedule': [schedule_entity]}
-            else:
-                weeks[week_dt] = {weekday_dt: {'date': dt.date(), 'schedule': [schedule_entity]}}
-
-    return weeks
+from .servicers.timetables import get_timetables
 
 
 class TimetablesView(LoginRequiredMixin, TemplateView):
@@ -88,24 +28,9 @@ class TimetablesView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['weeks'] = {}
 
-        user = self.request.user
+        date_start = date_now
 
-        today_start = date_now
-
-        free_lessons = FreeLesson.objects.filter(
-            get_user_context(self.request),
-            datetime__gte=today_start,
-        )
-
-        schedules = Schedule.objects.filter(
-            Q(paid_course__teacher__user=user) if user.is_staff else Q(paid_course__student__user=user),
-            datetime__gte=today_start,
-        )
-
-        weeks = {}
-
-        weeks = schedule_entity_adapter(schedules, weeks)
-        weeks = schedule_entity_adapter(free_lessons, weeks)
+        weeks = get_timetables(self.request, date_start)
 
         context['weeks'] = weeks
 
