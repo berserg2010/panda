@@ -9,22 +9,28 @@
 
     <div class="master">
       <div class="master-row">
-        <div class="master-col">
-          <div class="master-wrap">
-            <div class="master-block master-block__top">
-              <span class="master-subtitle">Курс:</span>
-              <p>{{ schedule.title|capfirst }}</p>
-            </div>
-            <div class="master-block">
-              <span class="master-subtitle">Ученик:</span>
-              <p>{{ schedule.student }}</p>
-            </div>
-            <div class="master-block">
-              <span class="master-subtitle">Запланировано на:</span>
-              <p>{{ schedule.time }}</p>
+
+        {% for schedule in timetable %}
+
+          <div class="master-col">
+            <div class="master-wrap">
+              <div class="master-block master-block__top">
+                <span class="master-subtitle">Курс:</span>
+                <p>{{ schedule.title|capfirst }}</p>
+              </div>
+              <div class="master-block">
+                <span class="master-subtitle">Ученик:</span>
+                <p>{{ schedule.student }}</p>
+              </div>
+              <div class="master-block">
+                <span class="master-subtitle">Запланировано на:</span>
+                <p>{{ schedule.time }}</p>
+              </div>
             </div>
           </div>
-        </div>
+
+        {% endfor %}
+
       </div>
     </div>
   </div>

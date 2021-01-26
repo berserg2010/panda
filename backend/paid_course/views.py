@@ -28,9 +28,7 @@ class TimetablesView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['weeks'] = {}
 
-        date_start = date_now
-
-        weeks = get_timetables(self.request, date_start)
+        weeks = get_timetables(self.request)
 
         context['weeks'] = weeks
 

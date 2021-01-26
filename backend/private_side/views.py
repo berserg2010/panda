@@ -8,6 +8,7 @@ from common.utils import date_now
 from private_side.services.context import get_free_lessons
 from account.models import Payment
 from paid_course.models import FreeLesson, PaidCourse, Schedule
+from paid_course.servicers.timetables import get_timetables
 
 
 class IndexLkView(LoginRequiredMixin, TemplateView):
@@ -18,8 +19,14 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
 
-        if not user.is_staff:
+        if user.is_staff:
+            context['timetable'] = {}
 
+            timetable = get_timetables(self.request, one_day=True)
+
+            context['timetable'] = timetable
+
+        else:
             groups_courses_stat = []
             student = user.student
 
