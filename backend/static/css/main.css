@@ -5452,6 +5452,7 @@ footer {
   transition-delay: .7s
 }
 .price-wrap {
+  height: 100%;
   background: #f8fffc;
   border-radius: 10px;
   padding: 38px 10px 70px 15px;
