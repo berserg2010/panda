@@ -43,7 +43,7 @@
 
     const button = $ipsp.get('button')
     button.setMerchantId(MERCHANT_ID)
-    button.setAmount(amount, 'RUB', !DEBUG)
+    button.setAmount(amount, 'UAH', !DEBUG)
     button.setResponseUrl(`${window.location.origin}/payment-callback/`)
     button.setHost('api.fondy.eu')
     button.addField({
