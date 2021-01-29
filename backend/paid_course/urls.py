@@ -16,8 +16,8 @@ urlpatterns = [
     path('timetables/', TimetablesView.as_view(), name='timetables'),
     path('reschedule_lesson/', reschedule_lesson, name='reschedule_lesson'),
 
-    # path('lessons/', LessonsListView.as_view(), name='lessons'),
-    # path('lesson/<uuid:pk>', LessonDetailView.as_view(), name='lesson'),
+    path('lessons/', LessonsListView.as_view(), name='lessons'),
+    path('lesson/<uuid:pk>', LessonDetailView.as_view(), name='lesson'),
 
     # path('notes/', NotesListView.as_view(), name='notes'),
     #

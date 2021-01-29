@@ -20,17 +20,14 @@ from .servicers.timetables import get_timetables
 
 
 class TimetablesView(LoginRequiredMixin, TemplateView):
-
     template_name = 'private/timetables.html'
 
     def get_context_data(self, **kwargs):
-
         context = super().get_context_data(**kwargs)
-        context['weeks'] = {}
+        context['timetable'] = {}
 
-        weeks = get_timetables(self.request)
-
-        context['weeks'] = weeks
+        timetable = get_timetables(self.request)
+        context['timetable'] = timetable
 
         return context
 
@@ -59,16 +56,20 @@ def reschedule_lesson(request):
     return JsonResponse(message)
 
 
-class LessonsListView(LoginRequiredMixin, ListView):
-    model = PaidCourse
+class LessonsListView(LoginRequiredMixin, TemplateView):
     template_name = 'private/lessons.html'
 
-    def get_queryset(self):
-        return super().get_queryset().filter(get_user_context(self.request), finished=False)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['timetable'] = {}
+
+        timetable = get_timetables(self.request, one_day=True)
+        context['timetable'] = timetable
+
+        return context
 
 
-class LessonDetailView(LoginRequiredMixin, DetailView):
-    model = LessonResults
+class LessonDetailView(LoginRequiredMixin, TemplateView):
     template_name = 'private/lesson.html'
 
 

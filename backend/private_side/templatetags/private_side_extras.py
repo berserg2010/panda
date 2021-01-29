@@ -64,6 +64,6 @@ def get_classname(obj: Union[Schedule, FreeLesson]):
 
 
 @register.filter
-def is_time_delta_8_hours(dt: datetime):
-    condition = date_now <= dt - timezone.timedelta(hours=8)
+def is_time_delta_hours(dt: datetime, td: int) -> bool:
+    condition = date_now <= dt - timezone.timedelta(hours=td)
     return condition

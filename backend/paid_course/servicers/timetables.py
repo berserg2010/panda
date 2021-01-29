@@ -82,7 +82,7 @@ def get_timetables(request, date_start: datetime = date_now, date_end: datetime 
     elif date_end is not None:
         filter_exp = Q(Q(datetime__date__gte=date_start) & Q(datetime__date__lte=date_end))
     else:
-        filter_exp = Q(datetime__gte=date_start)
+        filter_exp = Q(datetime__date__gte=date_start.date())
 
     free_lessons = FreeLesson.objects.filter(
         get_user_context(request),

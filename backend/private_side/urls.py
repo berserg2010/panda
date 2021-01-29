@@ -20,5 +20,4 @@ urlpatterns = [
     path('', include('paid_course.urls')),
 
     # path('', include('lesson.urls')),
-
 ]
