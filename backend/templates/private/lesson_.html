@@ -1,0 +1,276 @@
+{% extends 'private/_base.html' %}
+
+{% load static private_side_extras %}
+
+{% block title %}Занятие{% endblock %}
+
+{% block style %}
+  <style>
+    html, body {
+      height: 100%;
+    }
+
+    div.container {
+      width: 740px;
+    }
+
+    div.panel-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #voximplant_container {
+      width: 650px;
+      margin: 20px auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #log {
+      margin: 20px;
+      text-align: left;
+      font-size: 70%;
+      font-family: Monospace;
+    }
+
+    #controls {
+      width: 650px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #controls div.input-group {
+      float: none;
+      width: 320px;
+      margin: 0 auto;
+      margin-bottom: 5px;
+    }
+
+    #controls button {
+      float: none;
+    }
+
+    #voximplantlocalvideo {
+      float: left;
+      width: 320px;
+      height: 240px;
+    }
+
+    .vertical-center {
+      height:100%;
+      width:100%;
+
+      text-align: center;  /* align the inline(-block) elements horizontally */
+      font: 0/0 a;         /* remove the gap between inline(-block) elements */
+    }
+
+    .vertical-center:before {    /* create a full-height inline block pseudo=element */
+      content: ' ';
+      display: inline-block;
+      vertical-align: middle;  /* vertical alignment of the inline element */
+      height: 100%;
+    }
+
+    .vertical-center > .container {
+      max-width: 100%;
+      display: inline-block;
+      vertical-align: middle;  /* vertical alignment of the inline element */
+      font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;        /* <-- reset the font property */
+    }
+    .bootstrap-dialog {
+
+    }
+    .bootstrap-dialog .modal-header {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+    .bootstrap-dialog .bootstrap-dialog-title {
+      color: #fff;
+      display: inline-block;
+    }
+    .bootstrap-dialog.type-default .bootstrap-dialog-title {
+      color: #333;
+    }
+    .bootstrap-dialog.size-normal .bootstrap-dialog-title {
+      font-size: 16px;
+    }
+    .bootstrap-dialog.size-large .bootstrap-dialog-title {
+      font-size: 24px;
+    }
+    .bootstrap-dialog .bootstrap-dialog-close-button {
+      float: right;
+      filter:alpha(opacity=90);
+      -moz-opacity:0.9;
+      -khtml-opacity: 0.9;
+      opacity: 0.9;
+    }
+    .bootstrap-dialog.size-normal .bootstrap-dialog-close-button {
+      font-size: 20px;
+    }
+    .bootstrap-dialog.size-large .bootstrap-dialog-close-button {
+      font-size: 30px;
+    }
+    .bootstrap-dialog .bootstrap-dialog-close-button:hover {
+      cursor: pointer;
+      filter: alpha(opacity=100);
+      -moz-opacity: 1;
+      -khtml-opacity: 1;
+      opacity: 1;
+    }
+    .bootstrap-dialog.size-normal .bootstrap-dialog-message {
+      font-size: 14px;
+    }
+    .bootstrap-dialog.size-large .bootstrap-dialog-message {
+      font-size: 18px;
+    }
+    .bootstrap-dialog.type-default .modal-header {
+      background-color: #fff;
+    }
+    .bootstrap-dialog.type-info .modal-header {
+      background-color: #5bc0de;
+    }
+    .bootstrap-dialog.type-primary .modal-header {
+      background-color: #428bca;
+    }
+    .bootstrap-dialog.type-success .modal-header {
+      background-color: #5cb85c;
+    }
+    .bootstrap-dialog.type-warning .modal-header {
+      background-color: #f0ad4e;
+    }
+    .bootstrap-dialog.type-danger .modal-header {
+      background-color: #d9534f;
+    }
+    .bootstrap-dialog .bootstrap-dialog-button-icon {
+      margin-right: 3px;
+    }
+
+    /**
+     * Icon animation
+     * Copied from font-awesome: http://fontawesome.io/
+     **/
+    .icon-spin {
+      display: inline-block;
+      -moz-animation: spin 2s infinite linear;
+      -o-animation: spin 2s infinite linear;
+      -webkit-animation: spin 2s infinite linear;
+      animation: spin 2s infinite linear;
+    }
+    @-moz-keyframes spin {
+      0% {
+        -moz-transform: rotate(0deg);
+      }
+      100% {
+        -moz-transform: rotate(359deg);
+      }
+    }
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(359deg);
+      }
+    }
+    @-o-keyframes spin {
+      0% {
+        -o-transform: rotate(0deg);
+      }
+      100% {
+        -o-transform: rotate(359deg);
+      }
+    }
+    @-ms-keyframes spin {
+      0% {
+        -ms-transform: rotate(0deg);
+      }
+      100% {
+        -ms-transform: rotate(359deg);
+      }
+    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(359deg);
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+  <div class="jumbotron vertical-center">
+    <div class="container">
+      <div id="container" class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="panel-title">VoxImplant Video Chat</h3>
+        </div>
+
+        <div id="content" class="panel-body">
+
+          <div id="voximplant_container"></div>
+
+          <div id="controls" style="display:none">
+            <div class="input-wrapper">
+              <div class="input-group">
+                <span class="input-group-addon">@</span>
+                <input id="phonenum" type="text" class="form-control" placeholder="Username">
+              </div>
+            </div>
+
+            <div class="btn-group btn-group-justified">
+              <div class="btn-group">
+                <button type="button" class="btn btn-success" id="callButton">Call</button>
+                <button type="button" class="btn btn-default" id="fsButton">Enter fullscreen</button>
+              </div>
+            </div>
+          </div>
+          <div id="log" class="well hidden">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block script %}
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap-dialog.js' %}"></script>
+  <script type="text/javascript" src="//cdn.voximplant.com/edge/voximplant.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
+  {{ user.is_staff|json_script:'is_staff' }}
+  {{ object.paid_course.teacher.pk|json_script:'teacher' }}
+  {{ object.paid_course.student.pk|json_script:'student' }}
+  {{ object.pk|json_script:'lesson' }}
+
+  <script>
+
+    const is_staff = JSON.parse(document.getElementById('is_staff').textContent)
+    const teacher = JSON.parse(document.getElementById('teacher').textContent)
+    const student = JSON.parse(document.getElementById('student').textContent)
+    const lesson = JSON.parse(document.getElementById('lesson').textContent)
+
+
+    $(document).ready(function() {
+
+      $('#controls button.btn-success').click(function() {
+        createCall();
+      });
+      $('#fsButton').click(function(){
+        fullScreenmode(true);
+      });
+      if (showLog) $('#log').removeClass('hidden');
+    });
+  </script>
+
+{% endblock %}
