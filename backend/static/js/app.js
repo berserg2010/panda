@@ -46,7 +46,7 @@ try {
     micRequired: true, // force microphone/camera access request
     videoSupport: true, // enable video support
     progressTone: true, // play progress tone
-    localVideoContainerId: "voximplant_container", // element id for local video from camera or screen sharing
+    localVideoContainerId: "localVideoContainer", // element id for local video from camera or screen sharing
     remoteVideoContainerId: "voximplant_container"
   })
 } catch(e) {
@@ -64,49 +64,6 @@ function onSdkReady() {
 // Connection with VoxImplant established
 function onConnectionEstablished() {
   log("Connection established: " + voxAPI.connected())
-
-  // // show authorization form
-  // var $authForm = $('<div id="authForm">'+
-  //   '<form class="form-horizontal" role="form">'+
-  //   '<div class="form-group">'+
-  //   '<label for="inputUsername" class="col-sm-2 control-label">Username</label>'+
-  //   '<div class="col-sm-10">'+
-  //   '<input type="text" class="form-control" id="inputUsername" placeholder="Username">'+
-  //   '</div>'+
-  //   '</div>'+
-  //   '<div class="form-group">'+
-  //   '<label for="inputPassword" class="col-sm-2 control-label">Password</label>'+
-  //   '<div class="col-sm-10">'+
-  //   '<input type="password" class="form-control" id="inputPassword" placeholder="Password">'+
-  //   '</div>'+
-  //   '</div>'+
-  //   '<input type="submit" value="submit" class="hidden" />'+
-  //   '</form>'+
-  //   '</div>');
-  //
-  // if (typeof username == 'undefined' || typeof password == 'undefined') {
-  //   dialog = new BootstrapDialog({
-  //     title: 'Authorization',
-  //     message: $authForm,
-  //     buttons: [{
-  //       label: 'Sign in',
-  //       action: function(dialog) {
-  //         $('#authForm form').submit();
-  //       }
-  //     }],
-  //     closable: false,
-  //     onshown: function(dialog) {
-  //       $('#inputUsername').focus();
-  //       $('#authForm form').on('submit', function(e) {
-  //         username = $('#inputUsername').val();
-  //         password = $('#inputPassword').val();
-  //         login();
-  //         e.preventDefault();
-  //       });
-  //     }
-  //   });
-  //   dialog.open();
-  // } else login();
 
   login()
 }
@@ -130,46 +87,49 @@ function onConnectionClosed() {
   setTimeout(function() {voxAPI.connect()}, 1000);
 }
 
+const showLocalVideoButton = document.getElementById('showLocalVideoButton')
+
 // Handle authorization result
 function onAuthResult(e) {
   log("AuthResult: " + e.result)
 
   if (e.result) {
-    // Authorized successfully
-    // dialog.close()
-
-    var title = $('.personalArea-block__title').html() + ': logged in as ' + username
+    const title = $('.personalArea-block__title').html() + ': logged in as ' + username
     $('.personalArea-block__title').html(title)
-    $('#controls').slideDown()
-    showLocalVideo(true)
-  } else {
-    // Wrong username or password
-    // if (!$('div.alert.alert-danger').length) $('#authForm').prepend('<div class="alert alert-danger" role="alert">Wrong username or password was specified</div>');
 
-    log("Code: " + e.code);
+    showLocalVideoButton.removeAttribute('disabled')
+  } else {
+    log("Code: " + e.code)
   }
 }
 
+showLocalVideoButton.addEventListener('click', () => {
+  const voximplantlocalvideo = document.getElementById('voximplantlocalvideo')
+  showLocalVideo(!voximplantlocalvideo)
+})
+
+
 // Call's media element created
 function onMediaElement(e) {
-  // For WebRTC just using JS/CSS for transformation
-  $video = $(e.element);
-  $video.appendTo('#voximplant_container');
-  $video.css('margin-left', '10px').css('width', '320px').css('height', '240px').css('float', 'left');
-  $video[0].play();
+  // // For WebRTC just using JS/CSS for transformation
+  // $video = $(e.element);
+  // $video.appendTo('#voximplant_container');
+  // $video.css('margin-left', '10px').css('width', '320px').css('height', '240px').css('float', 'left');
+  // $video[0].play();
 }
 
 // Video stream from local screen sharing
 function onLocalVideoStream(e) {
-  console.log("LOCAL VIDEO STREAM");
-  console.log(e);
+  console.log("LOCAL VIDEO STREAM")
+  console.log(e)
+
   if (e.type == "sharing") {
-    $('#shareButton').html('Stop Sharing');
+    $('#shareButton').html('Stop Sharing')
     $('#shareButton').off('click').click(function() {
-      currentCall.stopSharingScreen();
-      $('#shareButton').html('Share Screen');
+      currentCall.stopSharingScreen()
+      $('#shareButton').html('Share Screen')
       $('#shareButton').off('click').click(function() {
-        currentCall.shareScreen(true);
+        currentCall.shareScreen(true)
       });
     });
   }
@@ -259,12 +219,12 @@ function onIncomingCall(e) {
 
 // Progress tone play start
 function onProgressToneStart(e) {
-  log("ProgessToneStart for call id: " + currentCall.id())
+  log("ProgressToneStart for call id: " + currentCall.id())
 }
 
-// Progres tone play stop
+// Progress tone play stop
 function onProgressToneStop(e) {
-  log("ProgessToneStop for call id: "+currentCall.id());
+  log("ProgressToneStop for call id: " + currentCall.id())
 }
 
 // Create outbound call
@@ -275,11 +235,10 @@ function createCall() {
   $('#cancelButton').click(function() {
     currentCall.hangup()
   })
-  // log("Calling to " + document.getElementById('phonenum').value)
+
   log("Calling to " + getUser())
 
   outboundCall = currentCall = voxAPI.call({
-    // number: document.getElementById('phonenum').value,
     number: getUser(true),
     video: { receiveVideo: true, sendVideo: true },
     customData: "TEST CUSTOM DATA"

@@ -8220,13 +8220,18 @@ footer {
   border-radius: 10px;
   position: absolute;
   top: 17px;
-  left: 20px
+  left: 20px;
+  overflow: hidden;
 }
 .videoCall-you img,
 .videoCall-you svg {
   display: block;
   max-width: 47px;
-  max-height: 47px
+  max-height: 47px;
+}
+.videoCall-you video {
+  /*width: 100px;*/
+  height: 100%;
 }
 .videoCall-buttons {
   display: flex;
