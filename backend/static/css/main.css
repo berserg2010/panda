@@ -8210,6 +8210,10 @@ footer {
   max-width: 186px;
   max-height: 186px
 }
+.videoCall-user.video-call--connected img,
+.videoCall-user.video-call--connected svg {
+  display: none;
+}
 .videoCall-you {
   display: flex;
   align-items: center;
