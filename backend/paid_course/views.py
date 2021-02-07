@@ -16,7 +16,7 @@ from common.utils import (
 )
 from account.services.mail import send_mail_reschedule_lesson
 from paid_course.models import FreeLesson, PaidCourse, Schedule, LessonResults
-from .servicers.timetables import get_timetables
+from .services.timetables import get_timetables
 
 
 class TimetablesView(LoginRequiredMixin, TemplateView):

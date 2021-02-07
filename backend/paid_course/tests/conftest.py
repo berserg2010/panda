@@ -1,9 +1,12 @@
-import pytest
+from datetime import datetime
 from mixer.backend.django import mixer
+import pytest
+from typing import Union
 
+from account.models import Student
 from course.models import GroupsOfCourses, PackageOfLessons, Course
 from paid_course.models import FreeLesson, PaidCourse, Schedule
-from paid_course.servicers.timetables import ScheduleEntity
+from paid_course.services.timetables import ScheduleEntity
 
 
 pytestmark = pytest.mark.django_db
@@ -11,7 +14,7 @@ pytestmark = pytest.mark.django_db
 
 @pytest.fixture
 def create_course():
-    def _create_course(is_published=True):
+    def _create_course(is_published: bool = True) -> Course:
         return mixer.blend(
             Course,
             is_published=is_published,
@@ -24,7 +27,7 @@ def create_course():
 
 @pytest.fixture
 def create_free_lesson():
-    def _create_free_lesson(student, dt, finished=False):
+    def _create_free_lesson(student: Student, dt: datetime, finished: bool = False) -> FreeLesson:
         return mixer.blend(
             FreeLesson,
             finished=finished,
@@ -37,7 +40,7 @@ def create_free_lesson():
 
 @pytest.fixture
 def create_paid_course():
-    def _create_paid_course(student, course, finished=False):
+    def _create_paid_course(student: Student, course: Course, finished: bool = False) -> PaidCourse:
         return mixer.blend(
             PaidCourse,
             finished=finished,
@@ -50,7 +53,7 @@ def create_paid_course():
 
 @pytest.fixture
 def create_schedule():
-    def _create_schedule(paid_course, dt):
+    def _create_schedule(paid_course: PaidCourse, dt: datetime) -> Schedule:
         return mixer.blend(
             Schedule,
             datetime=dt,
@@ -63,7 +66,7 @@ def create_schedule():
 class ParameterStorage:
 
     @staticmethod
-    def schedule_data(schedule: Schedule, dt) -> ScheduleEntity:
+    def schedule_data(schedule: Union[PaidCourse, FreeLesson], dt: datetime) -> ScheduleEntity:
         return ScheduleEntity(
             finished=schedule.finished,
             time=dt.time(),
