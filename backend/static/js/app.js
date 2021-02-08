@@ -64,7 +64,6 @@ function getHashParams() {
 }
 
 const log = (str) => {
-  // document.getElementById("log").innerHTML += str+"<br/>"
   console.info(str)
 }
 
@@ -95,34 +94,35 @@ try {
 
 // SDK ready - functions can be called now
 function onSdkReady() {
-  log('onSDKReady version ' + VoxImplant.version)
-  log('WebRTC supported: ' + voxAPI.isRTCsupported())
+  log('onSdkReady')
+  log(`onSDKReady version ${VoxImplant.version}`)
+  log(`WebRTC supported: ${voxAPI.isRTCsupported()}`)
 
   voxAPI.connect()
 }
 
 // Connection with VoxImplant established
 function onConnectionEstablished() {
-  log("Connection established: " + voxAPI.connected())
+  log(`onConnectionEstablished: ${voxAPI.connected()}`)
 
   login()
 }
 
 // Connection with VoxImplant failed
 function onConnectionFailed() {
-  log("Connection failed")
-  setTimeout(function() {voxAPI.connect()}, 1000)
+  log('onConnectionFailed')
+  setTimeout(() => {voxAPI.connect()}, 1000)
 }
 
 // Connection with VoxImplant closed
 function onConnectionClosed() {
-  log("Connection closed")
-  setTimeout(function() {voxAPI.connect()}, 1000);
+  log('onConnectionClosed')
+  setTimeout(() => {voxAPI.connect()}, 1000);
 }
 
 // Handle authorization result
 function onAuthResult(e) {
-  log("AuthResult: " + e.result)
+  log(`onAuthResult: ${e.result}`)
 
   if (e.result) {
     const title = $('.personalArea-block__title').html() + ': logged in as ' + username
@@ -130,13 +130,15 @@ function onAuthResult(e) {
 
     showLocalVideoButton.removeAttribute('disabled')
   } else {
-    log("Code: " + e.code)
+    log(`Code: ${e.code}`)
   }
 }
 
 // Incoming call
 function onIncomingCall(e) {
   currentCall = e.call
+
+  log(`onIncomingCall: ${currentCall.number()}`)
 
   // Add handlers
   currentCall.on(VoxImplant.CallEvents.Connected, onCallConnected)
@@ -145,15 +147,14 @@ function onIncomingCall(e) {
   currentCall.on(VoxImplant.CallEvents.MediaElementCreated, onMediaElement)
   currentCall.on(VoxImplant.CallEvents.LocalVideoStreamAdded, onLocalVideoStream)
 
-  log("Incoming call from: " + currentCall.number())
-
   // Answer automatically
   currentCall.answer(null, {}, { receiveVideo: true, sendVideo: true })
 }
 
 // Camera/mic access result
 function onMicAccessResult(e) {
-  log("Mic/Cam access allowed: " + e.result)
+  log(`onMicAccessResult: ${e.result}`)
+
   // if (e.result) {
   //   // Access was allowed
   //   if (mode == 'webrtc') dialog.close();
@@ -170,33 +171,31 @@ function onSourcesInfoUpdated() {
   //   videoSources = voxAPI.videoSources()
 }
 
-
 // Login function
 const login = () => {
-  log(username+"@"+application_name+"."+account_name+".voximplant.com")
+  log(username+'@'+application_name+'.'+account_name+'.voximplant.com')
 
-  voxAPI.login(username+"@"+application_name+"."+account_name+".voximplant.com", password)
+  voxAPI.login(username+'@'+application_name+'.'+account_name+'.voximplant.com', password)
 }
 
 // Call connected
 function onCallConnected(e) {
-  log("CallConnected: " + currentCall.id())
+  log(`onCallConnected: ${currentCall.id()}`)
+  log(`onCallConnected: ${currentCall.length}`)
 
   remoteVideoContainer.classList.add('video-call--connected')
-
-  console.info(currentCall.length)
 
   if (currentCall.length) {
     // $('#cancelButton').html('Disconnect')
     // $('<button type="button" class="btn btn-default" id="shareButton">Share Screen</button>').insertAfter("#cancelButton")
-    callControlState(false)
+    // callControlState(false)
   } else {
     // $('#callButton').replaceWith('<button type="button" class="btn btn-danger" id="cancelButton">Disconnect</button>')
     // $('<button type="button" class="btn btn-default" id="shareButton">Share Screen</button>').insertAfter("#cancelButton")
+
+    callControlState(false)
     cancelButton.addEventListener('click', cancelButtonHandler)
   }
-
-
 
   shareButton.addEventListener('click', () => {
     currentCall.shareScreen()
@@ -233,7 +232,9 @@ function onCallFailed(e) {
 
 // Call's media element created
 function onMediaElement(e) {
-  // // For WebRTC just using JS/CSS for transformation
+  // For WebRTC just using JS/CSS for transformation
+  log(`onMediaElement`)
+  // console.info(typeof e.element === 'HTMLVideoElement')
   // $video = $(e.element);
   // $video.appendTo('#voximplant_container');
   // $video.css('margin-left', '10px').css('width', '320px').css('height', '240px').css('float', 'left');
