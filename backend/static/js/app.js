@@ -8,31 +8,37 @@ const params = getHashParams(),
 // let dialog,
 let currentCall = null,
   outboundCall = null,
-  showLocalVideoState = false
+  showLocalVideoState = false,
+  shareScreenState = false,
+  micState = false
 
 // Control button
 const showLocalVideoButton = document.getElementById('showLocalVideoButton')
-const shareButton = document.getElementById('shareButton')
+const shareScreenButton = document.getElementById('shareScreenButton')
 const callButton = document.getElementById('callButton')
 const cancelButton = document.getElementById('cancelButton')
 
 const remoteVideoContainer = document.getElementById('remoteVideoContainer')
 
 showLocalVideoButton.addEventListener('click', () => {
-  // const voximplantlocalvideo = document.getElementById('voximplantlocalvideo')
   log('showLocalVideoButton -> click')
-  log(`showLocalVideoButton -> showLocalVideoState: ${showLocalVideoState}`)
-  log(`showLocalVideoButton -> currentCall: ${currentCall}`)
 
   showLocalVideo(!showLocalVideoState)
   currentCall !== null ? sendVideo(!showLocalVideoState) : null
   showLocalVideoState = !showLocalVideoState
 })
 
+shareScreenButton.addEventListener('click', () => {
+  log(`shareScreenButton -> click (${currentCall !== null})`)
+
+  currentCall !== null ? shareScreen(!shareScreenState) : null
+  shareScreenState = !shareScreenState
+})
+
 
 const callControlState = (disconnect = true) => {
   if (disconnect) {
-    shareButton.setAttribute('disabled', 'disabled')
+    shareScreenButton.setAttribute('disabled', 'disabled')
 
     cancelButton.setAttribute('hidden', 'hidden')
     cancelButton.removeEventListener('click', cancelButtonHandler)
@@ -40,7 +46,7 @@ const callControlState = (disconnect = true) => {
     callButton.removeAttribute('hidden')
     callButton.addEventListener('click', createCall)
   } else {
-    shareButton.removeAttribute('disabled')
+    shareScreenButton.removeAttribute('disabled')
 
     callButton.setAttribute('hidden', 'hidden')
     callButton.removeEventListener('click', createCall)
@@ -213,10 +219,6 @@ function onCallConnected(e) {
     callControlState(false)
   }
 
-  shareButton.addEventListener('click', () => {
-    currentCall.shareScreen()
-  })
-
   // const voximplantlocalvideo = document.getElementById('voximplantlocalvideo')
   // sendVideo(Boolean(voximplantlocalvideo))
   // sendVideo(true)
@@ -255,19 +257,21 @@ function onMediaElement(e) {
 }
 
 // Video stream from local screen sharing
-function onLocalVideoStream(e) {
+const onLocalVideoStream = (e) => {
   console.log('onLocalVideoStream')
   console.log(e)
 
   if (e.type == 'sharing') {
-    shareButton.html('Stop Sharing')
-    shareButton.off('click').click(function () {
-      currentCall.stopSharingScreen()
-      shareButton.html('Share Screen')
-      shareButton.off('click').click(function () {
-        currentCall.shareScreen()
-      })
-    })
+
+    log(`onLocalVideoStream - if`)
+
+    // shareButton.off('click').click(() => {
+    //   currentCall.stopSharingScreen()
+    //
+    //   shareButton.off('click').click(function () {
+    //     currentCall.shareScreen()
+    //   })
+    // })
   }
 }
 
@@ -298,6 +302,10 @@ const showRemoteVideo = (flag = true) => {
   currentCall.showRemoteVideo(flag)
 }
 
+const shareScreen = (flag = true) => {
+  flag ? currentCall.shareScreen() : currentCall.stopSharingScreen()
+}
+
 // Start/stop sending video
 const sendVideo = (flag = true) => {
   // voxAPI.sendVideo(flag)
@@ -305,7 +313,7 @@ const sendVideo = (flag = true) => {
 }
 
 // Enable fullscreen
-const fullScreenmode = (flag = true) => {
+const fullScreenMode = (flag = true) => {
   if (mode == 'webrtc') {
     if (flag === true && currentCall != null) {
       const elem = document.getElementById(currentCall.getVideoElementId())
@@ -324,9 +332,16 @@ const fullScreenmode = (flag = true) => {
 }
 
 const cancelButtonHandler = () => {
+  log('cancelButtonHandler')
   currentCall.hangup()
 
   callControlState()
+}
+
+const MicStatusHandler = (flag = false) => {
+  log(`MicStatusHandler: ${flag}`)
+
+  currentCall.handleMicStatus(flag)
 }
 
 

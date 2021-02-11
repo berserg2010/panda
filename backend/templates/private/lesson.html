@@ -21,32 +21,18 @@
 
           <div class="videoCall-col videoCall-col__1">
             <div class="videoCall-main">
-              {#              <div id="voximplant_container"></div>#}
-
               <div id="remoteVideoContainer" class="videoCall-user">
-                {#                <video#}
-                {#                  id="peer-camera"#}
-                {#                  width="300px"#}
-                {#                  height="700px"#}
-                {#                  autoplay="autoplay"#}
-                {#                  class="center-block"#}
-                {#                  style="display: none"#}
-                {#                  poster="{% static 'img/videoCall-user.svg' %}"#}
-                {#                ></video>#}
-                {#                <button id="connect-to-peer" >#}
-                <img src="{% static 'img/videoCall-user.svg' %}" height="300px">
-                {#                </button>#}
+                <img src="{% static 'img/videoCall-user.svg' %}" height="300px" alt="">
               </div>
 
               <div id="localVideoContainer" class="videoCall-you">
-                <img src="{% static 'img/videoCall-hi.svg' %}" height="100px">
+                <img src="{% static 'img/videoCall-hi.svg' %}" height="100px" alt="">
               </div>
 
               <div class="videoCall-buttons">
-
                 <ul class="videoCall-buttons__list">
                   <li>
-                    <button type="button">
+                    <button id="switchMicStateButton" type="button">
                       <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 0C7.79565 0 8.55871 0.316071 9.12132 0.87868C9.68393 1.44129 10 2.20435 10 3V9C10 9.79565 9.68393 10.5587 9.12132 11.1213C8.55871 11.6839 7.79565 12 7 12C6.20435 12 5.44129 11.6839 4.87868 11.1213C4.31607 10.5587 4 9.79565 4 9V3C4 2.20435 4.31607 1.44129 4.87868 0.87868C5.44129 0.316071 6.20435 0 7 0V0ZM14 9C14 12.53 11.39 15.44 8 15.93V19H6V15.93C2.61 15.44 0 12.53 0 9H2C2 10.3261 2.52678 11.5979 3.46447 12.5355C4.40215 13.4732 5.67392 14 7 14C8.32608 14 9.59785 13.4732 10.5355 12.5355C11.4732 11.5979 12 10.3261 12 9H14Z" fill="#5F9F84"></path>
                       </svg>
@@ -60,7 +46,7 @@
                     </button>
                   </li>
                   <li>
-                    <button id="shareButton" type="button" disabled>
+                    <button id="shareScreenButton" type="button" disabled>
                       <svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 14C21.1 14 21.99 13.1 21.99 12L22 2.00001C22 0.890014 21.1 0 20 0H3.99998C2.88998 0 1.99997 0.890014 1.99997 2.00001V12C2.00002 13.1 2.88998 14 3.99998 14H0V16H24V14H20ZM13 10.47V8.27998C10.22 8.27998 8.38997 9.12997 6.99998 11C7.56 8.33 9.10997 5.66999 13 5.12999V2.99999L17 6.72997L13 10.47Z" fill="#5F9F84"></path>
                       </svg>
@@ -90,11 +76,6 @@
 
 {% block script %}
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  {#  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>#}
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  {#  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>#}
-  {#  <script type="text/javascript" src="{% static 'js/bootstrap-dialog.js' %}"></script>#}
   <script type="text/javascript" src="//cdn.voximplant.com/edge/voximplant.min.js"></script>
   <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
@@ -117,15 +98,6 @@
 
     const username = getUser()
 
-    {#$(document).ready(function() {#}
-    {##}
-    {#  $('#callButton').click(function() {#}
-    {#    createCall()#}
-    {#  })#}
-    {#  $('#shareButton').click(function() {#}
-    {#    fullScreenmode(true)#}
-    {#  })#}
-    {#})#}
   </script>
 
 {% endblock %}
