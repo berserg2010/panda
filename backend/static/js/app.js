@@ -21,11 +21,13 @@ const cancelButton = document.getElementById('cancelButton')
 const remoteVideoContainer = document.getElementById('remoteVideoContainer')
 
 showLocalVideoButton.addEventListener('click', () => {
-  log('showLocalVideoButton -> click')
+  log(`showLocalVideoButton -> click : ${showLocalVideoState} --`)
 
   showLocalVideo(!showLocalVideoState)
   currentCall !== null ? sendVideo(!showLocalVideoState) : null
   showLocalVideoState = !showLocalVideoState
+
+  log(`showLocalVideoButton -> click : -- ${showLocalVideoState}`)
 })
 
 shareScreenButton.addEventListener('click', () => {
@@ -62,6 +64,11 @@ const addHandlers = () => {
   currentCall.addEventListener(VoxImplant.CallEvents.Failed, onCallFailed)
   currentCall.addEventListener(VoxImplant.CallEvents.MediaElementCreated, onMediaElement)
   currentCall.addEventListener(VoxImplant.CallEvents.LocalVideoStreamAdded, onLocalVideoStream)
+  currentCall.addEventListener(VoxImplant.CallEvents.EndpointAdded, onEndpointAdded)
+  currentCall.addEventListener(VoxImplant.CallEvents.RemoteMediaRemoved, onRemoteMediaRemoved)
+  currentCall.addEventListener(VoxImplant.CallEvents.ActiveUpdated, onActiveUpdated)
+  currentCall.addEventListener(VoxImplant.CallEvents.StateUpdated, onStateUpdated)
+  currentCall.addEventListener(VoxImplant.CallEvents.Updated, onCallUpdated)
 }
 
 function getHashParams() {
@@ -95,6 +102,9 @@ voxAPI.addEventListener(VoxImplant.Events.AuthResult, onAuthResult)
 voxAPI.addEventListener(VoxImplant.Events.IncomingCall, onIncomingCall)
 voxAPI.addEventListener(VoxImplant.Events.MicAccessResult, onMicAccessResult)
 voxAPI.addEventListener(VoxImplant.Events.SourcesInfoUpdated, onSourcesInfoUpdated)
+// voxAPI.addEventListener(VoxImplant.EndpointEvents.RemoteMediaAdded, onRemoteMediaAdded)
+// voxAPI.addEventListener(VoxImplant.EndpointEvents.RemoteMediaRemoved, onRemoteMediaRemoved)
+
 
 // initialize SDK
 try {
@@ -102,8 +112,11 @@ try {
     micRequired: true, // force microphone/camera access request
     videoSupport: true, // enable video support
     progressTone: true, // play progress tone
+    progressToneCountry: 'RU',
     localVideoContainerId: 'localVideoContainer', // element id for local video from camera or screen sharing
-    remoteVideoContainerId: 'remoteVideoContainer'
+    remoteVideoContainerId: 'remoteVideoContainer',
+    // showDebugInfo: true,
+    // showWarnings: true,
   })
 } catch (e) {
   log(e)
@@ -120,7 +133,7 @@ function onSdkReady() {
 
 // Connection with VoxImplant established
 function onConnectionEstablished() {
-  log(`onConnectionEstablished: ${voxAPI.connected()}`)
+  log(`onConnectionEstablished : ${voxAPI.connected()}`)
 
   login()
 }
@@ -131,9 +144,7 @@ function onConnectionFailed() {
 
   callControlState()
 
-  setTimeout(() => {
-    voxAPI.connect()
-  }, 1000)
+  reconnectCall()
 }
 
 // Connection with VoxImplant closed
@@ -142,6 +153,10 @@ function onConnectionClosed() {
 
   callControlState()
 
+  reconnectCall()
+}
+
+const reconnectCall = () => {
   setTimeout(() => {
     voxAPI.connect()
   }, 1000)
@@ -149,7 +164,7 @@ function onConnectionClosed() {
 
 // Handle authorization result
 function onAuthResult(e) {
-  log(`onAuthResult: ${e.result}`)
+  log(`onAuthResult : ${e.result}`)
 
   if (e.result) {
     const title = $('.personalArea-block__title').html() + ': logged in as ' + username
@@ -162,21 +177,26 @@ function onAuthResult(e) {
   }
 }
 
+let useVideo = {
+  receiveVideo: true,
+  sendVideo: showLocalVideoState
+}
+
 // Incoming call
 function onIncomingCall(e) {
   currentCall = e.call
 
-  log(`onIncomingCall: ${currentCall.number()}`)
+  log(`onIncomingCall : ${currentCall.number()}`)
 
   addHandlers()
 
   // Answer automatically
-  currentCall.answer(null, {}, { receiveVideo: true, sendVideo: showLocalVideoState })
+  currentCall.answer(useVideo)
 }
 
 // Camera/mic access result
 function onMicAccessResult(e) {
-  log(`onMicAccessResult: ${e.result}`)
+  log(`onMicAccessResult : ${e.result}`)
 
   // if (e.result) {
   //   // Access was allowed
@@ -190,6 +210,7 @@ function onMicAccessResult(e) {
 
 // Audio & video sources info available
 function onSourcesInfoUpdated() {
+  log(`onSourcesInfoUpdated`)
   // var audioSources = voxAPI.audioSources(),
   //   videoSources = voxAPI.videoSources()
 }
@@ -240,7 +261,11 @@ function onCallDisconnected(e) {
 
 // Call failed
 function onCallFailed(e) {
-  log("CallFailed: " + currentCall.id() + " code: " + e.code + " reason: " + e.reason)
+  log(`
+    CallFailed: ${currentCall.id()}, 
+    code: ${e.code}, 
+    reason: ${e.reason}
+  `)
 
   callControlState()
 }
@@ -249,6 +274,7 @@ function onCallFailed(e) {
 function onMediaElement(e) {
   // For WebRTC just using JS/CSS for transformation
   log(`onMediaElement`)
+  console.info(e)
   // console.info(typeof e.element === 'HTMLVideoElement')
   // $video = $(e.element);
   // $video.appendTo('#voximplant_container');
@@ -275,18 +301,55 @@ const onLocalVideoStream = (e) => {
   }
 }
 
+function onEndpointAdded(e) {
+  log(`onEndpointAdded`)
+
+  const remoteClient = e.call
+
+  console.info(e)
+  console.info(remoteClient)
+}
+
+function onRemoteMediaRemoved(e) {
+  log(`onRemoteMediaRemoved`)
+  console.info(e)
+}
+
+function onActiveUpdated(e) {
+  log('onActiveUpdated')
+  console.info(e)
+}
+
+function onStateUpdated(e) {
+  log('onStateUpdated')
+  console.info(e)
+}
+
+function onCallUpdated(e) {
+  log(`onCallUpdated`)
+  console.info(e.call)
+}
+
+function onRemoteMediaAdded(e) {
+  log(`RemoteMediaAdded : ${e}`)
+}
+
+// function onRemoteMediaRemoved(e) {
+//   log(`onRemoteMediaRemoved : ${e}`)
+// }
+
 // Create outbound call
 function createCall() {
   log('createCall')
 
   callControlState(false)
 
-  log(`Calling to ${getUser()}`)
+  log(`Calling to ${getUser(false)}`)
 
   outboundCall = currentCall = voxAPI.call({
-    number: getUser(true),
-    video: { receiveVideo: true, sendVideo: showLocalVideoState },
-    customData: "TEST CUSTOM DATA"
+    number: getUser(false),
+    video: useVideo,
+    // H264first: true
   })
 
   addHandlers()
@@ -294,22 +357,23 @@ function createCall() {
 
 // Show/hide local video
 const showLocalVideo = (flag = true) => {
+  log(`showLocalVideo : ${flag}`)
+
   voxAPI.showLocalVideo(flag)
-}
 
-// Show/hide remote video
-const showRemoteVideo = (flag = true) => {
-  currentCall.showRemoteVideo(flag)
-}
-
-const shareScreen = (flag = true) => {
-  flag ? currentCall.shareScreen() : currentCall.stopSharingScreen()
+  // if (!flag) {
+  //   voxAPI.hideLocalVideo()
+  // }
 }
 
 // Start/stop sending video
 const sendVideo = (flag = true) => {
   // voxAPI.sendVideo(flag)
   currentCall.sendVideo(flag)
+}
+
+const shareScreen = (flag = true) => {
+  flag ? currentCall.shareScreen(true, true) : currentCall.stopSharingScreen()
 }
 
 // Enable fullscreen

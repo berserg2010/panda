@@ -86,15 +86,15 @@
 
   <script>
 
-    const getUser = (revers = false) => {
-      const condition = revers ? !is_staff : is_staff
-      return condition ? 'teacher' : 'student'
-    }
-
     const is_staff = JSON.parse(document.getElementById('is_staff').textContent)
     const teacher = JSON.parse(document.getElementById('teacher').textContent)
     const student = JSON.parse(document.getElementById('student').textContent)
     const lesson = JSON.parse(document.getElementById('lesson').textContent)
+
+    const getUser = (self = true) => {
+      const condition = self ? is_staff : !is_staff
+      return condition ? 'teacher' : 'student'
+    }
 
     const username = getUser()
 
