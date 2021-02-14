@@ -3,7 +3,9 @@ const params = getHashParams(),
   password = 'Qazxcdew13',
   application_name = 'videochat',
   account_name = 'berserg2010',
-  showLog = true
+  showLog = true,
+  widthRemoteVideo = 600
+  heightRemoteVideo = 400
 
 // let dialog,
 let currentCall = null,
@@ -65,10 +67,6 @@ const addHandlers = () => {
   currentCall.addEventListener(VoxImplant.CallEvents.MediaElementCreated, onMediaElement)
   currentCall.addEventListener(VoxImplant.CallEvents.LocalVideoStreamAdded, onLocalVideoStream)
   currentCall.addEventListener(VoxImplant.CallEvents.EndpointAdded, onEndpointAdded)
-  currentCall.addEventListener(VoxImplant.CallEvents.RemoteMediaRemoved, onRemoteMediaRemoved)
-  currentCall.addEventListener(VoxImplant.CallEvents.ActiveUpdated, onActiveUpdated)
-  currentCall.addEventListener(VoxImplant.CallEvents.StateUpdated, onStateUpdated)
-  currentCall.addEventListener(VoxImplant.CallEvents.Updated, onCallUpdated)
 }
 
 function getHashParams() {
@@ -102,9 +100,6 @@ voxAPI.addEventListener(VoxImplant.Events.AuthResult, onAuthResult)
 voxAPI.addEventListener(VoxImplant.Events.IncomingCall, onIncomingCall)
 voxAPI.addEventListener(VoxImplant.Events.MicAccessResult, onMicAccessResult)
 voxAPI.addEventListener(VoxImplant.Events.SourcesInfoUpdated, onSourcesInfoUpdated)
-// voxAPI.addEventListener(VoxImplant.EndpointEvents.RemoteMediaAdded, onRemoteMediaAdded)
-// voxAPI.addEventListener(VoxImplant.EndpointEvents.RemoteMediaRemoved, onRemoteMediaRemoved)
-
 
 // initialize SDK
 try {
@@ -177,11 +172,6 @@ function onAuthResult(e) {
   }
 }
 
-let useVideo = {
-  receiveVideo: true,
-  sendVideo: showLocalVideoState
-}
-
 // Incoming call
 function onIncomingCall(e) {
   currentCall = e.call
@@ -191,7 +181,10 @@ function onIncomingCall(e) {
   addHandlers()
 
   // Answer automatically
-  currentCall.answer(useVideo)
+  currentCall.answer({
+    receiveVideo: true,
+    sendVideo: showLocalVideoState
+  })
 }
 
 // Camera/mic access result
@@ -225,38 +218,21 @@ const login = () => {
 // Call connected
 function onCallConnected(e) {
   log(`onCallConnected: ${currentCall.id()}`)
-  log(`onCallConnected: ${currentCall.length}`)
 
   remoteVideoContainer.classList.add('video-call--connected')
-
-  if (currentCall.length) {
-    // $('#cancelButton').html('Disconnect')
-    // $('<button type="button" class="btn btn-default" id="shareButton">Share Screen</button>').insertAfter("#cancelButton")
-    // callControlState(false)
-  } else {
-    // $('#callButton').replaceWith('<button type="button" class="btn btn-danger" id="cancelButton">Disconnect</button>')
-    // $('<button type="button" class="btn btn-default" id="shareButton">Share Screen</button>').insertAfter("#cancelButton")
-
-    callControlState(false)
-  }
-
-  // const voximplantlocalvideo = document.getElementById('voximplantlocalvideo')
-  // sendVideo(Boolean(voximplantlocalvideo))
-  // sendVideo(true)
-  // showRemoteVideo(true)
+  callControlState(false)
 }
 
 // Call disconnected
 function onCallDisconnected(e) {
   log('CallDisconnected: ' + currentCall.id() + ' Call state: ' + currentCall.state())
 
-  const remoteVideoContainer = document.getElementById('remoteVideoContainer')
   remoteVideoContainer.classList.remove('video-call--connected')
 
+  currentCall.hangup()
   currentCall = null
 
   callControlState()
-
 }
 
 // Call failed
@@ -303,40 +279,40 @@ const onLocalVideoStream = (e) => {
 
 function onEndpointAdded(e) {
   log(`onEndpointAdded`)
-
-  const remoteClient = e.call
-
   console.info(e)
-  console.info(remoteClient)
+
+  const endpoint = e.endpoint
+
+  // remove the display element with this endpoint
+  endpoint.on(VoxImplant.EndpointEvents.Removed, onEndpointRemoved)
+
+  endpoint.addEventListener(VoxImplant.EndpointEvents.RemoteMediaAdded, onRemoteMediaAdded)
+  endpoint.addEventListener(VoxImplant.EndpointEvents.RemoteMediaRemoved, onRemoteMediaRemoved)
+}
+
+function onEndpointRemoved(e) {
+  log('onEndpointRemoved')
+
+  remoteVideoContainer.classList.remove('video-call--connected')
+}
+
+function onRemoteMediaAdded(e) {
+  log('RemoteMediaAdded')
+  console.info(e)
+
+  e.mediaRenderer.element.width=widthRemoteVideo
+  e.mediaRenderer.element.height=heightRemoteVideo
+  e.mediaRenderer.render(remoteVideoContainer)
+
+  remoteVideoContainer.classList.add('video-call--connected')
 }
 
 function onRemoteMediaRemoved(e) {
   log(`onRemoteMediaRemoved`)
   console.info(e)
-}
 
-function onActiveUpdated(e) {
-  log('onActiveUpdated')
-  console.info(e)
+  remoteVideoContainer.classList.remove('video-call--connected')
 }
-
-function onStateUpdated(e) {
-  log('onStateUpdated')
-  console.info(e)
-}
-
-function onCallUpdated(e) {
-  log(`onCallUpdated`)
-  console.info(e.call)
-}
-
-function onRemoteMediaAdded(e) {
-  log(`RemoteMediaAdded : ${e}`)
-}
-
-// function onRemoteMediaRemoved(e) {
-//   log(`onRemoteMediaRemoved : ${e}`)
-// }
 
 // Create outbound call
 function createCall() {
@@ -348,7 +324,10 @@ function createCall() {
 
   outboundCall = currentCall = voxAPI.call({
     number: getUser(false),
-    video: useVideo,
+    video: {
+      receiveVideo: true,
+      sendVideo: showLocalVideoState
+    },
     // H264first: true
   })
 
@@ -360,15 +339,10 @@ const showLocalVideo = (flag = true) => {
   log(`showLocalVideo : ${flag}`)
 
   voxAPI.showLocalVideo(flag)
-
-  // if (!flag) {
-  //   voxAPI.hideLocalVideo()
-  // }
 }
 
 // Start/stop sending video
 const sendVideo = (flag = true) => {
-  // voxAPI.sendVideo(flag)
   currentCall.sendVideo(flag)
 }
 
@@ -408,28 +382,7 @@ const MicStatusHandler = (flag = false) => {
   currentCall.handleMicStatus(flag)
 }
 
-
-// Progress tone play start
-// function onProgressToneStart(e) {
-//   log("ProgressToneStart for call id: " + currentCall.id())
-// }
-
-// Progress tone play stop
-// function onProgressToneStop(e) {
-//   log("ProgressToneStop for call id: " + currentCall.id())
-// }
-
-// // Disconnect current call
-// function disconnectCall() {
-//   if (currentCall != null) {
-//     log("Disconnect")
-//     currentCall.hangup()
-//   }
-// }
-
 // // Close connection with VoxImplant
 // function closeConnection() {
 //   voxAPI.disconnect()
 // }
-
-
