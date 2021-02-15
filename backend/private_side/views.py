@@ -20,7 +20,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
         user = self.request.user
 
         if user.is_staff:
-            context['timetable'] = {}
+            context['timetable'] = []
 
             timetable = get_timetables(self.request, one_day=True)
 

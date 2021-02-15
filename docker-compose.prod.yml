@@ -9,7 +9,7 @@ services:
     restart: always
 
   pgbouncer:
-    image: edoburu/pgbouncer
+    image: edoburu/pgbouncer:1.15.0
     env_file:
       - env/db.env
     ports:
