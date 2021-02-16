@@ -29,7 +29,7 @@ class FreeLesson(BasicRelationshipTable):
     class Meta:
         verbose_name = 'пробное занятие'
         verbose_name_plural = '01 | Пробные занятия'
-        ordering = ('datetime', )
+        ordering = ('-datetime', )
 
 
 class PaidCourse(BasicRelationshipTable):
