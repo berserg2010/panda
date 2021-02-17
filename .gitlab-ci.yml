@@ -1,0 +1,11 @@
+stages:
+    - build
+    - test
+    - deplpy
+
+Docker build:
+    stage: build
+    script:
+        - echo "docker build is successfull"
+    # tags:
+
