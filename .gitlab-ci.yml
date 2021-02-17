@@ -38,7 +38,7 @@ Unit tests:
       - cp env/back.env.template env/back.env
       - cp env/db.env.template env/db.env
 
-      - docker-compose up --build
+      - docker-compose up --build -d
       - docker-compose stop
       - docker-compose run backend python manage.py makemigrations
       - docker-compose run backend python manage.py migrate
