@@ -33,6 +33,7 @@ before_script:
 Unit tests:
     stage: test
     script:
+      - pwd
       - cp ./env/common.env.template ./env/common.env
       - cp ./env/back.env.template ./env/back.env
       - cp ./env/db.env.template ./env/db.env
