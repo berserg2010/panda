@@ -3,31 +3,48 @@ stages:
     - test
     - deploy
 
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+
+image:
+  name: docker/compose:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - docker version
+  - docker-compose version
+
 Docker build:
     stage: build
     script:
-        - echo "docker build is successfull"
+        - docker-compose build
+        - docker-compose run backend python manage.py makemigrations
+        - docker-compose run backend python manage.py migrate
+        - docker-compose run backend python manage.py loaddata dump.json
     tags:
         - docker-django
 
 Unit tests:
     stage: test
     script:
-        - echo "Run tests"
+        - docker-compose run backend pytest
     tags:
         - docker-django
 
-Linters:
-    stage: test
-    script:
-        - echo "Run linters"
-    tags:
-        - docker-django
+# Linters:
+#     stage: test
+#     script:
+#         - echo "Run linters"
+#     tags:
+#         - docker-django
 
-Deploy to dev:
-    stage:
-        deploy
-    script:
-        - echo "${CI_PROJECT_NAME} from ${CI_COMMIT_REF_SLUG} [stage ${CI_JOB_STAGE}]"
-    tags:
-        - docker-django
+# Deploy to dev:
+#     stage:
+#         deploy
+#     script:
+#         - echo "${CI_PROJECT_NAME} from ${CI_COMMIT_REF_SLUG} [stage ${CI_JOB_STAGE}]"
+#     tags:
+#         - docker-django
