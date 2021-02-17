@@ -33,10 +33,13 @@ before_script:
 Unit tests:
     stage: test
     script:
-        - docker-compose build
-        - docker-compose run backend pytest
+      - cp env/common.env.template env/common.env
+      - cp env/back.env.template env/back.env
+      - cp env/db.env.template env/db.env
+      - docker-compose build
+      - docker-compose run backend pytest
     tags:
-        - docker-django
+      - docker-django
 
 # Linters:
 #     stage: test
