@@ -21,7 +21,7 @@ before_script:
   - docker-compose version
 
 after_script:
-  - docker-compose down
+  - docker-compose down -f
 
 # Docker build:
 #     stage: build
