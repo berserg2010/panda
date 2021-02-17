@@ -17,19 +17,22 @@ before_script:
   - docker version
   - docker-compose version
 
-Docker build:
-    stage: build
-    script:
+# Docker build:
+#     stage: build
+#     script:
+#         - docker-compose build
+#         - docker-compose run backend python manage.py makemigrations
+#         - docker-compose run backend python manage.py migrate
+#         - docker-compose run backend python manage.py loaddata dump.json
+#     tags:
+#         - docker-django
+
+Unit tests:
+    stage: test
         - docker-compose build
         - docker-compose run backend python manage.py makemigrations
         - docker-compose run backend python manage.py migrate
         - docker-compose run backend python manage.py loaddata dump.json
-    tags:
-        - docker-django
-
-Unit tests:
-    stage: test
-    script:
         - docker-compose run backend pytest
     tags:
         - docker-django
