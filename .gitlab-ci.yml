@@ -33,9 +33,9 @@ before_script:
 Unit tests:
     stage: test
     script:
-      - cp env/common.env.template env/common.env
-      - cp env/back.env.template env/back.env
-      - cp env/db.env.template env/db.env
+      - cp ./env/common.env.template ./env/common.env
+      - cp ./env/back.env.template ./env/back.env
+      - cp ./env/db.env.template ./env/db.env
       - docker-compose build
       - docker-compose run backend pytest
     tags:
