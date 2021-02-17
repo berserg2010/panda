@@ -30,9 +30,8 @@ before_script:
 Unit tests:
     stage: test
     script:
-        - cd /usr/src/panda
-        - pip install -q -r requirements.txt
-        - pytest
+        - docker-compose build
+        - docker-compose run backend pytest
     tags:
         - docker-django
 
