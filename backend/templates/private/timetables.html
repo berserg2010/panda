@@ -14,7 +14,7 @@
 
       <div class="timetables">
 
-        {% for key, week in weeks.items|dictsort:0 %}
+        {% for key, week in timetable.items|dictsort:0 %}
 
           <div class="timetables-block range-slider__wrap">
 
@@ -52,7 +52,7 @@
                           </li>
                         </ul>
 
-                      {% if not schedule.finished and schedule.lesson.datetime|is_time_delta_8_hours %}
+                      {% if not schedule.finished and schedule.lesson.datetime|is_time_delta_hours:8 %}
                         <button
                           type="button"
                           id="reschedule_lesson"

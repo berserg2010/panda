@@ -8,7 +8,7 @@ from common.utils import date_now
 from private_side.services.context import get_free_lessons
 from account.models import Payment
 from paid_course.models import FreeLesson, PaidCourse, Schedule
-from paid_course.servicers.timetables import get_timetables
+from paid_course.services.timetables import get_timetables
 
 
 class IndexLkView(LoginRequiredMixin, TemplateView):
