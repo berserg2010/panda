@@ -29,6 +29,7 @@ before_script:
 
 Unit tests:
     stage: test
+    script:
         - docker-compose build
         - docker-compose run backend python manage.py makemigrations
         - docker-compose run backend python manage.py migrate
