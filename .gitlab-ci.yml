@@ -7,5 +7,27 @@ Docker build:
     stage: build
     script:
         - echo "docker build is successfull"
-    # tags:
+    tags:
+        - docker-django
 
+Unit tests:
+    stage: test
+    script:
+        - echo "Run tests"
+    tags:
+        - docker-django
+
+Linters:
+    stage: test
+    script:
+        - echo "Run linters"
+    tags:
+        - docker-django
+
+Deploy to dev:
+    stage:
+        deploy
+    script:
+        - echo "${CI_PROJECT_NAME} from ${CI_COMMIT_REF_SLUG} [stage ${CI_JOB_STAGE}]"
+    tags:
+        - docker-django
