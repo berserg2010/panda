@@ -47,16 +47,16 @@ Docker build:
     - source env/db.env
 
     - docker logout
-    - echo ${CI_REGISTRY_PASSWORD} | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
 
-    - docker-compose --project-name backend build $CONTAINER_TEST_IMAGE
+    - docker build -t $CONTAINER_TEST_IMAGE .
     
     - docker-compose run backend python manage.py collectstatic --no-input
     - docker-compose run backend python manage.py makemigrations
     - docker-compose run backend python manage.py migrate
     - docker-compose run backend python manage.py loaddata init_data.json
 
-    - docker-compose push $CONTAINER_TEST_IMAGE
+    - docker push $CONTAINER_TEST_IMAGE
   tags:
     - docker-django
 
