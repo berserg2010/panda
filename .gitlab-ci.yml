@@ -49,7 +49,7 @@ Docker build:
     - docker logout
     - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
 
-    - docker build -f backend/Dockerfile -t $CONTAINER_TEST_IMAGE .
+    - docker build -f ./backend/Dockerfile -t $CONTAINER_TEST_IMAGE ./backend/
     
     - docker-compose run backend python manage.py collectstatic --no-input
     - docker-compose run backend python manage.py makemigrations
