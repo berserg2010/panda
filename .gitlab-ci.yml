@@ -37,6 +37,7 @@ Docker build:
       - source env/back.env
       - source env/db.env
       - docker-compose build
+      - docker-compose run backend python manage.py collectstatic --no-input
       - docker-compose run backend python manage.py makemigrations
       - docker-compose run backend python manage.py migrate
       - docker-compose run backend python manage.py loaddata dump.json
