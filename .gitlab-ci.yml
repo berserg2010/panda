@@ -23,7 +23,6 @@ before_script:
   # - docker version
   # - docker-compose version
 
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab-dev.ddns.net
 
   # - cp .env.template .env
   # - cp .env.template env/common.env
@@ -35,29 +34,31 @@ before_script:
 #   - docker-compose down
 
 Docker build:
-    stage: build
-    script:
-      - cp .env.template .env
-      - cp .env.template env/common.env
-      - cp env/back.env.template env/back.env
-      - cp env/db.env.template env/db.env
+  stage: build
+  script:
+    - cp .env.template .env
+    - cp .env.template env/common.env
+    - cp env/back.env.template env/back.env
+    - cp env/db.env.template env/db.env
 
-      - source .env
-      - source env/common.env
-      - source env/back.env
-      - source env/db.env
+    - source .env
+    - source env/common.env
+    - source env/back.env
+    - source env/db.env
 
-      - docker-compose build -t $CONTAINER_TEST_IMAGE .
-      
-      - docker-compose run backend python manage.py collectstatic --no-input
-      - docker-compose run backend python manage.py makemigrations
-      - docker-compose run backend python manage.py migrate
-      - docker-compose run backend python manage.py loaddata init_data.json
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
 
-      - docker-compose push $CONTAINER_TEST_IMAGE
+    - docker-compose --project-name backend build $CONTAINER_TEST_IMAGE
+    
+    - docker-compose run backend python manage.py collectstatic --no-input
+    - docker-compose run backend python manage.py makemigrations
+    - docker-compose run backend python manage.py migrate
+    - docker-compose run backend python manage.py loaddata init_data.json
 
-    tags:
-      - docker-django
+    - docker-compose push $CONTAINER_TEST_IMAGE
+  tags:
+    - docker-django
+
 
 Unit tests:
   stage: test
@@ -77,6 +78,9 @@ Unit tests:
     # - docker-compose run backend python manage.py makemigrations
     # - docker-compose run backend python manage.py migrate
     # - docker-compose run backend python manage.py loaddata init_data.json
+
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+
     - docker-compose pull $CONTAINER_TEST_IMAGE
 
     - docker-compose run pytest
