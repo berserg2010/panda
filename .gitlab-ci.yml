@@ -46,7 +46,7 @@ Docker build:
     - source env/back.env
     - source env/db.env
 
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY << $CI_BUILD_TOKEN
 
     - docker-compose --project-name backend build $CONTAINER_TEST_IMAGE
     
@@ -79,7 +79,7 @@ Unit tests:
     # - docker-compose run backend python manage.py migrate
     # - docker-compose run backend python manage.py loaddata init_data.json
 
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY << $CI_BUILD_TOKEN
 
     - docker-compose pull $CONTAINER_TEST_IMAGE
 
