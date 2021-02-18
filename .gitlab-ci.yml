@@ -57,6 +57,9 @@ Docker build:
 
 Unit tests:
   stage: test
+  only:
+    - dev
+    - master
   script:
     # - source .env
     # - source env/common.env
@@ -83,10 +86,11 @@ Unit tests:
 #     tags:
 #         - docker-django
 
-# Deploy to dev:
-#     stage:
-#         deploy
-#     script:
-#         - echo "${CI_PROJECT_NAME} from ${CI_COMMIT_REF_SLUG} [stage ${CI_JOB_STAGE}]"
-#     tags:
-#         - docker-django
+Deploy to dev:
+  stage: deploy
+  only: master
+  script:
+      - echo "${CI_PROJECT_NAME} from ${CI_COMMIT_REF_SLUG} [stage ${CI_JOB_STAGE}]"
+  tags:
+      - docker-django
+  when: manual
