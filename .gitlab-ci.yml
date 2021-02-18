@@ -6,7 +6,7 @@ stages:
 variables:
 #   DOCKER_HOST: tcp://docker:2375/
 #   DOCKER_DRIVER: overlay2
-  SECRET_KEY: $SECRET_KEY
+  SECRET_KEY: ${SECRET_KEY}
   PROJECT_NAME: hellopanda
   USER_ID: 993
   GROUP_ID: 992
