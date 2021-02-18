@@ -29,21 +29,21 @@ before_script:
 after_script:
   - docker-compose down
 
-Docker build:
-    stage: build
-    script:
-      - source .env
-      - source env/common.env
-      - source env/back.env
-      - source env/db.env
-      - docker-compose up --build -d
-      - docker-compose stop
-      - docker-compose run backend python manage.py collectstatic --no-input
-      - docker-compose run backend python manage.py makemigrations
-      - docker-compose run backend python manage.py migrate
-      - docker-compose run backend python manage.py loaddata init_data.json
-    tags:
-        - docker-django
+# Docker build:
+#     stage: build
+#     script:
+#       - source .env
+#       - source env/common.env
+#       - source env/back.env
+#       - source env/db.env
+#       - docker-compose up --build -d
+#       - docker-compose stop
+#       - docker-compose run backend python manage.py collectstatic --no-input
+#       - docker-compose run backend python manage.py makemigrations
+#       - docker-compose run backend python manage.py migrate
+#       - docker-compose run backend python manage.py loaddata init_data.json
+#     tags:
+#         - docker-django
 
 Unit tests:
   stage: test
@@ -52,6 +52,14 @@ Unit tests:
     - source env/common.env
     - source env/back.env
     - source env/db.env
+
+    - docker-compose up --build -d
+    - docker-compose stop
+    - docker-compose run backend python manage.py collectstatic --no-input
+    - docker-compose run backend python manage.py makemigrations
+    - docker-compose run backend python manage.py migrate
+    - docker-compose run backend python manage.py loaddata init_data.json
+
     - docker-compose run backend pytest
   tags:
     - docker-django
