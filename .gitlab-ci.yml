@@ -7,8 +7,10 @@ variables:
 #   DOCKER_HOST: tcp://docker:2375/
 #   DOCKER_DRIVER: overlay2
   PROJECT_NAME: hellopanda
-  USER_ID: 993
-  GROUP_ID: 992
+  #USER_ID: 993
+  #GROUP_ID: 992
+  USER_ID: 1000
+  GROUP_ID: 1000
 
 image:
   name: docker/compose:latest
