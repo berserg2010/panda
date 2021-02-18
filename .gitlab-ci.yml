@@ -50,7 +50,7 @@ Unit tests:
     - source env/common.env
     - source env/back.env
     - source env/db.env
-    - ls -alh
+    - docker-compose run backend ls -lah
     - docker-compose run backend pytest
   tags:
     - docker-django
