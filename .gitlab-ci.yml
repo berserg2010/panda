@@ -8,8 +8,10 @@ variables:
 #   DOCKER_DRIVER: overlay2
   # SECRET_KEY: ${SECRET_KEY}
   PROJECT_NAME: hellopanda
-  USER_ID: 993
-  GROUP_ID: 992
+  USER_ID: 1000 
+  #993
+  GROUP_ID: 1000
+    #992
 
 image:
   name: docker/compose:latest
