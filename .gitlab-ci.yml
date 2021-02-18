@@ -46,7 +46,7 @@ Docker build:
     - source env/back.env
     - source env/db.env
 
-    - docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY << $CI_BUILD_TOKEN
+    - $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY 
 
     - docker-compose --project-name backend build $CONTAINER_TEST_IMAGE
     
