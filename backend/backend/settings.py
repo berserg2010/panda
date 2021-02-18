@@ -9,7 +9,7 @@ from django.contrib import admin
 from django.core.management import utils
 
 
-if config('SENTRY_DSN'):
+if config('SENTRY_DSN', default=False):
     sentry_sdk.init(
         dsn=config('SENTRY_DSN'),
         integrations=[DjangoIntegration()],
