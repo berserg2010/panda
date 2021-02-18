@@ -80,7 +80,7 @@ Unit tests:
     # - docker-compose run backend python manage.py migrate
     # - docker-compose run backend python manage.py loaddata init_data.json
 
-    - docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY << $CI_BUILD_TOKEN
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
 
     - docker-compose pull $CONTAINER_TEST_IMAGE
 
