@@ -37,15 +37,17 @@ Docker build:
       - source env/back.env
       - source env/db.env
 
-      - docker-compose up --build -d
-      - docker-compose stop
+      - docker-compose build
       
       - docker-compose run backend python manage.py collectstatic --no-input
       - docker-compose run backend python manage.py makemigrations
       - docker-compose run backend python manage.py migrate
       - docker-compose run backend python manage.py loaddata init_data.json
+
+      - docker-compose push
+
     tags:
-        - docker-django
+      - docker-django
 
 Unit tests:
   stage: test
@@ -62,8 +64,9 @@ Unit tests:
     # - docker-compose run backend python manage.py makemigrations
     # - docker-compose run backend python manage.py migrate
     # - docker-compose run backend python manage.py loaddata init_data.json
+    - docker-compose pull
 
-    - docker-compose run backend pytest
+    - docker-compose run pytest
   tags:
     - docker-django
 
