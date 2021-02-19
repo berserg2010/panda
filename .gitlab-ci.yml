@@ -95,7 +95,7 @@ Unit tests:
     - docker-compose up -d db
     - docker-compose up -d redis
  
-    - docker run --env-file ./env/common.env --env-file ./env/back.env $CONTAINER_TEST_IMAGE pytest 
+    - docker run --env-file ./env/common.env --env-file ./env/back.env --workdir /usr/src/$PROJECT_NAME $CONTAINER_TEST_IMAGE pytest 
     
     - docker-compose down
   tags:
