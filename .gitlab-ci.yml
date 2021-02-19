@@ -92,7 +92,7 @@ Unit tests:
 
     - docker pull $CONTAINER_TEST_IMAGE
 
-    - docker run $CONTAINER_TEST_IMAGE pytest
+    - docker run --env-file ./env/common.env --env-file ./env/back.env $CONTAINER_TEST_IMAGE pytest 
   tags:
     - docker-django
 
