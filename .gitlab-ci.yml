@@ -95,6 +95,11 @@ Unit tests:
     - docker-compose up -d db
     - docker-compose up -d redis
  
+    - docker-compose run backend python manage.py collectstatic --no-input
+    - docker-compose run backend python manage.py makemigrations
+    - docker-compose run backend python manage.py migrate
+    - docker-compose run backend python manage.py loaddata init_data.json
+
     - docker run --env-file ./env/common.env --env-file ./env/back.env --workdir /usr/src/$PROJECT_NAME $CONTAINER_TEST_IMAGE pytest 
     
     - docker-compose down
