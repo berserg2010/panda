@@ -1,3 +1,9 @@
+image:
+  name: docker/compose:latest
+
+services:
+  - docker:dind
+
 stages:
     - build
     - test
@@ -6,54 +12,99 @@ stages:
 variables:
 #   DOCKER_HOST: tcp://docker:2375/
 #   DOCKER_DRIVER: overlay2
-  # SECRET_KEY: ${SECRET_KEY}
   PROJECT_NAME: hellopanda
+  HOST_NAME: project
   USER_ID: 993
   GROUP_ID: 992
+  CONTAINER_TEST_IMAGE: gitlab-dev.ddns.net:5050/hellopanda_project/hellopanda:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: gitlab-dev.ddns.net:5050/hellopanda_project/hellopanda:latest
 
-image:
-  name: docker/compose:latest
-
-services:
-  - docker:dind
 
 before_script:
-  - docker version
-  - docker-compose version
+  # - docker version
+  # - docker-compose version
 
   - cp .env.template .env
   - cp .env.template env/common.env
   - cp env/back.env.template env/back.env
   - cp env/db.env.template env/db.env
 
-after_script:
-  - docker-compose down
+  - source .env
+  - source env/common.env
+  - source env/back.env
+  - source env/db.env
+
+  - docker logout
+  - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
+
+
+# after_script:
+#   - docker-compose down
 
 Docker build:
-    stage: build
-    script:
-      - source .env
-      - source env/common.env
-      - source env/back.env
-      - source env/db.env
-      - docker-compose build
-      - docker-compose run backend python manage.py collectstatic --no-input
-      - docker-compose run backend python manage.py makemigrations
-      - docker-compose run backend python manage.py migrate
-      - docker-compose run backend python manage.py loaddata init_data.json
->>>>>>> 03200caec2f1dc708c044c7449fb67ed36391f76
-    tags:
-        - docker-django
+  stage: build
+  script:
+    # - cp .env.template .env
+    # - cp .env.template env/common.env
+    # - cp env/back.env.template env/back.env
+    # - cp env/db.env.template env/db.env
+
+    # - source .env
+    # - source env/common.env
+    # - source env/back.env
+    # - source env/db.env
+
+    # - docker logout
+    # - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
+
+    - docker build -f ./backend/Dockerfile -t $CONTAINER_TEST_IMAGE ./backend/
+    
+    - docker-compose run backend python manage.py collectstatic --no-input
+    - docker-compose run backend python manage.py makemigrations
+    - docker-compose run backend python manage.py migrate
+    - docker-compose run backend python manage.py loaddata init_data.json
+
+    - docker push $CONTAINER_TEST_IMAGE
+  tags:
+    - docker-django
+
 
 Unit tests:
   stage: test
+  only:
+    - dev
+    - master
   script:
-    - source .env
-    - source env/common.env
-    - source env/back.env
-    - source env/db.env
-    - docker-compose run backend ls -lah
+    # - source .env
+    # - source env/common.env
+    # - source env/back.env
+    # - source env/db.env
+
+    # - docker-compose up --build -d
+    # - docker-compose stop
+
+    # - docker-compose run backend python manage.py collectstatic --no-input
+    # - docker-compose run backend python manage.py makemigrations
+    # - docker-compose run backend python manage.py migrate
+    # - docker-compose run backend python manage.py loaddata init_data.json
+
+    # - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
+
+    # - docker pull $CONTAINER_TEST_IMAGE
+    
+    # - docker-compose up -d db
+    # - docker-compose up -d redis
+ 
+    - docker-compose run backend python manage.py collectstatic --no-input
+    - docker-compose run backend python manage.py makemigrations
+    - docker-compose run backend python manage.py migrate
+    - docker-compose run backend python manage.py loaddata init_data.json
+
     - docker-compose run backend pytest
+
+    # - docker run --env-file ./env/common.env --env-file ./env/back.env --workdir /usr/src/$PROJECT_NAME $CONTAINER_TEST_IMAGE pytest 
+    
+    - docker-compose down
   tags:
     - docker-django
 
@@ -64,10 +115,12 @@ Unit tests:
 #     tags:
 #         - docker-django
 
-# Deploy to dev:
-#     stage:
-#         deploy
-#     script:
-#         - echo "${CI_PROJECT_NAME} from ${CI_COMMIT_REF_SLUG} [stage ${CI_JOB_STAGE}]"
-#     tags:
-#         - docker-django
+Deploy to dev:
+  stage: deploy
+  only:
+    - master
+  script:
+      - echo "${CI_PROJECT_NAME} from ${CI_COMMIT_REF_SLUG} [stage ${CI_JOB_STAGE}]"
+  tags:
+      - docker-django
+  when: manual
