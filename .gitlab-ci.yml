@@ -92,8 +92,8 @@ Unit tests:
 
     - docker pull $CONTAINER_TEST_IMAGE
     
-    - docker-compose up db -d
-    - docker-compose up redis -d
+    - docker-compose up -d db
+    - docker-compose up -d redis
  
     - docker run --env-file ./env/common.env --env-file ./env/back.env $CONTAINER_TEST_IMAGE pytest 
     
