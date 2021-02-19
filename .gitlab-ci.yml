@@ -13,6 +13,7 @@ variables:
 #   DOCKER_HOST: tcp://docker:2375/
 #   DOCKER_DRIVER: overlay2
   PROJECT_NAME: hellopanda
+  HOST_NAME: project
   USER_ID: 993
   GROUP_ID: 992
   CONTAINER_TEST_IMAGE: gitlab-dev.ddns.net:5050/hellopanda_project/hellopanda:$CI_BUILD_REF_NAME
