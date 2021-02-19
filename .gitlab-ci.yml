@@ -91,6 +91,9 @@ Unit tests:
     # - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
 
     - docker pull $CONTAINER_TEST_IMAGE
+    
+    - docker-compose up db
+    - docker-compose up redis
 
     - docker run --env-file ./env/common.env --env-file ./env/back.env $CONTAINER_TEST_IMAGE pytest 
   tags:
