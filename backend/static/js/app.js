@@ -13,9 +13,10 @@ let currentCall = null,
   showLocalVideoState = false,
   shareScreenState = false,
   fullScreenState = false,
-  micState = false
+  micState = true
 
 // Control button
+const switchMicStateButton = document.getElementById('switchMicStateButton')
 const showLocalVideoButton = document.getElementById('showLocalVideoButton')
 const shareScreenButton = document.getElementById('shareScreenButton')
 const fullScreenButton = document.getElementById('fullScreenButton')
@@ -39,6 +40,12 @@ function getHashParams() {
 
   return hashParams
 }
+
+switchMicStateButton.addEventListener('click', () => {
+  log(`switchMicStateButton --> click : ${micState} -->`)
+  switchMicState()
+  log(`switchMicStateButton --> click : --> ${micState}`)
+})
 
 showLocalVideoButton.addEventListener('click', () => {
   log(`showLocalVideoButton -> click : ${showLocalVideoState} --`)
@@ -72,6 +79,7 @@ fullScreenButton.addEventListener('click', () => {
 
 const callControlState = (disconnect = true) => {
   if (disconnect) {
+    switchMicStateButton.setAttribute('disabled', 'disabled')
     shareScreenButton.setAttribute('disabled', 'disabled')
     fullScreenButton.setAttribute('disabled', 'disabled')
 
@@ -83,6 +91,7 @@ const callControlState = (disconnect = true) => {
 
     // exitFullscreen()
   } else {
+    switchMicStateButton.removeAttribute('disabled')
     shareScreenButton.removeAttribute('disabled')
     fullScreenButton.removeAttribute('disabled')
 
@@ -363,6 +372,14 @@ const showLocalVideo = (flag = true) => {
   log(`showLocalVideo : ${flag}`)
 
   voxAPI.showLocalVideo(flag)
+}
+
+const switchMicState = () => {
+  log(`switchMicState`)
+
+  micState ? currentCall.muteMicrophone() : currentCall.unmuteMicrophone()
+
+  micState = !micState
 }
 
 // Start/stop sending video
