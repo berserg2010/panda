@@ -52,6 +52,13 @@
                       </svg>
                     </button>
                   </li>
+                   <li>
+                    <button id="fullScreenButton" type="button" disabled>
+                      <svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 14C21.1 14 21.99 13.1 21.99 12L22 2.00001C22 0.890014 21.1 0 20 0H3.99998C2.88998 0 1.99997 0.890014 1.99997 2.00001V12C2.00002 13.1 2.88998 14 3.99998 14H0V16H24V14H20ZM13 10.47V8.27998C10.22 8.27998 8.38997 9.12997 6.99998 11C7.56 8.33 9.10997 5.66999 13 5.12999V2.99999L17 6.72997L13 10.47Z" fill="red"></path>
+                      </svg>
+                    </button>
+                  </li>
                 </ul>
                 <button id="callButton" type="button" class="videoCall-buttons__btn">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +83,7 @@
 
 {% block script %}
 
-  <script type="text/javascript" src="//cdn.voximplant.com/edge/voximplant.min.js"></script>
+  <script type="text/javascript" src="https://cdn.voximplant.com/edge/voximplant.min.js"></script>
   <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
   {{ user.is_staff|json_script:'is_staff' }}

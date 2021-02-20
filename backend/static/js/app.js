@@ -12,15 +12,33 @@ let currentCall = null,
   outboundCall = null,
   showLocalVideoState = false,
   shareScreenState = false,
+  fullScreenState = false,
   micState = false
 
 // Control button
 const showLocalVideoButton = document.getElementById('showLocalVideoButton')
 const shareScreenButton = document.getElementById('shareScreenButton')
+const fullScreenButton = document.getElementById('fullScreenButton')
 const callButton = document.getElementById('callButton')
 const cancelButton = document.getElementById('cancelButton')
 
 const remoteVideoContainer = document.getElementById('remoteVideoContainer')
+
+function getHashParams() {
+  let hashParams = {},
+    e
+  const a = /\+/g,  // Regex for replacing addition symbol with a space
+    r = /([^&;=]+)=?([^&;]*)/g,
+    d = (s) => {
+      return decodeURIComponent(s.replace(a, " "))
+    },
+    q = window.location.hash.substring(1)
+
+  while (e = r.exec(q))
+    hashParams[d(e[1])] = d(e[2])
+
+  return hashParams
+}
 
 showLocalVideoButton.addEventListener('click', () => {
   log(`showLocalVideoButton -> click : ${showLocalVideoState} --`)
@@ -39,18 +57,34 @@ shareScreenButton.addEventListener('click', () => {
   shareScreenState = !shareScreenState
 })
 
+document.addEventListener('fullscreenchange', (e) => {
+  log('fullscreenchange event -->')
+  fullScreenState = document.fullscreenElement !== null
+  console.info(`fullscreenchange event --> ${fullScreenState}`)
+})
+
+fullScreenButton.addEventListener('click', () => {
+  log(`fullScreenButton --> ${fullScreenState}`)
+
+  fullScreenMode(!fullScreenState)
+  // fullScreenState = !fullScreenState
+})
 
 const callControlState = (disconnect = true) => {
   if (disconnect) {
     shareScreenButton.setAttribute('disabled', 'disabled')
+    fullScreenButton.setAttribute('disabled', 'disabled')
 
     cancelButton.setAttribute('hidden', 'hidden')
     cancelButton.removeEventListener('click', cancelButtonHandler)
 
     callButton.removeAttribute('hidden')
     callButton.addEventListener('click', createCall)
+
+    // exitFullscreen()
   } else {
     shareScreenButton.removeAttribute('disabled')
+    fullScreenButton.removeAttribute('disabled')
 
     callButton.setAttribute('hidden', 'hidden')
     callButton.removeEventListener('click', createCall)
@@ -67,22 +101,6 @@ const addHandlers = () => {
   currentCall.addEventListener(VoxImplant.CallEvents.MediaElementCreated, onMediaElement)
   currentCall.addEventListener(VoxImplant.CallEvents.LocalVideoStreamAdded, onLocalVideoStream)
   currentCall.addEventListener(VoxImplant.CallEvents.EndpointAdded, onEndpointAdded)
-}
-
-function getHashParams() {
-  let hashParams = {},
-    e
-  const a = /\+/g,  // Regex for replacing addition symbol with a space
-    r = /([^&;=]+)=?([^&;]*)/g,
-    d = (s) => {
-      return decodeURIComponent(s.replace(a, " "))
-    },
-    q = window.location.hash.substring(1)
-
-  while (e = r.exec(q))
-    hashParams[d(e[1])] = d(e[2])
-
-  return hashParams
 }
 
 const log = (str) => {
@@ -139,6 +157,8 @@ function onConnectionFailed() {
 
   callControlState()
 
+  // exitFullscreen()
+
   reconnectCall()
 }
 
@@ -147,6 +167,8 @@ function onConnectionClosed() {
   log('onConnectionClosed')
 
   callControlState()
+
+  // exitFullscreen()
 
   reconnectCall()
 }
@@ -225,14 +247,16 @@ function onCallConnected(e) {
 
 // Call disconnected
 function onCallDisconnected(e) {
-  log('CallDisconnected: ' + currentCall.id() + ' Call state: ' + currentCall.state())
+  log('onCallDisconnected: ' + currentCall.id() + ' Call state: ' + currentCall.state())
 
   remoteVideoContainer.classList.remove('video-call--connected')
+  exitFullscreen()
 
-  currentCall.hangup()
+  // currentCall.hangup()
   currentCall = null
 
   callControlState()
+
 }
 
 // Call failed
@@ -244,6 +268,7 @@ function onCallFailed(e) {
   `)
 
   callControlState()
+  // exitFullscreen()
 }
 
 // Call's media element created
@@ -290,12 +315,6 @@ function onEndpointAdded(e) {
   endpoint.addEventListener(VoxImplant.EndpointEvents.RemoteMediaRemoved, onRemoteMediaRemoved)
 }
 
-function onEndpointRemoved(e) {
-  log('onEndpointRemoved')
-
-  remoteVideoContainer.classList.remove('video-call--connected')
-}
-
 function onRemoteMediaAdded(e) {
   log('RemoteMediaAdded')
   console.info(e)
@@ -307,9 +326,14 @@ function onRemoteMediaAdded(e) {
   remoteVideoContainer.classList.add('video-call--connected')
 }
 
+function onEndpointRemoved(e) {
+  log('onEndpointRemoved')
+
+  remoteVideoContainer.classList.remove('video-call--connected')
+}
+
 function onRemoteMediaRemoved(e) {
   log(`onRemoteMediaRemoved`)
-  console.info(e)
 
   remoteVideoContainer.classList.remove('video-call--connected')
 }
@@ -353,26 +377,37 @@ const shareScreen = (flag = true) => {
 // Enable fullscreen
 const fullScreenMode = (flag = true) => {
   if (mode == 'webrtc') {
+
     if (flag === true && currentCall != null) {
-      const elem = document.getElementById(currentCall.getVideoElementId())
+      // const elem = document.getElementById(currentCall.id())
+      // const elem = remoteVideoContainer.querySelector('video')
+      const elem = document.querySelector('.videoCall-main')
 
       if (elem.requestFullscreen) {
-        elem.requestFullscreen()
+        elem.requestFullscreen('show')
       } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen()
+        elem.msRequestFullscreen('show')
       } else if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen()
+        elem.mozRequestFullScreen('show')
       } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen()
+        elem.webkitRequestFullscreen('show')
       }
+    } else {
+      exitFullscreen()
     }
   }
 }
 
+const exitFullscreen = () => {
+  document.exitFullscreen()
+}
+
 const cancelButtonHandler = () => {
   log('cancelButtonHandler')
-  currentCall.hangup()
-
+  if (currentCall != null) {
+    currentCall.hangup()
+    // currentCall = null
+  }
   callControlState()
 }
 
