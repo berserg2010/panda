@@ -8175,7 +8175,8 @@ footer {
   overflow: hidden;
 }
 .videoCall-col__1 {
-  width: 44%
+  width: 44%;
+  min-width: 296px;
 }
 .videoCall-col__2 {
   width: 56%;
@@ -8475,6 +8476,15 @@ footer {
 .videoCall-input input {
   display: none
 }
+@media only screen and (max-width:1040px) {
+  .videoCall-buttons__list {
+    padding: 0 5px;
+  }
+  .videoCall-buttons__list li a,
+  .videoCall-buttons__list li button {
+    padding: 0 5px;
+  }
+}
 @media only screen and (max-width:768px) {
   .videoCall-row {
     display: block;
@@ -8513,12 +8523,12 @@ footer {
     max-width: 28px;
     max-height: 28px
   }
-  .videoCall-user {
-    /*top: 35px;*/
-    /*transform: translate(-50%, 0)*/
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+  /*.videoCall-user {*/
+  /*  !*top: 35px;*!*/
+  /*  !*transform: translate(-50%, 0)*!*/
+  /*  top: 50%;*/
+  /*  transform: translate(-50%, -50%);*/
+  /*}*/
   .videoCall-user img,
   .videoCall-user svg {
     max-width: 118px;
@@ -8527,9 +8537,6 @@ footer {
   .videoCall-buttons {
     bottom: 18px;
     transform: translate(-50%, 0);
-  }
-  .videoCall-buttons__list {
-    padding: 0 5px
   }
   .videoCall.videoCall-second .videoCall-title {
     padding-bottom: 28px
@@ -8546,11 +8553,6 @@ footer {
     padding: 0;
     padding-top: 28px;
     padding-bottom: 37px;
-  }
-
-  .videoCall-buttons__list li a,
-  .videoCall-buttons__list li button {
-    padding: 0 10px
   }
 }
 
