@@ -12,7 +12,7 @@ class BasicRelationshipTable(CommonId):
 
     finished = models.BooleanField(default=False, verbose_name='завершен')
 
-    teacher = models.ForeignKey(Teacher, null=True, blank=True, on_delete=models.PROTECT, verbose_name='учитель')
+    teacher = models.ForeignKey(Teacher, null=True, blank=True, on_delete=models.CASCADE, verbose_name='учитель')
     student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='ученик')
 
     class Meta:
