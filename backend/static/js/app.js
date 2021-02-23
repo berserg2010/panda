@@ -4,10 +4,9 @@ const params = getHashParams(),
   application_name = 'videochat',
   account_name = 'berserg2010',
   showLog = true,
-  widthRemoteVideo = 600
-heightRemoteVideo = 400
+  widthRemoteVideo = 600,
+  heightRemoteVideo = 400
 
-// let dialog,
 let currentCall = null,
   outboundCall = null,
   micState = true,
@@ -204,8 +203,8 @@ function onAuthResult(e) {
   log(`onAuthResult : ${e.result}`)
 
   if (e.result) {
-    const title = $('.personalArea-block__title').html() + ': logged in as ' + username
-    $('.personalArea-block__title').html(title)
+    // const title = $('.personalArea-block__title').html() + ': logged in as ' + e.displayName
+    // $('.personalArea-block__title').html(title)
 
     callControlState()
     showLocalVideoButton.removeAttribute('disabled')

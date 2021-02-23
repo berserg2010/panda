@@ -79,9 +79,4 @@ def user_voximplant_handler(account, method: str):
             'user_password': 'Rfvbnhyt46',
         })
 
-    print(payload)
-
     res = requests.get(f'https://api.voximplant.com/platform_api/{method_dict.get(method)}', params=payload)
-
-    print(res.url)
-    print(res.json())

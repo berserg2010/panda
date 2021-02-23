@@ -5,6 +5,7 @@ from .views import (
     reschedule_lesson,
     LessonsListView,
     LessonDetailView,
+    TrialLessonView,
 
     NotesListView,
     VocabularyListView,
@@ -17,6 +18,7 @@ urlpatterns = [
     path('reschedule_lesson/', reschedule_lesson, name='reschedule_lesson'),
 
     path('lessons/', LessonsListView.as_view(), name='lessons'),
+    path('trial_lesson/<uuid:pk>', TrialLessonView.as_view(), name='trial_lesson'),
     path('lesson/<uuid:pk>', LessonDetailView.as_view(), name='lesson'),
 
     # path('notes/', NotesListView.as_view(), name='notes'),

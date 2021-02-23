@@ -99,20 +99,19 @@
   <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
   {{ user.is_staff|json_script:'is_staff' }}
-  {{ object.paid_course.teacher.pk|json_script:'teacher' }}
-  {{ object.paid_course.student.pk|json_script:'student' }}
-  {{ object.pk|json_script:'lesson' }}
+  {{ object.teacher.pk|json_script:'teacher' }}
+  {{ object.student.pk|json_script:'student' }}
+{#  {{ object.pk|json_script:'lesson' }}#}
 
   <script>
-
     const is_staff = JSON.parse(document.getElementById('is_staff').textContent)
     const teacher = JSON.parse(document.getElementById('teacher').textContent)
     const student = JSON.parse(document.getElementById('student').textContent)
-    const lesson = JSON.parse(document.getElementById('lesson').textContent)
+    {#const lesson = JSON.parse(document.getElementById('lesson').textContent)#}
 
     const getUser = (self = true) => {
       const condition = self ? is_staff : !is_staff
-      return condition ? 'teacher' : 'student'
+      return condition ? teacher : student
     }
 
     const username = getUser()
