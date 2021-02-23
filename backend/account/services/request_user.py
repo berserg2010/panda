@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db import transaction, IntegrityError
 
+from backend import settings
 from common.utils import date_now, new_password
 from account.models import RequestUser, Student
 from account.services.mail import (
@@ -67,16 +68,17 @@ def user_voximplant_handler(account, method: str):
         'del': 'DelUser',
     }
     payload = {
-        'account_id': '3832054',
-        'api_key': '79b894ac-81c7-4099-acc9-cd0e0f439c10',
-        'application_id': '10391824',
+        'account_id': settings.VOXIMPLANT_ACC_ID,
+        'api_key': settings.VOXIMPLANT_API_KEY,
+        'application_id': settings.VOXIMPLANT_APP_ID,
         'user_name': account.id,
     }
 
     if method == 'add':
         payload.update({
             'user_display_name': account.get_full_name(),
-            'user_password': 'Rfvbnhyt46',
+            'user_password': settings.VOXIMPLANT_USER_PASSWORD,
         })
 
     res = requests.get(f'https://api.voximplant.com/platform_api/{method_dict.get(method)}', params=payload)
+    return res

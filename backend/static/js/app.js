@@ -1,8 +1,8 @@
 const params = getHashParams(),
   mode = typeof (params.mode) == 'undefined' ? 'webrtc' : params.mode,
-  password = 'Qazxcdew13',
-  application_name = 'videochat',
-  account_name = 'berserg2010',
+  // password = 'Qazxcdew13',
+  // application_name = 'videochat',
+  // account_name = 'berserg2010',
   showLog = true,
   widthRemoteVideo = 600,
   heightRemoteVideo = 400

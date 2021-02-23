@@ -98,12 +98,20 @@
   <script type="text/javascript" src="https://cdn.voximplant.com/edge/voximplant.min.js"></script>
   <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
+  {{ 'VOXIMPLANT_ACC_NAME'|get_settings_var|json_script:'VOXIMPLANT_ACC_NAME' }}
+  {{ 'VOXIMPLANT_APP_NAME'|get_settings_var|json_script:'VOXIMPLANT_APP_NAME' }}
+  {{ 'VOXIMPLANT_USER_PASSWORD'|get_settings_var|json_script:'VOXIMPLANT_USER_PASSWORD' }}
+
   {{ user.is_staff|json_script:'is_staff' }}
   {{ object.teacher.pk|json_script:'teacher' }}
   {{ object.student.pk|json_script:'student' }}
-{#  {{ object.pk|json_script:'lesson' }}#}
+  {#  {{ object.pk|json_script:'lesson' }}#}
 
   <script>
+    const account_name = JSON.parse(document.getElementById('VOXIMPLANT_ACC_NAME').textContent)
+    const application_name = JSON.parse(document.getElementById('VOXIMPLANT_APP_NAME').textContent)
+    const password = JSON.parse(document.getElementById('VOXIMPLANT_USER_PASSWORD').textContent)
+
     const is_staff = JSON.parse(document.getElementById('is_staff').textContent)
     const teacher = JSON.parse(document.getElementById('teacher').textContent)
     const student = JSON.parse(document.getElementById('student').textContent)
@@ -115,7 +123,6 @@
     }
 
     const username = getUser()
-
   </script>
 
 {% endblock %}
