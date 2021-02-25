@@ -49,7 +49,7 @@ def reschedule_lesson(request):
         else:
             lesson = FreeLesson.objects.get(pk=obj_id)
 
-        if lesson.datetime >= date_now - timezone.timedelta(hours=8):
+        if lesson.datetime >= date_now() - timezone.timedelta(hours=8):
             send_mail_reschedule_lesson(lesson)
             message = message_success('Вы отправили заявку.')
 

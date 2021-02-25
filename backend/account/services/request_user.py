@@ -1,7 +1,7 @@
 import requests
 
 from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import make_password
+# from django.contrib.auth.hashers import make_password
 from django.db import transaction, IntegrityError
 
 from backend import settings
@@ -32,7 +32,7 @@ def request_user_accept(obj: RequestUser) -> str:
         student=student,
     )
     obj.accept = True
-    obj.check_date = date_now
+    obj.check_date = date_now()
 
     try:
         with transaction.atomic():
@@ -54,7 +54,7 @@ def request_user_accept(obj: RequestUser) -> str:
 def request_user_reject(obj: RequestUser) -> str:
 
     obj.accept = False
-    obj.check_date = date_now
+    obj.check_date = date_now()
     obj.save()
 
     send_mail_request_user_reject(obj.email)

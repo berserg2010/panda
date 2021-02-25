@@ -55,7 +55,7 @@ class Schedule(models.Model):
     paid_course = models.ForeignKey(PaidCourse, on_delete=models.CASCADE, verbose_name='курс')
 
     @classmethod
-    def get_student_schedule(cls, student, groups_courses, first_date, second_date=date_now):
+    def get_student_schedule(cls, student, groups_courses, first_date, second_date=date_now()):
         return cls.objects.filter(
             Q(paid_course__student=student),
             Q(paid_course__course__group_of_course=groups_courses),

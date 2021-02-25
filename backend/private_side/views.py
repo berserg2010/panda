@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.encoding import iri_to_uri, quote
 
 from common.utils import date_now
-from private_side.services.context import get_free_lessons
+from paid_course.services.trial_lesson import get_trial_lessons
 from account.models import Payment
 from paid_course.models import FreeLesson, PaidCourse, Schedule
 from paid_course.services.timetables import get_timetables
@@ -30,7 +30,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
             groups_courses_stat = []
             student = user.student
 
-            last_payment_qs = student.get_payment_student.filter(valid_until__gte=date_now)
+            last_payment_qs = student.get_payment_student.filter(valid_until__gte=date_now())
 
             for last_payment_inst in last_payment_qs.order_by(
                 'group_of_course__pk', '-valid_until'
@@ -44,7 +44,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
                 if condition:
                     order_time = last_payment.first_payment.order_time
                     combine_filter = Q(
-                        Q(order_time__gte=order_time) | Q(valid_until__gte=date_now),
+                        Q(order_time__gte=order_time) | Q(valid_until__gte=date_now()),
                     )
                     active_payments = last_payment_qs.filter(combine_filter).order_by('valid_until')
 
@@ -93,7 +93,7 @@ class IndexLkView(LoginRequiredMixin, TemplateView):
 
             context['groups_courses_stat'] = groups_courses_stat
 
-            context['free_lessons'] = get_free_lessons(self)
+            context['free_lessons'] = get_trial_lessons(self)
 
         return context
 

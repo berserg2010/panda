@@ -13,7 +13,7 @@ class TestTimetablesService:
 
     @pytest.mark.parametrize('schedule_obj', [Schedule, FreeLesson])
     def test_get_schedule_entity(self, schedule_obj):
-        schedule_obj = mixer.blend(schedule_obj, datetime=date_now)
+        schedule_obj = mixer.blend(schedule_obj, datetime=date_now())
         schedule = get_schedule_entity(
             schedule_obj
         )
