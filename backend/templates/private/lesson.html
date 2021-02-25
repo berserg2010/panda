@@ -13,6 +13,12 @@
     <div class="personalArea-block">
       <div class="personalArea-block__top">
         <span class="personalArea-block__title">Занятие</span>
+        {% if user.is_staff %}
+          <form method="post">
+            {% csrf_token %}
+            <button class="second-btn" type="submit">Завершить занятие</button>
+          </form>
+        {% endif %}
         <div class="personalArea-block__top-b"></div>
       </div>
 
