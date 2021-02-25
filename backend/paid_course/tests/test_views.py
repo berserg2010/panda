@@ -20,17 +20,17 @@ class TestTimetablesView:
         res = student_register.get(reverse('private_side:timetables'))
         assert res.status_code == HTTP_200_OK
 
-    @pytest.mark.skip
+
     def test_context_student(self, student_register, create_course,
-                             create_free_lesson, create_paid_course, create_schedule):
+                             create_trial_lesson, create_paid_course, create_schedule):
 
         res = student_register.get('/lk/timetables/')
         assert res.status_code == HTTP_200_OK
-        assert res.context['weeks'] == {}
+        assert res.context['timetable'] == {}
 
         user = res.context['user']
 
-        start_dt = date_now
+        start_dt = date_now()
         week_1 = start_dt.isocalendar()[1]
         day_1 = start_dt.isocalendar()[2]
 
@@ -43,22 +43,23 @@ class TestTimetablesView:
         week_2 = td_8_days_dt.isocalendar()[1]
         day_3 = td_8_days_dt.isocalendar()[2]
 
-        free_lesson = create_free_lesson(user.student, start_dt)
+        trial_lesson = create_trial_lesson(user.student, start_dt)
         assert FreeLesson.objects.count() == 1
 
-        result_data_free_lesson = {
+        result_data_trial_lesson = {
             week_1: {
                 day_1: {
                     'date': start_dt.date(),
                     'schedule': [
-                        ParameterStorage.schedule_data(free_lesson, start_dt),
+                        ParameterStorage.schedule_data(trial_lesson, start_dt),
                     ]
                 },
             },
         }
         res = student_register.get('/lk/timetables/')
         assert res.status_code == HTTP_200_OK
-        assert res.context['weeks'] == result_data_free_lesson
+        assert res.context['timetable'] == result_data_trial_lesson
+        assert res.context['timetable'][week_1][day_1] == result_data_trial_lesson[week_1][day_1]
 
         course = create_course(is_published=True)
         assert Course.objects.count() == 1
@@ -75,7 +76,7 @@ class TestTimetablesView:
                 day_1: {
                     'date': start_dt.date(),
                     'schedule': [
-                        ParameterStorage.schedule_data(free_lesson, start_dt),
+                        ParameterStorage.schedule_data(trial_lesson, start_dt),
                         ParameterStorage.schedule_data(schedule_2_hours, td_2_hours_dt),
                     ],
                 },
@@ -98,4 +99,7 @@ class TestTimetablesView:
 
         res = student_register.get('/lk/timetables/')
         assert res.status_code == HTTP_200_OK
-        assert res.context['weeks'] == result_data
+        # assert res.context['timetable'] == result_data
+        assert res.context['timetable'][week_1][day_1] == result_data[week_1][day_1]
+        assert res.context['timetable'][week_1][day_2] == result_data[week_1][day_2]
+        assert res.context['timetable'][week_2][day_3] == result_data[week_2][day_3]

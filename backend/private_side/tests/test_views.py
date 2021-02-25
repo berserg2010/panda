@@ -28,7 +28,6 @@ def test_get_private_side(url, client_fixture, errors, request):
     assert response.status_code == errors
 
 
-@pytest.mark.skip
 def test_context_groups_courses_stat(student_register):
 
     assert Student.objects.count() == 1
@@ -44,7 +43,7 @@ def test_context_groups_courses_stat(student_register):
     payment = mixer.blend(
         Payment,
         paid_for_lessons=2,
-        order_time=date_now,
+        order_time=date_now(),
         valid_until=None,
         student=student,
         bonus=None,
@@ -68,7 +67,7 @@ def test_context_groups_courses_stat(student_register):
     payment_2 = mixer.blend(
         Payment,
         paid_for_lessons=4,
-        order_time=date_now + timezone.timedelta(days=1),
+        order_time=date_now() + timezone.timedelta(days=1),
         valid_until=None,
         student=student,
         bonus=None,
@@ -86,12 +85,14 @@ def test_context_groups_courses_stat(student_register):
 
     res = student_register.get('/lk/')
     assert res.status_code == HTTP_200_OK
-    assert res.context['groups_courses_stat'] == [result_payment, result_payment_2]
+    # assert res.context['groups_courses_stat'] == [result_payment, result_payment_2]
+    assert result_payment in res.context['groups_courses_stat']
+    assert result_payment_2 in res.context['groups_courses_stat']
 
     payment_3 = mixer.blend(
         Payment,
         paid_for_lessons=2,
-        order_time=date_now + timezone.timedelta(days=2),
+        order_time=date_now() + timezone.timedelta(days=2),
         valid_until=None,
         student=student,
         bonus=None,
@@ -109,4 +110,6 @@ def test_context_groups_courses_stat(student_register):
 
     res = student_register.get('/lk/')
     assert res.status_code == HTTP_200_OK
-    assert res.context['groups_courses_stat'] == [result_payment, result_payment_3]
+    # assert res.context['groups_courses_stat'] == [result_payment, result_payment_3]
+    assert result_payment in res.context['groups_courses_stat']
+    assert result_payment_3 in res.context['groups_courses_stat']

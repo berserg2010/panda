@@ -26,8 +26,8 @@ def create_course():
 
 
 @pytest.fixture
-def create_free_lesson():
-    def _create_free_lesson(student: Student, dt: datetime, finished: bool = False) -> FreeLesson:
+def create_trial_lesson():
+    def _create_trial_lesson(student: Student, dt: datetime, finished: bool = False) -> FreeLesson:
         return mixer.blend(
             FreeLesson,
             finished=finished,
@@ -35,7 +35,7 @@ def create_free_lesson():
             student=student,
         )
 
-    return _create_free_lesson
+    return _create_trial_lesson
 
 
 @pytest.fixture
