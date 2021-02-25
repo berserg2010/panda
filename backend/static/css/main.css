@@ -8175,7 +8175,8 @@ footer {
   overflow: hidden;
 }
 .videoCall-col__1 {
-  width: 44%
+  width: 44%;
+  min-width: 296px;
 }
 .videoCall-col__2 {
   width: 56%;
@@ -8199,24 +8200,50 @@ footer {
   position: relative;
   overflow: hidden;
 }
-.videoCall-user {
+.videoCall-main .videoCall-user video {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 50%
+
+  border-radius: 10px;
+}
+.videoCall-main:fullscreen .videoCall-user video {
+  width: 100%;
+  height: 100%;
+}
+.videoCall-user {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  /*position: absolute;*/
+  /*top: 50%;*/
+  /*left: 50%;*/
+  /*transform: translate(-50%, -50%);*/
+  /*border-radius: 50%*/
 }
 .videoCall-user img,
 .videoCall-user svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   display: block;
   max-width: 186px;
-  max-height: 186px
+  max-height: 186px;
+}
+.videoCall-user.video-call--connected {
+  background-color: black;
 }
 .videoCall-user.video-call--connected img,
 .videoCall-user.video-call--connected svg {
   display: none;
 }
 .videoCall-you {
+  position: absolute;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8224,7 +8251,6 @@ footer {
   height: 102px;
   background: #2f2f2f;
   border-radius: 10px;
-  position: absolute;
   top: 17px;
   left: 20px;
   overflow: hidden;
@@ -8235,12 +8261,21 @@ footer {
   max-width: 47px;
   max-height: 47px;
 }
+.videoCall-you.videoCall-you--show img,
+.videoCall-you.videoCall-you--show svg {
+  display: none;
+}
 .videoCall-you video {
   /*width: 100px;*/
   height: 100%;
+
+  transform: rotateY(180deg);
+  /*-webkit-transform:rotateY(180deg); !* Safari and Chrome *!*/
+  /*-moz-transform:rotateY(180deg); !* Firefox *!*/
 }
 .videoCall-buttons {
   position: absolute;
+
   bottom: 38px;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -8275,7 +8310,7 @@ footer {
 .videoCall-buttons__list li svg {
   display: block;
   max-width: 24px;
-  max-height: 20px
+  max-height: 24px
 }
 .videoCall-buttons__btn {
   position: relative;
@@ -8441,6 +8476,15 @@ footer {
 .videoCall-input input {
   display: none
 }
+@media only screen and (max-width:1040px) {
+  .videoCall-buttons__list {
+    padding: 0 5px;
+  }
+  .videoCall-buttons__list li a,
+  .videoCall-buttons__list li button {
+    padding: 0 5px;
+  }
+}
 @media only screen and (max-width:768px) {
   .videoCall-row {
     display: block;
@@ -8479,12 +8523,12 @@ footer {
     max-width: 28px;
     max-height: 28px
   }
-  .videoCall-user {
-    /*top: 35px;*/
-    /*transform: translate(-50%, 0)*/
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+  /*.videoCall-user {*/
+  /*  !*top: 35px;*!*/
+  /*  !*transform: translate(-50%, 0)*!*/
+  /*  top: 50%;*/
+  /*  transform: translate(-50%, -50%);*/
+  /*}*/
   .videoCall-user img,
   .videoCall-user svg {
     max-width: 118px;
@@ -8493,9 +8537,6 @@ footer {
   .videoCall-buttons {
     bottom: 18px;
     transform: translate(-50%, 0);
-  }
-  .videoCall-buttons__list {
-    padding: 0 5px
   }
   .videoCall.videoCall-second .videoCall-title {
     padding-bottom: 28px
@@ -8512,11 +8553,6 @@ footer {
     padding: 0;
     padding-top: 28px;
     padding-bottom: 37px;
-  }
-
-  .videoCall-buttons__list li a,
-  .videoCall-buttons__list li button {
-    padding: 0 10px
   }
 }
 

@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 from django.utils import timezone
-from typing import Union
+from typing import Union, List
 from datetime import datetime
 
 from common.utils import date_now
@@ -64,6 +64,14 @@ def get_classname(obj: Union[Schedule, FreeLesson]):
 
 
 @register.filter
-def is_time_delta_hours(dt: datetime, td: int) -> bool:
-    condition = date_now <= dt - timezone.timedelta(hours=td)
+def is_time_delta_minutes(dt: datetime, args: str) -> bool:
+    if ',' in args:
+        td_start, td_end = [int(arg.strip()) for arg in args.split(',')]
+        dt_start = dt - timezone.timedelta(minutes=td_start)
+        dt_end = dt + timezone.timedelta(minutes=td_end)
+        condition = dt_start <= timezone.now() <= dt_end
+    else:
+        td_start = int(args.strip())
+        dt_start = dt - timezone.timedelta(minutes=td_start)
+        condition = dt_start <= timezone.now()
     return condition

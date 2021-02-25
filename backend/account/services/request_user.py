@@ -1,7 +1,10 @@
+import requests
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db import transaction, IntegrityError
 
+from backend import settings
 from common.utils import date_now, new_password
 from account.models import RequestUser, Student
 from account.services.mail import (
@@ -43,6 +46,7 @@ def request_user_accept(obj: RequestUser) -> str:
     else:
         message = 'Заявка принята'
         send_mail_request_user_accept(user.email, password)
+        user_voximplant_handler(student, 'add')
 
     return message
 
@@ -56,3 +60,25 @@ def request_user_reject(obj: RequestUser) -> str:
     send_mail_request_user_reject(obj.email)
 
     return 'Заявка отклонена'
+
+
+def user_voximplant_handler(account, method: str):
+    method_dict = {
+        'add': 'AddUser',
+        'del': 'DelUser',
+    }
+    payload = {
+        'account_id': settings.VOXIMPLANT_ACC_ID,
+        'api_key': settings.VOXIMPLANT_API_KEY,
+        'application_id': settings.VOXIMPLANT_APP_ID,
+        'user_name': account.id,
+    }
+
+    if method == 'add':
+        payload.update({
+            'user_display_name': account.get_full_name(),
+            'user_password': settings.VOXIMPLANT_USER_PASSWORD,
+        })
+
+    res = requests.get(f'https://api.voximplant.com/platform_api/{method_dict.get(method)}', params=payload)
+    return res

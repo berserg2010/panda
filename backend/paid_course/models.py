@@ -12,8 +12,8 @@ class BasicRelationshipTable(CommonId):
 
     finished = models.BooleanField(default=False, verbose_name='завершен')
 
-    teacher = models.ForeignKey(Teacher, null=True, blank=True, on_delete=models.PROTECT, verbose_name='учитель')
-    student = models.ForeignKey(Student, on_delete=models.PROTECT, verbose_name='ученик')
+    teacher = models.ForeignKey(Teacher, null=True, blank=True, on_delete=models.CASCADE, verbose_name='учитель')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='ученик')
 
     class Meta:
         abstract = True
@@ -24,7 +24,7 @@ class FreeLesson(BasicRelationshipTable):
     datetime = models.DateTimeField(null=True, blank=True, verbose_name='дата и время занятия')
 
     def __str__(self):
-        return f'{self.datetime.astimezone()}'
+        return f'{self.student}'
 
     class Meta:
         verbose_name = 'пробное занятие'
@@ -52,7 +52,7 @@ class Schedule(models.Model):
 
     datetime = models.DateTimeField(verbose_name='дата и время занятия')
 
-    paid_course = models.ForeignKey(PaidCourse, on_delete=models.PROTECT, verbose_name='курс')
+    paid_course = models.ForeignKey(PaidCourse, on_delete=models.CASCADE, verbose_name='курс')
 
     @classmethod
     def get_student_schedule(cls, student, groups_courses, first_date, second_date=date_now):

@@ -1,56 +1,105 @@
 const params = getHashParams(),
   mode = typeof (params.mode) == 'undefined' ? 'webrtc' : params.mode,
-  password = 'Qazxcdew13',
-  application_name = 'videochat',
-  account_name = 'berserg2010',
+  // password = 'Qazxcdew13',
+  // application_name = 'videochat',
+  // account_name = 'berserg2010',
   showLog = true,
-  widthRemoteVideo = 600
+  widthRemoteVideo = 600,
   heightRemoteVideo = 400
 
-// let dialog,
 let currentCall = null,
   outboundCall = null,
-  showLocalVideoState = false,
+  micState = true,
+  showLocalVideoState = true,
   shareScreenState = false,
-  micState = false
+  fullScreenState = false
 
 // Control button
+const switchMicStateButton = document.getElementById('switchMicStateButton')
 const showLocalVideoButton = document.getElementById('showLocalVideoButton')
 const shareScreenButton = document.getElementById('shareScreenButton')
+const fullScreenButton = document.getElementById('fullScreenButton')
 const callButton = document.getElementById('callButton')
 const cancelButton = document.getElementById('cancelButton')
 
+const localVideoContainer = document.getElementById('localVideoContainer')
 const remoteVideoContainer = document.getElementById('remoteVideoContainer')
 
+function getHashParams() {
+  let hashParams = {},
+    e
+  const a = /\+/g,  // Regex for replacing addition symbol with a space
+    r = /([^&;=]+)=?([^&;]*)/g,
+    d = (s) => {
+      return decodeURIComponent(s.replace(a, " "))
+    },
+    q = window.location.hash.substring(1)
+
+  while (e = r.exec(q))
+    hashParams[d(e[1])] = d(e[2])
+
+  return hashParams
+}
+
+const switchSvgButton = (svg_list, on = true) => {
+  if (on) {
+    svg_list[0].classList.remove('visually-hidden')
+    svg_list[1].classList.add('visually-hidden')
+  } else {
+    svg_list[1].classList.remove('visually-hidden')
+    svg_list[0].classList.add('visually-hidden')
+  }
+}
+
+switchMicStateButton.addEventListener('click', () => {
+  log(`switchMicStateButton --> click : ${micState}`)
+
+  switchMicState()
+})
+
 showLocalVideoButton.addEventListener('click', () => {
-  log(`showLocalVideoButton -> click : ${showLocalVideoState} --`)
+  log(`showLocalVideoButton --> click : ${showLocalVideoState}`)
 
-  showLocalVideo(!showLocalVideoState)
-  currentCall !== null ? sendVideo(!showLocalVideoState) : null
-  showLocalVideoState = !showLocalVideoState
-
-  log(`showLocalVideoButton -> click : -- ${showLocalVideoState}`)
+  showLocalVideo()
 })
 
 shareScreenButton.addEventListener('click', () => {
-  log(`shareScreenButton -> click (${currentCall !== null})`)
+  log(`shareScreenButton -> click (${shareScreenState})`)
 
-  currentCall !== null ? shareScreen(!shareScreenState) : null
-  shareScreenState = !shareScreenState
+  shareScreen()
 })
 
+document.addEventListener('fullscreenchange', (e) => {
+  fullScreenState = document.fullscreenElement !== null
+  log(`fullscreenchange event --> ${fullScreenState}`)
+  const svg_list = fullScreenButton.querySelectorAll('svg')
+
+  switchSvgButton(svg_list, !fullScreenState)
+})
+
+fullScreenButton.addEventListener('click', () => {
+  log(`fullScreenButton --> ${fullScreenState}`)
+
+  fullScreenMode(!fullScreenState)
+})
 
 const callControlState = (disconnect = true) => {
   if (disconnect) {
+    switchMicStateButton.setAttribute('disabled', 'disabled')
     shareScreenButton.setAttribute('disabled', 'disabled')
+    fullScreenButton.setAttribute('disabled', 'disabled')
 
     cancelButton.setAttribute('hidden', 'hidden')
     cancelButton.removeEventListener('click', cancelButtonHandler)
 
     callButton.removeAttribute('hidden')
     callButton.addEventListener('click', createCall)
+
+    // exitFullscreen()
   } else {
+    switchMicStateButton.removeAttribute('disabled')
     shareScreenButton.removeAttribute('disabled')
+    fullScreenButton.removeAttribute('disabled')
 
     callButton.setAttribute('hidden', 'hidden')
     callButton.removeEventListener('click', createCall)
@@ -67,22 +116,6 @@ const addHandlers = () => {
   currentCall.addEventListener(VoxImplant.CallEvents.MediaElementCreated, onMediaElement)
   currentCall.addEventListener(VoxImplant.CallEvents.LocalVideoStreamAdded, onLocalVideoStream)
   currentCall.addEventListener(VoxImplant.CallEvents.EndpointAdded, onEndpointAdded)
-}
-
-function getHashParams() {
-  let hashParams = {},
-    e
-  const a = /\+/g,  // Regex for replacing addition symbol with a space
-    r = /([^&;=]+)=?([^&;]*)/g,
-    d = (s) => {
-      return decodeURIComponent(s.replace(a, " "))
-    },
-    q = window.location.hash.substring(1)
-
-  while (e = r.exec(q))
-    hashParams[d(e[1])] = d(e[2])
-
-  return hashParams
 }
 
 const log = (str) => {
@@ -139,6 +172,10 @@ function onConnectionFailed() {
 
   callControlState()
 
+  switchMicState(true)
+
+  // exitFullscreen()
+
   reconnectCall()
 }
 
@@ -147,6 +184,10 @@ function onConnectionClosed() {
   log('onConnectionClosed')
 
   callControlState()
+
+  switchMicState(true)
+
+  // exitFullscreen()
 
   reconnectCall()
 }
@@ -162,11 +203,13 @@ function onAuthResult(e) {
   log(`onAuthResult : ${e.result}`)
 
   if (e.result) {
-    const title = $('.personalArea-block__title').html() + ': logged in as ' + username
-    $('.personalArea-block__title').html(title)
+    // const title = $('.personalArea-block__title').html() + ': logged in as ' + e.displayName
+    // $('.personalArea-block__title').html(title)
 
     callControlState()
     showLocalVideoButton.removeAttribute('disabled')
+
+    showLocalVideo(true)
   } else {
     log(`Code: ${e.code}`)
   }
@@ -225,14 +268,16 @@ function onCallConnected(e) {
 
 // Call disconnected
 function onCallDisconnected(e) {
-  log('CallDisconnected: ' + currentCall.id() + ' Call state: ' + currentCall.state())
+  log('onCallDisconnected: ' + currentCall.id() + ' Call state: ' + currentCall.state())
 
   remoteVideoContainer.classList.remove('video-call--connected')
+  exitFullscreen()
 
-  currentCall.hangup()
+  // currentCall.hangup()
   currentCall = null
 
   callControlState()
+
 }
 
 // Call failed
@@ -244,13 +289,16 @@ function onCallFailed(e) {
   `)
 
   callControlState()
+
+  switchMicState(true)
+
+  // exitFullscreen()
 }
 
 // Call's media element created
 function onMediaElement(e) {
   // For WebRTC just using JS/CSS for transformation
   log(`onMediaElement`)
-  console.info(e)
   // console.info(typeof e.element === 'HTMLVideoElement')
   // $video = $(e.element);
   // $video.appendTo('#voximplant_container');
@@ -265,8 +313,6 @@ const onLocalVideoStream = (e) => {
 
   if (e.type == 'sharing') {
 
-    log(`onLocalVideoStream - if`)
-
     // shareButton.off('click').click(() => {
     //   currentCall.stopSharingScreen()
     //
@@ -279,12 +325,11 @@ const onLocalVideoStream = (e) => {
 
 function onEndpointAdded(e) {
   log(`onEndpointAdded`)
-  console.info(e)
 
   const endpoint = e.endpoint
 
   // remove the display element with this endpoint
-  endpoint.on(VoxImplant.EndpointEvents.Removed, onEndpointRemoved)
+  endpoint.addEventListener(VoxImplant.EndpointEvents.Removed, onEndpointRemoved)
 
   endpoint.addEventListener(VoxImplant.EndpointEvents.RemoteMediaAdded, onRemoteMediaAdded)
   endpoint.addEventListener(VoxImplant.EndpointEvents.RemoteMediaRemoved, onRemoteMediaRemoved)
@@ -298,7 +343,6 @@ function onEndpointRemoved(e) {
 
 function onRemoteMediaAdded(e) {
   log('RemoteMediaAdded')
-  console.info(e)
 
   e.mediaRenderer.element.width=widthRemoteVideo
   e.mediaRenderer.element.height=heightRemoteVideo
@@ -309,7 +353,6 @@ function onRemoteMediaAdded(e) {
 
 function onRemoteMediaRemoved(e) {
   log(`onRemoteMediaRemoved`)
-  console.info(e)
 
   remoteVideoContainer.classList.remove('video-call--connected')
 }
@@ -334,27 +377,56 @@ function createCall() {
   addHandlers()
 }
 
+const switchMicState = (flag = false) => {
+  micState = !micState || flag
+
+  log(`switchMicState: ${micState}`)
+
+  const svg_list = switchMicStateButton.querySelectorAll('svg')
+
+  micState ? currentCall.unmuteMicrophone() : currentCall.muteMicrophone()
+
+  switchSvgButton(svg_list, micState)
+}
+
 // Show/hide local video
-const showLocalVideo = (flag = true) => {
-  log(`showLocalVideo : ${flag}`)
+const showLocalVideo = (flag = false) => {
+  showLocalVideoState = !showLocalVideoState || flag
 
-  voxAPI.showLocalVideo(flag)
+  log(`showLocalVideo : ${showLocalVideoState}`)
+
+  const svg_list = showLocalVideoButton.querySelectorAll('svg')
+
+  if (showLocalVideoState) {
+    localVideoContainer.classList.add('videoCall-you--show')
+  } else {
+    localVideoContainer.classList.remove('videoCall-you--show')
+  }
+
+  voxAPI.showLocalVideo(showLocalVideoState)
+  currentCall !== null ? currentCall.sendVideo(showLocalVideoState) : null
+
+  switchSvgButton(svg_list, showLocalVideoState)
 }
 
-// Start/stop sending video
-const sendVideo = (flag = true) => {
-  currentCall.sendVideo(flag)
-}
+const shareScreen = () => {
+  log(`shareScreen : ${shareScreenState}`)
 
-const shareScreen = (flag = true) => {
-  flag ? currentCall.shareScreen(true, true) : currentCall.stopSharingScreen()
+  const svg_list = shareScreenButton.querySelectorAll('svg')
+
+  if (currentCall !== null) {
+    !shareScreenState ? currentCall.shareScreen(true, true) : currentCall.stopSharingScreen()
+  }
+  switchSvgButton(svg_list, !shareScreenState)
+  shareScreenState = !shareScreenState
 }
 
 // Enable fullscreen
 const fullScreenMode = (flag = true) => {
   if (mode == 'webrtc') {
+
     if (flag === true && currentCall != null) {
-      const elem = document.getElementById(currentCall.getVideoElementId())
+      const elem = document.querySelector('.videoCall-main')
 
       if (elem.requestFullscreen) {
         elem.requestFullscreen()
@@ -365,15 +437,26 @@ const fullScreenMode = (flag = true) => {
       } else if (elem.webkitRequestFullscreen) {
         elem.webkitRequestFullscreen()
       }
+    } else {
+      exitFullscreen()
     }
   }
 }
 
+const exitFullscreen = () => {
+  document.exitFullscreen()
+    .then(() => {console.info('Document Exited from Full screen mode')})
+    .catch((err) => {console.error(err)})
+}
+
 const cancelButtonHandler = () => {
   log('cancelButtonHandler')
-  currentCall.hangup()
-
+  if (currentCall != null) {
+    currentCall.hangup()
+    // currentCall = null
+  }
   callControlState()
+  switchMicState(true)
 }
 
 const MicStatusHandler = (flag = false) => {
@@ -381,8 +464,3 @@ const MicStatusHandler = (flag = false) => {
 
   currentCall.handleMicStatus(flag)
 }
-
-// // Close connection with VoxImplant
-// function closeConnection() {
-//   voxAPI.disconnect()
-// }

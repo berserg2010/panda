@@ -43,6 +43,9 @@ before_script:
 
 Docker build:
   stage: build
+  only:
+    - dev
+    - master
   script:
     # - cp .env.template .env
     # - cp .env.template env/common.env

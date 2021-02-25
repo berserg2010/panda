@@ -69,8 +69,16 @@ class LessonsListView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class LessonDetailView(LoginRequiredMixin, TemplateView):
+class CommonLessonView(LoginRequiredMixin, DetailView):
     template_name = 'private/lesson.html'
+
+
+class LessonDetailView(CommonLessonView):
+    model = PaidCourse
+
+
+class TrialLessonView(CommonLessonView):
+    model = FreeLesson
 
 
 class NotesListView(LoginRequiredMixin, ListView):
