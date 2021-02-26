@@ -3,6 +3,8 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
@@ -72,9 +74,17 @@ class LessonsListView(LoginRequiredMixin, TemplateView):
 class CommonLessonView(LoginRequiredMixin, DetailView):
     template_name = 'private/lesson.html'
 
+    def post(self, request, *args, **kwargs):
+
+        obj = self.get_object()
+        obj.finished = True
+        obj.save()
+
+        return redirect(reverse('private_side:lessons'))
+
 
 class LessonDetailView(CommonLessonView):
-    model = PaidCourse
+    model = Schedule
 
 
 class TrialLessonView(CommonLessonView):

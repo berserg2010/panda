@@ -28,7 +28,7 @@
         {% if schedule.lesson|get_classname == 'FreeLesson' %}
           <a href="{% url 'private_side:trial_lesson' schedule.lesson.pk %}" class="second-btn">Начать урок</a>
         {% else %}
-          <a href="{% url 'private_side:lesson' schedule.lesson.paid_course.pk %}" class="second-btn">Начать урок</a>
+          <a href="{% url 'private_side:lesson' schedule.lesson.pk %}" class="second-btn">Начать урок</a>
         {% endif %}
 
         {#                      <a href="#" class="main-btn master-btn">Перенести урок</a>#}

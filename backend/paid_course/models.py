@@ -46,7 +46,7 @@ class PaidCourse(BasicRelationshipTable):
         verbose_name_plural = '02 | Оплаченные курсы'
 
 
-class Schedule(models.Model):
+class Schedule(CommonId):
 
     finished = models.BooleanField(default=False, verbose_name='занятие проведено')
 
@@ -71,7 +71,7 @@ class Schedule(models.Model):
         return self.paid_course.teacher
 
     def __str__(self):
-        return f'{self.datetime.astimezone()}'
+        return f'{self.pk} | {self.datetime.astimezone()}'
 
     class Meta:
         verbose_name = 'расписание занятий'

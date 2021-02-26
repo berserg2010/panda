@@ -34,7 +34,7 @@ from account.services.mail import (
     send_mail_bonus, send_mail_recover_password,
 )
 from course.models import Course
-from paid_course.models import FreeLesson, PaidCourse
+from paid_course.models import PaidCourse
 
 
 class AccountLoginView(LoginView):
