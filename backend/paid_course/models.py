@@ -71,7 +71,7 @@ class Schedule(CommonId):
         return self.paid_course.teacher
 
     def __str__(self):
-        return f'{self.datetime.astimezone()}'
+        return f'{self.pk} | {self.datetime.astimezone()}'
 
     class Meta:
         verbose_name = 'расписание занятий'
