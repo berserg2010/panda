@@ -77,19 +77,14 @@ class CommonLessonView(LoginRequiredMixin, DetailView):
     def post(self, request, *args, **kwargs):
 
         obj = self.get_object()
-
-        if isinstance(obj, PaidCourse):
-            pass
-        else:
-            obj.finished = True
-
+        obj.finished = True
         obj.save()
 
         return redirect(reverse('private_side:lessons'))
 
 
 class LessonDetailView(CommonLessonView):
-    model = PaidCourse
+    model = Schedule
 
 
 class TrialLessonView(CommonLessonView):

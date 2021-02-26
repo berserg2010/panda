@@ -46,7 +46,7 @@ class PaidCourse(BasicRelationshipTable):
         verbose_name_plural = '02 | Оплаченные курсы'
 
 
-class Schedule(models.Model):
+class Schedule(CommonId):
 
     finished = models.BooleanField(default=False, verbose_name='занятие проведено')
 
