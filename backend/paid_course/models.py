@@ -9,7 +9,6 @@ from lesson.models import Lesson
 
 
 class BasicRelationshipTable(CommonId):
-
     finished = models.BooleanField(default=False, verbose_name='завершен')
 
     teacher = models.ForeignKey(Teacher, null=True, blank=True, on_delete=models.CASCADE, verbose_name='учитель')
@@ -20,7 +19,6 @@ class BasicRelationshipTable(CommonId):
 
 
 class FreeLesson(BasicRelationshipTable):
-
     datetime = models.DateTimeField(null=True, blank=True, verbose_name='дата и время занятия')
 
     def __str__(self):
@@ -33,7 +31,6 @@ class FreeLesson(BasicRelationshipTable):
 
 
 class PaidCourse(BasicRelationshipTable):
-
     course = models.ForeignKey(Course, on_delete=models.PROTECT, verbose_name='курс')
 
     lessons = models.ManyToManyField(Lesson, through='LessonResults', related_name='paid_courses', verbose_name='уроки')
@@ -47,7 +44,6 @@ class PaidCourse(BasicRelationshipTable):
 
 
 class Schedule(CommonId):
-
     finished = models.BooleanField(default=False, verbose_name='занятие проведено')
 
     datetime = models.DateTimeField(verbose_name='дата и время занятия')
@@ -75,12 +71,11 @@ class Schedule(CommonId):
 
     class Meta:
         verbose_name = 'расписание занятий'
-        verbose_name_plural = 'расписания занятий'
+        verbose_name_plural = '03 | Расписания занятий'
         ordering = ('datetime', )
 
 
 class LessonResults(CommonId):
-
     finished = models.BooleanField(default=False, verbose_name='завершен')
 
     test_result = models.FloatField(default=0, verbose_name='результат по тестам')
@@ -97,6 +92,5 @@ class LessonResults(CommonId):
         return f'{self.paid_course} | {self.lesson}'
 
     class Meta:
-
         verbose_name = 'результат занятия'
-        verbose_name_plural = '03 | Результаты занятий'
+        verbose_name_plural = '04 | Результаты занятий'
