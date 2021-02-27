@@ -6,10 +6,10 @@ from django.db.models import Q
 from datetime import datetime
 import os
 
-def date_now():
-    if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
-        return timezone.now()
-    else:
+if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
+    date_now = timezone.now
+else:
+    def date_now():
         return datetime(2018, 1, 1, tzinfo=timezone.utc)
 
 
