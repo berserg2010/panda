@@ -1,14 +1,15 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
+from django.utils.safestring import mark_safe
 
 from common.utils import CommonIdModelAdmin
+from paid_course.services.paid_course import get_courses_stat
 from .models import RequestUser, Teacher, Student, Payment
 from .services.request_user import request_user_accept, request_user_reject
 
 
 @admin.register(RequestUser)
 class RequestUserAdmin(CommonIdModelAdmin):
-
     list_display = (
         'email',
         'get_full_name',
@@ -53,7 +54,6 @@ class RequestUserAdmin(CommonIdModelAdmin):
 
 
 class AccountAdmin(CommonIdModelAdmin):
-
     list_display = (
         'get_full_name',
         'get_email',
@@ -74,13 +74,28 @@ class TeacherAdmin(AccountAdmin):
     pass
 
 
+def get_unfinished_lessons(obj: Student) -> str:
+    courses_stat = get_courses_stat(obj.user)
+    if courses_stat:
+        inner_html: str = ''
+        for course_stat in courses_stat:
+            inner_html = inner_html + f'<p style="padding-left: 0;">Группа курсов: ' \
+                                      f'<b>{course_stat.title}</b>, ' \
+                                      f'количество занятий: ' \
+                                      f'<b style="color: {"green" if course_stat.lessons > 1 else "red"};">{course_stat.lessons}</b>;</p>\n'
+        return mark_safe(inner_html)
+get_unfinished_lessons.short_description = 'статистика по курсам'
+
+
 @admin.register(Student)
 class StudentAdmin(AccountAdmin):
-    pass
+    list_display = (
+        *AccountAdmin.list_display,
+        get_unfinished_lessons,
+    )
 
 
 class BonusLesson(admin.SimpleListFilter):
-
     title = 'бесплатные занятия'
     parameter_name = 'is_bonus'
 
@@ -99,7 +114,6 @@ class BonusLesson(admin.SimpleListFilter):
 
 @admin.register(Payment)
 class PaymentAdmin(CommonIdModelAdmin):
-
     list_display = (
         *CommonIdModelAdmin.list_display,
         'student',
