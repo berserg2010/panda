@@ -8329,6 +8329,9 @@ footer {
   background: #ff4b4b;
   border-radius: 0 10px 10px 0;
 }
+.videoCall-buttons__btn--green {
+  background: #5f9f84;
+}
 .videoCall-buttons__btn img,
 .videoCall-buttons__btn svg {
   position: absolute;
