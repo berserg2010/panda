@@ -1,6 +1,7 @@
 from datetime import datetime, time
 from pydantic import BaseModel
 from typing import Union, Optional, List, Dict
+from types import FunctionType
 
 from django.db.models import Q
 
@@ -62,7 +63,15 @@ def _schedule_entity_adapter(schedules: List[Union[Schedule, FreeLesson]], weeks
     return weeks
 
 
-def get_timetables(request, date_start: datetime = date_now(), date_end: datetime = None, one_day: bool = False) -> Union[Dict, List]:
+def get_timetables(
+        request,
+        date_start: Union[datetime, FunctionType] = date_now,
+        date_end: datetime = None,
+        one_day: bool = False
+) -> Union[Dict, List]:
+
+    if isinstance(date_start, FunctionType):
+        date_start = date_start()
 
     if one_day:
         filter_exp = Q(datetime__date=date_start)
