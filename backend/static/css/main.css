@@ -8221,6 +8221,10 @@ footer {
   width: 100%;
   height: 100%;
 }
+.videoCall-main:-webkit-full-screen .videoCall-user video {
+  width: 100%;
+  height: 100%;
+}
 .videoCall-user {
   position: relative;
   width: 100%;

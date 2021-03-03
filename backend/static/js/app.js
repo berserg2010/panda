@@ -444,9 +444,29 @@ const fullScreenMode = (flag = true) => {
 }
 
 const exitFullscreen = () => {
-  document.exitFullscreen()
-    .then(() => {console.info('Document Exited from Full screen mode')})
-    .catch((err) => {console.error(err)})
+  let exitFS
+
+  if (document.exitFullscreen) {
+    exitFS = document.exitFullscreen()
+  } else if (document.webkitExitFullscreen) {
+    exitFS = document.webkitExitFullscreen()
+  } else if (document.msExitFullscreen) {
+    exitFS = document.msExitFullscreen()
+  } else if (document.mozCancelFullScreen) {
+    exitFS = document.mozCancelFullScreen()
+  } else {
+    alert('Выход из полноэкранного режима не работает, для выхода нажмите Esc.')
+  }
+
+  if (exitFS) {
+    exitFS
+      .then(() => {
+        console.info('Document Exited from Full screen mode')
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
 }
 
 const cancelButtonHandler = () => {
