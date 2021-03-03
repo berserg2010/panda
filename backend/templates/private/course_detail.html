@@ -7,7 +7,7 @@
 {% block content %}
   <div class="personalArea-content">
 
-    {% include 'private/components/personal-area-modal.html' %}
+{#    {% include 'private/components/personal-area-modal.html' %}#}
 
     <div class="courses">
       <div class="courses-col courses-col__big">
@@ -34,7 +34,7 @@
 
             <div class="choice-col">
               <div class="choice-wrap">
-                <span class="choice-num">{{ package_of_lessons.count }} занятия</span>
+                <span class="choice-num">{{ package_of_lessons.get_count_lessons }}*</span>
 
                 <span class="choice-price">{{ price|floatformat:"0" }} грн./занятие</span>
 
@@ -56,6 +56,15 @@
 
         </div>
       </div>
+    </div>
+
+    <div class="footnote">
+      <p>*Пакет занятий приобретается на 28 дней.</p>
+      <p>Обратите внимание: если на 28-й день у вас остается 1 и более перенесенных занятий, то на следующий день они сгорают. Чтобы занятия не сгорели, необходимо внести оплату на следующие 28 дней.</p>
+      <p>Например:</p>
+      <blockquote>На 28-й день оплаченного курса у вас остается 2 перенесенных часа, вы вносите оплату еще за 8 занятий и у вас появляется 10 оплаченных занятий, которые нужно выходить в последующие 28 дней.</blockquote>
+      <p>В случае непреодолимой силы (болезни, травмы и др.) можно перенести занятие менее, чем за 8 часов, уведомив администратора.</p>
+      <p>Ученик имеет право заморозить занятия на 2 недели, предварительно уведомив администратора, не менее, чем за 8 часов.</p>
     </div>
   </div>
 {% endblock %}
