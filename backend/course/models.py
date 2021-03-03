@@ -20,8 +20,21 @@ class PackageOfLessons(models.Model):
     count = models.PositiveSmallIntegerField(verbose_name='количество занятий')
     cost = models.PositiveSmallIntegerField(verbose_name='стоимость')
 
+    @property
+    def get_count_lessons(self):
+        remainder = self.count % 10
+        if self.count in (11, 12, 13, 14):
+            string = f'{self.count} занятий'
+        elif remainder == 1:
+            string = f'{self.count} занятие'
+        elif remainder in (2, 3, 4):
+            string = f'{self.count} занятия'
+        else:
+            string = f'{self.count} занятий'
+        return string
+
     def __str__(self) -> str:
-        return f'{self.count} | {self.cost}'
+        return f'{self.get_count_lessons} | {self.cost}'
 
     class Meta:
         verbose_name = 'количество занятий'

@@ -7946,14 +7946,23 @@ footer {
 .courses {
   display: flex;
   flex-flow: row wrap;
-  margin: 0 -15px
+  /*margin: 0 -15px*/
+  margin: 0;
 }
 .courses-col {
-  width: 33.333%;
-  padding: 0 15px 30px
+  width: calc(calc(100% - 32px) / 3);
+  /*padding: 0 15px 30px*/
+  /*padding: 0;*/
+  /*padding-bottom: 30px;*/
+  margin-right: 16px;
+  margin-bottom: 30px;
+}
+.courses-col:nth-child(3n) {
+  margin-right: 0;
 }
 .courses-col.courses-col__big {
-  width: 100%
+  width: 100%;
+  margin-right: 0;
 }
 .courses-col.courses-col__big .courses-wrap {
   height: 393px
@@ -8002,16 +8011,24 @@ footer {
 }
 @media only screen and (max-width:768px) {
   .courses-col {
-    width: 50%;
-    padding: 0 15px 15px
+    width: calc(calc(100% - 16px) / 2);
+    /*padding: 0 15px 15px*/
+    margin-right: 16px;
+  }
+    .courses-col:nth-child(3n) {
+    margin-right: auto;
+  }
+  .courses-col:nth-child(2n) {
+    margin-right: 0;
   }
 }
 @media only screen and (max-width:550px) {
   .courses {
-    padding: 15px 0 0
+    /*padding: 15px 0 0*/
   }
   .courses-col {
-    width: 100%
+    width: 100%;
+    margin-right: 0;
   }
   .courses-col.courses-col__big .courses-wrap {
     height: 284px
@@ -8619,25 +8636,25 @@ footer {
 .choice-row {
   display: flex;
   flex-flow: row wrap;
-  margin: 0 -15px;
+  /*margin: 0 -15px;*/
   position: relative
 }
-.choice-row::after,
-.choice-row::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 15px;
-  background: #fff;
-  /*z-index: 2*/
-}
-.choice-row::before {
-  left: 0
-}
-.choice-row::after {
-  right: 0
-}
+/*.choice-row::after,*/
+/*.choice-row::before {*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  height: 100%;*/
+/*  width: 15px;*/
+/*  background: #fff;*/
+/*  !*z-index: 2*!*/
+/*}*/
+/*.choice-row::before {*/
+/*  left: 0*/
+/*}*/
+/*.choice-row::after {*/
+/*  right: 0*/
+/*}*/
 .choice-col {
   width: 20%;
   text-align: center;
@@ -10571,6 +10588,13 @@ footer {
 
 .personalArea-content {
   position: relative
+}
+.personalArea-content .footnote p {
+  margin-bottom: 8px;
+}
+.personalArea-content .footnote blockquote {
+  padding: revert;
+  margin: revert;
 }
 
 .personalArea-modal {
