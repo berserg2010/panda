@@ -160,17 +160,17 @@
       console.info(`[error] ${ev.message}`)
     }
 
-    setInterval(() => {
-        const data = {
-          'event': 'status.connect',
-          'data': {
-            'user': username,
-            'online': true
-          }
-        }
-        statusSocket.send(JSON.stringify(data))
-      }, 5000
-    )
+    {#setInterval(() => {#}
+    {#    const data = {#}
+    {#      'event': 'status.connect',#}
+    {#      'data': {#}
+    {#        'user': username,#}
+    {#        'online': true#}
+    {#      }#}
+    {#    }#}
+    {#    statusSocket.send(JSON.stringify(data))#}
+    {#  }, 5000#}
+    {#)#}
   </script>
 
 {% endblock %}

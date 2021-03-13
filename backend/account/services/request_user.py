@@ -1,12 +1,14 @@
 import requests
+from typing import Union
 
 from django.contrib.auth import get_user_model
 # from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
 from django.db import transaction, IntegrityError
 
 from backend import settings
 from common.utils import date_now, new_password
-from account.models import RequestUser, Student
+from account.models import RequestUser, Student, Teacher
 from account.services.mail import (
     send_mail_request_user_accept,
     send_mail_request_user_reject,
@@ -82,3 +84,9 @@ def user_voximplant_handler(account, method: str):
 
     res = requests.get(f'https://api.voximplant.com/platform_api/{method_dict.get(method)}', params=payload)
     return res
+
+
+def get_account(user: User) -> Union[Teacher, Student]:
+    account_model = Teacher if user.is_staff else Student
+    account = account_model.objects.get(user=user)
+    return account

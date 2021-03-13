@@ -1,7 +1,9 @@
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 import json
+import uuid
 
+from account.services.request_user import get_account
 from .common import CommonConsumer
 
 
@@ -9,10 +11,10 @@ class StatusInLesson(CommonConsumer):
 
     async def connect(self):
         await super().connect()
-        self.group_id = self.scope['url_route']['kwargs']['group_id']
+        self.user = self.scope['user']
+        self.group_id: uuid = self.scope['url_route']['kwargs']['group_id']
         self.group = None
-        self.participants = []
-        self.user_id = self.scope['user'].pk
+        self.participants = await self.get_participant()
 
         if not self.group_id:
             await self._throw_error({'detail': 'Урок не найден'})
@@ -23,16 +25,27 @@ class StatusInLesson(CommonConsumer):
         await self.channel_layer.group_add(
             self.group_id,
             self.channel_name
-
         )
+        print(dir(self.channel_layer))
 
-        # await self.accept()
-    #
-    # async def disconnect(self, close_code):
-    #     await self.channel_layer.group_discard(
-    #         self.lesson_id,
-    #         self.channel_name
-    #     )
+        data = {
+            'participants': str(self.participants.pk)
+        }
+
+        return await self._group_send(data, event='connect')
+
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        data = {
+            'participants': str(self.participants.pk)
+        }
+        return await self._group_send(data, event='disconnect')
+
+        # await self.channel_layer.group_discard(
+        #     self.lesson_id,
+        #     self.channel_name
+        # )
 
     # async def receive(self, text_data):
     #     text_data_json = json.loads(text_data)
@@ -49,17 +62,11 @@ class StatusInLesson(CommonConsumer):
 
     async def event_status_connect(self, event):
         data = event['data']
-        print(self.user_id)
-        print(data.get('user'))
-        if self.user_id != data.get('user'):
-            return await self._group_send(data, event=event['event'])
-
+        return await self._group_send(data, event=event['event'])
 
     @database_sync_to_async
     def get_participant(self):
-        participant = None
-        self.participant = participant
-        return participant
+        return get_account(self.user)
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
