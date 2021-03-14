@@ -1,6 +1,8 @@
 from django import template
 from django.db.models import Sum, Q, QuerySet
 
+from paid_course.models import Schedule
+
 register = template.Library()
 
 
@@ -31,3 +33,8 @@ def filter_group_of_courses_latest_date(obj: QuerySet, value_filter):
 @register.filter
 def get_count(qs):
     return qs.count()
+
+
+@register.filter
+def get_lesson_type(lesson):
+    return 'schedule' if isinstance(lesson, Schedule) else 'free_lesson'
