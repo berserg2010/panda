@@ -10,6 +10,8 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
+from django.core.cache import cache
+
 from common.utils import (
     date_now,
     get_user_context,

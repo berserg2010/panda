@@ -12,6 +12,7 @@ services:
       - db_layer
 
   redis:
+    container_name: redis
     image: redis:alpine
     networks:
       - db_layer

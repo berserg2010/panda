@@ -11134,16 +11134,17 @@ footer {
   align-items: center;
 }
 .online-indicator span {
-  display: none;
+  /*display: none;*/
   margin-left: 8px;
 
   font-size: 20px;
   line-height: 1;
   font-weight: 300;
-  color: #ffb42d;
+  color: #ada7a7;
 }
 .online-indicator--online span {
-  display: inline;
+  /*display: inline;*/
+  color: #ffb42d;
 }
 .online-indicator__wrapper {
   position: relative;

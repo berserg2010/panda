@@ -12,9 +12,9 @@
   <div class="personalArea-content">
     <div class="personalArea-block">
       <div class="personalArea-block__top">
-        <span class="personalArea-block__title">Занятие</span>
+        <span class="personalArea-block__title">{% if user.is_staff %}Ученик{% else %}Учитель{% endif %}</span>
 
-        {% include 'private/components/online_indicator.html' with user_online='Ученик' %}
+        {% include 'private/components/online_indicator.html' %}
 
         {% if user.is_staff %}
           <form method="post">
@@ -22,7 +22,6 @@
             <button class="second-btn" type="submit">Завершить занятие</button>
           </form>
         {% endif %}
-{#        <div class="personalArea-block__top-b"></div>#}
       </div>
 
       <div class="videoCall">
@@ -144,33 +143,48 @@
     const statusSocket = new WebSocket(wsURL)
 
     statusSocket.onopen = (ev) => {
-      console.info('Соединение установлено')
+      console.info('[open] Соединение установлено')
     }
 
     statusSocket.onmessage = (ev) => {
-      console.info('Данные получены')
-      console.info(ev.data)
+      console.info('[message] Данные получены')
+      const data = JSON.parse(ev.data)
+      {#console.info(data)#}
+      indicatorHandler(data)
     }
 
     statusSocket.onclose = (ev) => {
-      console.info(`[close] Соединение закрыто  код=${ev.code} причина=${ev.reason}`)
+      console.info(`[close] Соединение закрыто, код=${ev.code}, причина=${ev.reason}`)
+      offlineIndicatorHandler()
     }
 
     statusSocket.onerror = (ev) => {
       console.info(`[error] ${ev.message}`)
+      offlineIndicatorHandler()
     }
 
-    {#setInterval(() => {#}
-    {#    const data = {#}
-    {#      'event': 'status.connect',#}
-    {#      'data': {#}
-    {#        'user': username,#}
-    {#        'online': true#}
-    {#      }#}
-    {#    }#}
-    {#    statusSocket.send(JSON.stringify(data))#}
-    {#  }, 5000#}
-    {#)#}
+    const onlineIndicator = document.querySelector('.online-indicator')
+    const textOnlineIndicator = onlineIndicator.querySelector('span')
+
+    const indicatorHandler = ({ data, event }) => {
+      const { participants } = data
+
+      if (participants.indexOf(getUser(false)) !== -1) {
+        onlineIndicatorHandler()
+      } else {
+        offlineIndicatorHandler()
+      }
+    }
+
+    const onlineIndicatorHandler = () => {
+      onlineIndicator.classList.add('online-indicator--online')
+      textOnlineIndicator.textContent = 'Online'
+    }
+
+    const offlineIndicatorHandler = () => {
+      onlineIndicator.classList.remove('online-indicator--online')
+      textOnlineIndicator.textContent = 'Offline'
+    }
   </script>
 
 {% endblock %}
