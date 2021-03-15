@@ -11134,7 +11134,6 @@ footer {
   align-items: center;
 }
 .online-indicator span {
-  /*display: none;*/
   margin-left: 8px;
 
   font-size: 20px;
@@ -11143,7 +11142,6 @@ footer {
   color: #ada7a7;
 }
 .online-indicator--online span {
-  /*display: inline;*/
   color: #ffb42d;
 }
 .online-indicator__wrapper {

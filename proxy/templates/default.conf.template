@@ -2,6 +2,11 @@ upstream ${PROJECT_NAME} {
     server backend:8000;
 }
 
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    '' close;
+}
+
 server {
     listen 80;
     listen [::]:80;
@@ -19,9 +24,9 @@ server {
 
     ssl_certificate_key /usr/src/${PROJECT_NAME}/ssl/privkey.pem;
     ssl_certificate     /usr/src/${PROJECT_NAME}/ssl/fullchain.pem;
-#    ssl_trusted_certificate /usr/src/${PROJECT_NAME}/ssl/chain.pem;
 
-#    ssl_dhparam /usr/src/${PROJECT_NAME}/ssl/dhparams.pem;
+    ssl_trusted_certificate /usr/src/${PROJECT_NAME}/ssl/chain.pem;
+    ssl_dhparam /usr/src/${PROJECT_NAME}/ssl/dhparams.pem;
 }
 
 server {
@@ -32,15 +37,19 @@ server {
 
     ssl_certificate_key /usr/src/${PROJECT_NAME}/ssl/privkey.pem;
     ssl_certificate     /usr/src/${PROJECT_NAME}/ssl/fullchain.pem;
-#    ssl_trusted_certificate /usr/src/${PROJECT_NAME}/ssl/chain.pem;
 
-#    ssl_dhparam /usr/src/${PROJECT_NAME}/ssl/dhparams.pem;
+    ssl_trusted_certificate /usr/src/${PROJECT_NAME}/ssl/chain.pem;
+    ssl_dhparam /usr/src/${PROJECT_NAME}/ssl/dhparams.pem;
 
     location / {
         proxy_pass http://${PROJECT_NAME};
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
+
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+
         proxy_redirect off;
     }
 
