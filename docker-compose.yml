@@ -3,6 +3,7 @@ version: '3.8'
 services:
 
   db:
+    container_name: db
     image: postgres:13
     env_file:
       - env/db.env
@@ -18,6 +19,7 @@ services:
       - db_layer
 
   backend:
+    container_name: backend
     build:
       context: backend/.
       args:
@@ -30,6 +32,8 @@ services:
       - env/db.env
     volumes:
       - ./backend:/usr/src/${PROJECT_NAME}
+    command:
+      [ "redis-cli", "-u", "redis://redis:6379/0", "flushall" ]
     depends_on:
       - db
       - redis
