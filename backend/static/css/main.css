@@ -8248,11 +8248,13 @@ footer {
 }
 .videoCall-main:fullscreen .videoCall-user video {
   width: 100%;
-  height: 100%;
+  /*height: 100%;*/
+  height: auto;
 }
 .videoCall-main:-webkit-full-screen .videoCall-user video {
   width: 100%;
-  height: 100%;
+  /*height: 100%;*/
+  height: auto;
 }
 .videoCall-user {
   position: relative;
