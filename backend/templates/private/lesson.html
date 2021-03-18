@@ -1,6 +1,6 @@
 {% extends 'private/_base.html' %}
 
-{% load static private_side_extras %}
+{% load static private_side_extras paid_course_extras %}
 
 {% block title %}Занятие{% endblock %}
 
@@ -12,14 +12,16 @@
   <div class="personalArea-content">
     <div class="personalArea-block">
       <div class="personalArea-block__top">
-        <span class="personalArea-block__title">Занятие</span>
+        <span class="personalArea-block__title">{% if user.is_staff %}Ученик{% else %}Учитель{% endif %}</span>
+
+        {% include 'private/components/online_indicator.html' %}
+
         {% if user.is_staff %}
           <form method="post">
             {% csrf_token %}
             <button class="second-btn" type="submit">Завершить занятие</button>
           </form>
         {% endif %}
-        <div class="personalArea-block__top-b"></div>
       </div>
 
       <div class="videoCall">
@@ -111,7 +113,8 @@
   {{ user.is_staff|json_script:'is_staff' }}
   {{ object.teacher.pk|json_script:'teacher' }}
   {{ object.student.pk|json_script:'student' }}
-  {#  {{ object.pk|json_script:'lesson' }}#}
+  {{ object.pk|json_script:'lesson_id' }}
+  {{ object|get_lesson_type|json_script:'lesson_type' }}
 
   <script>
     const account_name = JSON.parse(document.getElementById('VOXIMPLANT_ACC_NAME').textContent)
@@ -121,7 +124,8 @@
     const is_staff = JSON.parse(document.getElementById('is_staff').textContent)
     const teacher = JSON.parse(document.getElementById('teacher').textContent)
     const student = JSON.parse(document.getElementById('student').textContent)
-    {#const lesson = JSON.parse(document.getElementById('lesson').textContent)#}
+    const lesson_id = JSON.parse(document.getElementById('lesson_id').textContent)
+    const lesson_type = JSON.parse(document.getElementById('lesson_type').textContent)
 
     const getUser = (self = true) => {
       const condition = self ? is_staff : !is_staff
@@ -129,6 +133,58 @@
     }
 
     const username = getUser()
+  </script>
+
+  <script>
+    const currentLocation = window.location
+    const wsProtocol = currentLocation.protocol === 'https:' ? 'wss://' : 'ws://'
+    const wsURL = `${wsProtocol}${currentLocation.host}/ws${currentLocation.pathname}`
+
+    const statusSocket = new WebSocket(wsURL)
+
+    statusSocket.onopen = (ev) => {
+      console.info('[open] Соединение установлено')
+    }
+
+    statusSocket.onmessage = (ev) => {
+      console.info('[message] Данные получены')
+      const data = JSON.parse(ev.data)
+      {#console.info(data)#}
+      indicatorHandler(data)
+    }
+
+    statusSocket.onclose = (ev) => {
+      console.info(`[close] Соединение закрыто, код=${ev.code}, причина=${ev.reason}`)
+      offlineIndicatorHandler()
+    }
+
+    statusSocket.onerror = (ev) => {
+      console.info(`[error] ${ev.message}`)
+      offlineIndicatorHandler()
+    }
+
+    const onlineIndicator = document.querySelector('.online-indicator')
+    const textOnlineIndicator = onlineIndicator.querySelector('span')
+
+    const indicatorHandler = ({ data, event }) => {
+      const { participants } = data
+
+      if (participants.indexOf(getUser(false)) !== -1) {
+        onlineIndicatorHandler()
+      } else {
+        offlineIndicatorHandler()
+      }
+    }
+
+    const onlineIndicatorHandler = () => {
+      onlineIndicator.classList.add('online-indicator--online')
+      textOnlineIndicator.textContent = 'Online'
+    }
+
+    const offlineIndicatorHandler = () => {
+      onlineIndicator.classList.remove('online-indicator--online')
+      textOnlineIndicator.textContent = 'Offline'
+    }
   </script>
 
 {% endblock %}

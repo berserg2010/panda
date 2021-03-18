@@ -9,6 +9,7 @@ services:
     restart: always
 
   pgbouncer:
+    container_name: pgbouncer
     image: edoburu/pgbouncer:1.15.0
     env_file:
       - env/db.env
@@ -34,6 +35,7 @@ services:
       - proxy_back
 
   proxy:
+    container_name: proxy
     image: nginx:1.19
     env_file:
       - env/common.env

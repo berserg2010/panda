@@ -62,7 +62,8 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('redis', 6379)],
+            # 'hosts': [('redis', 6379)],
+            'hosts': ['redis://redis:6379/0'],
         },
     },
 }
@@ -198,3 +199,16 @@ VOXIMPLANT_APP_ID=config('VOXIMPLANT_APP_ID')
 VOXIMPLANT_APP_NAME=config('VOXIMPLANT_APP_NAME')
 VOXIMPLANT_API_KEY=config('VOXIMPLANT_API_KEY')
 VOXIMPLANT_USER_PASSWORD=config('VOXIMPLANT_USER_PASSWORD')
+
+
+# REDIS
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
+        }
+    }
+}
