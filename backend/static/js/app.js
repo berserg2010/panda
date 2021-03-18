@@ -69,13 +69,24 @@ shareScreenButton.addEventListener('click', () => {
   shareScreen()
 })
 
-document.addEventListener('fullscreenchange', (e) => {
-  fullScreenState = document.fullscreenElement !== null
+const fullscreenchangeHandler = () => {
+  let fullscreenElement
+
+  if (document.fullscreenElement !== undefined) {
+    fullscreenElement = document.fullscreenElement
+  } else if (document.webkitFullscreenElement !== undefined) {
+    fullscreenElement = document.webkitFullscreenElement
+  }
+
+  fullScreenState = fullscreenElement !== null
   log(`fullscreenchange event --> ${fullScreenState}`)
   const svg_list = fullScreenButton.querySelectorAll('svg')
 
   switchSvgButton(svg_list, !fullScreenState)
-})
+}
+
+document.addEventListener('fullscreenchange', fullscreenchangeHandler)
+document.addEventListener('webkitfullscreenchange', fullscreenchangeHandler)
 
 fullScreenButton.addEventListener('click', () => {
   log(`fullScreenButton --> ${fullScreenState}`)
@@ -344,8 +355,8 @@ function onEndpointRemoved(e) {
 function onRemoteMediaAdded(e) {
   log('RemoteMediaAdded')
 
-  e.mediaRenderer.element.width=widthRemoteVideo
-  e.mediaRenderer.element.height=heightRemoteVideo
+  e.mediaRenderer.element.width = widthRemoteVideo
+  e.mediaRenderer.element.height = heightRemoteVideo
   e.mediaRenderer.render(remoteVideoContainer)
 
   remoteVideoContainer.classList.add('video-call--connected')
@@ -423,19 +434,21 @@ const shareScreen = () => {
 
 // Enable fullscreen
 const fullScreenMode = (flag = true) => {
+  console.info(`fullScreenMode --> ${flag}`)
   if (mode == 'webrtc') {
+    console.info(`fullScreenMode --> if mode`)
 
     if (flag === true && currentCall != null) {
       const elem = document.querySelector('.videoCall-main')
 
       if (elem.requestFullscreen) {
         elem.requestFullscreen()
+      } else if (elem.webkitRequestFullScreen) {
+        elem.webkitRequestFullScreen()
       } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen()
       } else if (elem.mozRequestFullScreen) {
         elem.mozRequestFullScreen()
-      } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen()
       }
     } else {
       exitFullscreen()
@@ -444,9 +457,29 @@ const fullScreenMode = (flag = true) => {
 }
 
 const exitFullscreen = () => {
-  document.exitFullscreen()
-    .then(() => {console.info('Document Exited from Full screen mode')})
-    .catch((err) => {console.error(err)})
+  let exitFS
+
+  if (document.exitFullscreen) {
+    exitFS = document.exitFullscreen()
+  } else if (document.webkitCancelFullScreen) {
+    exitFS = document.webkitCancelFullScreen()
+  } else if (document.msExitFullscreen) {
+    exitFS = document.msExitFullscreen()
+  } else if (document.mozCancelFullScreen) {
+    exitFS = document.mozCancelFullScreen()
+  } else {
+    alert('Выход из полноэкранного режима не работает, для выхода нажмите Esc.')
+  }
+
+  if (exitFS) {
+    exitFS
+      .then(() => {
+        console.info('Document Exited from Full screen mode')
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
 }
 
 const cancelButtonHandler = () => {
