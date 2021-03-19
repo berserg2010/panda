@@ -1,4 +1,4 @@
-{% load static %}
+{% load static private_side_extras %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -48,7 +48,10 @@
   {% endif %}
 </script>
 
+{{ 'DEBUG'|get_settings_var|json_script:'DEBUG' }}
+
 <script>
+  const DEBUG = JSON.parse(document.getElementById('DEBUG').textContent)
 
   function formSubmitHandler(form) {
 
@@ -75,10 +78,21 @@
         showMessage(data)
 
         form.reset()
+
+        if (form.id === 'request-user-form') {
+          gtagHandler('send_request')
+        }
       })
       .catch((e) => {
         console.error(e)
       })
+  }
+
+  const gtagHandler = (event) => {
+    if (!DEBUG) {
+      gtag('event', event, {'event_category': 'button'})
+    }
+    return false
   }
 
 </script>
