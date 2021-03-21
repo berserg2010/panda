@@ -24,7 +24,6 @@ before_script:
   # - docker version
   # - docker-compose version
 
-  - docker-compose down
   - cp .env.template .env
   - cp .env.template env/common.env
   - cp env/back.env.template env/back.env
