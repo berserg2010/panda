@@ -3971,7 +3971,7 @@ footer {
   /*z-index: 2*/
 }
 .main-info {
-  max-width: 530px
+  max-width: 540px
 }
 .main-title {
   font-size: 48px;
@@ -4019,7 +4019,7 @@ footer {
     min-height: 460px
   }
   .main-info {
-    max-width: 430px
+    max-width: 540px;
   }
   .main-title {
     font-size: 40px;
