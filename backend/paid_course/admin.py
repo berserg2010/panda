@@ -16,8 +16,8 @@ class ScheduleInline(admin.StackedInline):
 
 class BaseLessonAdmin(CommonIdModelAdmin):
     list_display = (
-        'student',
         'teacher',
+        'student',
         'finished',
     )
     fields = (
@@ -32,13 +32,29 @@ class BaseLessonAdmin(CommonIdModelAdmin):
     save_on_top = False
 
 
+def get_course_title(self):
+    if isinstance(self, Schedule):
+        return self.paid_course.course.title
+    else:
+        return 'Пробное заняние'
+get_course_title.short_description = 'расписание по курсу'
+
+
 @admin.register(FreeLesson)
 class FreeLessonAdmin(BaseLessonAdmin):
     list_display = (
+        get_course_title,
         *BaseLessonAdmin.list_display,
         'datetime',
     )
-    list_display_links = ('student', )
+    search_fields = (
+        'student__user__last_name',
+        'teacher__user__last_name',
+    )
+    list_filter = (
+        'finished',
+        'datetime',
+    )
     fields = (
         *BaseLessonAdmin.fields,
         'datetime',
@@ -58,22 +74,38 @@ class PaidCourseAdmin(BaseLessonAdmin):
     inlines = (ScheduleInline, )
 
 
+def get_teacher(self):
+    return self.paid_course.teacher
+get_teacher.short_description = 'учитель'
+
+
+def get_student(self):
+    return self.paid_course.student
+get_student.short_description = 'ученик'
+
+
 @admin.register(Schedule)
 class ScheduleAdmin(CommonIdModelAdmin):
     list_display = (
-        'paid_course',
-        'datetime',
+        get_course_title,
+        get_teacher,
+        get_student,
         'finished',
+        'datetime',
     )
     search_fields = (
         'paid_course__student__user__last_name',
+        'paid_course__teacher__user__last_name',
     )
-    list_filter = ('datetime', 'finished', )
+    list_filter = (
+        'finished',
+        'datetime',
+    )
     fields = (
         *CommonIdModelAdmin.fields,
         'paid_course',
-        'datetime',
         'finished',
+        'datetime',
     )
     save_on_top = False
 
