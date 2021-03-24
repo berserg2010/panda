@@ -10,10 +10,9 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from django.core.cache import cache
-
 from common.utils import (
     date_now,
+    get_days_in_month,
     get_user_context,
     message_success,
     message_error,
@@ -30,7 +29,14 @@ class TimetablesView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['timetable'] = {}
 
-        timetable = get_timetables(self.request)
+        if self.request.user.is_staff:
+            dn = date_now()
+            date_start = dn.replace(day=1)
+            date_end = dn.replace(day=get_days_in_month(dn))
+
+            timetable = get_timetables(self.request, date_start=date_start, date_end=date_end)
+        else:
+            timetable = get_timetables(self.request)
         context['timetable'] = timetable
 
         return context

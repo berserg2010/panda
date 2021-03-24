@@ -1,3 +1,6 @@
+from calendar import monthrange
+from typing import Tuple
+
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
@@ -11,6 +14,10 @@ if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
 else:
     def date_now():
         return datetime(2018, 1, 1, tzinfo=timezone.utc)
+
+
+def get_days_in_month(date: datetime) -> int:
+    return monthrange(date.year, date.month)[1]
 
 
 def get_user_context(request, is_filter=True):
