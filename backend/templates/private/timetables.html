@@ -14,15 +14,21 @@
 
       <div class="timetables">
 
+        {% now 'W' as week_now %}
+
         {% for key, week in timetable.items|dictsort:0 %}
 
           <div class="timetables-block range-slider__wrap">
 
-            {% if forloop.first %}
+            {% if key|add:'0' < week_now|add:'0' and forloop.counter0 == 0 %}
+              <span class="timetables-title">Прошедшие недели</span>
+            {% endif %}
+
+            {% if key|add:'0' == week_now|add:'0' %}
               <span class="timetables-title">Текущая неделя</span>
             {% endif %}
 
-            {% if forloop.counter0 == 1 %}
+            {% if key|add:'0' == week_now|add:'1' %}
               <span class="timetables-title">Следующие недели</span>
             {% endif %}
 
