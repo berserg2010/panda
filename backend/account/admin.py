@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 
-from common.utils import CommonIdModelAdmin
+from common.utils import CommonIdModelAdmin, date_now
 from paid_course.services.paid_course import get_courses_stat
 from .models import RequestUser, Teacher, Student, Payment
 from .services.request_user import request_user_accept, request_user_reject
@@ -82,7 +83,13 @@ def get_unfinished_lessons(obj: Student) -> str:
             inner_html = inner_html + f'<p style="padding-left: 0;">Группа курсов: ' \
                                       f'<b>{course_stat.title}</b>, ' \
                                       f'количество занятий: ' \
-                                      f'<b style="color: {"green" if course_stat.lessons > 1 else "red"};">{course_stat.lessons}</b>;</p>\n'
+                                      f'<b ' \
+                                      f'style="color: {"green" if course_stat.lessons > 1 else "red"};"' \
+                                      f'>{course_stat.lessons}</b>;</p>' \
+                                      f'заканчивается: ' \
+                                      f'<b ' \
+                                      f'style="color: {"green" if course_stat.valid_until.date() > (date_now().date() + timezone.timedelta(days=5)) else "red"};"' \
+                                      f'>{course_stat.valid_until.date()}</b>;</p>\n'
         return mark_safe(inner_html)
 get_unfinished_lessons.short_description = 'статистика по курсам'
 

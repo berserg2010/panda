@@ -9,6 +9,7 @@ from django.db.models import Q
 from datetime import datetime
 import os
 
+
 if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
     date_now = timezone.now
 else:
