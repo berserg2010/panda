@@ -20,7 +20,7 @@ class GroupCoursesStat(BaseModel):
 
 def get_chain_of_payments(last_payment_qs: QuerySet[Payment], group_of_course: uuid) -> Tuple[QuerySet[Payment], datetime]:
 
-    last_payment = last_payment_qs.filter(group_of_course=group_of_course).first()
+    last_payment = last_payment_qs.filter(valid_until__gte=date_now()).filter(group_of_course=group_of_course).first()
 
     if last_payment is not None and last_payment.first_payment is not None:
         order_time = last_payment.first_payment.order_time
@@ -46,8 +46,8 @@ def get_courses_stat(user) -> List[GroupCoursesStat]:
     groups_courses_stat: List[GroupCoursesStat] = []
     student = user.student
 
-    last_payment_qs = student.get_payment_student.filter(valid_until__gte=date_now())
-    last_payment_distinct_qs = last_payment_qs.order_by(
+    last_payment_qs = student.get_payment_student
+    last_payment_distinct_qs = last_payment_qs.filter(valid_until__gte=date_now()).order_by(
         'group_of_course__pk', '-valid_until'
     ).distinct('group_of_course')
 

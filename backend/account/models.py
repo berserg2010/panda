@@ -121,9 +121,12 @@ class Payment(CommonId):
                 valid_until__gte=self.order_time,
             ).first()
 
-            self.first_payment = payment.first_payment if (
+            first_payment = payment.first_payment if (
                 payment and payment.first_payment is not None
             ) else payment
+
+            if first_payment and first_payment.pk != self.pk:
+                self.first_payment = first_payment
 
         if not self.valid_until:
             self.valid_until = self.order_time + timezone.timedelta(days=28)

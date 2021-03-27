@@ -60,6 +60,9 @@ class AccountAdmin(CommonIdModelAdmin):
         'get_email',
         'phone',
     )
+    search_fields = (
+        'user__last_name',
+    )
     fields = (
         *CommonIdModelAdmin.fields,
         'user',
