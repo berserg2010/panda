@@ -51,6 +51,8 @@ class FreeLessonAdmin(BaseLessonAdmin):
         'student__user__last_name',
         'teacher__user__last_name',
     )
+    date_hierarchy = 'datetime'
+    ordering = ('datetime', )
     list_filter = (
         'finished',
         'datetime',
@@ -101,6 +103,7 @@ class ScheduleAdmin(CommonIdModelAdmin):
         'finished',
         'datetime',
     )
+    date_hierarchy = 'datetime'
     fields = (
         *CommonIdModelAdmin.fields,
         'paid_course',
