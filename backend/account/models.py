@@ -118,6 +118,7 @@ class Payment(CommonId):
             payment = Payment.objects.filter(
                 student=self.student,
                 group_of_course=self.group_of_course,
+                order_time__lte=self.order_time,
                 valid_until__gte=self.order_time,
             ).first()
 
