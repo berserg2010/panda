@@ -90,6 +90,7 @@ INSTALLED_APPS = [
     'course.apps.CourseConfig',
     'paid_course.apps.PaidCourseConfig',
     'lesson.apps.LessonConfig',
+    'chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [
