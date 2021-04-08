@@ -55,7 +55,7 @@ class Schedule(CommonId):
         return cls.objects.filter(
             Q(paid_course__student=student),
             Q(paid_course__course__group_of_course=groups_courses),
-            Q(datetime__gte=first_date) | Q(datetime__lte=second_date),
+            Q(datetime__gte=first_date) & Q(datetime__lte=second_date),
         )
 
     @property

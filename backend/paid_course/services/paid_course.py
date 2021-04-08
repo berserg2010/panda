@@ -70,7 +70,8 @@ def get_courses_stat(user) -> List[GroupCoursesStat]:
         schedule = Schedule.get_student_schedule(
             student,
             last_payment_inst.group_of_course,
-            order_time
+            order_time,
+            valid_until,
         ).filter(finished=True).count()
 
         bonus -= schedule
