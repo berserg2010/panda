@@ -4,6 +4,7 @@ from django.utils import timezone
 
 from common.models import CommonId
 from course.models import GroupsOfCourses
+from .services.payment import get_valid_until
 
 
 GENDER = [
@@ -113,7 +114,6 @@ class Payment(CommonId):
     get_first_data_payment.short_description = 'первая дата оплаты'
 
     def save(self, *args, **kwargs):
-
         if not self.first_payment:
             payment = Payment.objects.filter(
                 student=self.student,
@@ -130,7 +130,7 @@ class Payment(CommonId):
                 self.first_payment = first_payment
 
         if not self.valid_until:
-            self.valid_until = self.order_time + timezone.timedelta(days=28)
+            self.valid_until = get_valid_until(self.order_time)
 
         super().save(*args, **kwargs)
 
