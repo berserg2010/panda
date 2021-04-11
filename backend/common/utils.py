@@ -1,5 +1,6 @@
 from calendar import monthrange
-from typing import Tuple
+from pydantic import BaseModel
+from typing import List
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
@@ -15,6 +16,16 @@ if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
 else:
     def date_now():
         return datetime(2018, 1, 1, tzinfo=timezone.utc)
+
+
+def get_timedelta(dt: datetime = date_now(), days: int = 0):
+    dt += timezone.timedelta(days=days)
+    return dt
+
+
+def sorted_list_pydantic_models(list_models: List[BaseModel], key: str, reverse: bool = False):
+    sorted_list_models = sorted(list_models, key=lambda x: getattr(x, key), reverse=reverse)
+    return sorted_list_models
 
 
 def get_days_in_month(date: datetime) -> int:

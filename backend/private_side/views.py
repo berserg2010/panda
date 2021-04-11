@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from paid_course.services.paid_course import get_courses_stat
+from .services.courses_stat import get_courses_stat
 from paid_course.services.trial_lesson import get_trial_lessons
 from account.models import Payment
 from paid_course.models import PaidCourse

@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.utils.safestring import mark_safe
 
 from common.utils import CommonIdModelAdmin, date_now
-from paid_course.services.paid_course import get_courses_stat
+from private_side.services.courses_stat import get_courses_stat
 from .models import RequestUser, Teacher, Student, Payment
 from .services.request_user import request_user_accept, request_user_reject
 
