@@ -128,7 +128,7 @@ class Payment(CommonId):
 
                 self.first_payment = first_payment
         else:
-            if (self.pk == self.first_payment.pk) or (self.valid_until < self.first_payment.order_time):
+            if (self.first_payment.pk == self.pk) or (self.first_payment.order_time > self.order_time):
                 self.first_payment = None
 
         super().save(*args, **kwargs)
