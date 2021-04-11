@@ -121,14 +121,18 @@ class Payment(CommonId):
                 student=self.student,
                 group_of_course=self.group_of_course,
                 valid_until__range=(self.order_time, self.valid_until),
-            ).exclude(pk=self.pk, first_payment__pk=self.pk).first()
+            ).exclude(pk=self.pk).first()
 
             if payment is not None:
-                first_payment = payment.first_payment if payment.first_payment is not None else payment
+                condition = payment.first_payment is not None and payment.first_payment.pk != self.pk
+                if condition:
+                    self.first_payment = payment.first_payment
+                else:
+                    self.first_payment = payment
 
-                self.first_payment = first_payment
         else:
-            if (self.first_payment.pk == self.pk) or (self.first_payment.order_time > self.order_time):
+            condition = (self.first_payment.valid_until < self.order_time) or (self.valid_until < self.first_payment.order_time)
+            if (self.first_payment.pk == self.pk) or condition:
                 self.first_payment = None
 
         super().save(*args, **kwargs)
