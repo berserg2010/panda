@@ -1,6 +1,5 @@
-from django.db import models
 from django.contrib.auth import get_user_model
-from django.utils import timezone
+from django.db import models
 
 from common.models import CommonId
 from course.models import GroupsOfCourses
@@ -114,23 +113,23 @@ class Payment(CommonId):
     get_first_data_payment.short_description = 'первая дата оплаты'
 
     def save(self, *args, **kwargs):
-        if not self.first_payment:
+        if not self.valid_until:
+            self.valid_until = get_valid_until(self.order_time)
+
+        if self.first_payment is None:
             payment = Payment.objects.filter(
                 student=self.student,
                 group_of_course=self.group_of_course,
-                order_time__lte=self.order_time,
-                valid_until__gte=self.order_time,
-            ).first()
+                valid_until__range=(self.order_time, self.valid_until),
+            ).exclude(pk=self.pk, first_payment__pk=self.pk).first()
 
-            first_payment = payment.first_payment if (
-                payment and payment.first_payment is not None
-            ) else payment
+            if payment is not None:
+                first_payment = payment.first_payment if payment.first_payment is not None else payment
 
-            if first_payment and first_payment.pk != self.pk:
                 self.first_payment = first_payment
-
-        if not self.valid_until:
-            self.valid_until = get_valid_until(self.order_time)
+        else:
+            if (self.pk == self.first_payment.pk) or (self.valid_until < self.first_payment.order_time):
+                self.first_payment = None
 
         super().save(*args, **kwargs)
 
