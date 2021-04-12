@@ -119,12 +119,22 @@ Unit tests:
 #     tags:
 #         - docker-django
 
-Deploy to dev:
-  stage: deploy
-  only:
-    - master
+deploy_staging:
+  stage: staging
+  environment:
+    name: staging
+    url: https://hqua0177372.online-vm.com
   script:
-      - echo "${CI_PROJECT_NAME} from ${CI_COMMIT_REF_SLUG} [stage ${CI_JOB_STAGE}]"
-  tags:
-      - docker-django
-  when: manual
+    - git clone git@gitlab-dev.ddns.net:hellopanda_project/hellopanda.git
+
+    - docker-compose down
+
+    - docker-compose run backend python manage.py collectstatic --no-input
+    - docker-compose run backend python manage.py makemigrations
+    - docker-compose run backend python manage.py migrate
+    - docker-compose run backend python manage.py loaddata init_data.json
+
+    - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+  only:
+    - dev
+
