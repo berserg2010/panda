@@ -138,4 +138,5 @@ deploy_staging:
     - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
   only:
     - dev
-
+  tags:
+    - docker-django
