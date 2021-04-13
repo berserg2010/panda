@@ -15,8 +15,8 @@ variables:
   HOST_NAME: project
   USER_ID: 993
   GROUP_ID: 992
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY/hellopanda_project/hellopanda:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY/hellopanda_project/hellopanda:latest
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 
 before_script:
@@ -44,7 +44,7 @@ Docker build:
     - dev
     - master
   before_script:
-    - echo "\#\#\# Stage build \#\#\#"
+    - echo "Stage build"
 
     - cp .env.template .env
     - cp .env.template env/common.env
@@ -56,16 +56,15 @@ Docker build:
     - source env/back.env
     - source env/db.env
 
-  script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
 
-    # - docker build -f ./backend/Dockerfile -t $CONTAINER_TEST_IMAGE ./backend/
-    - docker-compose build
+  script:
+    - docker-compose build backend -t $CONTAINER_TEST_IMAGE
     
-    - docker-compose run backend python manage.py collectstatic --no-input
-    - docker-compose run backend python manage.py makemigrations
-    - docker-compose run backend python manage.py migrate
-    - docker-compose run backend python manage.py loaddata init_data.json
+    # - docker-compose run backend python manage.py collectstatic --no-input
+    # - docker-compose run backend python manage.py makemigrations
+    # - docker-compose run backend python manage.py migrate
+    # - docker-compose run backend python manage.py loaddata init_data.json
 
     - docker push $CONTAINER_TEST_IMAGE
   tags:
@@ -78,17 +77,17 @@ Unit tests:
     - dev
     - master
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
+    # - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
 
     - docker pull $CONTAINER_TEST_IMAGE
     
     # - docker-compose up -d db
     # - docker-compose up -d redis
  
-    # - docker-compose run backend python manage.py collectstatic --no-input
-    # - docker-compose run backend python manage.py makemigrations
-    # - docker-compose run backend python manage.py migrate
-    # - docker-compose run backend python manage.py loaddata init_data.json
+    - docker-compose run backend python manage.py collectstatic --no-input
+    - docker-compose run backend python manage.py makemigrations
+    - docker-compose run backend python manage.py migrate
+    - docker-compose run backend python manage.py loaddata init_data.json
 
     - docker-compose run backend pytest
 
