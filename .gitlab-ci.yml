@@ -44,7 +44,7 @@ Docker build:
     - dev
     - master
   before_script:
-    - echo "### Stage build ###"
+    - echo "\#\#\# Stage build \#\#\#"
 
     - cp .env.template .env
     - cp .env.template env/common.env
