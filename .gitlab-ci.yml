@@ -52,6 +52,9 @@ Docker build:
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE backend
     - docker push $CONTAINER_TEST_IMAGE
+
+  after_script:
+    - docker-compose down
   tags:
     - docker-django
 
@@ -87,7 +90,8 @@ Unit tests:
     - docker-compose run backend python manage.py loaddata init_data.json
 
     - docker-compose run backend pytest
-
+    
+  after_script:
     - docker-compose down
   tags:
     - docker-django
