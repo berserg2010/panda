@@ -58,7 +58,7 @@ Docker build:
 
     - docker push $CONTAINER_TEST_IMAGE
   tags:
-    - docker-dev
+    - docker-django
 
 
 Unit tests:
@@ -85,7 +85,7 @@ Unit tests:
     
     - docker-compose down
   tags:
-    - docker-dev
+    - docker-django
 
 deploy_staging:
   stage: staging
@@ -106,4 +106,4 @@ deploy_staging:
   only:
     - dev
   tags:
-    - docker-dev
+    - docker-django
