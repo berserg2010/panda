@@ -99,7 +99,7 @@ deploy_staging:
     name: staging
     url: https://hqua0177372.online-vm.com
   script:
-    - git clone git@gitlab-dev.ddns.net:hellopanda_project/hellopanda.git
+    - docker pull $CONTAINER_TEST_IMAGE
 
     - docker-compose down
 
