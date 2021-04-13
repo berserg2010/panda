@@ -116,15 +116,13 @@ deploy_staging:
   script:
     - docker pull $CONTAINER_TEST_IMAGE
 
-    - docker-compose down
-
     - docker-compose run backend python manage.py collectstatic --no-input
     - docker-compose run backend python manage.py makemigrations
     - docker-compose run backend python manage.py migrate
     - docker-compose run backend python manage.py loaddata init_data.json
 
+    - docker-compose down
+
     - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
   only:
     - dev
-  tags:
-    - docker-django
