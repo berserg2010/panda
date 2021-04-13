@@ -15,8 +15,8 @@ variables:
   HOST_NAME: project
   USER_ID: 993
   GROUP_ID: 992
-  CONTAINER_TEST_IMAGE: gitlab-dev.ddns.net:5050/hellopanda_project/hellopanda:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: gitlab-dev.ddns.net:5050/hellopanda_project/hellopanda:latest
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY/hellopanda_project/hellopanda:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY/hellopanda_project/hellopanda:latest
 
 
 before_script:
@@ -55,7 +55,7 @@ Docker build:
     - docker-compose run backend python manage.py migrate
     - docker-compose run backend python manage.py loaddata init_data.json
 
-    #- docker push $CONTAINER_TEST_IMAGE
+    - docker push $CONTAINER_TEST_IMAGE
   tags:
     - docker-dev
 
@@ -66,17 +66,17 @@ Unit tests:
     - dev
     - master
   script:
-    # - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
 
-    # - docker pull $CONTAINER_TEST_IMAGE
+    - docker pull $CONTAINER_TEST_IMAGE
     
     # - docker-compose up -d db
     # - docker-compose up -d redis
  
-    - docker-compose run backend python manage.py collectstatic --no-input
-    - docker-compose run backend python manage.py makemigrations
-    - docker-compose run backend python manage.py migrate
-    - docker-compose run backend python manage.py loaddata init_data.json
+    # - docker-compose run backend python manage.py collectstatic --no-input
+    # - docker-compose run backend python manage.py makemigrations
+    # - docker-compose run backend python manage.py migrate
+    # - docker-compose run backend python manage.py loaddata init_data.json
 
     - docker-compose run backend pytest
 
