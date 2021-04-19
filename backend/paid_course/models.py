@@ -4,7 +4,7 @@ from django.db.models import Q
 from common.utils import date_now
 from common.models import CommonId
 from account.models import Teacher, Student
-from course.models import Course, CourseLesson
+from course.models import Course, CourseLesson, GroupsOfCourses
 from lesson.models import Lesson
 
 
@@ -51,11 +51,12 @@ class Schedule(CommonId):
     paid_course = models.ForeignKey(PaidCourse, on_delete=models.CASCADE, verbose_name='курс')
 
     @classmethod
-    def get_student_schedule(cls, student, groups_courses, first_date, second_date=date_now()):
+    def get_student_schedule(cls, student: Student, group_courses: GroupsOfCourses,
+                             first_date: datetime, second_date: datetime = date_now()):
         return cls.objects.filter(
             Q(paid_course__student=student),
-            Q(paid_course__course__group_of_course=groups_courses),
-            Q(datetime__gte=first_date) | Q(datetime__lte=second_date),
+            Q(paid_course__course__group_of_course=group_courses),
+            Q(datetime__gte=first_date) & Q(datetime__lte=second_date),
         )
 
     @property

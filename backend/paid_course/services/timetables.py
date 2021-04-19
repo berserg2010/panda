@@ -5,7 +5,7 @@ from types import FunctionType
 
 from django.db.models import Q
 
-from common.utils import date_now, get_user_context
+from common.utils import date_now, get_user_context, sorted_list_pydantic_models
 from account.models import Teacher, Student
 from paid_course.models import FreeLesson, Schedule
 
@@ -52,7 +52,7 @@ def _schedule_entity_adapter(schedules: List[Union[Schedule, FreeLesson]], weeks
             if weekdays and weekdays.get(weekday_dt):
                 weekday = weeks[week_dt][weekday_dt]
                 weekday['schedule'] += [schedule_entity]
-                sorted_weekday = sorted(weekday['schedule'], key=lambda x: x.time)
+                sorted_weekday = sorted_list_pydantic_models(weekday['schedule'], 'time')
                 weeks[week_dt][weekday_dt]['schedule'] = sorted_weekday
 
             elif weekdays:
@@ -94,7 +94,7 @@ def get_timetables(
         timetable = []
         timetable += [get_schedule_entity(schedule) for schedule in schedules]
         timetable += [get_schedule_entity(free_lesson) for free_lesson in free_lessons]
-        timetable = sorted(timetable, key=lambda x: x.time)
+        timetable = sorted_list_pydantic_models(timetable, 'time')
     else:
         timetable = {}
 

@@ -6,9 +6,9 @@ import uuid
 from django.db.models import Q, Sum
 from django.db.models.query import QuerySet
 
-from common.utils import date_now
+from common.utils import date_now, sorted_list_pydantic_models
 from account.models import Payment
-from ..models import Schedule
+from paid_course.models import Schedule
 
 
 class GroupCoursesStat(BaseModel):
@@ -39,7 +39,8 @@ def get_chain_of_payments(last_payment_qs: QuerySet[Payment], group_of_course: u
 
 
 def get_sum_paid_lessons(obj: QuerySet[Payment]) -> int:
-    return obj.aggregate(Sum('paid_for_lessons')).get('paid_for_lessons__sum', 0)
+    sum_paid_lessons = obj.aggregate(Sum('paid_for_lessons')).get('paid_for_lessons__sum', 0)
+    return sum_paid_lessons
 
 
 def get_courses_stat(user) -> List[GroupCoursesStat]:
@@ -67,11 +68,12 @@ def get_courses_stat(user) -> List[GroupCoursesStat]:
 
         valid_until = active_payments.filter(paid_filter).latest('valid_until').valid_until
 
-        schedule = Schedule.get_student_schedule(
+        schedule = get_student_schedule_count(
             student,
             last_payment_inst.group_of_course,
-            order_time
-        ).filter(finished=True).count()
+            order_time,
+            valid_until,
+        )
 
         bonus -= schedule
         lessons -= schedule
@@ -85,4 +87,16 @@ def get_courses_stat(user) -> List[GroupCoursesStat]:
 
         groups_courses_stat.append(group_courses_stat)
 
-    return groups_courses_stat
+    sorted_groups_courses_stat = sorted_list_pydantic_models(groups_courses_stat, 'valid_until')
+
+    return sorted_groups_courses_stat
+
+
+def get_student_schedule_count(student, group_of_course, first_date, second_date=date_now()):
+    student_schedule_count = Schedule.get_student_schedule(
+        student,
+        group_of_course,
+        first_date,
+        second_date,
+    ).filter(finished=True).count()
+    return student_schedule_count

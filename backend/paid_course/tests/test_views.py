@@ -4,9 +4,9 @@ from rest_framework.status import HTTP_200_OK
 from django.urls import reverse
 from django.utils import timezone
 
+from conftest import ParameterStorage
 from common.utils import date_now
 from course.models import Course
-from .conftest import ParameterStorage
 from ..models import FreeLesson, PaidCourse
 
 
@@ -99,7 +99,6 @@ class TestTimetablesView:
 
         res = student_register.get('/lk/timetables/')
         assert res.status_code == HTTP_200_OK
-        # assert res.context['timetable'] == result_data
         assert res.context['timetable'][week_1][day_1] == result_data[week_1][day_1]
         assert res.context['timetable'][week_1][day_2] == result_data[week_1][day_2]
         assert res.context['timetable'][week_2][day_3] == result_data[week_2][day_3]
