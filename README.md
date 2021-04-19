@@ -42,13 +42,13 @@ Prod:
     cp .env.template .env
     ln .env env/common.env
 
-    docker-compose run backend python manage.py dumpdata --indent 2 --exclude contenttypes --exclude admin.logentry --output dump.json
+    docker-compose run --rm backend python manage.py dumpdata --indent 2 --exclude contenttypes --exclude admin.logentry --output dump.json
     
-    docker-compose run backend python manage.py makemigrations
-    docker-compose run backend python manage.py migrate
-    docker-compose run backend python manage.py loaddata dump.json
+    docker-compose run --rm backend python manage.py makemigrations
+    docker-compose run --rm backend python manage.py migrate
+    docker-compose run --rm backend python manage.py loaddata dump.json
     
-    docker-compose run backend python manage.py collectstatic --no-input
+    docker-compose run --rm backend python manage.py collectstatic --no-input
     
     docker-compose up --build
     

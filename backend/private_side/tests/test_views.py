@@ -32,7 +32,7 @@ def test_context_groups_courses_stat(student_register):
 
     assert Student.objects.count() == 1
     student = get_user_model().objects.get(
-        username=ParameterStorage.user_auth.get('username')
+        username=ParameterStorage.student_auth.get('username')
     ).student
 
     res = student_register.get('/lk/')

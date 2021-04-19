@@ -1,8 +1,12 @@
-import pytest
+from asgiref.sync import sync_to_async
+from channels.db import database_sync_to_async
 from mixer.backend.django import mixer
-from django.test import Client
+import pytest
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+from django.test import Client
 
 from account.models import Student, Payment
 
@@ -32,8 +36,8 @@ def create_superuser(create_user_handler):
 
 @pytest.fixture(autouse=True)
 def create_student(create_user_handler):
-    def _create_student():
-        user = create_user_handler(ParameterStorage.user_auth)
+    def _create_student() -> User:
+        user = create_user_handler(ParameterStorage.student_auth)
         mixer.blend(
             Student,
             user=user,
@@ -63,8 +67,8 @@ def client_register(client, create_superuser):
 def student_register(client, create_student):
     create_student()
     res = client.login(
-        username=ParameterStorage.user_auth.get('username'),
-        password=ParameterStorage.user_auth.get('password'),
+        username=ParameterStorage.student_auth.get('username'),
+        password=ParameterStorage.student_auth.get('password'),
     )
     assert res
     return client
@@ -80,10 +84,10 @@ class ParameterStorage:
         'password': get_user_model().objects.make_random_password(),
     }
 
-    user_auth = {
+    student_auth = {
         'username': 'user',
-        'email': 'user@asdfasdf.com',
-        'first_name': 'first_user',
-        'last_name': 'last_user',
+        'email': 'student@asdfasdf.com',
+        'first_name': 'first_name_student',
+        'last_name': 'last_name_student',
         'password': get_user_model().objects.make_random_password(),
     }
