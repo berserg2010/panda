@@ -44,13 +44,13 @@ def create_superuser(create_user_handler):
 
 @pytest.fixture(autouse=True)
 def create_student(create_user_handler):
-    def _create_student() -> User:
+    def _create_student() -> Student:
         user = create_user_handler(ParameterStorage.student_auth)
-        mixer.blend(
+        student = mixer.blend(
             Student,
             user=user,
         )
-        return user
+        return student
     return _create_student
 
 
