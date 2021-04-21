@@ -144,3 +144,23 @@ class Payment(CommonId):
         verbose_name = 'платеж'
         verbose_name_plural = '04 | Платежи'
         ordering = ('-valid_until', 'student__user__last_name')
+
+
+class Promo(CommonId):
+    code = models.CharField(max_length=32, verbose_name='код')
+
+    description = models.TextField(default='', blank=True, verbose_name='описание')
+
+    discount = models.PositiveSmallIntegerField(verbose_name='скидка, %')
+
+    order_time = models.DateTimeField(verbose_name='оплата была произведена')
+    valid_until = models.DateTimeField(verbose_name='действительно до')
+
+    student = models.ManyToManyField(Student, related_name='promo', verbose_name='ученик')
+
+    def __str__(self):
+        return f'{self.description}'
+
+    class Meta:
+        verbose_name = 'промо'
+        verbose_name_plural = '05 | Промо'
