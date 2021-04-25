@@ -1,6 +1,7 @@
 from calendar import monthrange
 from pydantic import BaseModel
 from typing import List
+from uuid import UUID
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
@@ -15,7 +16,7 @@ if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
     date_now = timezone.now
 else:
     def date_now():
-        return datetime(2018, 1, 1, tzinfo=timezone.utc)
+        return datetime(2018, 1, 1)
 
 
 def get_timedelta(dt: datetime = date_now(), days: int = 0):
@@ -88,3 +89,11 @@ class CommonFieldsModelAdmin(CommonIdModelAdmin):
         'title',
         'description',
     )
+
+
+def check_uuid(bonus_id) -> bool:
+    try:
+        UUID(bonus_id, version=4)
+    except ValueError:
+        return False
+    return True

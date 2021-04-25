@@ -130,6 +130,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         'paid_for_lessons',
         'amount',
         'bonus',
+        'promo',
         'group_of_course',
         'order_time',
         'valid_until',
@@ -140,6 +141,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         'student',
         'paid_for_lessons',
         'bonus',
+        'promo',
         'group_of_course',
         'valid_until',
 
@@ -172,7 +174,6 @@ class PromoAdmin(CommonIdModelAdmin):
         *CommonIdModelAdmin.list_display,
         'code',
         'description',
-        'discount',
         'order_time',
         'valid_until',
     )
@@ -180,7 +181,6 @@ class PromoAdmin(CommonIdModelAdmin):
         *CommonIdModelAdmin.fields,
         'code',
         'description',
-        'discount',
         'order_time',
         'valid_until',
     )
