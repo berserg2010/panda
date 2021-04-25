@@ -82,6 +82,41 @@ class Student(Account):
         verbose_name_plural = '03 | Ученики'
 
 
+class Promo(CommonId):
+    code = models.CharField(max_length=32, verbose_name='код')
+
+    description = models.TextField(default='', blank=True, verbose_name='описание')
+
+    # discount = models.PositiveSmallIntegerField(default=0, blank=True, verbose_name='скидка, %')
+
+    # lesson = models.PositiveSmallIntegerField(default=0, blank=True, verbose_name='количество уроков')
+
+    order_time = models.DateTimeField(verbose_name='дата начала')
+    valid_until = models.DateTimeField(blank=True, verbose_name='действует до')
+
+    def save(self, *args, **kwargs):
+        if not self.valid_until:
+            self.valid_until = get_valid_until(self.order_time)
+
+        # Если промо с таким кодом уже активно, то не создаем объект
+        promo = Promo.objects.filter(
+            code=self.code,
+            valid_until__range=(self.order_time, self.valid_until),
+        ).exclude(pk=self.pk).exists()
+
+        if promo:
+            return
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.code}'
+
+    class Meta:
+        verbose_name = 'промо'
+        verbose_name_plural = '05 | Промо'
+
+
 class Payment(CommonId):
 
     paid_for_lessons = models.PositiveSmallIntegerField(verbose_name='оплачено занятий')
@@ -96,6 +131,7 @@ class Payment(CommonId):
 
     student = models.ForeignKey(Student, on_delete=models.PROTECT, related_name='payment_student', verbose_name='ученик')
     bonus = models.ForeignKey(Student, null=True, blank=True, on_delete=models.PROTECT, related_name='payment_bonus', verbose_name='бонус')
+    promo = models.ForeignKey(Promo, null=True, blank=True, on_delete=models.PROTECT, related_name='payment_promo', verbose_name='промо')
     group_of_course = models.ForeignKey(GroupsOfCourses, on_delete=models.PROTECT, verbose_name='группа курса')
     first_payment = models.ForeignKey(
         'Payment',

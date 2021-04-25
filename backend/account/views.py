@@ -15,12 +15,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.edit import FormView
 
 from common.utils import (
+    date_now,
     new_password,
     get_user_context,
     message_success,
     message_error,
+    check_uuid,
 )
-from account.models import Student, Payment
+from account.models import Student, Payment, Promo
 from account.forms import (
     RequestUserForm,
     RecoverPasswordForm,
@@ -95,17 +97,15 @@ def recover_password(request):
 
 @csrf_exempt
 def payment_callback(request):
-
     if request.method == 'POST':
         response_status = request.POST.get('response_status')
         order_status = request.POST.get('order_status')
 
         if response_status == 'success' and order_status == 'approved':
             context = message_success('Оплата прошла успешно!')
-
             payment_id = request.POST.get('payment_id')
-            order_id = request.POST.get('order_id')
             actual_amount = int(request.POST.get('actual_amount')) // 100
+            order_id = request.POST.get('order_id')
             order_time = datetime.strptime(request.POST.get('order_time'), '%d.%m.%Y %H:%M:%S')
 
             merchant_data = {
@@ -119,6 +119,7 @@ def payment_callback(request):
 
             student = Student.objects.get(pk=student_id)
             bonus_student = Student.objects.none()
+            bonus_promo = Promo.objects.none()
             course = Course.objects.get(pk=course_id)
 
             payment_base = Payment(
@@ -134,23 +135,45 @@ def payment_callback(request):
 
             payment_bonus = None
             payment_bonus_ = None
-            condition = bonus_id and Student.objects.filter(
-                pk=bonus_id, user__is_active=True
-            ).exclude(pk=student.pk).exists()
-            if condition:
-                bonus_student = Student.objects.get(pk=bonus_id)
-                payment_bonus = deepcopy(payment_base)
 
-                payment_bonus.pk = None
-                payment_bonus.amount = None
-                payment_bonus.order_time = timezone.now()
-                payment_bonus.paid_for_lessons = 2
-                payment_bonus.bonus = bonus_student
+            condition = False
+            if bonus_id:
+                bonus_id = bonus_id.strip()
 
-                payment_bonus_ = deepcopy(payment_bonus)
-                payment_bonus_.pk = None
-                payment_bonus_.student = bonus_student
-                payment_bonus_.bonus = student
+                if check_uuid(bonus_id):
+                    try:
+                        bonus_student = Student.objects.filter(
+                            pk=bonus_id, user__is_active=True
+                        ).exclude(pk=student.pk).first()
+                    except ValueError:
+                        pass
+                else:
+                    try:
+                        bonus_promo = Promo.objects.exclude(payment_promo__student=student_id).filter(
+                            code=bonus_id, valid_until__date__gte=date_now().date()
+                        ).first()
+                    except ValueError:
+                        pass
+
+                if bonus_student or bonus_promo:
+                    condition = True
+
+                    payment_bonus = deepcopy(payment_base)
+                    payment_bonus.pk = None
+                    payment_bonus.amount = None
+                    payment_bonus.order_time = timezone.now()
+                    payment_bonus.paid_for_lessons = 2
+
+                if bonus_promo:
+                    payment_bonus.promo = bonus_promo
+
+                if bonus_student:
+                    payment_bonus.bonus = bonus_student
+
+                    payment_bonus_ = deepcopy(payment_bonus)
+                    payment_bonus_.pk = None
+                    payment_bonus_.student = bonus_student
+                    payment_bonus_.bonus = student
 
             paid_course = None
             if not PaidCourse.objects.filter(student=student, course=course).exists():
@@ -163,8 +186,10 @@ def payment_callback(request):
                 with transaction.atomic():
                     payment_base.save()
 
-                    if payment_bonus is not None and payment_bonus_ is not None:
+                    if payment_bonus is not None:
                         payment_bonus.save()
+
+                    if payment_bonus_ is not None:
                         payment_bonus_.save()
 
                     if paid_course is not None:
@@ -180,7 +205,17 @@ def payment_callback(request):
                     condition
                 )
 
+                if bonus_id and not condition:
+                    context = message_success(
+                        f'Оплата прошла успешно, но промо код {bonus_id} не прошёл проверку.\nОбратитесь в службу поддержки.'
+                    )
+
                 if condition:
+                    context = message_success(
+                        f'Оплата прошла успешно, промо код {bonus_id} зарегистрирован.'
+                    )
+
+                if bonus_student:
                     send_mail_bonus(bonus_student.user.email)
 
                 send_mail_payment_admin(payment_id, student.user.first_name, paid_for_lessons)

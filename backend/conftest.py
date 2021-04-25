@@ -51,6 +51,18 @@ def create_student(create_user_handler):
     return _create_student
 
 
+@pytest.fixture(autouse=True)
+def create_student_two(create_user_handler):
+    def _create_student_two():
+        user = create_user_handler(ParameterStorage.user_auth_two)
+        student = mixer.blend(
+            Student,
+            user=user,
+        )
+        return student
+    return _create_student_two
+
+
 @pytest.fixture
 def client():
     return Client()
@@ -195,6 +207,13 @@ class ParameterStorage:
         'email': 'user@asdfasdf.com',
         'first_name': 'first_user',
         'last_name': 'last_user',
+        'password': get_user_model().objects.make_random_password(),
+    }
+    user_auth_two = {
+        'username': 'user_two',
+        'email': 'user_two@asdfasdf.com',
+        'first_name': 'first_user_two',
+        'last_name': 'last_user_two',
         'password': get_user_model().objects.make_random_password(),
     }
 

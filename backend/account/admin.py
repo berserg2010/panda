@@ -5,7 +5,7 @@ from django.utils.safestring import mark_safe
 
 from common.utils import CommonIdModelAdmin, date_now
 from private_side.services.courses_stat import get_courses_stat
-from .models import RequestUser, Teacher, Student, Payment
+from .models import RequestUser, Teacher, Student, Payment, Promo
 from .services.request_user import request_user_accept, request_user_reject
 
 
@@ -130,6 +130,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         'paid_for_lessons',
         'amount',
         'bonus',
+        'promo',
         'group_of_course',
         'order_time',
         'valid_until',
@@ -140,6 +141,7 @@ class PaymentAdmin(CommonIdModelAdmin):
         'student',
         'paid_for_lessons',
         'bonus',
+        'promo',
         'group_of_course',
         'valid_until',
 
@@ -163,4 +165,23 @@ class PaymentAdmin(CommonIdModelAdmin):
     #     'order',
     #     'order_time',
     # )
+    save_on_top = False
+
+
+@admin.register(Promo)
+class PromoAdmin(CommonIdModelAdmin):
+    list_display = (
+        *CommonIdModelAdmin.list_display,
+        'code',
+        'description',
+        'order_time',
+        'valid_until',
+    )
+    fields = (
+        *CommonIdModelAdmin.fields,
+        'code',
+        'description',
+        'order_time',
+        'valid_until',
+    )
     save_on_top = False
