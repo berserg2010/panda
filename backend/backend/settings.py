@@ -27,6 +27,8 @@ SECRET_KEY = config('SECRET_KEY', default=utils.get_random_secret_key())
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+HOST_NAME = config('HOST_NAME', default='localhost')
+
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
@@ -40,7 +42,7 @@ CORS_ALLOW_HEADERS = default_headers + (
     'contenttype',
 )
 CORS_ORIGIN_WHITELIST = [
-    f'https://{config("HOST_NAME")}',
+    f'https://{HOST_NAME}',
 
     'https://api.fondy.eu',
 ]
@@ -163,10 +165,10 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static_build'),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -179,27 +181,27 @@ LOGOUT_REDIRECT_URL = '/'
 admin.AdminSite.site_header = config('PROJECT_NAME', default='project').upper()
 admin.AdminSite.empty_value_display = '--'
 
-NUMB_WEBRTC_USERNAME = config('NUMB_WEBRTC_USERNAME', default='')
-NUMB_WEBRTC_CREDENTIAL = config('NUMB_WEBRTC_CREDENTIAL', default='')
+# NUMB_WEBRTC_USERNAME = config('NUMB_WEBRTC_USERNAME', default='')
+# NUMB_WEBRTC_CREDENTIAL = config('NUMB_WEBRTC_CREDENTIAL', default='')
 
 
 # Fondy
 MERCHANT_ID = config('MERCHANT_ID', default=1396424, cast=int)
 
 # EMAIL
-EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
 EMAIL_PORT = 465
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='root')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_SSL = True
 
 # Voximplant
-VOXIMPLANT_ACC_ID=config('VOXIMPLANT_ACC_ID')
-VOXIMPLANT_ACC_NAME=config('VOXIMPLANT_ACC_NAME')
-VOXIMPLANT_APP_ID=config('VOXIMPLANT_APP_ID')
-VOXIMPLANT_APP_NAME=config('VOXIMPLANT_APP_NAME')
-VOXIMPLANT_API_KEY=config('VOXIMPLANT_API_KEY')
-VOXIMPLANT_USER_PASSWORD=config('VOXIMPLANT_USER_PASSWORD')
+VOXIMPLANT_ACC_ID = config('VOXIMPLANT_ACC_ID', default='')
+VOXIMPLANT_ACC_NAME = config('VOXIMPLANT_ACC_NAME', default='')
+VOXIMPLANT_APP_ID = config('VOXIMPLANT_APP_ID', default='')
+VOXIMPLANT_APP_NAME = config('VOXIMPLANT_APP_NAME', default='')
+VOXIMPLANT_API_KEY = config('VOXIMPLANT_API_KEY', default='')
+VOXIMPLANT_USER_PASSWORD = config('VOXIMPLANT_USER_PASSWORD', default='')
 
 
 # REDIS

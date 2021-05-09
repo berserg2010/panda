@@ -3,10 +3,10 @@ version: '3.8'
 services:
 
   db:
-    restart: always
+    restart: unless-stopped
 
   redis:
-    restart: always
+    restart: unless-stopped
 
   pgbouncer:
     container_name: pgbouncer
@@ -15,7 +15,7 @@ services:
       - env/db.env
     ports:
       - 6432:5432
-    restart: always
+    restart: unless-stopped
     depends_on:
       - db
     networks:
@@ -27,10 +27,15 @@ services:
       - POSTGRES_PORT=6432
     ports:
       - 8000
-    user: root
+#    user: root
     command:
       [ "daphne", "-b", "0.0.0.0", "-p", "8000", "backend.asgi:application" ]
-    restart: always
+    volumes:
+      # Volume
+      - static:/usr/src/${PROJECT_NAME}/static_root
+      # Bind
+      - ./backend/media:/usr/src/${PROJECT_NAME}/media
+    restart: unless-stopped
     networks:
       - proxy_back
 
@@ -40,24 +45,23 @@ services:
     env_file:
       - env/common.env
     ports:
-      - ${PROXY_PORT_V4}:80
-      - ${PROXY_PORT_V6}:443
+      - ${PROXY_PORT_HTTP}:80
+      - ${PROXY_PORT_HTTPS}:443
     volumes:
+      # Volume
+      - static:/usr/src/${PROJECT_NAME}/static_root
+      # Bind
       - ./proxy/templates:/etc/nginx/templates
-      - type: bind
-        source: ./backend/static
-        target: /usr/src/${PROJECT_NAME}/static
-      - type: bind
-        source: ./backend/media
-        target: /usr/src/${PROJECT_NAME}/media
-      - type: bind
-        source: ./ssl
-        target: /usr/src/${PROJECT_NAME}/ssl
-    restart: always
+      - ./ssl:/usr/src/${PROJECT_NAME}/ssl
+      - ./backend/media:/usr/src/${PROJECT_NAME}/media
+    restart: unless-stopped
     depends_on:
       - backend
     networks:
       - proxy_back
+
+volumes:
+  static:
 
 networks:
   proxy_back:

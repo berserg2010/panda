@@ -25,13 +25,14 @@
 
 <div id="snackbar"></div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>#}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://api.fondy.eu/static_common/v1/checkout/ipsp.js"></script>
 
 {% block script %}{% endblock %}
 
-<script src="{% static 'js/scripts.js' %}"></script>
+{#<script src="{% static 'js/scripts.js' %}"></script>#}
+<script src="{% static 'js/main.js' %}"></script>
 
 {{ 'DEBUG'|get_settings_var|json_script:'DEBUG' }}
 {{ 'MERCHANT_ID'|get_settings_var|json_script:'MERCHANT_ID' }}

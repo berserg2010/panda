@@ -54,7 +54,7 @@ server {
     }
 
     location /static {
-        alias /usr/src/${PROJECT_NAME}/static;
+        alias /usr/src/${PROJECT_NAME}/static_root;
     }
     location /media {
         alias /usr/src/${PROJECT_NAME}/media;

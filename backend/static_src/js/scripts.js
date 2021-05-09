@@ -1,3 +1,7 @@
+const AOS = require('aos');
+const $ = jQuery = require('jquery');
+
+
 ! function(e, t) {
   "object" == typeof exports && "object" == typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define([], t) : "object" == typeof exports ? exports.AOS = t() : e.AOS = t()
 }(this, function() {

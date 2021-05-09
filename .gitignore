@@ -204,11 +204,16 @@ pip-selfcheck.json
 
 
 ### Static ###
-!**/static/
-!**/static/lib
-**/static/admin
-**/static/rest_framework
-staticfiles
+#!backend/static_src/
+#!backend/static_src/lib
+#backend/static_src/admin
+#backend/static_src/rest_framework
+backend/static_build/*
+!backend/static_build/.gitkeep
+#!backend/static_build
+#!backend/static_root/
+backend/static_root/*
+!backend/static_root/.gitkeep
 
 
 ### SSL ###
