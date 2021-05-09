@@ -28,8 +28,6 @@ services:
     ports:
       - 8000
 #    user: root
-    command:
-      [ "daphne", "-b", "0.0.0.0", "-p", "8000", "backend.asgi:application" ]
     volumes:
       # Volume
       - static:/usr/src/${PROJECT_NAME}/static_root

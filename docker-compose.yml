@@ -33,7 +33,11 @@ services:
       - env/back.env
       - env/db.env
     command:
-      [ "redis-cli", "-u", "redis://redis:6379/0", "flushall" ]
+      sh -c "
+        python3 -c \"import redis;r=redis.Redis(host='redis',port='6379');r.flushall()\"
+        && python3 manage.py collectstatic -c --no-input
+        && daphne -b 0.0.0.0 -p 8000 backend.asgi:application
+      "
     depends_on:
       - db
       - redis

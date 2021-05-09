@@ -68,5 +68,3 @@ USER node
 COPY --chown=${USER_ID}:${GROUP_ID} . ./
 
 COPY --chown=${USER_ID}:${GROUP_ID} --from=0 /usr/src/${PROJECT_NAME}/dist ./static_build
-
-RUN python3 manage.py collectstatic --clear --no-input

@@ -17,8 +17,7 @@ module.exports = ({ debug = 'false' }) => {
     mode:  mode,
     output: {
       filename: 'js/main.js',
-      // path: distPath,
-      path: `${distPath}`,
+      path: distPath,
     },
     module: {
       rules: [
