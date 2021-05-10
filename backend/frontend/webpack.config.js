@@ -13,10 +13,15 @@ module.exports = ({ debug = 'false' }) => {
   const mode = [ 'true', '1' ].includes(debug) ? 'development' : 'production'
 
   return {
-    entry: './index.js',
     mode:  mode,
+    context: path.join(__dirname),
+    entry: {
+      index: './index.js',
+      main: `${srcPath}/js/main.js`,
+      video_chat: `${srcPath}/js/video_chat.js`,
+    },
     output: {
-      filename: 'js/main.js',
+      filename: 'js/[name].js',
       path: distPath,
     },
     module: {
@@ -98,7 +103,6 @@ module.exports = ({ debug = 'false' }) => {
         patterns: [
           {from: `${srcPath}/fonts`, to: `${distPath}/fonts`},
           {from: `${srcPath}/img`, to: `${distPath}/img`},
-          // {from: `${srcPath}/js`, to: `${distPath}/js`},
         ],
       }),
       require('autoprefixer'),
