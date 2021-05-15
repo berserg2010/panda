@@ -1,4 +1,5 @@
 const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -16,9 +17,10 @@ module.exports = ({ debug = 'false' }) => {
     mode:  mode,
     context: path.join(__dirname),
     entry: {
-      index: './index.js',
-      main: `${srcPath}/js/main.js`,
-      video_chat: `${srcPath}/js/video_chat.js`,
+      index: `${srcPath}/js/index.js`,
+      main_public: `${srcPath}/js/main_public.js`,
+      main_private: `${srcPath}/js/main_private.js`,
+      video_chat: `${srcPath}/js/components/video_chat.js`,
     },
     output: {
       filename: 'js/[name].js',
@@ -38,6 +40,11 @@ module.exports = ({ debug = 'false' }) => {
               }
             },
           ],
+        },
+        // Vue
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
         },
         // SCSS/CSS
         {
@@ -96,6 +103,7 @@ module.exports = ({ debug = 'false' }) => {
       ],
     },
     plugins: [
+      new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         filename: 'css/main.css',
       }),

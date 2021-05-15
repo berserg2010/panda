@@ -35,7 +35,7 @@ services:
     command:
       sh -c "
         python3 -c \"import redis;r=redis.Redis(host='redis',port='6379');r.flushall()\"
-        && python3 manage.py collectstatic -c --no-input
+        && python3 manage.py collectstatic --no-input
         && daphne -b 0.0.0.0 -p 8000 backend.asgi:application
       "
     depends_on:

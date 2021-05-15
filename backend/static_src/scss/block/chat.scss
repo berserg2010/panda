@@ -1,0 +1,117 @@
+#chat {
+  width: $menu-width;
+  padding: 16px;
+
+  position: absolute;
+  top: calc(50% - #{$menu-width / 2});
+  left: calc(50% - #{$menu-width / 2});
+  z-index: 5;
+
+  box-sizing: border-box;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+
+  background-color: white;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.chat-group {
+
+  .chat-list {
+    position: relative;
+  }
+  .chat-list li {
+    margin-bottom: 16px;
+  }
+  .chat-list li:last-child {
+    margin: 0;
+  }
+  .chat-list li a {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+
+    min-width: 288px;
+    min-height: 56px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    overflow: hidden;
+    background: #ffb42d;
+    border-radius: 10px;
+
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #f8fffc;
+
+    transition: box-shadow .2s, background .2s;
+  }
+  .chat-list li a:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
+  }
+  .chat-list li a.active {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
+    background: #5f9f84;
+  }
+  .avatar {
+    display: block;
+
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    margin-right: 8px;
+
+    overflow: hidden;
+    position: relative;
+  }
+  .avatar img {
+    display: block;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 48px;
+    height: 48px;
+
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 3px solid #f8fffc;
+    object-fit: cover;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 216px;
+    height: 40px;
+  }
+  .content span {
+    width: 100%;
+
+    font-style: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .content span:first-child {
+    font-weight: bold;
+  }
+}
+
+.chat-message {
+  display: none;
+}
