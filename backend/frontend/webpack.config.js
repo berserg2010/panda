@@ -9,11 +9,21 @@ const srcPath = path.join(__dirname, 'src');
 const distPath = path.join(__dirname, 'dist');
 
 
-module.exports = ({ debug = 'false' }) => {
+module.exports = ({ debug = 'false', watch = 'false' }) => {
 
-  const mode = [ 'true', '1' ].includes(debug) ? 'development' : 'production'
+  debug = JSON.parse(debug.toLowerCase());
+  watch = JSON.parse(watch.toLowerCase()) && debug;
+
+  console.info(`Debug: ${debug}`);
+
+  const mode = debug ? 'development' : 'production';
 
   return {
+    watch: watch,
+    watchOptions: {
+      aggregateTimeout: 600,
+      poll: 1000,
+    },
     mode:  mode,
     context: path.join(__dirname),
     entry: {
@@ -70,7 +80,8 @@ module.exports = ({ debug = 'false' }) => {
         },
         // IMG
         {
-          test: /\.(jpg|png|svg)$/,
+          // test: /\.(jpg|png|svg)$/,
+          test: /\.(jpg|png)$/,
           use: [{
             loader: 'file-loader',
             options: {
@@ -79,6 +90,14 @@ module.exports = ({ debug = 'false' }) => {
               name: '[name]-[sha1:hash:7].[ext]',
             },
           }]
+        },
+        //SVG
+        {
+          test: /\.svg$/,
+          use: [
+            'vue-loader',
+            'vue-svg-loader',
+          ],
         },
         // Fonts
         {

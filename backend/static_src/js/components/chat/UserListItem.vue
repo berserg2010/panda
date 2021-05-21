@@ -1,25 +1,18 @@
 <template>
   <li>
     <a href="#">
-      <dev class="avatar">
-        <img src="/static/img/user.jpg" alt="avatar">
-      </dev>
-      <div class="content">
-        <span>{{ fullName }}</span>
-        <span>{{ message }}</span>
-      </div>
+      <UserItem />
     </a>
   </li>
 </template>
 
 <script>
+import UserItem from './UserItem.vue';
+
 export default {
   name: 'UserListItem',
-  data() {
-    return {
-      fullName: 'Alina Ivanova',
-      message: 'Hello! Hello! Hello! Hello! Hello!',
-    }
+  components: {
+    UserItem,
   },
 }
 </script>

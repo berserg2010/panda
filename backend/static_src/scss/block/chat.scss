@@ -1,5 +1,7 @@
 #chat {
   width: $menu-width;
+  height: 400px;
+
   padding: 16px;
 
   position: absolute;
@@ -19,6 +21,7 @@
 }
 
 .chat-group {
+  //display: none;
 
   .chat-list {
     position: relative;
@@ -30,39 +33,70 @@
     margin: 0;
   }
   .chat-list li a {
-    position: relative;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: left;
-    align-items: center;
-
-    min-width: 288px;
-    min-height: 56px;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-
-    overflow: hidden;
-    background: #ffb42d;
-    border-radius: 10px;
-
-    font-size: 14px;
-    line-height: 17px;
-    font-weight: 500;
-    color: #f8fffc;
-
-    transition: box-shadow .2s, background .2s;
+    display: block;
   }
-  .chat-list li a:hover {
+  .chat-list li .user-aria:hover {
     box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
   }
-  .chat-list li a.active {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
+  .chat-list li .user-aria:active {
+    //box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
     background: #5f9f84;
   }
+}
+
+.chat-message {
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: #5f9f84;
+  border-radius: 10px;
+
+  .user-aria {
+    background-color: #5f9f84;
+  }
+}
+
+.user-aria {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: left;
+  align-items: center;
+
+  min-width: 288px;
+  min-height: 56px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  overflow: hidden;
+  background: #ffb42d;
+  border-radius: 10px;
+
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: #f8fffc;
+
+  transition: box-shadow .2s, background .2s;
+
+  .arrow_left {
+    width: 24px;
+    height: 24px;
+
+    border-color: #f8fffc;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+  }
+
   .avatar {
     display: block;
 
@@ -96,7 +130,7 @@
     justify-content: space-between;
     align-items: flex-start;
 
-    width: 216px;
+    width: 188px;
     height: 40px;
   }
   .content span {
@@ -110,8 +144,4 @@
   .content span:first-child {
     font-weight: bold;
   }
-}
-
-.chat-message {
-  display: none;
 }

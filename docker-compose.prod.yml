@@ -9,7 +9,6 @@ services:
     restart: unless-stopped
 
   pgbouncer:
-    container_name: pgbouncer
     image: edoburu/pgbouncer:1.15.0
     env_file:
       - env/db.env
@@ -33,12 +32,17 @@ services:
       - static:/usr/src/${PROJECT_NAME}/static_root
       # Bind
       - ./backend/media:/usr/src/${PROJECT_NAME}/media
+    command:
+      sh -c "
+        python3 -c \"import redis;r=redis.Redis(host='redis',port='6379');r.flushall()\"
+        && python3 manage.py collectstatic --no-input
+        && daphne -b 0.0.0.0 -p 8000 backend.asgi:application
+      "
     restart: unless-stopped
     networks:
       - proxy_back
 
   proxy:
-    container_name: proxy
     image: nginx:1.19
     env_file:
       - env/common.env

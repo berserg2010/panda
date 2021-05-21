@@ -3,5 +3,36 @@ version: '3.8'
 services:
 
   backend:
+    command:
+      sh -c "
+        python3 -c \"import redis;r=redis.Redis(host='redis',port='6379');r.flushall()\"
+        && daphne -b 0.0.0.0 -p 8000 backend.asgi:application
+      "
+    volumes:
+      # Volume
+      - static_build:/usr/src/${PROJECT_NAME}/static_build
+      # Bind
+      - ./backend/media:/usr/src/${PROJECT_NAME}/media
     ports:
       - 8000:8000
+
+
+  frontend:
+    build:
+      dockerfile: ../frontend/Dockerfile
+      context: backend/.
+      args:
+        PROJECT_NAME: ${PROJECT_NAME}
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
+        DEBUG: ${DEBUG}
+    command: npx webpack --env debug=$DEBUG watch=true
+    volumes:
+      # Volume
+      - static_build:/usr/src/${PROJECT_NAME}/dist
+      # Bind
+      - ./backend/static_src:/usr/src/${PROJECT_NAME}/src
+
+
+volumes:
+  static_build:
