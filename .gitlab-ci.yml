@@ -97,7 +97,7 @@ Unit tests:
     - docker-django
 
 
-deploy_staging:
+# deploy_staging:
   stage: staging
   environment:
     name: staging
