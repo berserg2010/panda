@@ -1,5 +1,5 @@
 <template>
-  <div class="arrow_left"></div>
+  <button type="button" class="arrow_left"></button>
 </template>
 
 <script>
