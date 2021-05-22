@@ -2,12 +2,13 @@
 
 {% load static private_side_extras paid_course_extras %}
 
-{% block title %}Занятие{% endblock %}
-
-{% block style %}
+{% block og_title %}
+  {% block title %}Занятие | {{ block.super }}{% endblock %}
 {% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Занятие</h1>
 
   <div class="personalArea-content">
     <div class="personalArea-block">

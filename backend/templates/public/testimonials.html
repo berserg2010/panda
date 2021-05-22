@@ -2,9 +2,15 @@
 
 {% load static %}
 
-{% block title %}Отзывы{% endblock %}
+{% block og_title %}
+  {% block title %}Отзывы наших учеников | {{ block.super }}{% endblock %}
+{% endblock %}
+
+{% block description %}Впервые на нашем сайте? Тогда тебе, скорее всего, интересно ознакомиться с отзывами наших учеников, которые уже изучают английский и китайский в Hello Panda{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Отзывы наших учеников</h1>
 
   {% include 'public/components/slider_testimonials.html' %}
 

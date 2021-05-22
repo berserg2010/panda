@@ -2,9 +2,14 @@
 
 {% load static private_side_extras %}
 
-{% block title %}Расписание{% endblock %}
+{% block og_title %}
+  {% block title %}Расписание | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Расписание</h1>
+
   <div class="personalArea-content">
     <div class="personalArea-block">
       <div class="personalArea-block__top">

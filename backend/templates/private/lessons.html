@@ -2,9 +2,14 @@
 
 {% load static course_extras %}
 
-{% block title %}Занятия{% endblock %}
+{% block og_title %}
+  {% block title %}Занятия | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Занятия</h1>
+
   <div class="personalArea-content">
     <div class="personalArea-block">
       <div class="personalArea-block__top">

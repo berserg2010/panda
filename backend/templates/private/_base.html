@@ -6,7 +6,10 @@
 
   {% include 'common/head.html' %}
 
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}Личный кабинет | Hello Panda{% endblock %}</title>
+  <meta property="og:title" content="{% block og_title %}{% endblock %}" />
+
+  <meta name="description" content="{% block description %}{% endblock %}" />
 
 </head>
 <body class="bodyLk">

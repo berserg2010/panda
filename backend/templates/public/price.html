@@ -2,9 +2,16 @@
 
 {% load static %}
 
-{% block title %}Стоимость{% endblock %}
+{% block og_title %}
+  {% block title %}Стоимость обучения | {{ block.super }}{% endblock %}
+{% endblock %}
+
+{% block description %}Стоимость обучения рассчитывается в зависимости от выбранной интенсивности занятий в месяц и от выбранного преподавателя{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Стоимость обучения</h1>
+
   <section class="process process-second">
     <div class="wrapper">
       <div class="process-info">

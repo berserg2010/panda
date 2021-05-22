@@ -2,9 +2,15 @@
 
 {% load static %}
 
-{% block title %}Процесс обучения{% endblock %}
+{% block og_title %}
+  {% block title %}Как проходят занятия | {{ block.super }}{% endblock %}
+{% endblock %}
+
+{% block description %}Занятия в школе проходят индивидуально с преподавателем на онлайн платформе. Hello Panda использует интерактивный подход и новейшие решения{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Как проходят занятия</h1>
 
   {% include 'public/components/process-section.html' %}
 

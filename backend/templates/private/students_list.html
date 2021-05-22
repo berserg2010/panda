@@ -2,9 +2,14 @@
 
 {% load static private_side_extras %}
 
-{% block title %}Ученики{% endblock %}
+{% block og_title %}
+  {% block title %}Ученики | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Ученики</h1>
+
   <div class="personalArea-content">
     <div class="personalArea-block">
       <div class="personalArea-block__top">

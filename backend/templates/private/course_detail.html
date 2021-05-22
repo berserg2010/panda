@@ -2,9 +2,14 @@
 
 {% load static %}
 
-{% block title %}Описание курса{% endblock %}
+{% block og_title %}
+  {% block title %}Описание курса | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Описание курса</h1>
+
   <div class="personalArea-content">
 
     <div class="courses">
