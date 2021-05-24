@@ -11,15 +11,9 @@ const routes = {
 
 export default {
   name: 'Chat',
-  data() {
-    return {
-      currentRoute: 'user-list-page',
-      // currentRoute: 'messages-page',
-    }
-  },
   computed: {
     CurrentComponent() {
-      return routes[this.currentRoute]
+      return routes[this.$store.getters.getCurrentRoute]
     },
   },
   render() {

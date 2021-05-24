@@ -1,6 +1,6 @@
 <template>
   <li>
-    <a href="#">
+    <a @click.prevent="checkUser">
       <UserItem />
     </a>
   </li>
@@ -13,6 +13,11 @@ export default {
   name: 'UserListItem',
   components: {
     UserItem,
+  },
+  methods: {
+    checkUser() {
+      this.$store.dispatch('changePage', 'messages-page')
+    }
   },
 }
 </script>

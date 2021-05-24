@@ -24,12 +24,13 @@ RUN npm cache clean --force
 RUN npm init -y \
 && npm install -g build-tools \
 && npm install \
-&& npm install vue@next \
+&& npm install vue@next vuex@next \
 && npm install -g @vue/cli \
 && npm install webpack webpack-cli phantomjs --save-dev \
 && npm install node-sass jquery babel-loader @babel/core @babel/preset-env css-loader sass-loader sass postcss-loader autoprefixer postcss file-loader mini-css-extract-plugin copy-webpack-plugin css-minimizer-webpack-plugin --save-dev \
 && npm install vue-loader@next vue-loader-plugin @vue/compiler-sfc vue-svg-loader@beta vue-template-compiler --save-dev \
-&& npm install socket.io aos --save \
+&& npm install @vue/devtools --save-dev \
+&& npm install socket.io aos \
 && npm audit fix --force
 
 COPY ./frontend/ .

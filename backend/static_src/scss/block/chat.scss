@@ -1,3 +1,6 @@
+@use "sass:math";
+
+
 #chat {
   width: $menu-width;
   height: 400px;
@@ -5,8 +8,8 @@
   padding: 16px;
 
   position: absolute;
-  top: calc(50% - #{$menu-width / 2});
-  left: calc(50% - #{$menu-width / 2});
+  top: calc(50% - #{math.div($menu-width, 2)});
+  left: calc(50% - #{math.div($menu-width, 2)});
   z-index: 5;
 
   box-sizing: border-box;

@@ -6,7 +6,7 @@
 
     <!--  <input id="chat-message-submit" disabled type="button" value="Send">-->
 
-    <UserItem for-chat="true" />
+    <UserItem :for-chat="true" />
   </div>
 </template>
 
