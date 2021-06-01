@@ -1,22 +1,38 @@
 <template>
-  <div class="chat-message">
-    <!--  <textarea id="chat-log" cols="100" rows="20"></textarea>-->
-    <!--  <label for="chat-message-input">Сообщение</label>-->
-    <!--  <input id="chat-message-input" type="text">-->
+  <div class="chat-wrapper">
+    <div class="chat-message">
+      <!--  <textarea id="chat-log" cols="100" rows="20"></textarea>-->
+      <!--  <label for="chat-message-input">Сообщение</label>-->
+      <!--  <input id="chat-message-input" type="text">-->
 
-    <!--  <input id="chat-message-submit" disabled type="button" value="Send">-->
+      <!--  <input id="chat-message-submit" disabled type="button" value="Send">-->
+      <UserItem :user="currentInterlocutor" :for-chat="true" />
 
-    <UserItem :for-chat="true" />
+      <MessagesList />
+
+      <MessageInput />
+    </div>
   </div>
 </template>
 
 <script>
-import UserItem from './UserItem.vue'
+import { mapState } from 'vuex';
+
+import UserItem from './UserItem.vue';
+import MessagesList from './MessagesList.vue';
+import MessageInput from './MessageInput.vue';
+
 
 export default {
   name: 'MessagesPage',
   components: {
     UserItem,
+    MessagesList,
+    MessageInput,
   },
+  computed: {
+    ...mapState({
+      currentInterlocutor: (state) => state.users.currentInterlocutor,
+    })},
 };
 </script>

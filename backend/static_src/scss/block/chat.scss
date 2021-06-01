@@ -1,17 +1,18 @@
 @use "sass:math";
 
+@import "~vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
+
 
 #chat {
-  width: $menu-width;
-  height: 400px;
-
-  padding: 16px;
-
   position: absolute;
   top: calc(50% - #{math.div($menu-width, 2)});
   left: calc(50% - #{math.div($menu-width, 2)});
-  z-index: 5;
 
+  width: $menu-width;
+  height: 400px;
+  //padding: 16px;
+
+  overflow: hidden;
   box-sizing: border-box;
   border-color: black;
   border-style: solid;
@@ -19,39 +20,65 @@
 
   background-color: white;
 
-  overflow-x: hidden;
-  overflow-y: auto;
+  //z-index: 5;
+}
+
+.chat-wrapper {
+  position: relative;
+
+  height: 100%;
+  width: inherit;
+  padding: 16px;
+
+  overflow: hidden;
 }
 
 .chat-group {
-  //display: none;
 
-  .chat-list {
-    position: relative;
-  }
-  .chat-list li {
-    margin-bottom: 16px;
-  }
-  .chat-list li:last-child {
-    margin: 0;
-  }
-  .chat-list li a {
+  a {
     display: block;
+
+    margin-bottom: 16px;
+
+    cursor: pointer;
   }
-  .chat-list li .user-aria:hover {
+  a:last-child {
+    margin-bottom: 0;
+  }
+
+  .user-aria {
+    user-select: none;
+
+    border-color: #ffb42d;
+
+    background-color: #ffb42d;
+
+  }
+
+  .user-aria:hover {
     box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
   }
-  .chat-list li .user-aria:active {
-    //box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
-    background: #5f9f84;
+  .user-aria:active {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
+
+    border-color: #5f9f84;
+
+    background-color: #5f9f84;
+  }
+  .user-aria:focus {
+    border-color: #5f9f84;
+
+    background-color: #5f9f84;
   }
 }
 
 .chat-message {
-  //display: none;
+  position: relative;
 
-  width: 100%;
+  width: 328px;
   height: 100%;
+  padding-top: 72px;
+  padding-bottom: 72px;
 
   border-style: solid;
   border-width: 1px;
@@ -59,8 +86,110 @@
   border-radius: 10px;
 
   .user-aria {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+
+    //width: inherit;
+    padding-left: 20px;
+    padding-right: 20px;
+
     background-color: #5f9f84;
+
+    border-color: #5f9f84;
+
+    z-index: 3;
+
+    .content {
+      justify-content: center;
+    }
   }
+
+  .messages_list {
+    height: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    overflow: hidden;
+
+    div[class~='messages_list_item']:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .messages_list_item,
+  .message_input {
+    position: relative;
+
+    padding: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .messages_list_item {
+    height: auto;
+    margin-bottom: 16px;
+  }
+  .messages_list_item p {
+    min-height: 32px;
+    color: #6b6b6b;
+  }
+  .messages_list_item--left {
+    margin-right: 88px;
+    border-color: #5f9f84;
+    border-top-left-radius: 0;
+  }
+  .messages_list_item--right {
+    margin-left: 88px;
+    border-color: #ffb42d;
+    border-bottom-right-radius: 0;
+  }
+
+  .message_input {
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+
+    padding-right: 56px;
+
+    border-color: #5f9f84;
+
+    textarea {
+      width: 100%;
+      height: 32px;
+
+      border: none;
+      resize: none;
+    }
+
+    .message_input_button {
+      position: absolute;
+
+      right: 15px; // border 1px
+      top: calc(50% - #{math.div(24px, 2)});
+    }
+  }
+}
+
+.box_item {
+  width: inherit;
+  height: 56px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  overflow: hidden;
+
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: #f8fffc;
+
+  //transition: box-shadow .2s, background .2s;
 }
 
 .user-aria {
@@ -72,23 +201,9 @@
   justify-content: left;
   align-items: center;
 
-  min-width: 288px;
-  min-height: 56px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-
-  overflow: hidden;
-  background: #ffb42d;
-  border-radius: 10px;
-
-  font-size: 14px;
-  line-height: 17px;
-  font-weight: 500;
-  color: #f8fffc;
-
-  transition: box-shadow .2s, background .2s;
+  transition-property: all;
+  transition-duration: .2s;
+  transition-timing-function: ease;
 
   .arrow_left {
     margin-right: 20px;
@@ -141,28 +256,58 @@
   .content span:first-child {
     font-weight: bold;
   }
-
-  &__arrow_left {
-    padding-left: 20px;
-    padding-right: 20px;
-
-    &--active {
-      background-color: #5f9f84;
-    }
-
-    & .content {
-      justify-content: center;
-    }
-  }
-
 }
 
 .arrow_left {
+  position: relative;
+
   width: 24px;
   height: 24px;
 
+  box-sizing: border-box;
   border-color: #f8fffc;
   border-style: solid;
   border-width: 1px;
   border-radius: 2px;
+
+  cursor: pointer;
+
+  svg {
+    position: absolute;
+    top: calc(50% - #{math.div(24px, 2)});
+    left: calc(50% - #{math.div(24px, 2)});
+  }
+
+  .arrow_left__element {
+    fill: #f8fffc;
+  }
+}
+
+.message_input_button {
+  position: relative;
+
+  width: 24px;
+  height: 24px;
+
+  cursor: pointer;
+
+  svg {
+    position: absolute;
+    top: calc(50% - #{math.div(24px, 2)});
+    left: calc(50% - #{math.div(24px, 2)});
+  }
+
+  .message_input_button__element {
+    fill: #5f9f84;
+  }
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

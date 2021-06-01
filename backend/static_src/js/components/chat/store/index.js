@@ -1,32 +1,19 @@
 import { createStore } from 'vuex';
 
+import chatPage from './modules/chatPage';
+import users from './modules/users';
+import messages from './modules/messages';
+
+
+const debug = process.env.NODE_ENV !== 'production';
 
 const store = createStore({
-  state () {
-    return {
-      count: 5,
-      currentRoute: 'user-list-page',
-      // currentRoute: 'messages-page',
-    }
+  modules: {
+    chatPage,
+    users,
+    messages,
   },
-  mutations: {
-    increment(state) {
-      state.count++
-    },
-    changePage(state, route) {
-      state.currentRoute = route
-    },
-  },
-  actions: {
-    changePage({ commit }, route) {
-      commit('changePage', route)
-    }
-  },
-  getters: {
-    getCurrentRoute(state) {
-      return state.currentRoute
-    }
-  }
-})
+  strict: debug,
+});
 
-export default store
+export default store;

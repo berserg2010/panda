@@ -1,23 +1,37 @@
+<template>
+  <transition name="fade" mode="out-in">
+    <UserListPage v-if="currentRoute === 'user-list-page'" />
+    <MessagesPage v-else />
+  </transition>
+</template>
+
+
 <script>
-import { h } from 'vue';
+import { mapState } from 'vuex';
 
 import UserListPage from './UserListPage.vue';
 import MessagesPage from './MessagesPage.vue';
 
+
 const routes = {
   'user-list-page': UserListPage,
   'messages-page': MessagesPage,
-}
+};
 
 export default {
   name: 'Chat',
+  components: {
+    UserListPage,
+    MessagesPage,
+  },
   computed: {
-    CurrentComponent() {
-      return routes[this.$store.getters.getCurrentRoute]
-    },
+    ...mapState({
+      currentRoute: (state) => state.chatPage.currentRoute,
+      currentUserId: (state) => state.users.currentUserId,
+    }),
   },
-  render() {
-    return h(this.CurrentComponent)
-  },
+  created() {
+    this.$store.dispatch('initInterlocutors', this.$store.state.users.currentUserId);
+  }
 };
 </script>

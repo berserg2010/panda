@@ -134,5 +134,10 @@ module.exports = ({ debug = 'false', watch = 'false' }) => {
       }),
       require('autoprefixer'),
     ],
+    resolve: {
+      alias: {
+        'vue3-perfect-scrollbar': path.resolve(__dirname, 'node_modules/vue3-perfect-scrollbar'),
+      }
+    },
   }
 };

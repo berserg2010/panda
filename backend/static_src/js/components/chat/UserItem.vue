@@ -1,16 +1,12 @@
 <template>
-  <div
-    class="user-aria"
-    :class="{ 'user-aria__arrow_left': forChat, 'user-aria__arrow_left--active': forChat }"
-  >
+  <div class="box_item user-aria">
     <ArrowLeft v-if="forChat" />
-
     <div class="avatar">
       <img src="/static/img/user.jpg" alt="avatar">
     </div>
     <div class="content">
-      <span>{{ fullName }}</span>
-      <span v-if="!forChat">{{ message }}</span>
+      <span>{{ user.username }}</span>
+      <span v-if="!forChat">{{ lastMessage }}</span>
     </div>
   </div>
 </template>
@@ -28,12 +24,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    user: {
+      type: Object,
+      required: true,
+    }
   },
   data() {
     return {
-      fullName: 'Alina Ivanova',
-      message: 'Hello! Hello! Hello! Hello! Hello!',
+      lastMessage: 'Hello! Hello! Hello! Hello! Hello!',
     }
   },
-}
+};
 </script>
