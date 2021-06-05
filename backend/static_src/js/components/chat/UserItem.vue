@@ -6,13 +6,14 @@
     </div>
     <div class="content">
       <span>{{ user.username }}</span>
-      <span v-if="!forChat">{{ lastMessage }}</span>
+      <span v-if="!forChat && lastMessage">{{ lastMessage.message }}</span>
     </div>
   </div>
 </template>
 
 <script>
 import ArrowLeft from './ArrowLeft.vue';
+
 
 export default {
   name: 'UserListItem',
@@ -27,12 +28,12 @@ export default {
     user: {
       type: Object,
       required: true,
-    }
+    },
   },
-  data() {
-    return {
-      lastMessage: 'Hello! Hello! Hello! Hello! Hello!',
-    }
+  computed: {
+    lastMessage() {
+      return this.$store.getters.getLastMessage(this.user.id);
+    },
   },
 };
 </script>

@@ -4,8 +4,10 @@ const _courses = [
   { student: '2', teacher: '10' },
   { student: '3', teacher: '11' },
   { student: '1', teacher: '12' },
-]
-
+  { student: '1', teacher: '13' },
+  { student: '1', teacher: '14' },
+  { student: '1', teacher: '15' },
+];
 
 const _users = [
   { id: '1', username: 'student_1' },
@@ -14,7 +16,10 @@ const _users = [
   { id: '10', username: 'teacher_1' },
   { id: '11', username: 'teacher_2' },
   { id: '12', username: 'teacher_3' },
-]
+  { id: '13', username: 'teacher_4' },
+  { id: '14', username: 'teacher_5' },
+  { id: '15', username: 'teacher_6' },
+];
 
 const _messages = [
   { fromUser: '1', toUser: '10', message: 'Hello, Allis', datetime: '01.01.2021 15:00:00' },
@@ -25,7 +30,7 @@ const _messages = [
   { fromUser: '1', toUser: '10', message: 'By', datetime: '01.01.2021 15:17:00' },
   { fromUser: '1', toUser: '11', message: 'By', datetime: '01.01.2021 15:21:00' },
   { fromUser: '2', toUser: '10', message: 'By', datetime: '01.01.2021 15:22:00' },
-]
+];
 
 
 export const getInterlocutorsId = (arrayCourses, currentUserId) => {
@@ -39,11 +44,11 @@ export const getInterlocutorsId = (arrayCourses, currentUserId) => {
 };
 
 export const filterInterlocutors = (arrayUsers, arrayUsersId) => {
-  return arrayUsers.filter((user) => arrayUsersId.has(user.id))
+  return arrayUsers.filter((user) => arrayUsersId.has(user.id));
 };
 
 export const filterMessages = (arrayMessages, currentUserId) => {
-  return arrayMessages.filter((event) => event.fromUser === currentUserId || event.toUser === currentUserId)
+  return arrayMessages.filter((event) => event.fromUser === currentUserId || event.toUser === currentUserId);
 };
 
 

@@ -12,8 +12,8 @@ export default {
   name: 'ArrowLeft',
   methods: {
     toListUsers() {
-      this.$store.dispatch('changePage', 'user-list-page')
+      this.$store.dispatch('changePage', 'user-list-page');
     }
   },
-}
+};
 </script>

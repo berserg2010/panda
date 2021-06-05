@@ -17,7 +17,7 @@ export default {
     user: {
       type: Object,
       required: true,
-    }
+    },
   },
   methods: {
     changePage() {

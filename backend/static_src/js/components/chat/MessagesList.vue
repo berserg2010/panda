@@ -1,10 +1,10 @@
 <template>
-  <perfect-scrollbar class="messages_list">
-    <div>
+  <perfect-scrollbar class="messages_list" ref="scroll">
+    <div> <!--Для отделеня списка от служебных элементов ps-->
       <MessagesListItem
-        v-for="(message, key) in getMessages"
+        v-for="(message, key) in messages"
         :key="key"
-        :class="[ userId === message.fromUser ? 'messages_list_item--right' : 'messages_list_item--left' ]"
+        :class="[ currentUserId === message.fromUser ? 'messages_list_item--right' : 'messages_list_item--left' ]"
         :message="message.message"
       />
     </div>
@@ -12,22 +12,40 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import MessagesListItem from './MessagesListItem.vue';
+
 
 export default {
   name: 'MessagesList',
   components: {
     MessagesListItem,
   },
-  data() {
-    return {
-      userId: '1',
-    }
-  },
-  computed: {
-    getMessages() {
-      return this.$store.getters.getMessages(this.$store.state.users.currentInterlocutor.id)
+  props: {
+    messages: {
+      type: Array,
+      required: true,
     },
   },
-}
+  computed: {
+    ...mapState({
+      currentUserId: (state) => state.users.currentUserId,
+    }),
+  },
+  methods: {
+    scrollToElement() {
+      const el = this.$refs.scroll.$el;
+      el.scrollBy(0, el.scrollHeight);
+    },
+  },
+  mounted() {
+    this.$nextTick(function () {
+      this.scrollToElement();
+    });
+  },
+  updated() {
+    this.scrollToElement();
+  }
+};
 </script>

@@ -8,7 +8,7 @@
       <!--  <input id="chat-message-submit" disabled type="button" value="Send">-->
       <UserItem :user="currentInterlocutor" :for-chat="true" />
 
-      <MessagesList />
+      <MessagesList :messages="getMessages" />
 
       <MessageInput />
     </div>
@@ -33,6 +33,10 @@ export default {
   computed: {
     ...mapState({
       currentInterlocutor: (state) => state.users.currentInterlocutor,
-    })},
+    }),
+    getMessages() {
+      return this.$store.getters.getMessages(this.currentInterlocutor.id);
+    },
+  },
 };
 </script>

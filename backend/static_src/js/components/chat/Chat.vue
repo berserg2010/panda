@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
-    <UserListPage v-if="currentRoute === 'user-list-page'" />
+    <UserListPage v-if="currentRoute === 'user-list-page'" :interlocutors="interlocutors" />
     <MessagesPage v-else />
   </transition>
 </template>
@@ -28,10 +28,11 @@ export default {
     ...mapState({
       currentRoute: (state) => state.chatPage.currentRoute,
       currentUserId: (state) => state.users.currentUserId,
+      interlocutors: (state) => state.users.interlocutors,
     }),
   },
   created() {
-    this.$store.dispatch('initInterlocutors', this.$store.state.users.currentUserId);
+    this.$store.dispatch('initInterlocutors', this.currentUserId);
   }
 };
 </script>

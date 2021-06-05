@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 import UserListItem from './UserListItem.vue';
 
 
@@ -19,10 +17,11 @@ export default {
   components: {
     UserListItem,
   },
-  computed: {
-    ...mapState({
-      interlocutors: (state) => state.users.interlocutors
-    })
+  props: {
+    interlocutors: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>

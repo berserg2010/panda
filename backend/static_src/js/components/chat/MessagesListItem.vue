@@ -11,7 +11,7 @@ export default {
     message: {
       type: String,
       required: true,
-    }
-  }
-}
+    },
+  },
+};
 </script>
