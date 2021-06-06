@@ -97,38 +97,38 @@ Unit tests:
     - docker-django
 
 
-deploy_staging:
-  stage: staging
-  environment:
-    name: staging
-    url: https://hqua0177372.online-vm.com
-  before_script:
-    - echo "Stage staging"
+# deploy_staging:
+#   stage: staging
+#   environment:
+#     name: staging
+#     url: https://hqua0177372.online-vm.com
+#   before_script:
+#     - echo "Stage staging"
 
-    - cp .env.template .env
-    - cp .env.template env/common.env
-    - cp env/back.env.template env/back.env
-    - cp env/db.env.template env/db.env
+#     - cp .env.template .env
+#     - cp .env.template env/common.env
+#     - cp env/back.env.template env/back.env
+#     - cp env/db.env.template env/db.env
 
-    - source .env
-    - source env/common.env
-    - source env/back.env
-    - source env/db.env
+#     - source .env
+#     - source env/common.env
+#     - source env/back.env
+#     - source env/db.env
 
-    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
+#     - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY 
 
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
+#   script:
+#     - docker pull $CONTAINER_TEST_IMAGE
 
-    - docker-compose run backend python manage.py collectstatic --no-input
-    - docker-compose run backend python manage.py makemigrations
-    - docker-compose run backend python manage.py migrate
-    - docker-compose run backend python manage.py loaddata init_data.json
+#     - docker-compose run backend python manage.py collectstatic --no-input
+#     - docker-compose run backend python manage.py makemigrations
+#     - docker-compose run backend python manage.py migrate
+#     - docker-compose run backend python manage.py loaddata init_data.json
 
-    - docker-compose down
+#     - docker-compose down
 
-    - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
-  only:
-    - dev
-  tags:
-    - docker-django
+#     - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+#   only:
+#     - dev
+#   tags:
+#     - docker-django

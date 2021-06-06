@@ -2,9 +2,15 @@
 
 {% load static %}
 
-{% block title %}Главная{% endblock %}
+{% block og_title %}
+  {% block title %}{{ block.super }}{% endblock %}
+{% endblock %}
+
+{% block description %}Онлайн-школа Hello Panda — доступное обучение языкам через интернет ⭐ Интерактивное обучение ✅ Фокус на ученике ⚡ Где угодно и когда угодно ✔ Бесплатный урок ☎️ {{ settings_site.phone_first }}{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Изучение языков онлайн</h1>
 
   <section class="main">
     <div class="main-bg"></div>

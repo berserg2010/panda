@@ -2,9 +2,14 @@
 
 {% load static %}
 
-{% block title %}Все курсы{% endblock %}
+{% block og_title %}
+  {% block title %}Все курсы | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Все курсы</h1>
+
   <div class="personalArea-content">
     <div class="courses">
 

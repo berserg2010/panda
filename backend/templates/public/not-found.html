@@ -2,9 +2,14 @@
 
 {% load static %}
 
-{% block title %}Страница не найдена{% endblock %}
+{% block og_title %}
+  {% block title %}Страница не найдена | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Страница не найдена</h1>
+
   <section class="notFound">
     <div class="notFound-bg notFound-bg__1">
       <img src="{% static 'img/notFound-bg-1.svg' %}" alt="">

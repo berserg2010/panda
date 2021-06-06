@@ -2,9 +2,13 @@
 
 {% load static private_side_extras %}
 
-{% block title %}Главная{% endblock %}
+{% block og_title %}
+  {% block title %}Главная страница | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Главная страница</h1>
 
   {% if user.is_staff %}
     {% include 'private/index_teacher.html' %}

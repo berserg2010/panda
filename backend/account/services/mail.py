@@ -67,9 +67,9 @@ def send_mail_recover_password(email: str, password: str) -> None:
 
 def send_mail_payment(email: str,
                       payment_id, student_name: str, number_for_lessons: int,
-                      is_free_lessons: bool = False) -> None:
+                      is_bonus_lessons: bool = False) -> None:
 
-    free_lessons = 'Плюс 2 бесплатных занятия.\n' if is_free_lessons else ''
+    free_lessons = 'Плюс 2 бесплатных занятия.\n' if is_bonus_lessons else ''
 
     body = (
         f'{student_name}, Вы оплатили {number_for_lessons} занятий.\n'

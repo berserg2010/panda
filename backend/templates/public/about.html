@@ -2,9 +2,16 @@
 
 {% load static %}
 
-{% block title %}О школе{% endblock %}
+{% block og_title %}
+  {% block title %}О школе | {{ block.super }}{% endblock %}
+{% endblock %}
+
+{% block description %}Hello Panda обучает детей и взрослых по всей Украине и за рубежом английскому и китайскому языку с использованием современных мультимедийных технологий в процессе обучения{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">О школе</h1>
+
   <section class="process">
     <div class="wrapper">
       <div class="process-info">

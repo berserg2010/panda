@@ -2,9 +2,16 @@
 
 {% load static %}
 
-{% block title %}Стоимость{% endblock %}
+{% block og_title %}
+  {% block title %}Стоимость обучения | {{ block.super }}{% endblock %}
+{% endblock %}
+
+{% block description %}Стоимость обучения рассчитывается в зависимости от выбранной интенсивности занятий в месяц и от выбранного преподавателя{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Стоимость обучения</h1>
+
   <section class="process process-second">
     <div class="wrapper">
       <div class="process-info">
@@ -41,7 +48,7 @@
             <div class="price-num"><span>220</span><b>грн./час</b></div>
             <p>Английский язык<br />Китайский язык</p>
             <ul class="price-list">
-              <li>12-20 часов в месяц</li>
+              <li>12 - 20 часов в месяц</li>
             </ul>
             <div class="price-wrap__bg">
               <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +63,7 @@
             <div class="price-num"><span>250</span><b>грн./час</b></div>
             <p>Английский язык<br />Китайский язык</p>
             <ul class="price-list">
-              <li>4-11 часов в месяц</li>
+              <li>8 - 11 часов в месяц</li>
             </ul>
             <div class="price-wrap__bg">
               <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +77,7 @@
             <div class="price-num"><span>300</span><b>грн./час</b></div>
             <p>Спец. курс<br />Английский язык<br />Китайский язык</p>
             <ul class="price-list">
-              <li>4-20 часов в месяц</li>
+              <li>4 - 20 часов в месяц</li>
             </ul>
             <div class="price-wrap__bg">
               <svg width="349" height="67" viewBox="0 0 349 67" fill="none" xmlns="http://www.w3.org/2000/svg">

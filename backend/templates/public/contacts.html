@@ -2,9 +2,16 @@
 
 {% load static %}
 
-{% block title %}Контакты{% endblock %}
+{% block og_title %}
+  {% block title %}Контакты | {{ block.super }}{% endblock %}
+{% endblock %}
+
+{% block description %}Если ты принял решение учиться в нашей школе или у тебя возникли другие вопросы, касающиеся процесса обучения у нас – связывайся с нами любым удобным способом{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Контакты</h1>
+
   <section class="contacts">
     <div class="contacts-bg contacts-bg__1">
       <img src="{% static 'img/contacts-bg-1.svg' %}" alt="">

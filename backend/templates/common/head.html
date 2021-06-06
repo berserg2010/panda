@@ -1,14 +1,12 @@
 {% load static %}
 
 <meta charset="utf-8" />
-<meta name="description" content="" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 {#<meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}" />#}
 <meta property="og:url" content="{{ request.build_absolute_uri }}" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Hello panda!" />
 <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/favicon/favicon.jpg' %}" />
 {#  <meta property="og:description" content="Your description" />#}
 

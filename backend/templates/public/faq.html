@@ -2,9 +2,16 @@
 
 {% load static %}
 
-{% block title %}Частые вопросы{% endblock %}
+{% block og_title %}
+  {% block title %}Частые вопросы | {{ block.super }}{% endblock %}
+{% endblock %}
+
+{% block description %}Ответы на часто задаваемые вопросы об обучении — онлайн школа английского и китайского языка Hello Panda{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Частые вопросы</h1>
+
   <section class="faq">
     <div class="faq-bg faq-bg__1">
       <img src="{% static 'img/faq-bg-1.svg' %}" alt="">

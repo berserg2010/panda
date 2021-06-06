@@ -2,9 +2,14 @@
 
 {% load static %}
 
-{% block title %}Настройки профиля{% endblock %}
+{% block og_title %}
+  {% block title %}Настройки профиля | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
+
+  <h1 class="visually-hidden">Настройки профиля</h1>
+
   <div class="personalArea-content">
     <div class="personalArea-block">
       <div class="personalArea-block__top">

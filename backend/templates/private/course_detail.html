@@ -2,12 +2,15 @@
 
 {% load static %}
 
-{% block title %}Описание курса{% endblock %}
+{% block og_title %}
+  {% block title %}Описание курса | {{ block.super }}{% endblock %}
+{% endblock %}
 
 {% block content %}
-  <div class="personalArea-content">
 
-{#    {% include 'private/components/personal-area-modal.html' %}#}
+  <h1 class="visually-hidden">Описание курса</h1>
+
+  <div class="personalArea-content">
 
     <div class="courses">
       <div class="courses-col courses-col__big">
