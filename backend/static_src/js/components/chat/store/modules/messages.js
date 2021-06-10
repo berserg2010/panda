@@ -1,15 +1,15 @@
-import api, { filterMessages } from '../../api';
+import api from '../../api';
 
 
 const state = () => {
   return {
-    messages: [],
+    messages: {},
   };
 };
 
 const mutations = {
   initMessages(state, messages) {
-    state.messages = messages;
+    state.messages[messages['chat_id']] = messages.messages;
   },
   addMessage(state, message) {
     state.messages.push(message);
@@ -17,23 +17,25 @@ const mutations = {
 };
 
 const actions = {
-  initMessages({ commit }, currentUserId) {
+  initMessages({ commit }, chatId) {
     api.getMessages((messages) => {
       commit('initMessages', messages);
-    }, currentUserId);
+    }, chatId);
   },
-  addMessage({ commit }, message) {
-    commit('addMessage', message);
+  sendMessage({ commit }, data) {
+    api.sendMessage(() => {
+      // commit('addMessage', data);
+    }, data)
   },
 };
 
 const getters = {
-  getMessages: (state) => (interlocutorId) => {
-    return filterMessages(state.messages, interlocutorId);
+  getMessages: (state) => (chatId) => {
+    return state.messages[chatId]
   },
-  getLastMessage: (state) => (interlocutorId) => {
-    const messages = filterMessages(state.messages, interlocutorId);
-    return messages[messages.length - 1];
+  getLastMessage: (state) => (chatId) => {
+    const message = state.messages[chatId];
+    return message.messages[message.messages.length - 1];
   },
 };
 

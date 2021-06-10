@@ -1,11 +1,6 @@
 <template>
   <div class="chat-wrapper">
     <div class="chat-message">
-      <!--  <textarea id="chat-log" cols="100" rows="20"></textarea>-->
-      <!--  <label for="chat-message-input">Сообщение</label>-->
-      <!--  <input id="chat-message-input" type="text">-->
-
-      <!--  <input id="chat-message-submit" disabled type="button" value="Send">-->
       <UserItem :user="currentInterlocutor" :for-chat="true" />
 
       <MessagesList :messages="getMessages" />
@@ -33,9 +28,10 @@ export default {
   computed: {
     ...mapState({
       currentInterlocutor: (state) => state.users.currentInterlocutor,
+      currentChatId: (state) => state.users.currentChatId,
     }),
     getMessages() {
-      return this.$store.getters.getMessages(this.currentInterlocutor.id);
+      return this.$store.getters.getMessages(this.currentChatId);
     },
   },
 };

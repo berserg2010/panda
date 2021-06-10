@@ -35,8 +35,13 @@
 
 <script src="{% static 'js/main_private.js' %}"></script>
 
+{{ user.pk|json_script:'currentUserId' }}
 {{ 'DEBUG'|get_settings_var|json_script:'DEBUG' }}
 {{ 'MERCHANT_ID'|get_settings_var|json_script:'MERCHANT_ID' }}
+
+<script>
+  const currentUserId = JSON.parse(document.getElementById('currentUserId').textContent)
+</script>
 
 <script>
   // Fondy

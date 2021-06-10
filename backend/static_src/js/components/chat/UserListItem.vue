@@ -23,6 +23,9 @@ export default {
     changePage() {
       this.$store.dispatch('changePage', 'messages-page');
       this.$store.dispatch('setCurrentInterlocutor', this.user);
+
+      this.$store.dispatch('setCurrentChatId', this.user.chat_id);
+      this.$store.dispatch('initMessages', this.user.chat_id);
     },
   },
 };

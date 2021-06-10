@@ -31,7 +31,7 @@ services:
       # Volume
       - static:/usr/src/${PROJECT_NAME}/static_root
       # Bind
-      - ./backend/media:/usr/src/${PROJECT_NAME}/media
+#      - ./backend/media:/usr/src/${PROJECT_NAME}/media
     command:
       sh -c "
         python3 -c \"import redis;r=redis.Redis(host='redis',port='6379');r.flushall()\"

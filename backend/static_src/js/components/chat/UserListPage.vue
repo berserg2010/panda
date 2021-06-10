@@ -2,7 +2,7 @@
   <perfect-scrollbar class="chat-wrapper chat-group">
     <UserListItem
       v-for="interlocutor in interlocutors"
-      :key="interlocutor.id"
+      :key="interlocutor.chat_id"
       :user="interlocutor"
     />
   </perfect-scrollbar>

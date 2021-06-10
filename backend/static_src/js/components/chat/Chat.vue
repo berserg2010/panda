@@ -27,12 +27,11 @@ export default {
   computed: {
     ...mapState({
       currentRoute: (state) => state.chatPage.currentRoute,
-      currentUserId: (state) => state.users.currentUserId,
       interlocutors: (state) => state.users.interlocutors,
     }),
   },
   created() {
-    this.$store.dispatch('initInterlocutors', this.currentUserId);
-  }
+    this.$store.dispatch('initInterlocutors');
+  },
 };
 </script>

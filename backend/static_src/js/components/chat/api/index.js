@@ -1,70 +1,57 @@
-const _courses = [
-  { student: '1', teacher: '10' },
-  { student: '1', teacher: '11' },
-  { student: '2', teacher: '10' },
-  { student: '3', teacher: '11' },
-  { student: '1', teacher: '12' },
-  { student: '1', teacher: '13' },
-  { student: '1', teacher: '14' },
-  { student: '1', teacher: '15' },
-];
-
-const _users = [
-  { id: '1', username: 'student_1' },
-  { id: '2', username: 'student_2' },
-  { id: '3', username: 'student_3' },
-  { id: '10', username: 'teacher_1' },
-  { id: '11', username: 'teacher_2' },
-  { id: '12', username: 'teacher_3' },
-  { id: '13', username: 'teacher_4' },
-  { id: '14', username: 'teacher_5' },
-  { id: '15', username: 'teacher_6' },
-];
-
-const _messages = [
-  { fromUser: '1', toUser: '10', message: 'Hello, Allis', datetime: '01.01.2021 15:00:00' },
-  { fromUser: '10', toUser: '1', message: 'Hello, Ivan', datetime: '01.01.2021 15:01:00' },
-  { fromUser: '1', toUser: '10', message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda doloribus, facere in natus obcaecati qui repudiandae! Architecto aspernatur assumenda atque consequatur dolorum enim, fuga iure recusandae tempore temporibus voluptates.', datetime: '01.01.2021 15:05:00' },
-  { fromUser: '1', toUser: '10', message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda doloribus, facere in natus obcaecati qui repudiandae! Architecto aspernatur assumenda atque consequatur dolorum enim, fuga iure recusandae tempore temporibus voluptates.', datetime: '01.01.2021 15:10:00' },
-  { fromUser: '10', toUser: '1', message: 'Ok', datetime: '01.01.2021 15:16:00' },
-  { fromUser: '1', toUser: '10', message: 'By', datetime: '01.01.2021 15:17:00' },
-  { fromUser: '1', toUser: '11', message: 'By', datetime: '01.01.2021 15:21:00' },
-  { fromUser: '2', toUser: '10', message: 'By', datetime: '01.01.2021 15:22:00' },
-];
 
 
-export const getInterlocutorsId = (arrayCourses, currentUserId) => {
-  return new Set(arrayCourses.map((el) => {
-    if (el.student === currentUserId) {
-      return el.teacher
-    } else if (el.teacher === currentUserId) {
-      return el.student
-    }
-  }))
-};
+const currentLocation = window.location;
+const wsProtocol = currentLocation.protocol === 'https:' ? 'wss://' : 'ws://';
+const wsURL = `${wsProtocol}${currentLocation.host}/ws/lk/chat/`;
 
-export const filterInterlocutors = (arrayUsers, arrayUsersId) => {
-  return arrayUsers.filter((user) => arrayUsersId.has(user.id));
-};
+const ws = new WebSocket(wsURL);
 
-export const filterMessages = (arrayMessages, currentUserId) => {
-  return arrayMessages.filter((event) => event.fromUser === currentUserId || event.toUser === currentUserId);
-};
+ws.onclose = (ev) => {
+  console.info(`[close] Соединение закрыто, код=${ev.code}, причина=${ev.reason}`)
+}
+
+ws.onerror = (ev) => {
+  console.info(`[error] ${ev.message}`)
+}
 
 
 export default {
-  getInterlocutors(cb, currentUserId) {
-    // axios.get('https://jsonplaceholder.typicode.com/users')
-    //   .then((response) => {
-    //     cb(response.data)
-    //   })
-    setTimeout(() => cb(
-      filterInterlocutors(_users, getInterlocutorsId(_courses, currentUserId))
-    ), 100)
+  getInterlocutors(cb) {
+    ws.onopen = (ev) => {
+      console.info('[open] Соединение установлено')
+
+      ws.send(JSON.stringify({
+        event: 'get.interlocutors',
+        data: {},
+      }));
+    }
+
+    ws.onmessage = (ev) => {
+      console.info('[message] Данные получены')
+      const data = JSON.parse(ev.data)
+      console.info(data)
+      cb(data.data)
+    }
   },
-  getMessages(cb, currentUserId) {
-    setTimeout(() => cb(
-      filterMessages(_messages, currentUserId)
-    ), 100)
+
+  getMessages(cb, currentChatId) {
+    ws.send(JSON.stringify({
+      event: 'get.messages',
+      data: { currentChatId },
+    }));
+
+    ws.onmessage = (ev) => {
+      console.info('[message] Данные получены')
+      const data = JSON.parse(ev.data)
+      console.info(data)
+      cb(data.data)
+    }
+  },
+
+  sendMessage(cb, data) {
+    ws.send(JSON.stringify({
+      event: 'set.message',
+      data,
+    }));
   },
 };

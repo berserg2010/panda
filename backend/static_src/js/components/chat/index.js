@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, reactive } from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import PerfectScrollbar from 'vue3-perfect-scrollbar';

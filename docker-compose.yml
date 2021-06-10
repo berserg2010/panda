@@ -29,6 +29,9 @@ services:
       - env/common.env
       - env/back.env
       - env/db.env
+    volumes:
+      # Bind
+      - ./backend:/usr/src/${PROJECT_NAME}
     depends_on:
       - db
       - redis

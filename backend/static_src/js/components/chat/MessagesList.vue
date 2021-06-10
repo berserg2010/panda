@@ -2,18 +2,16 @@
   <perfect-scrollbar class="messages_list" ref="scroll">
     <div> <!--Для отделеня списка от служебных элементов ps-->
       <MessagesListItem
-        v-for="(message, key) in messages"
-        :key="key"
-        :class="[ currentUserId === message.fromUser ? 'messages_list_item--right' : 'messages_list_item--left' ]"
-        :message="message.message"
+        v-for="message in messages"
+        :key="message.message_id"
+        :class="[ currentUserId === message.sender_id ? 'messages_list_item--right' : 'messages_list_item--left' ]"
+        :message="message.text"
       />
     </div>
   </perfect-scrollbar>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 import MessagesListItem from './MessagesListItem.vue';
 
 
@@ -24,14 +22,14 @@ export default {
   },
   props: {
     messages: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
-  computed: {
-    ...mapState({
-      currentUserId: (state) => state.users.currentUserId,
-    }),
+  data() {
+    return {
+      currentUserId
+    }
   },
   methods: {
     scrollToElement() {

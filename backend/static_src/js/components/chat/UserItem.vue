@@ -5,8 +5,8 @@
       <img src="/static/img/user.jpg" alt="avatar">
     </div>
     <div class="content">
-      <span>{{ user.username }}</span>
-      <span v-if="!forChat && lastMessage">{{ lastMessage.message }}</span>
+      <span>{{ user.full_name }}</span>
+      <span v-if="!forChat && lastMessage">{{ lastMessage }}</span>
     </div>
   </div>
 </template>
@@ -32,7 +32,8 @@ export default {
   },
   computed: {
     lastMessage() {
-      return this.$store.getters.getLastMessage(this.user.id);
+      const last_message = this.user.last_message
+      return last_message?.text
     },
   },
 };

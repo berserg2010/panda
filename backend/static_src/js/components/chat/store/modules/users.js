@@ -3,8 +3,9 @@ import api from '../../api';
 
 const state = () => {
   return {
-    currentUserId: '1',
+    // currentUserId: window.currentUserId,
     interlocutors: [],
+    currentChatId: '',
     currentInterlocutor: {},
   };
 };
@@ -16,18 +17,24 @@ const mutations = {
   setCurrentInterlocutor(state, currentInterlocutor) {
     state.currentInterlocutor = currentInterlocutor;
   },
+  setCurrentChatId(state, currentChatId) {
+    state.currentChatId = currentChatId;
+  },
 };
 
 const actions = {
-  initInterlocutors({ commit, dispatch, rootState }, currentUserId) {
+  initInterlocutors({ commit, dispatch }) {
     api.getInterlocutors((interlocutors) => {
       commit('initInterlocutors', interlocutors);
-      dispatch('initMessages', currentUserId);
-    }, currentUserId);
+      // dispatch('initMessages', currentUserId);
+    });
   },
   setCurrentInterlocutor({ commit }, currentInterlocutor) {
     commit('setCurrentInterlocutor', currentInterlocutor);
   },
+  setCurrentChatId({ commit }, currentChatId) {
+    commit('setCurrentChatId', currentChatId);
+  }
 };
 
 const getters = {};

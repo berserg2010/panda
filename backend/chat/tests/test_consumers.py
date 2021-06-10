@@ -26,26 +26,26 @@ def create_user(username, email, password):
 
 
 @pytest.mark.asyncio
-async def test_chat():
-    client_1 = Client()
-    client_2 = Client()
+class TestChat:
 
-    user_1 = await create_user('test1', 'test1@gmail.com', '123qweasd')
-    user_2 = await create_user('test2', 'test2@gmail.com', '123qweasd')
+    async def test_connect(self):
+        client_1 = Client()
+        client_2 = Client()
 
-    await sync_to_async(client_1.force_login)(user=user_1)
-    await sync_to_async(client_2.force_login)(user=user_2)
+        user_1 = await create_user('test1', 'test1@gmail.com', '123qweasd')
+        user_2 = await create_user('test2', 'test2@gmail.com', '123qweasd')
 
-    communicator_1 = WebsocketCommunicator(
-        application=application,
-        path='ws/lk/chat/',
-        headers=[(
-            b'cookie',
-            f'{settings.SESSION_COOKIE_NAME}={client_1.cookies[settings.SESSION_COOKIE_NAME].value}'.encode('ascii')
-        )],
-    )
+        await sync_to_async(client_1.force_login)(user=user_1)
+        await sync_to_async(client_2.force_login)(user=user_2)
 
-    print(communicator_1)
+        communicator_1 = WebsocketCommunicator(
+            application=application,
+            path='ws/lk/chat/',
+            headers=[(
+                b'cookie',
+                f'{settings.SESSION_COOKIE_NAME}={client_1.cookies[settings.SESSION_COOKIE_NAME].value}'.encode('ascii')
+            )],
+        )
 
-    connected, _ = await communicator_1.connect()
-    assert connected
+        connected, _ = await communicator_1.connect()
+        assert connected

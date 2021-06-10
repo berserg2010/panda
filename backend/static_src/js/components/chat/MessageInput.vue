@@ -1,12 +1,14 @@
 <template>
   <div class="box_item message_input">
-    <textarea v-model="message" placeholder="Please, enter message"></textarea>
+    <textarea v-model="text" placeholder="Please, enter message"></textarea>
 
     <MessageInputButton :disabled="disabled" :send-message="sendMessage" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import MessageInputButton from './MessageInputButton.vue';
 
 
@@ -17,27 +19,31 @@ export default {
   },
   data() {
     return {
-      message: '',
+      text: '',
+      currentUserId,
     };
   },
   computed: {
     disabled() {
-      return this.message.trim() === '';
+      return this.text.trim() === '';
     },
+    ...mapState({
+      currentChatId: (state) => state.users.currentChatId,
+    }),
   },
   methods: {
     sendMessage() {
       const data = {
-        fromUser: this.$store.state.users.currentUserId,
-        toUser: this.$store.state.users.currentInterlocutor.id,
-        message: this.message.trim(),
-        datetime: (() => {
+        text: this.text.trim(),
+        sent_at: (() => {
           const date = new Date();
           return date.toISOString();
         })(),
+        chat_id: this.currentChatId,
+        sender_id: this.currentUserId,
       };
 
-      this.$store.dispatch('addMessage', data);
+      this.$store.dispatch('sendMessage', data);
 
       this.message = '';
     },

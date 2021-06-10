@@ -12,7 +12,7 @@ services:
       # Volume
       - static_build:/usr/src/${PROJECT_NAME}/static_build
       # Bind
-      - ./backend/media:/usr/src/${PROJECT_NAME}/media
+#      - ./backend/media:/usr/src/${PROJECT_NAME}/media
     ports:
       - 8000:8000
 
