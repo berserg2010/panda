@@ -45,7 +45,7 @@ export default {
 
       this.$store.dispatch('sendMessage', data);
 
-      this.message = '';
+      this.text = '';
     },
   }
 };

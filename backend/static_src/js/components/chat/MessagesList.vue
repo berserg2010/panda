@@ -39,11 +39,15 @@ export default {
   },
   mounted() {
     this.$nextTick(function () {
+      console.info('mounted scrollToElement')
       this.scrollToElement();
     });
   },
   updated() {
-    this.scrollToElement();
+    this.$nextTick(function () {
+      console.info('updated scrollToElement')
+      this.scrollToElement();
+    });
   }
 };
 </script>

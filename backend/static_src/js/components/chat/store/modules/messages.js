@@ -12,7 +12,12 @@ const mutations = {
     state.messages[messages['chat_id']] = messages.messages;
   },
   addMessage(state, message) {
-    state.messages.push(message);
+    const messages = state.messages
+    if (message.chat_id in messages) {
+      messages[message.chat_id].push(message.message)
+    } else {
+      state.messages[message.chat_id] = message.message;
+    }
   },
 };
 
@@ -22,9 +27,12 @@ const actions = {
       commit('initMessages', messages);
     }, chatId);
   },
-  sendMessage({ commit }, data) {
-    api.sendMessage(() => {
-      // commit('addMessage', data);
+  sendMessage({ commit, rootState }, data) {
+    api.sendMessage((message) => {
+      commit('addMessage', {
+        chat_id: rootState.users.currentChatId,
+        message,
+      })
     }, data)
   },
 };
@@ -34,8 +42,13 @@ const getters = {
     return state.messages[chatId]
   },
   getLastMessage: (state) => (chatId) => {
-    const message = state.messages[chatId];
-    return message.messages[message.messages.length - 1];
+    let last_message;
+    const messages = state.messages;
+    if (chatId in messages) {
+      const chat_messages = messages[chatId];
+      last_message = chat_messages[chat_messages.length - 1];
+    }
+    return last_message
   },
 };
 

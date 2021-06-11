@@ -29,7 +29,6 @@ export default {
     ws.onmessage = (ev) => {
       console.info('[message] Данные получены')
       const data = JSON.parse(ev.data)
-      console.info(data)
       cb(data.data)
     }
   },
@@ -43,7 +42,6 @@ export default {
     ws.onmessage = (ev) => {
       console.info('[message] Данные получены')
       const data = JSON.parse(ev.data)
-      console.info(data)
       cb(data.data)
     }
   },
@@ -53,5 +51,11 @@ export default {
       event: 'set.message',
       data,
     }));
+
+    ws.onmessage = (ev) => {
+      console.info('[message] Данные получены')
+      const data = JSON.parse(ev.data)
+      cb(data.data)
+    }
   },
 };
