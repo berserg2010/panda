@@ -18,19 +18,19 @@ ws.onerror = (ev) => {
 export default {
   getInterlocutors(cb) {
     ws.onopen = (ev) => {
-      console.info('[open] Соединение установлено')
+      console.info('[open] Соединение установлено');
 
       ws.send(JSON.stringify({
         event: 'get.interlocutors',
         data: {},
       }));
-    }
+    };
 
     ws.onmessage = (ev) => {
-      console.info('[message] Данные получены')
-      const data = JSON.parse(ev.data)
-      cb(data.data)
-    }
+      // console.info('[getInterlocutors] Данные получены');
+      const data = JSON.parse(ev.data);
+      cb(data.data);
+    };
   },
 
   getMessages(cb, currentChatId) {
@@ -40,10 +40,10 @@ export default {
     }));
 
     ws.onmessage = (ev) => {
-      console.info('[message] Данные получены')
-      const data = JSON.parse(ev.data)
-      cb(data.data)
-    }
+      // console.info('[getMessages] Данные получены');
+      const data = JSON.parse(ev.data);
+      cb(data.data);
+    };
   },
 
   sendMessage(cb, data) {
@@ -53,9 +53,9 @@ export default {
     }));
 
     ws.onmessage = (ev) => {
-      console.info('[message] Данные получены')
-      const data = JSON.parse(ev.data)
-      cb(data.data)
-    }
+      // console.info('[sendMessage] Данные получены');;
+      const data = JSON.parse(ev.data);
+      cb(data.data);
+    };
   },
 };

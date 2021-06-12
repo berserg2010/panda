@@ -6373,6 +6373,7 @@ $(function() {
       $(".menu-arrow").on("click", function(t) {
         $(".personalArea").toggleClass("personalArea-active")
       }),
+
       $(".range-slider").on("init reInit", function(t, e) {
         var a = e.slideCount;
         $(this).parents(".range-slider__wrap").find(".range").attr("max", a)

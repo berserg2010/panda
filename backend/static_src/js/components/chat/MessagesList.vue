@@ -6,6 +6,7 @@
         :key="message.message_id"
         :class="[ currentUserId === message.sender_id ? 'messages_list_item--right' : 'messages_list_item--left' ]"
         :message="message.text"
+        :scrollToElement="scrollToElement"
       />
     </div>
   </perfect-scrollbar>
@@ -22,7 +23,7 @@ export default {
   },
   props: {
     messages: {
-      type: Object,
+      type: Array,
       required: true,
     },
   },
@@ -39,15 +40,15 @@ export default {
   },
   mounted() {
     this.$nextTick(function () {
-      console.info('mounted scrollToElement')
+      // console.info('[MessagesList] mounted');
       this.scrollToElement();
     });
   },
   updated() {
     this.$nextTick(function () {
-      console.info('updated scrollToElement')
+      // console.info('[MessagesList] updated');
       this.scrollToElement();
     });
-  }
+  },
 };
 </script>

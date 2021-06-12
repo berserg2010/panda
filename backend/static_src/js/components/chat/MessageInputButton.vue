@@ -18,6 +18,6 @@ export default {
       type: Function,
       required: true,
     },
-  }
+  },
 };
 </script>

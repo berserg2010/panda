@@ -33,8 +33,8 @@ export default {
   computed: {
     lastMessage() {
       const last_message = this.$store.getters.getLastMessage(this.user.chat_id)
-        || this.user.last_message
-      return last_message?.text
+        || this.user.last_message;
+      return last_message?.text;
     },
   },
 };

@@ -12,6 +12,21 @@ export default {
       type: String,
       required: true,
     },
+    scrollToElement: {
+      type: Function,
+      required: true,
+    }
+
+  },
+  mounted() {
+    this.$nextTick(function () {
+      this.scrollToElement();
+    });
+  },
+  updated() {
+    this.$nextTick(function () {
+      this.scrollToElement();
+    });
   },
 };
 </script>

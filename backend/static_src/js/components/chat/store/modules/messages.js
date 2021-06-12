@@ -12,12 +12,13 @@ const mutations = {
     state.messages[messages['chat_id']] = messages.messages;
   },
   addMessage(state, message) {
-    const messages = state.messages
+    const messages = { ...state.messages }
     if (message.chat_id in messages) {
-      messages[message.chat_id].push(message.message)
+      messages[message.chat_id].push(message.message);
     } else {
-      state.messages[message.chat_id] = message.message;
+      messages[message.chat_id] = message.message;
     }
+    state.messages = messages;
   },
 };
 
