@@ -30,14 +30,13 @@ services:
       - env/back.env
       - env/db.env
     volumes:
-      # Bind
-      - ./backend:/usr/src/${PROJECT_NAME}
+      # Volume
+      - ./backups:/usr/src/${PROJECT_NAME}/backups
     depends_on:
       - db
       - redis
     networks:
       - db_layer
-
 
 networks:
   db_layer:

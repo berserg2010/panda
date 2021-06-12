@@ -29,9 +29,9 @@ services:
 #    user: root
     volumes:
       # Volume
-      - static:/usr/src/${PROJECT_NAME}/static_root
+      - static_root:/usr/src/${PROJECT_NAME}/static_root
       # Bind
-#      - ./backend/media:/usr/src/${PROJECT_NAME}/media
+      - ./backend/media:/usr/src/${PROJECT_NAME}/media
     command:
       sh -c "
         python3 -c \"import redis;r=redis.Redis(host='redis',port='6379');r.flushall()\"
@@ -51,7 +51,7 @@ services:
       - ${PROXY_PORT_HTTPS}:443
     volumes:
       # Volume
-      - static:/usr/src/${PROJECT_NAME}/static_root
+      - static_root:/usr/src/${PROJECT_NAME}/static_root
       # Bind
       - ./proxy/templates:/etc/nginx/templates
       - ./ssl:/usr/src/${PROJECT_NAME}/ssl
@@ -63,7 +63,7 @@ services:
       - proxy_back
 
 volumes:
-  static:
+  static_root:
 
 networks:
   proxy_back:

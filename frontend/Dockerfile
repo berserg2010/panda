@@ -30,7 +30,7 @@ RUN npm init -y \
 && npm install node-sass jquery babel-loader @babel/core @babel/preset-env css-loader sass-loader sass postcss-loader autoprefixer postcss file-loader mini-css-extract-plugin copy-webpack-plugin css-minimizer-webpack-plugin --save-dev \
 && npm install vue-loader@next vue-loader-plugin @vue/compiler-sfc vue-svg-loader@beta vue-template-compiler --save-dev \
 && npm install @vue/devtools --save-dev \
-&& npm install axios vue-axios vue-native-websocket aos vue3-perfect-scrollbar \
+&& npm install axios vue-axios aos vue3-perfect-scrollbar \
 && npm audit fix --force
 
 COPY ./frontend/ .
