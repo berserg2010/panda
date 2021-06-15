@@ -55,6 +55,12 @@ Prod:
 
     docker-compose run --rm backend python manage.py dumpdata --indent 2 --exclude contenttypes --exclude admin.logentry --output dump.json
 
+Тесты
+
+    docker-compose run --rm backend pytest --reuse-db -s
+
+    docker-compose run --rm backend pytest --create-db -s
+
 
 ## Верстка
 

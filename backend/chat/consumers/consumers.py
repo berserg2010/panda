@@ -77,6 +77,7 @@ class InterlocutorConsumer(CommonConsumer):
 
         interlocutors = []
         for chat in chats:
+            print(self.user)
             interlocutor = chat.interlocutor_one if chat.interlocutor_two.pk == self.user.pk else chat.interlocutor_two
             last_message = None
             if chat.last_message:

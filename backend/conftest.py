@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.test import Client
 
 from common.utils import date_now
-from account.models import Student, Payment
+from account.models import Student, Teacher, Payment
 from course.models import GroupsOfCourses, PackageOfLessons, Course
 from paid_course.models import FreeLesson, PaidCourse, Schedule
 from paid_course.services.timetables import ScheduleEntity
@@ -55,6 +55,18 @@ def create_student(create_user_handler):
 
 
 @pytest.fixture(autouse=True)
+def create_teacher(create_user_handler):
+    def _create_teacher() -> Teacher:
+        user = create_user_handler(ParameterStorage.teacher_auth)
+        teacher = mixer.blend(
+            Teacher,
+            user=user,
+        )
+        return teacher
+    return _create_teacher
+
+
+@pytest.fixture(autouse=True)
 def create_student_two(create_user_handler):
     def _create_student_two():
         user = create_user_handler(ParameterStorage.user_auth_two)
@@ -88,6 +100,17 @@ def student_register(client, create_student):
     res = client.login(
         username=ParameterStorage.student_auth.get('username'),
         password=ParameterStorage.student_auth.get('password'),
+    )
+    assert res
+    return client
+
+
+@pytest.fixture
+def teacher_client_register(client, create_teacher):
+    create_teacher()
+    res = client.login(
+        username=ParameterStorage.teacher_auth.get('username'),
+        password=ParameterStorage.teacher_auth.get('password'),
     )
     assert res
     return client
@@ -210,6 +233,13 @@ class ParameterStorage:
         'email': 'student@asdfasdf.com',
         'first_name': 'first_name_student',
         'last_name': 'last_name_student',
+        'password': get_user_model().objects.make_random_password(),
+    }
+    teacher_auth = {
+        'username': 'teacher',
+        'email': 'teacher@asdfasdf.com',
+        'first_name': 'teacher',
+        'last_name': 'asdfasdf',
         'password': get_user_model().objects.make_random_password(),
     }
     user_auth_two = {

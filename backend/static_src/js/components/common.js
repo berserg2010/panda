@@ -5911,618 +5911,569 @@ const $ = jQuery = require('jquery');
 });
 $(function() {
   AOS.init()
-}),
+})
 
-  $(document).ready(function() {
+$(document).ready(function() {
 
-    function t() {
-      $("#red").val(),
-        $("#green").val(),
-        $("#blue").val()
-    }
+  function t() {
+    $("#red").val(),
+      $("#green").val(),
+      $("#blue").val()
+  }
 
-    if (window.addEventListener("load", AOS.refresh),
-      $(".instructor-slider,.testimonials-slider").slick({
-        infinite: !0,
-        arrows: !1,
-        dots: !1,
-        nextArrow: '<button class="slick-arrow slick-next"></button>',
-        prevArrow: '<button class="slick-arrow slick-prev"></button>',
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: !0,
-        autoplaySpeed: 1e4,
-        speed: 500,
-        centerMode: !0,
-        variableWidth: !0,
-        responsive: [{
-          breakpoint: 768,
-          settings: {
-            centerMode: !1
-          }
-        }]
-      }),
-      $(".personalArea-slider").slick({
-        infinite: !1,
-        arrows: !1,
-        dots: !1,
-        nextArrow: '<button class="slick-arrow slick-next"></button>',
-        prevArrow: '<button class="slick-arrow slick-prev"></button>',
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        speed: 500,
-        variableWidth: !0,
-        responsive: [{
-          breakpoint: 1380,
-          settings: {
-            slidesToShow: 2
-          }
-        }, {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 1
-          }
-        }]
-      }),
-      $(".timetables-slider").slick({
-        infinite: !1,
-        arrows: !1,
-        dots: !1,
-        nextArrow: '<button class="slick-arrow slick-next"></button>',
-        prevArrow: '<button class="slick-arrow slick-prev"></button>',
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        speed: 500,
-        variableWidth: !0,
-        responsive: [{
-          breakpoint: 1380,
-          settings: {
-            slidesToShow: 2
-          }
-        }, {
-          breakpoint: 680,
-          settings: {
-            slidesToShow: 1
-          }
-        }]
-      }),
-      $(".file-slider").slick({
-        infinite: !1,
-        arrows: !1,
-        dots: !1,
-        nextArrow: '<button class="slick-arrow slick-next"></button>',
-        prevArrow: '<button class="slick-arrow slick-prev"></button>',
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        speed: 500,
-        variableWidth: !0,
-        responsive: [{
-          breakpoint: 1380,
-          settings: {
-            slidesToShow: 2
-          }
-        }, {
-          breakpoint: 680,
-          settings: {
-            slidesToShow: 1
-          }
-        }]
-      }),
-      $('[data-fancybox="gallery"]').fancybox({
-        beforeShow: function() {
-          $(".caption--image").remove()
-        },
-        afterShow: function() {
-          var t = $(".fancybox-caption"),
-            e = t.clone().addClass("caption--image");
-          $(".fancybox-slide--current .fancybox-content").append(e),
-            t.not(".caption--image").addClass("caption--bottom")
+  const headerBar = document.querySelector('.header-bar');
+
+  if (window.addEventListener("load", AOS.refresh),
+    $(".instructor-slider,.testimonials-slider").slick({
+      infinite: !0,
+      arrows: !1,
+      dots: !1,
+      nextArrow: '<button class="slick-arrow slick-next"></button>',
+      prevArrow: '<button class="slick-arrow slick-prev"></button>',
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: !0,
+      autoplaySpeed: 1e4,
+      speed: 500,
+      centerMode: !0,
+      variableWidth: !0,
+      responsive: [{
+        breakpoint: 768,
+        settings: {
+          centerMode: !1
         }
-      }),
+      }]
+    }),
+    $(".personalArea-slider").slick({
+      infinite: !1,
+      arrows: !1,
+      dots: !1,
+      nextArrow: '<button class="slick-arrow slick-next"></button>',
+      prevArrow: '<button class="slick-arrow slick-prev"></button>',
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      speed: 500,
+      variableWidth: !0,
+      responsive: [{
+        breakpoint: 1380,
+        settings: {
+          slidesToShow: 2
+        }
+      }, {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1
+        }
+      }]
+    }),
+    $(".timetables-slider").slick({
+      infinite: !1,
+      arrows: !1,
+      dots: !1,
+      nextArrow: '<button class="slick-arrow slick-next"></button>',
+      prevArrow: '<button class="slick-arrow slick-prev"></button>',
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      speed: 500,
+      variableWidth: !0,
+      responsive: [{
+        breakpoint: 1380,
+        settings: {
+          slidesToShow: 2
+        }
+      }, {
+        breakpoint: 680,
+        settings: {
+          slidesToShow: 1
+        }
+      }]
+    }),
+    $(".file-slider").slick({
+      infinite: !1,
+      arrows: !1,
+      dots: !1,
+      nextArrow: '<button class="slick-arrow slick-next"></button>',
+      prevArrow: '<button class="slick-arrow slick-prev"></button>',
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      speed: 500,
+      variableWidth: !0,
+      responsive: [{
+        breakpoint: 1380,
+        settings: {
+          slidesToShow: 2
+        }
+      }, {
+        breakpoint: 680,
+        settings: {
+          slidesToShow: 1
+        }
+      }]
+    }),
+    $('[data-fancybox="gallery"]').fancybox({
+      beforeShow: function() {
+        $(".caption--image").remove()
+      },
+      afterShow: function() {
+        var t = $(".fancybox-caption"),
+          e = t.clone().addClass("caption--image");
+        $(".fancybox-slide--current .fancybox-content").append(e),
+          t.not(".caption--image").addClass("caption--bottom")
+      }
+    }),
 
 
-      // Menu/authentication modal
-      $('.header-bar').on('click', function() {
+    // Menu/authentication modal
+    // $('.header-bar').on('click', headerBarClickEvent),
+    headerBar.addEventListener('click', headerBarClickEvent),
 
-        const header = document.querySelector('.header')
-        const headerRow = document.querySelector('.header-row')
-        const modal = document.querySelector('.modal')
-        const menu = document.querySelector('.menu')
+    Array.from(document.getElementsByClassName('button-modal')).forEach(function(element) {
+        element.addEventListener('click', function(t) {
+          t.preventDefault()
 
-        const e = $(this).attr('href')
+          const header = document.querySelector('.header')
+          const headerRow = document.querySelector('.header-row')
+          const modal = document.querySelector('.modal')
 
-        const modalIsOpen = modal?.classList.contains('open')
+          const e = $(this).attr('href')
 
-        if (modalIsOpen) {
-          modalHiddenHandler({ force: false })
-        } else {
-          headerRow?.classList.toggle('menu--open')
-          menu?.classList.toggle('menu--open')
+          header.classList.add('header-active')
+
+          const menuIsOpen = headerRow.classList.contains('menu--open')
+
+          if (menuIsOpen) {
+            headerRow.classList.remove('menu--open')
+          }
+
+          modalHiddenHandler({ force: true })
+          modal?.classList.add(e)
+          scrollHiddenHandler(true)
 
           $('.modal').find('.modal-tab').removeClass('active')
           $('.modal').find('#' + e).addClass('active')
+        })
+      }
+    ),
+
+    // $(document).on('click', documentClickEvent),
+    document.addEventListener('click', documentClickEvent),
+
+    $(".drop-text").on("click", function(t) {
+      t.preventDefault(), $(this).parents(".drop").toggleClass("active"), $(window).width() <= 960 && $(this).next().slideToggle()
+    }),
+
+    $('.header-user__top').on('click', function() {
+      $('.header-user').toggleClass('active')
+    }),
+
+    $(document).on("click", function(t) {
+      var e = $(".drop");
+      e.is(t.target)
+      || 0 !== e.has(t.target).length
+      || $(".form-btn").is(t.target)
+      || $(".drop").removeClass("active")
+    }),
+
+    $(document).on('click', function(t) {
+      var e = $('.header-user');
+      e.is(t.target) || 0 !== e.has(t.target).length || $('.header-user').removeClass('active')
+    }),
+
+    $(".slick-current.slick-active .instructor-overlay").on("click", function() {
+      var t = $(this).parents(".instructor-video");
+      url = $(t).find(".instructor-url").text(), $(t).addClass("active"), $(t).find("iframe").attr("src", url)
+    }),
+    $(".tab-list li a").on("click", function(t) {
+      t.preventDefault(), $(".tab-list li a").removeClass("active"),
+        $(".tab").removeClass("tab-active");
+      var e = $(t.target).attr("href");
+      $(e).addClass("tab-active"),
+        $(this).addClass("active")
+    }),
+    $(".accordeon .accordeon-block").hide().prev().click(function() {
+      $(this).parents(".accordeon").hasClass("accordeon-active") ? $(".accordeon").removeClass("accordeon-active") : ($(".accordeon").removeClass("accordeon-active"), $(this).parents(".accordeon").addClass("accordeon-active")), $(this).parents().find(".accordeon-block").not(this).slideUp().prev(), $(this).next().not(":visible").slideDown().prev().parents()
+    }),
+    $(".grid").masonry({
+      itemSelector: ".grid-item",
+      percentPosition: !0
+    }),
+    $(".input-textarea textarea").keyup(function() {
+      var t = $(this).val().length;
+      $(this).attr("maxlength", "1000").parents(".input-textarea").find(".input-textarea__info b").text(1e3 - t)
+    }),
+
+    $("#statistics1").length) {
+    var e = new ProgressBar.Circle(statistics1, {
+      color: "#FFB42D",
+      strokeWidth: 5,
+      trailWidth: 5,
+      easing: "easeInOut",
+      duration: 1400,
+      text: {
+        autoStyleContainer: !1
+      },
+      from: {
+        color: "#FFB42D",
+        width: 5
+      },
+      to: {
+        color: "#FFB42D",
+        width: 5
+      },
+      step: function(t, e) {
+        e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
+        var a = Math.round(e.value() * $("#statistics1-1").text());
+        0 === a ? e.setText("") : e.setText(a)
+      }
+    });
+    e.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', e.text.style.fontSize = "48px", e.animate($("#procent-1").text(), {
+      duration: 1500
+    })
+  }
+
+  if ($("#statistics2").length) {
+    var a = new ProgressBar.Circle(statistics2, {
+      color: "#FFB42D",
+      strokeWidth: 5,
+      trailWidth: 5,
+      easing: "easeInOut",
+      duration: 1400,
+      text: {
+        autoStyleContainer: !1
+      },
+      from: {
+        color: "#FFB42D",
+        width: 5
+      },
+      to: {
+        color: "#FFB42D",
+        width: 5
+      },
+      step: function(t, e) {
+        e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
+        var a = Math.round(e.value() * $("#statistics2-2").text());
+        0 === a ? e.setText("") : e.setText(a + "<span>+</span>")
+      }
+    });
+    a.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', a.text.style.fontSize = "48px", a.animate($("#procent-2").text(), {
+      duration: 1500
+    })
+  }
+  if ($("#statistics3").length) {
+    var s = new ProgressBar.Circle(statistics3, {
+      color: "#FFB42D",
+      strokeWidth: 5,
+      trailWidth: 5,
+      easing: "easeInOut",
+      duration: 1400,
+      text: {
+        autoStyleContainer: !1
+      },
+      from: {
+        color: "#FFB42D",
+        width: 5
+      },
+      to: {
+        color: "#FFB42D",
+        width: 5
+      },
+      step: function(t, e) {
+        e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
+        var a = Math.round(e.value() * $("#statistics3-3").text());
+        0 === a ? e.setText("") : e.setText(a + "<span>+</span>")
+      }
+    });
+    s.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', s.text.style.fontSize = "48px", s.animate($("#procent-3").text(), {
+      duration: 1500
+    })
+  }
+  if ($("#statistics4").length) {
+    var o = new ProgressBar.Circle(statistics4, {
+      color: "#FFB42D",
+      strokeWidth: 5,
+      trailWidth: 5,
+      easing: "easeInOut",
+      duration: 1400,
+      text: {
+        autoStyleContainer: !1
+      },
+      from: {
+        color: "#FFB42D",
+        width: 5
+      },
+      to: {
+        color: "#FFB42D",
+        width: 5
+      },
+      step: function(t, e) {
+        e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
+        var a = Math.round(e.value() * $("#statistics4-4").text());
+        0 === a ? e.setText("") : e.setText(a + "<span>+</span>")
+      }
+    });
+    o.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', o.text.style.fontSize = "48px", o.animate($("#procent-4").text(), {
+      duration: 1500
+    })
+  }
+  if ($("#perstatistics1").length) {
+    var e = new ProgressBar.Circle(perstatistics1, {
+      color: "#FFB42D",
+      strokeWidth: 5,
+      trailWidth: 5,
+      easing: "easeInOut",
+      duration: 1400,
+      text: {
+        autoStyleContainer: !1
+      },
+      from: {
+        color: "#FFB42D",
+        width: 5
+      },
+      to: {
+        color: "#FFB42D",
+        width: 5
+      },
+      step: function(t, e) {
+        e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
+        var a = (e.value() * $("#perstatistics1-1").text()).toFixed(1);
+        0 === a ? e.setText("") : e.setText(a)
+      }
+    });
+    e.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', e.text.style.fontSize = "48px", e.animate($("#perprocent-1").text(), {
+      duration: 1500
+    })
+  }
+  if ($("#perstatistics2").length) {
+    var e = new ProgressBar.Circle(perstatistics2, {
+      color: "#FFB42D",
+      strokeWidth: 5,
+      trailWidth: 5,
+      easing: "easeInOut",
+      duration: 1400,
+      text: {
+        autoStyleContainer: !1
+      },
+      from: {
+        color: "#FFB42D",
+        width: 5
+      },
+      to: {
+        color: "#FFB42D",
+        width: 5
+      },
+      step: function(t, e) {
+        e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
+        var a = (e.value() * $("#perstatistics2-2").text()).toFixed(1);
+        0 === a ? e.setText("") : e.setText(a)
+      }
+    });
+    e.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', e.text.style.fontSize = "48px", e.animate($("#perprocent-2").text(), {
+      duration: 1500
+    })
+  }
+  if ($("#perstatistics3").length) {
+    var e = new ProgressBar.Circle(perstatistics3, {
+      color: "#FFB42D",
+      strokeWidth: 5,
+      trailWidth: 5,
+      easing: "easeInOut",
+      duration: 1400,
+      text: {
+        autoStyleContainer: !1
+      },
+      from: {
+        color: "#FFB42D",
+        width: 5
+      },
+      to: {
+        color: "#FFB42D",
+        width: 5
+      },
+      step: function(t, e) {
+        e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
+        var a = (e.value() * $("#perstatistics3-3").text()).toFixed(1);
+        0 === a ? e.setText("") : e.setText(a)
+      }
+    });
+    e.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', e.text.style.fontSize = "48px", e.animate($("#perprocent-3").text(), {
+      duration: 1500
+    })
+  }
+
+  $(".select").on("click", function(t) {
+    if ($(this).hasClass("active")) {
+      var e = t.target,
+        a = $(this).find(".select-text"),
+        s = $(this).find(".select-value");
+
+      "LI" == e.tagName ? ($(a).text($(e).text()),
+        $(s).val($(e).text()),
+        $(e).hasClass("color-green") ? $(this).find(".select-text").removeClass("color-red").addClass("color-green") : $(e).hasClass("color-red") && $(this).find(".select-text").removeClass("color-green").addClass("color-red")) : "A" == e.tagName && ($(a).html($(e).html()),
+        $(s).val($(e).text())),
+        $(this).removeClass("active")
+    } else {
+      $(".select").removeClass("active"),
+        $(this).addClass("active")
+    }
+  }),
+    $(document).on("click", function(t) {
+      var e = $(".select");
+      e.is(t.target) || 0 !== e.has(t.target).length || $(".select").removeClass("active")
+    }),
+
+    $(".menu-arrow").on("click", function(t) {
+      $(".personalArea").toggleClass("personalArea-active")
+    }),
+
+    $(".range-slider").on("init reInit", function(t, e) {
+      var a = e.slideCount;
+      $(this).parents(".range-slider__wrap").find(".range").attr("max", a)
+    }),
+    $(".range-slider").on("afterChange", function(t, e, a) {
+      $(this).parents(".range-slider__wrap").find(".range").val(a + 1)
+    }),
+    $(".range").on("input change", function() {
+      $(this).parents(".range-slider__wrap").find(".range-slider").slick("slickGoTo", this.value - 1)
+    }),
+    $(".methods-drop li a").on("click", function(t) {
+      t.preventDefault(),
+        $(".methods-drop li a").removeClass("active"),
+        $(".methods-tab").removeClass("active");
+      var e = $(t.target).attr("href");
+      $(e).addClass("active"),
+        $(this).addClass("active"),
+        $(this).parents(".methods-col__menu").find(".methods-last").text($(this).text())
+    }),
+    $(".methods-col__menu").on("click", function(t) {
+      $(this).toggleClass("active")
+    });
+
+  var i = $('.modal');
+  if (
+    // $('.button-modal').on('click', function(t) {
+    //   t.preventDefault()
+    //     // ,
+    //     // $(".header").removeClass('header-active');
+    //
+    //   var e = $(this).attr("href");
+    //
+    //   $(i).addClass("open"),
+    //     $(".modal-overlay").addClass("open-overlay"),
+    //     $(".modal").addClass(e),
+    //     $(".modal").find(".modal-tab").removeClass("active"),
+    //     $(".modal").find("#" + e).addClass("active")
+    // }),
+
+    // $(".modal-close, .modal-overlay").on("click", function() {
+    //   $(i).removeClass("open"),
+    //     $(".modal-overlay").removeClass("open-overlay")
+    // }),
+
+    $(".scrollbar-outer,.menu-over").scrollbar(),
+
+    $(".datepicker").length && $(".datepicker").datepicker({
+        dateFormat: "dd-mm-yy",
+        monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+        dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+        onSelect: function(t) {
+          $(this).parents(".master-datepicker").find(".datepicker-input span").text($(this).val())
         }
-
-        header.classList.toggle('header-active')
-        scrollHiddenHandler()
-      }),
-
-      Array.from(document.getElementsByClassName('button-modal')).forEach(function(element) {
-          element.addEventListener('click', function(t) {
-            t.preventDefault()
-
-            const header = document.querySelector('.header')
-            const headerRow = document.querySelector('.header-row')
-            const modal = document.querySelector('.modal')
-
-            const e = $(this).attr('href')
-
-            header.classList.add('header-active')
-
-            const menuIsOpen = headerRow.classList.contains('menu--open')
-
-            if (menuIsOpen) {
-              headerRow.classList.remove('menu--open')
-            }
-
-            modalHiddenHandler({ force: true })
-            modal?.classList.add(e)
-            scrollHiddenHandler(true)
-
-            $('.modal').find('.modal-tab').removeClass('active')
-            $('.modal').find('#' + e).addClass('active')
-          })
-        }
-      ),
-
-
-      $(document).on('click', function(e) {
-        const target = e.target
-
-        const header = document.querySelector('.header')
-        const headerBar = document.querySelector('.header-bar')
-        const headerRow = document.querySelector('.header-row')
-        const menu = document.querySelector('.menu')
-        const formBtn = document.querySelector('.form-btn')
-        const modalOverlay = document.querySelector('.modal-overlay')
-        const modal = document.querySelector('.modal')
-
-        const isHeaderBar = is_contains(target, headerBar)
-        const isHeaderRow = is_contains(target, headerRow)
-        const isModal = is_contains(target, modal)
-        const isButtonModal = target.classList.contains('button-modal')
-        const isMenu = is_contains(target, menu)
-
-        if (!isHeaderBar && !isHeaderRow && !isModal && !isButtonModal && !isMenu) {
-          header?.classList.remove('header-active')
-          headerRow?.classList.remove('menu--open')
-          menu?.classList.remove('menu--open')
-
-          scrollHiddenHandler(false)
-
-          if (modal) {
-            modalHiddenHandler({ clean: true })
-          }
-        }
-      }),
-
-
-      $(".drop-text").on("click", function(t) {
-        t.preventDefault(), $(this).parents(".drop").toggleClass("active"), $(window).width() <= 960 && $(this).next().slideToggle()
-      }),
-
-      $('.header-user__top').on('click', function() {
-        $('.header-user').toggleClass('active')
-      }),
-
-
-      $(document).on("click", function(t) {
-        var e = $(".drop");
-        e.is(t.target)
-        || 0 !== e.has(t.target).length
-        || $(".form-btn").is(t.target)
-        || $(".drop").removeClass("active")
-      }),
-
-      $(document).on('click', function(t) {
-        var e = $('.header-user');
-        e.is(t.target) || 0 !== e.has(t.target).length || $('.header-user').removeClass('active')
-      }),
-
-      $(".slick-current.slick-active .instructor-overlay").on("click", function() {
-        var t = $(this).parents(".instructor-video");
-        url = $(t).find(".instructor-url").text(), $(t).addClass("active"), $(t).find("iframe").attr("src", url)
-      }),
-      $(".tab-list li a").on("click", function(t) {
-        t.preventDefault(), $(".tab-list li a").removeClass("active"),
-          $(".tab").removeClass("tab-active");
+      },
+      $.datepicker.regional.ru),
+      $(".vocabulary-ico").on("click", function() {
+        $(".vocabulary-ico audio").each(function() {
+          this.pause(), this.currentTime = 0
+        }),
+        $(this).find("audio").length && $(this).find("audio")[0].play()
+      }), $(".master-btn").on("click", function(t) {
+      t.preventDefault(),
+        $(this).parents(".master-wrap").toggleClass("active")
+    }),
+      $(".lesson-tabs li a").on("click", function(t) {
+        t.preventDefault(), $(".lesson-tabs li a").removeClass("active"), $(".lesson-input__copy").removeClass("active");
         var e = $(t.target).attr("href");
+        $(e).addClass("active"), $(this).addClass("active")
+      }),
+      $(window).on("scroll", function() {
+        $(".videoCall-col__1").length && ($(this).scrollTop() >= $(".videoCall-row").offset().top - 70 ? $(".videoCall-col__1").addClass("videoCall-fixed") : $(".videoCall-col__1").removeClass("videoCall-fixed"))
+      }),
+      $(".testing-wrap input").on("keyup", function() {
+        $(this).attr("size", $(this).val().length)
+      }),
+      $(".categories-list.options li a").on("click", function(t) {
+        t.preventDefault()
+      }),
+      $(".profile-edit").on("click", function(t) {
+        t.preventDefault(),
+          $(this).parents(".profile").toggleClass("profile-changes")
+      }),
+      $(".input-cardNumber").attr("type", "text").mask("9999 9999 9999 9999", {
+        reverse: !0
+      }),
+      $(".input-expiry").attr("type", "text").mask("99/99", {
+        reverse: !0
+      }),
+      $(".input-cvv").attr("type", "text").mask("999", {
+        reverse: !0
+      }),
+      $(".personalArea-card__input input").on("focus", function() {
+        $(this).parents(".personalArea-card__input").addClass("input-active")
+      }).on("blur", function() {
+        "" != !$(this).val() && $(this).parents(".personalArea-card__input").removeClass("input-active")
+      }),
+      $(".personalModal-tab").on("click", function(t) {
+        t.preventDefault(), $(".personalArea-modal__tabs li a").removeClass("active"),
+          $(".personalArea-modal__tab").removeClass("tab-active");
+        var e = $(this).attr("href");
         $(e).addClass("tab-active"),
           $(this).addClass("active")
       }),
-      $(".accordeon .accordeon-block").hide().prev().click(function() {
-        $(this).parents(".accordeon").hasClass("accordeon-active") ? $(".accordeon").removeClass("accordeon-active") : ($(".accordeon").removeClass("accordeon-active"), $(this).parents(".accordeon").addClass("accordeon-active")), $(this).parents().find(".accordeon-block").not(this).slideUp().prev(), $(this).next().not(":visible").slideDown().prev().parents()
-      }),
-      $(".grid").masonry({
-        itemSelector: ".grid-item",
-        percentPosition: !0
-      }),
-      $(".input-textarea textarea").keyup(function() {
-        var t = $(this).val().length;
-        $(this).attr("maxlength", "1000").parents(".input-textarea").find(".input-textarea__info b").text(1e3 - t)
+
+      $(".topUpAccount-btn").on("click", function(t) {
+        t.preventDefault();
+        var e = $(this).attr("href");
+        $(e).addClass("modal-active")
       }),
 
-      $("#statistics1").length) {
-      var e = new ProgressBar.Circle(statistics1, {
-        color: "#FFB42D",
-        strokeWidth: 5,
-        trailWidth: 5,
-        easing: "easeInOut",
-        duration: 1400,
-        text: {
-          autoStyleContainer: !1
-        },
-        from: {
-          color: "#FFB42D",
-          width: 5
-        },
-        to: {
-          color: "#FFB42D",
-          width: 5
-        },
-        step: function(t, e) {
-          e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
-          var a = Math.round(e.value() * $("#statistics1-1").text());
-          0 === a ? e.setText("") : e.setText(a)
-        }
-      });
-      e.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', e.text.style.fontSize = "48px", e.animate($("#procent-1").text(), {
-        duration: 1500
-      })
-    }
-    if ($("#statistics2").length) {
-      var a = new ProgressBar.Circle(statistics2, {
-        color: "#FFB42D",
-        strokeWidth: 5,
-        trailWidth: 5,
-        easing: "easeInOut",
-        duration: 1400,
-        text: {
-          autoStyleContainer: !1
-        },
-        from: {
-          color: "#FFB42D",
-          width: 5
-        },
-        to: {
-          color: "#FFB42D",
-          width: 5
-        },
-        step: function(t, e) {
-          e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
-          var a = Math.round(e.value() * $("#statistics2-2").text());
-          0 === a ? e.setText("") : e.setText(a + "<span>+</span>")
-        }
-      });
-      a.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', a.text.style.fontSize = "48px", a.animate($("#procent-2").text(), {
-        duration: 1500
-      })
-    }
-    if ($("#statistics3").length) {
-      var s = new ProgressBar.Circle(statistics3, {
-        color: "#FFB42D",
-        strokeWidth: 5,
-        trailWidth: 5,
-        easing: "easeInOut",
-        duration: 1400,
-        text: {
-          autoStyleContainer: !1
-        },
-        from: {
-          color: "#FFB42D",
-          width: 5
-        },
-        to: {
-          color: "#FFB42D",
-          width: 5
-        },
-        step: function(t, e) {
-          e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
-          var a = Math.round(e.value() * $("#statistics3-3").text());
-          0 === a ? e.setText("") : e.setText(a + "<span>+</span>")
-        }
-      });
-      s.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', s.text.style.fontSize = "48px", s.animate($("#procent-3").text(), {
-        duration: 1500
-      })
-    }
-    if ($("#statistics4").length) {
-      var o = new ProgressBar.Circle(statistics4, {
-        color: "#FFB42D",
-        strokeWidth: 5,
-        trailWidth: 5,
-        easing: "easeInOut",
-        duration: 1400,
-        text: {
-          autoStyleContainer: !1
-        },
-        from: {
-          color: "#FFB42D",
-          width: 5
-        },
-        to: {
-          color: "#FFB42D",
-          width: 5
-        },
-        step: function(t, e) {
-          e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
-          var a = Math.round(e.value() * $("#statistics4-4").text());
-          0 === a ? e.setText("") : e.setText(a + "<span>+</span>")
-        }
-      });
-      o.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', o.text.style.fontSize = "48px", o.animate($("#procent-4").text(), {
-        duration: 1500
-      })
-    }
-    if ($("#perstatistics1").length) {
-      var e = new ProgressBar.Circle(perstatistics1, {
-        color: "#FFB42D",
-        strokeWidth: 5,
-        trailWidth: 5,
-        easing: "easeInOut",
-        duration: 1400,
-        text: {
-          autoStyleContainer: !1
-        },
-        from: {
-          color: "#FFB42D",
-          width: 5
-        },
-        to: {
-          color: "#FFB42D",
-          width: 5
-        },
-        step: function(t, e) {
-          e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
-          var a = (e.value() * $("#perstatistics1-1").text()).toFixed(1);
-          0 === a ? e.setText("") : e.setText(a)
-        }
-      });
-      e.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', e.text.style.fontSize = "48px", e.animate($("#perprocent-1").text(), {
-        duration: 1500
-      })
-    }
-    if ($("#perstatistics2").length) {
-      var e = new ProgressBar.Circle(perstatistics2, {
-        color: "#FFB42D",
-        strokeWidth: 5,
-        trailWidth: 5,
-        easing: "easeInOut",
-        duration: 1400,
-        text: {
-          autoStyleContainer: !1
-        },
-        from: {
-          color: "#FFB42D",
-          width: 5
-        },
-        to: {
-          color: "#FFB42D",
-          width: 5
-        },
-        step: function(t, e) {
-          e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
-          var a = (e.value() * $("#perstatistics2-2").text()).toFixed(1);
-          0 === a ? e.setText("") : e.setText(a)
-        }
-      });
-      e.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', e.text.style.fontSize = "48px", e.animate($("#perprocent-2").text(), {
-        duration: 1500
-      })
-    }
-    if ($("#perstatistics3").length) {
-      var e = new ProgressBar.Circle(perstatistics3, {
-        color: "#FFB42D",
-        strokeWidth: 5,
-        trailWidth: 5,
-        easing: "easeInOut",
-        duration: 1400,
-        text: {
-          autoStyleContainer: !1
-        },
-        from: {
-          color: "#FFB42D",
-          width: 5
-        },
-        to: {
-          color: "#FFB42D",
-          width: 5
-        },
-        step: function(t, e) {
-          e.path.setAttribute("stroke", t.color), e.path.setAttribute("stroke-width", t.width);
-          var a = (e.value() * $("#perstatistics3-3").text()).toFixed(1);
-          0 === a ? e.setText("") : e.setText(a)
-        }
-      });
-      e.text.style.fontFamily = '"Montserrat", Helvetica, sans-serif', e.text.style.fontSize = "48px", e.animate($("#perprocent-3").text(), {
-        duration: 1500
-      })
-    }
-
-    $(".select").on("click", function(t) {
-      if ($(this).hasClass("active")) {
-        var e = t.target,
-          a = $(this).find(".select-text"),
-          s = $(this).find(".select-value");
-
-        "LI" == e.tagName ? ($(a).text($(e).text()),
-          $(s).val($(e).text()),
-          $(e).hasClass("color-green") ? $(this).find(".select-text").removeClass("color-red").addClass("color-green") : $(e).hasClass("color-red") && $(this).find(".select-text").removeClass("color-green").addClass("color-red")) : "A" == e.tagName && ($(a).html($(e).html()),
-          $(s).val($(e).text())),
-          $(this).removeClass("active")
-      } else {
-        $(".select").removeClass("active"),
-          $(this).addClass("active")
-      }
-    }),
-      $(document).on("click", function(t) {
-        var e = $(".select");
-        e.is(t.target) || 0 !== e.has(t.target).length || $(".select").removeClass("active")
+      $(".personalArea-modal__close").on("click", function() {
+        $(".personalArea-modal").removeClass("modal-active")
       }),
-
-      $(".menu-arrow").on("click", function(t) {
-        $(".personalArea").toggleClass("personalArea-active")
-      }),
-
-      $(".range-slider").on("init reInit", function(t, e) {
-        var a = e.slideCount;
-        $(this).parents(".range-slider__wrap").find(".range").attr("max", a)
-      }),
-      $(".range-slider").on("afterChange", function(t, e, a) {
-        $(this).parents(".range-slider__wrap").find(".range").val(a + 1)
-      }),
-      $(".range").on("input change", function() {
-        $(this).parents(".range-slider__wrap").find(".range-slider").slick("slickGoTo", this.value - 1)
-      }),
-      $(".methods-drop li a").on("click", function(t) {
-        t.preventDefault(),
-          $(".methods-drop li a").removeClass("active"),
-          $(".methods-tab").removeClass("active");
-        var e = $(t.target).attr("href");
-        $(e).addClass("active"),
-          $(this).addClass("active"),
-          $(this).parents(".methods-col__menu").find(".methods-last").text($(this).text())
-      }),
-      $(".methods-col__menu").on("click", function(t) {
-        $(this).toggleClass("active")
-      });
-
-    var i = $('.modal');
-    if (
-      // $('.button-modal').on('click', function(t) {
-      //   t.preventDefault()
-      //     // ,
-      //     // $(".header").removeClass('header-active');
-      //
-      //   var e = $(this).attr("href");
-      //
-      //   $(i).addClass("open"),
-      //     $(".modal-overlay").addClass("open-overlay"),
-      //     $(".modal").addClass(e),
-      //     $(".modal").find(".modal-tab").removeClass("active"),
-      //     $(".modal").find("#" + e).addClass("active")
-      // }),
-
-      // $(".modal-close, .modal-overlay").on("click", function() {
-      //   $(i).removeClass("open"),
-      //     $(".modal-overlay").removeClass("open-overlay")
-      // }),
-
-      $(".scrollbar-outer,.menu-over").scrollbar(),
-
-      $(".datepicker").length && $(".datepicker").datepicker({
-          dateFormat: "dd-mm-yy",
-          monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-          dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
-          onSelect: function(t) {
-            $(this).parents(".master-datepicker").find(".datepicker-input span").text($(this).val())
-          }
-        },
-        $.datepicker.regional.ru),
-        $(".vocabulary-ico").on("click", function() {
-          $(".vocabulary-ico audio").each(function() {
-            this.pause(), this.currentTime = 0
-          }),
-          $(this).find("audio").length && $(this).find("audio")[0].play()
-        }), $(".master-btn").on("click", function(t) {
-        t.preventDefault(),
-          $(this).parents(".master-wrap").toggleClass("active")
-      }),
-        $(".lesson-tabs li a").on("click", function(t) {
-          t.preventDefault(), $(".lesson-tabs li a").removeClass("active"), $(".lesson-input__copy").removeClass("active");
-          var e = $(t.target).attr("href");
-          $(e).addClass("active"), $(this).addClass("active")
-        }),
-        $(window).on("scroll", function() {
-          $(".videoCall-col__1").length && ($(this).scrollTop() >= $(".videoCall-row").offset().top - 70 ? $(".videoCall-col__1").addClass("videoCall-fixed") : $(".videoCall-col__1").removeClass("videoCall-fixed"))
-        }),
-        $(".testing-wrap input").on("keyup", function() {
-          $(this).attr("size", $(this).val().length)
-        }),
-        $(".categories-list.options li a").on("click", function(t) {
-          t.preventDefault()
-        }),
-        $(".profile-edit").on("click", function(t) {
-          t.preventDefault(),
-            $(this).parents(".profile").toggleClass("profile-changes")
-        }),
-        $(".input-cardNumber").attr("type", "text").mask("9999 9999 9999 9999", {
-          reverse: !0
-        }),
-        $(".input-expiry").attr("type", "text").mask("99/99", {
-          reverse: !0
-        }),
-        $(".input-cvv").attr("type", "text").mask("999", {
-          reverse: !0
-        }),
-        $(".personalArea-card__input input").on("focus", function() {
-          $(this).parents(".personalArea-card__input").addClass("input-active")
-        }).on("blur", function() {
-          "" != !$(this).val() && $(this).parents(".personalArea-card__input").removeClass("input-active")
-        }),
-        $(".personalModal-tab").on("click", function(t) {
-          t.preventDefault(), $(".personalArea-modal__tabs li a").removeClass("active"),
-            $(".personalArea-modal__tab").removeClass("tab-active");
-          var e = $(this).attr("href");
-          $(e).addClass("tab-active"),
-            $(this).addClass("active")
-        }),
-
-        $(".topUpAccount-btn").on("click", function(t) {
-          t.preventDefault();
-          var e = $(this).attr("href");
-          $(e).addClass("modal-active")
-        }),
-
-        $(".personalArea-modal__close").on("click", function() {
-          $(".personalArea-modal").removeClass("modal-active")
-        }),
-        $(".testing-audio audio").on("play", function(t) {
-          $(".testing-audio audio").each(function(e, a) {
-            a !== t.currentTarget && this.pause()
-          })
-        }),
-        $(".paint").length
-    ) {
-      var r,
-        n = $(".selected").css("background-color"),
-        l = $("canvas"),
-        c = l[0].getContext("2d"),
-        d = !1,
-        u = $(".testing-img").width(),
-        h = $(".testing-img").height();
-
-      document.getElementById("mainCanvas").width = u,
-        document.getElementById("mainCanvas").height = h,
-        console.log(u),
-        console.log(h),
-        $(".controls").on("click", "li", function() {
-          $(this).siblings().removeClass("selected"), $(this).addClass("selected"), n = $(this).css("background-color")
-        }),
-        $("#revealColorSelect").click(function() {
-          t(), $("#colorSelect").toggle()
-        }),
-        l.mousedown(function(t) {
-          r = t, d = !0
-        }).mousemove(function(t) {
-          d && (c.beginPath(), c.moveTo(r.offsetX, r.offsetY), c.lineTo(t.offsetX, t.offsetY), c.strokeStyle = n, c.lineWidth = 5, c.lineCap = "round", c.stroke(), r = t)
-        }).mouseup(function() {
-          d = !1
-        }).mouseleave(function() {
-          l.mouseup()
+      $(".testing-audio audio").on("play", function(t) {
+        $(".testing-audio audio").each(function(e, a) {
+          a !== t.currentTarget && this.pause()
         })
-    }
-  });
+      }),
+      $(".paint").length
+  ) {
+    var r,
+      n = $(".selected").css("background-color"),
+      l = $("canvas"),
+      c = l[0].getContext("2d"),
+      d = !1,
+      u = $(".testing-img").width(),
+      h = $(".testing-img").height();
+
+    document.getElementById("mainCanvas").width = u,
+      document.getElementById("mainCanvas").height = h,
+      console.log(u),
+      console.log(h),
+      $(".controls").on("click", "li", function() {
+        $(this).siblings().removeClass("selected"), $(this).addClass("selected"), n = $(this).css("background-color")
+      }),
+      $("#revealColorSelect").click(function() {
+        t(), $("#colorSelect").toggle()
+      }),
+      l.mousedown(function(t) {
+        r = t, d = !0
+      }).mousemove(function(t) {
+        d && (c.beginPath(), c.moveTo(r.offsetX, r.offsetY), c.lineTo(t.offsetX, t.offsetY), c.strokeStyle = n, c.lineWidth = 5, c.lineCap = "round", c.stroke(), r = t)
+      }).mouseup(function() {
+        d = !1
+      }).mouseleave(function() {
+        l.mouseup()
+      })
+  }
+});
 
 
 // Copy bonus
@@ -6611,3 +6562,62 @@ const is_contains = (target, el) => {
   }
   return null
 }
+
+function documentClickEvent(e) {
+  const target = e.target
+
+  const header = document.querySelector('.header')
+  const headerBar = document.querySelector('.header-bar')
+  const headerRow = document.querySelector('.header-row')
+  const menu = document.querySelector('.menu')
+  const formBtn = document.querySelector('.form-btn')
+  const modalOverlay = document.querySelector('.modal-overlay')
+  const modal = document.querySelector('.modal')
+  const chatButton = document.querySelector('.header-link');
+
+  const isHeaderBar = is_contains(target, headerBar)
+  const isHeaderRow = is_contains(target, headerRow)
+  const isModal = is_contains(target, modal)
+  const isButtonModal = target.classList.contains('button-modal')
+  const isMenu = is_contains(target, menu)
+  const isChatButton = is_contains(target, chatButton);
+
+  if (!isHeaderBar && !isHeaderRow && !isModal && !isButtonModal && !isMenu && !isChatButton) {
+    header?.classList.remove('header-active')
+    headerRow?.classList.remove('menu--open')
+    menu?.classList.remove('menu--open')
+
+    scrollHiddenHandler(false)
+
+    if (modal) {
+      modalHiddenHandler({ clean: true })
+    }
+  }
+}
+
+
+function headerBarClickEvent() {
+  const header = document.querySelector('.header')
+  const headerRow = document.querySelector('.header-row')
+  const modal = document.querySelector('.modal')
+  const menu = document.querySelector('.menu')
+
+  const e = $(this).attr('href')
+
+  const modalIsOpen = modal?.classList.contains('open')
+
+  if (modalIsOpen) {
+    modalHiddenHandler({ force: false })
+  } else {
+    headerRow?.classList.toggle('menu--open')
+    menu?.classList.toggle('menu--open')
+
+    $('.modal').find('.modal-tab').removeClass('active')
+    $('.modal').find('#' + e).addClass('active')
+  }
+
+  header.classList.toggle('header-active')
+  scrollHiddenHandler()
+}
+
+module.exports = { documentClickEvent, headerBarClickEvent };
