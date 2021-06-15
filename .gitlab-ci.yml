@@ -89,8 +89,9 @@ Unit tests:
     - docker-compose run backend python manage.py migrate
     - docker-compose run backend python manage.py loaddata init_data.json
 
-    - docker-compose run backend pytest
-    
+    - docker-compose run backend pytest --ignore=chat
+    - docker-compose run backend pytest chat
+
   after_script:
     - docker-compose down
   tags:

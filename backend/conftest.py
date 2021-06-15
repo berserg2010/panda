@@ -54,16 +54,16 @@ def create_student(create_user_handler):
     return _create_student
 
 
-@pytest.fixture(autouse=True)
-def create_teacher(create_user_handler):
-    def _create_teacher() -> Teacher:
-        user = create_user_handler(ParameterStorage.teacher_auth)
-        teacher = mixer.blend(
-            Teacher,
-            user=user,
-        )
-        return teacher
-    return _create_teacher
+# @pytest.fixture(autouse=True)
+# def create_teacher(create_user_handler):
+#     def _create_teacher() -> Teacher:
+#         user = create_user_handler(ParameterStorage.teacher_auth)
+#         teacher = mixer.blend(
+#             Teacher,
+#             user=user,
+#         )
+#         return teacher
+#     return _create_teacher
 
 
 @pytest.fixture(autouse=True)
@@ -105,15 +105,15 @@ def student_register(client, create_student):
     return client
 
 
-@pytest.fixture
-def teacher_client_register(client, create_teacher):
-    create_teacher()
-    res = client.login(
-        username=ParameterStorage.teacher_auth.get('username'),
-        password=ParameterStorage.teacher_auth.get('password'),
-    )
-    assert res
-    return client
+# @pytest.fixture
+# def teacher_client_register(client, create_teacher):
+#     create_teacher()
+#     res = client.login(
+#         username=ParameterStorage.teacher_auth.get('username'),
+#         password=ParameterStorage.teacher_auth.get('password'),
+#     )
+#     assert res
+#     return client
 
 
 @pytest.fixture

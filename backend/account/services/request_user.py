@@ -89,4 +89,5 @@ def user_voximplant_handler(account, method: str):
 def get_account(user: User) -> Union[Teacher, Student]:
     account_model = Teacher if user.is_staff else Student
     account = account_model.objects.get(user=user)
+    # account = user.teacher if user.is_staff else user.student
     return account

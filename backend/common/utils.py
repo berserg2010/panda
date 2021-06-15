@@ -1,15 +1,17 @@
 from calendar import monthrange
+from datetime import datetime
+import os
 from pydantic import BaseModel
-from typing import List
+from typing import List, Union
 from uuid import UUID
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
-from django.utils import timezone
+from django.contrib.auth.models import User
 from django.db.models import Q
-from datetime import datetime
-import os
+from django.http import HttpRequest
+from django.utils import timezone
 
 
 if os.getenv('DJANGO_SETTINGS_MODULE') == 'backend.settings':
