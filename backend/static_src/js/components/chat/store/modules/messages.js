@@ -12,11 +12,11 @@ const mutations = {
     state.messages[messages['chat_id']] = messages.messages;
   },
   addMessage(state, message) {
-    const messages = { ...state.messages }
+    const messages = { ...state.messages };
     if (message.chat_id in messages) {
-      messages[message.chat_id].push(message.message);
+      messages[message.chat_id].push(message);
     } else {
-      messages[message.chat_id] = message.message;
+      messages[message.chat_id] = message;
     }
     state.messages = messages;
   },
@@ -24,23 +24,16 @@ const mutations = {
 
 const actions = {
   initMessages({ commit }, chatId) {
-    api.getMessages((messages) => {
-      commit('initMessages', messages);
-    }, chatId);
+    api.client({ event: 'get.messages', data: { currentChatId: chatId }});
   },
-  sendMessage({ commit, rootState }, data) {
-    api.sendMessage((message) => {
-      commit('addMessage', {
-        chat_id: rootState.users.currentChatId,
-        message,
-      })
-    }, data)
+  sendMessage({ commit }, data) {
+    api.client({ event: 'set.message', data });
   },
 };
 
 const getters = {
   getMessages: (state) => (chatId) => {
-    return state.messages[chatId]
+    return state.messages[chatId];
   },
   getLastMessage: (state) => (chatId) => {
     let last_message;
@@ -49,7 +42,7 @@ const getters = {
       const chat_messages = messages[chatId];
       last_message = chat_messages[chat_messages.length - 1];
     }
-    return last_message
+    return last_message;
   },
 };
 

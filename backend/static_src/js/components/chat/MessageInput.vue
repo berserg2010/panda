@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       text: '',
-      currentUserId,
+      currentUserId: currentUserId.toString(),
     };
   },
   computed: {

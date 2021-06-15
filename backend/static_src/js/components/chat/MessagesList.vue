@@ -4,7 +4,7 @@
       <MessagesListItem
         v-for="message in messages"
         :key="message.message_id"
-        :class="[ currentUserId === message.sender_id ? 'messages_list_item--right' : 'messages_list_item--left' ]"
+        :class="[ currentUserId.toString() === message.sender_id ? 'messages_list_item--right' : 'messages_list_item--left' ]"
         :message="message.text"
         :scrollToElement="scrollToElement"
       />

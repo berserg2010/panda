@@ -2,7 +2,7 @@
   <div class="box_item user-aria">
     <ArrowLeft v-if="forChat" />
     <div class="avatar">
-      <img src="/static/img/user.jpg" alt="avatar">
+      <img :src="user.avatar_url" alt="avatar">
     </div>
     <div class="content">
       <span>{{ user.full_name }}</span>

@@ -1,61 +1,51 @@
+import store from '../store';
 
 
 const currentLocation = window.location;
 const wsProtocol = currentLocation.protocol === 'https:' ? 'wss://' : 'ws://';
 const wsURL = `${wsProtocol}${currentLocation.host}/ws/lk/chat/`;
 
-const ws = new WebSocket(wsURL);
+const wsChat = new WebSocket(wsURL);
 
-ws.onclose = (ev) => {
-  console.info(`[close] Соединение закрыто, код=${ev.code}, причина=${ev.reason}`)
+
+wsChat.onclose = (ev) => {
+  console.info(`[close] Соединение закрыто, код=${ev.code}, причина=${ev.reason}`);
 }
 
-ws.onerror = (ev) => {
-  console.info(`[error] ${ev.message}`)
-}
+wsChat.onerror = (ev) => {
+  console.info(`[error] ${ev.message}`);
+};
+
+wsChat.onmessage = (ev) => {
+  const data = JSON.parse(ev.data);
+  // console.info(`[${data.event}] Данные получены`, data);
+
+  switch (data.event) {
+    case 'get.interlocutors':
+      store.commit('initInterlocutors', data.data);
+      break;
+    case 'get.messages':
+      store.commit('initMessages', data.data);
+      break;
+    case 'set.message':
+      store.commit('addMessage', data.data);
+      break;
+    default:
+      console.info('Unknown message received :', data.event);
+  }
+};
 
 
 export default {
-  getInterlocutors(cb) {
-    ws.onopen = (ev) => {
-      console.info('[open] Соединение установлено');
+  getInterlocutors({ event, data }) {
+    wsChat.onopen = (ev) => {
+      console.info(`[open] Соединение установлено`);
 
-      ws.send(JSON.stringify({
-        event: 'get.interlocutors',
-        data: {},
-      }));
-    };
-
-    ws.onmessage = (ev) => {
-      // console.info('[getInterlocutors] Данные получены');
-      const data = JSON.parse(ev.data);
-      cb(data.data);
+      wsChat.send(JSON.stringify({ event, data }));
     };
   },
 
-  getMessages(cb, currentChatId) {
-    ws.send(JSON.stringify({
-      event: 'get.messages',
-      data: { currentChatId },
-    }));
-
-    ws.onmessage = (ev) => {
-      // console.info('[getMessages] Данные получены');
-      const data = JSON.parse(ev.data);
-      cb(data.data);
-    };
-  },
-
-  sendMessage(cb, data) {
-    ws.send(JSON.stringify({
-      event: 'set.message',
-      data,
-    }));
-
-    ws.onmessage = (ev) => {
-      // console.info('[sendMessage] Данные получены');;
-      const data = JSON.parse(ev.data);
-      cb(data.data);
-    };
+  client({ event, data }) {
+    wsChat.send(JSON.stringify({ event, data }));
   },
 };

@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.db.models import Q
 
-from account.services.request_user import get_account
+from account.services.request_user import get_user_avatar
 from paid_course.consumers.common import CommonConsumer
 from ..models import Chat, Message
 
@@ -41,12 +41,7 @@ class InterlocutorConsumer(CommonConsumer):
         data = event.get('data')
         self.group_id = data.get('chat_id')
         message = await self.set_message(data)
-        data = MessageModel(
-            message_id=str(message.pk),
-            text=message.text,
-            sent_at=str(message.sent_at),
-            sender_id=str(message.sender.pk),
-        ).dict()
+        data = message_model(message).dict()
         await self._group_send(data, event=event['event'])
 
     @database_sync_to_async
@@ -64,18 +59,13 @@ class InterlocutorConsumer(CommonConsumer):
             interlocutor: User = chat.interlocutor_one if chat.interlocutor_two.pk == self.user.pk else chat.interlocutor_two
             last_message = None
             if chat.last_message:
-                last_message = MessageModel(
-                    message_id=str(chat.last_message.pk),
-                    text=chat.last_message.text,
-                    sent_at=str(chat.last_message.sent_at),
-                    sender_id=str(chat.last_message.sender.pk),
-                )
+                last_message = message_model(chat.last_message)
             interlocutors.append(InterlocutorModel(
                 interlocutor_id=str(interlocutor.pk),
                 full_name=interlocutor.get_full_name(),
                 chat_id=str(chat.pk),
                 last_message=last_message,
-                avatar_url=get_account(interlocutor).avatar.url
+                avatar_url=get_user_avatar(interlocutor)
             ).dict())
 
         return interlocutors
@@ -87,12 +77,7 @@ class InterlocutorConsumer(CommonConsumer):
 
         messages = []
         for message in qs:
-            messages.append(MessageModel(
-                message_id=str(message.pk),
-                text=message.text,
-                sent_at=str(message.sent_at),
-                sender_id=str(message.sender.pk),
-            ).dict())
+            messages.append(message_model(message).dict())
 
         return {
             'chat_id': chat_id,
@@ -118,6 +103,7 @@ class InterlocutorConsumer(CommonConsumer):
 class MessageModel(BaseModel):
     message_id: str
     text: str = ''
+    chat_id: str
     sent_at: str
     sender_id: str
 
@@ -128,3 +114,14 @@ class InterlocutorModel(BaseModel):
     chat_id: str
     last_message: MessageModel = None
     avatar_url: str
+
+
+def message_model(message: Message) -> MessageModel:
+    model = MessageModel(
+        message_id=str(message.pk),
+        text=message.text,
+        chat_id=str(message.chat.pk),
+        sent_at=str(message.sent_at),
+        sender_id=str(message.sender.pk),
+    )
+    return model

@@ -3,7 +3,6 @@ import api from '../../api';
 
 const state = () => {
   return {
-    // currentUserId: window.currentUserId,
     interlocutors: [],
     currentChatId: '',
     currentInterlocutor: {},
@@ -24,17 +23,14 @@ const mutations = {
 
 const actions = {
   initInterlocutors({ commit, dispatch }) {
-    api.getInterlocutors((interlocutors) => {
-      commit('initInterlocutors', interlocutors);
-      // dispatch('initMessages', currentUserId);
-    });
+    api.getInterlocutors( { event: 'get.interlocutors', data: {}});
   },
   setCurrentInterlocutor({ commit }, currentInterlocutor) {
     commit('setCurrentInterlocutor', currentInterlocutor);
   },
   setCurrentChatId({ commit }, currentChatId) {
     commit('setCurrentChatId', currentChatId);
-  }
+  },
 };
 
 const getters = {};

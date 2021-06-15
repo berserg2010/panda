@@ -91,3 +91,9 @@ def get_account(user: User) -> Union[Teacher, Student]:
     account = account_model.objects.get(user=user)
     # account = user.teacher if user.is_staff else user.student
     return account
+
+
+def get_user_avatar(user: User) -> str:
+    if user.is_superuser:
+        return '/media/img/account/default.svg'
+    return get_account(user).avatar.url
